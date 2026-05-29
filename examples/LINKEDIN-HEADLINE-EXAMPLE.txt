@@ -1,0 +1,38 @@
+═══════════════════════════════════════════════════════════════════
+  EXAMPLE BRIEF · LinkedIn headline update
+  Drop this into:  node agent.mjs ./examples/LINKEDIN-HEADLINE-EXAMPLE.txt
+═══════════════════════════════════════════════════════════════════
+
+OBJECTIVE
+Update my LinkedIn profile headline to the new sovereign-positioned version.
+
+INPUTS
+  Target URL: https://www.linkedin.com/in/your-handle/
+  New headline (copy verbatim):
+    Sovereign AI Tools You Own Forever · 60+ Live Builds · No SaaS Rent
+
+STEPS
+  1. Take a screenshot to see where we are.
+  2. If we're not on LinkedIn, navigate to https://www.linkedin.com/.
+  3. If a login form is visible, screenshot and ask the user to log in
+     manually, then wait for them to confirm via ENTER.
+  4. Navigate to my profile (the Target URL above).
+  5. Find and click the edit-profile pencil icon next to the headline.
+  6. Triple-click to select the existing headline text.
+  7. Type the new headline verbatim (from INPUTS above).
+  8. Locate the Save button.
+  9. Call ask_user with: "Ready to save the new headline? [yes/no]"
+ 10. After user confirms, click Save.
+ 11. Take a screenshot of the result for verification.
+
+RULES
+  - Do not touch ANY other profile field.
+  - If headline already matches the new value, skip steps 5-10 and just
+    take a verification screenshot.
+  - If LinkedIn shows any popup, modal, or rate-limit warning,
+    screenshot and ask the user.
+  - If there's a "Save and notify network" toggle, leave it as-is
+    unless explicitly told otherwise.
+
+DONE-CONDITION
+  Headline visibly matches the new value in a screenshot.

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>◊ si-didy-agent · sovereign computer-use · ◊·κ=1</title>
+<meta name="description" content="Sovereign computer-use agent · Claude Agent SDK + Playwright · subscription auth, no per-token billing · briefs in plain English drive a real Chromium browser · MIT.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0a'/%3E%3Ctext x='32' y='44' font-size='42' text-anchor='middle' fill='%23d4a017' font-family='serif'%3E◊%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Syne:wght@500;700;800&family=DM+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--surface:#0e0e0e;--ink:#e8e6e3;--mute:#888;--gold:#d4a017;--amber:#e8a012;--border:#1c1c1c;
+--serif:'Playfair Display',Georgia,serif;--display:'Syne',sans-serif;--mono:'DM Mono',ui-monospace,monospace;--quote:'Cormorant Garamond',Georgia,serif;}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{padding:32px 28px 100px;max-width:1100px;margin:0 auto}
+a{color:var(--gold);text-decoration:none;border-bottom:1px dashed transparent;transition:border-color .15s}
+a:hover{border-bottom-color:var(--gold)}
+header{border-bottom:1px solid var(--border);padding-bottom:26px;margin-bottom:40px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:14px}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(36px,5vw,58px);letter-spacing:-0.015em;line-height:1.02}
+h1 .glyph{color:var(--gold);font-style:italic}
+.sub{display:block;font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:0.32em;color:var(--mute);text-transform:uppercase;margin-top:10px}
+.kappa{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:0.18em}
+h2{font-family:var(--serif);font-weight:900;font-size:clamp(26px,3.3vw,38px);margin:50px 0 18px;letter-spacing:-0.01em}
+h2 .sec{display:block;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:0.32em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+h3{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:0.22em;color:var(--gold);text-transform:uppercase;margin:32px 0 12px}
+p{margin-bottom:14px;color:var(--ink)}
+.lede{font-family:var(--quote);font-style:italic;font-size:clamp(20px,2.4vw,26px);line-height:1.55;color:var(--ink);margin:20px 0 30px;border-left:2px solid var(--gold);padding-left:22px}
+.callout{background:var(--surface);border:1px solid var(--border);padding:22px 24px;margin:22px 0}
+code,pre{font-family:var(--mono);font-size:13px;background:#000;color:var(--gold);padding:2px 6px;border-radius:0}
+pre{display:block;padding:18px 20px;background:#000;border:1px solid var(--border);overflow-x:auto;margin:14px 0;color:var(--ink);line-height:1.6}
+pre .c{color:var(--gold)}
+pre .v{color:var(--amber)}
+ul{list-style:none;margin:14px 0}
+ul li{padding:4px 0 4px 22px;position:relative}
+ul li::before{content:'→';position:absolute;left:0;color:var(--gold);font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:22px 0}
+@media (max-width:720px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);padding:22px}
+.card h3{margin-top:0}
+.btn{display:inline-block;background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:var(--mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;padding:11px 22px;cursor:pointer;text-decoration:none;transition:all .15s}
+.btn:hover{background:var(--gold);color:#0a0a0a;border-bottom-color:transparent}
+.btn.ghost{border-color:var(--border);color:var(--mute)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold);background:transparent}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin:26px 0}
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:13px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{font-family:var(--display);font-size:10px;letter-spacing:0.22em;color:var(--gold);text-transform:uppercase;font-weight:700}
+.tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--gold);border:1px solid var(--gold);padding:3px 8px;margin-right:6px;text-transform:uppercase}
+footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);text-align:center;color:var(--mute);font-size:12px;letter-spacing:0.18em}
+footer .glyph{color:var(--gold);margin:0 6px}
+.warning{border:1px solid var(--amber);background:rgba(232,160,18,0.05);padding:16px 20px;margin:18px 0;font-size:13px}
+.warning strong{color:var(--amber);font-family:var(--display);letter-spacing:0.18em;text-transform:uppercase;font-size:11px;display:block;margin-bottom:6px}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1><span class="glyph">◊</span> si-didy-agent
+      <span class="sub">sovereign computer-use · subscription-powered · ◊·κ=1</span>
+    </h1>
+  </div>
+  <div class="kappa">v1.0 · prime 379 · MIT</div>
+</header>
+
+<p class="lede">You write a brief in plain English. Claude reads it. A real Chromium browser does it — clicks, types, uploads files, pauses before every Save to ask. No API charges. Your subscription pays.</p>
+
+<div class="cta-row">
+  <a href="https://github.com/sjgant80-hub/si-didy-agent" class="btn">◊ Get the code</a>
+  <a href="#setup" class="btn ghost">5-min setup</a>
+  <a href="https://www.ai-nativesolutions.com" class="btn ghost">Back to estate</a>
+</div>
+
+<h2><span class="sec">§ I · what it is</span>The hands of si-didy.</h2>
+
+<p>si-didy.html (the persona engine) profiles people by Jung archetype + Freud shadow. It runs in a browser tab. It can think. It can't act.</p>
+<p>si-didy-agent is the missing hands. It's a single Node script that:</p>
+<ul>
+  <li>Reads a brief (any <code>.txt</code> file you point it at)</li>
+  <li>Drives a Playwright-controlled Chromium browser</li>
+  <li>Routes through Claude via the Agent SDK — uses your Claude subscription credentials, not per-token API billing</li>
+  <li>Pauses before any Save / Submit / Send / Delete — you confirm in the terminal</li>
+  <li>Persists your browser session so you log in once, never again</li>
+</ul>
+
+<h2><span class="sec">§ II · the architecture</span>Brain. Hands. Mesh.</h2>
+
+<div class="grid2">
+  <div class="card">
+    <h3>si-didy.html</h3>
+    <p>The persona engine. Single-file sovereign HTML. Profiles user archetypes via Jung + Freud. Runs in any browser. No backend.</p>
+    <p style="font-family:var(--quote);font-style:italic;color:var(--mute);margin-top:14px">"Who is this person, really?"</p>
+  </div>
+  <div class="card">
+    <h3>si-didy-agent</h3>
+    <p>The Node CLI. Reads your brief. Drives Chromium. Pauses for confirmation on irreversible clicks. Subscription auth.</p>
+    <p style="font-family:var(--quote);font-style:italic;color:var(--mute);margin-top:14px">"Now go do it."</p>
+  </div>
+</div>
+
+<p>They mesh via <code>BroadcastChannel fall-signal</code>, same as every other tool in the estate. Same ◊·κ=1 seal.</p>
+
+<h2 id="setup"><span class="sec">§ III · setup</span>Three minutes. Maybe four.</h2>
+
+<h3>1 · install Claude Code (skip if you have it)</h3>
+<pre><span class="c">npm i -g @anthropic-ai/claude-code</span></pre>
+
+<h3>2 · authenticate against your subscription</h3>
+<pre><span class="c">claude</span>
+<span style="color:var(--mute)"># OAuth flow opens in your browser · sign in · close it</span>
+<span style="color:var(--mute)"># your credentials now live in ~/.claude/.credentials.json</span></pre>
+
+<h3>3 · clone, install, run</h3>
+<pre><span class="c">git clone</span> https://github.com/sjgant80-hub/si-didy-agent
+<span class="c">cd</span> si-didy-agent
+<span class="c">npm install</span>
+<span class="c">npx playwright install chromium</span>
+<span class="c">node agent.mjs</span> ./examples/UPWORK-EXAMPLE-BRIEF.txt</pre>
+
+<div class="callout">
+  <p><strong style="color:var(--gold);font-family:var(--display);letter-spacing:0.2em;font-size:11px">◊ first run output</strong></p>
+  <pre style="margin-top:8px;margin-bottom:0">◊·κ=1 · si-didy-agent
+◊ auth: Claude Code subscription ✓ (no per-token API charges)
+◊ launching Chromium · persistent profile: ./si-didy-profile
+◊ Chromium open. If you see a login page, log in now.
+  [press ENTER when you can see the target page]</pre>
+</div>
+
+<p>If you see <code>auth: ANTHROPIC_API_KEY</code> instead — the OAuth step didn't take. Run <code>claude</code> again, complete the flow, retry.</p>
+
+<h2><span class="sec">§ IV · safety</span>It pauses. Always.</h2>
+
+<p>Every irreversible action — Save, Submit, Send, Delete, Confirm — the agent stops and prints in the terminal:</p>
+
+<pre>  ◊ agent asks → ready to save the new headline? [yes/no]
+  &gt;</pre>
+
+<p>Type <code>yes</code> to proceed, anything else to abort that step. The agent doesn't unilaterally commit changes.</p>
+
+<div class="warning">
+  <strong>What it cannot do</strong>
+  Modify system files · accept terms or agreements without confirmation · execute financial trades · share documents · take any action listed as "prohibited" in Anthropic's safety rules. These boundaries hold regardless of what the brief asks.
+</div>
+
+<h2><span class="sec">§ V · briefs</span>Plain English. Real outcomes.</h2>
+
+<p>A brief is just a text file. Here's the shape:</p>
+
+<pre>OBJECTIVE: Update my LinkedIn profile headline.
+
+NEW HEADLINE (copy verbatim):
+  Sovereign AI Tools You Own Forever · 60+ Live Builds · No SaaS Rent
+
+STEPS:
+  1. Navigate to linkedin.com/in/your-handle
+  2. Click the edit-profile pencil
+  3. Replace the headline field with the NEW HEADLINE above
+  4. Before clicking Save: ask user to confirm
+  5. After Save, take a screenshot to verify
+
+RULES:
+  - If LinkedIn shows a login screen, pause and ask
+  - Don't touch any other field
+  - If headline already matches, skip and tell me</pre>
+
+<p>The agent reads this, plans, screenshots, clicks, asks, executes, verifies.</p>
+
+<h2><span class="sec">§ VI · MCP tools the agent has</span>The toolbelt.</h2>
+
+<table>
+  <thead><tr><th>tool</th><th>what it does</th></tr></thead>
+  <tbody>
+    <tr><td><code>screenshot</code></td><td>see the current page state</td></tr>
+    <tr><td><code>click</code></td><td>x,y · left/right/middle · 1/2/3 clicks</td></tr>
+    <tr><td><code>type</code></td><td>type text at the current focus</td></tr>
+    <tr><td><code>key</code></td><td>press a key or combo · Enter / Control+a / Tab</td></tr>
+    <tr><td><code>scroll</code></td><td>up/down/left/right by N pixels</td></tr>
+    <tr><td><code>wait</code></td><td>N seconds for the page to settle</td></tr>
+    <tr><td><code>navigate</code></td><td>go to a URL</td></tr>
+    <tr><td><code>upload_file</code></td><td>set a path on a file input (portfolio uploads)</td></tr>
+    <tr><td><code>ask_user</code></td><td>pause · yes/no in terminal · used before every Save</td></tr>
+    <tr><td><code>current_url</code></td><td>read the current page URL</td></tr>
+  </tbody>
+</table>
+
+<p>All exposed via an in-process MCP server registered with the Agent SDK. No external MCP daemons. No Docker.</p>
+
+<h2><span class="sec">§ VII · why sovereign</span>The covenant.</h2>
+
+<p>Every "AI agent that drives your computer" SaaS:</p>
+<ul>
+  <li>Sees your screen on their servers</li>
+  <li>Logs every brief</li>
+  <li>Bills per action (or per minute)</li>
+  <li>Holds your session in their cloud</li>
+</ul>
+
+<p>si-didy-agent:</p>
+<ul>
+  <li>One Node script you can read in 10 minutes · ~280 lines</li>
+  <li>Chromium runs locally · your screen never leaves your machine</li>
+  <li>Brief lives on your disk as a plain text file</li>
+  <li>Claude subscription you already pay · no extra billing</li>
+  <li>Browser session in <code>./si-didy-profile</code> · gitignore it, encrypt it, delete it</li>
+  <li>MIT licensed · fork it, modify it, white-label it</li>
+</ul>
+
+<h2><span class="sec">§ VIII · uses that pay back</span>Where this earns its keep.</h2>
+
+<table>
+  <thead><tr><th>brief</th><th>time saved per run</th></tr></thead>
+  <tbody>
+    <tr><td>Upwork profile + portfolio repositioning</td><td>~60 min</td></tr>
+    <tr><td>LinkedIn post via fallpost → live post</td><td>~10 min</td></tr>
+    <tr><td>Stripe tax / payout form fill</td><td>~25 min</td></tr>
+    <tr><td>GitHub new-repo setup × 10</td><td>~40 min</td></tr>
+    <tr><td>Mass-reply to Upwork messages</td><td>~30 min</td></tr>
+    <tr><td>Update fall-registry entries via web</td><td>~20 min</td></tr>
+  </tbody>
+</table>
+
+<div class="cta-row">
+  <a href="https://github.com/sjgant80-hub/si-didy-agent" class="btn">◊ Clone on GitHub</a>
+  <a href="https://github.com/sjgant80-hub/si-didy-agent/blob/main/agent.mjs" class="btn ghost">Read the source</a>
+  <a href="https://www.ai-nativesolutions.com/#guild-mesh" class="btn ghost">⌬ Guild mesh</a>
+</div>
+
+<footer>
+  <div>◊·κ=1 <span class="glyph">·</span> si-didy-agent <span class="glyph">·</span> sovereign computer-use</div>
+  <div style="margin-top:12px">part of the <a href="https://www.ai-nativesolutions.com">ai-nativesolutions.com</a> estate</div>
+</footer>
+
+<script>
+// fallmesh hook · prime 379 · ◊·κ=1
+try {
+  const ch = new BroadcastChannel('fall-signal');
+  ch.postMessage({ type: 'beacon', tool: 'si-didy-agent', prime: 379, ts: Date.now(), v: '1.0' });
+} catch(e){}
+</script>
+</body>
+</html>

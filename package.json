@@ -1,0 +1,39 @@
+{
+  "name": "si-didy-agent",
+  "version": "1.0.0",
+  "description": "Sovereign computer-use agent · Claude Agent SDK + Playwright · subscription auth · ◊·κ=1",
+  "type": "module",
+  "main": "agent.mjs",
+  "bin": {
+    "si-didy-agent": "./agent.mjs"
+  },
+  "scripts": {
+    "start": "node agent.mjs",
+    "upwork": "node agent.mjs ./examples/UPWORK-EXAMPLE-BRIEF.txt"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.1.0",
+    "playwright": "^1.49.0",
+    "zod": "^3.23.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "author": "Simon Gant · sjgant80-hub",
+  "homepage": "https://sjgant80-hub.github.io/si-didy-agent/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sjgant80-hub/si-didy-agent"
+  },
+  "keywords": [
+    "computer-use",
+    "claude",
+    "agent",
+    "playwright",
+    "sovereign",
+    "anthropic",
+    "mcp",
+    "automation"
+  ]
+}
