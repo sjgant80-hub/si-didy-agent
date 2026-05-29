@@ -1,7 +1,7 @@
 {
   "name": "si-didy-agent",
-  "version": "1.0.0",
-  "description": "Sovereign computer-use agent · Claude Agent SDK + Playwright · subscription auth · ◊·κ=1",
+  "version": "2.0.0",
+  "description": "Sovereign 4-tier agent · CLI + HTTP + MCP + Browser · Claude Agent SDK · subscription auth · ◊·κ=1",
   "type": "module",
   "main": "agent.mjs",
   "bin": {
@@ -9,12 +9,15 @@
   },
   "scripts": {
     "start": "node agent.mjs",
-    "upwork": "node agent.mjs ./examples/UPWORK-EXAMPLE-BRIEF.txt"
+    "upwork": "node agent.mjs ./examples/UPWORK-BRIEF.txt",
+    "github-audit": "node agent.mjs ./examples/GITHUB-AUDIT-BRIEF.txt"
   },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.1.0",
-    "playwright": "^1.49.0",
     "zod": "^3.23.0"
+  },
+  "optionalDependencies": {
+    "playwright": "^1.49.0"
   },
   "engines": {
     "node": ">=20"
@@ -34,6 +37,8 @@
     "sovereign",
     "anthropic",
     "mcp",
+    "cli-router",
+    "tier-cascade",
     "automation"
   ]
 }

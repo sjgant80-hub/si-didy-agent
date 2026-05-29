@@ -1,165 +1,178 @@
-# ◊ si-didy-agent
+# ◊ si-didy-agent · v2
 
-**Sovereign computer-use agent · Claude Agent SDK + Playwright · ◊·κ=1**
+**Sovereign 4-tier agent · Claude Agent SDK · CLI + HTTP + MCP + Browser · ◊·κ=1**
 
-You write a brief in plain English. Claude reads it. A real Chromium browser does it — clicks, types, uploads files, pauses before every Save to ask. **No API charges.** Your Claude subscription pays.
+You write a brief in plain English. Claude reads it. The agent picks the **cheapest execution tier** that finishes the job — CLI when possible, HTTP when there's an API, MCP when a server is registered, browser only as last resort. **No API charges.** Your Claude subscription pays.
 
 Prime **379** · MIT · part of the [ai-nativesolutions.com](https://www.ai-nativesolutions.com) estate.
 
-Landing page: [sjgant80-hub.github.io/si-didy-agent](https://sjgant80-hub.github.io/si-didy-agent/)
+Landing: [sjgant80-hub.github.io/si-didy-agent](https://sjgant80-hub.github.io/si-didy-agent/)
 
 ---
 
-## What this is
+## What's new in v2
 
-`si-didy.html` is the **persona engine** — profiles people by Jung archetype + Freud shadow. Runs in any browser. No backend. It thinks.
+v1 was Playwright-only. As Thomas put it: "playwright is for noobs." He was right.
 
-`si-didy-agent` is the **hands**. A single Node script that:
+v2 ships **four execution tiers**, cheapest-first:
 
-- Reads a brief (any `.txt` file you point it at)
-- Drives a Playwright-controlled Chromium browser
-- Routes through Claude via the **Agent SDK** — uses your Claude subscription credentials, not per-token API billing
-- Pauses before any Save / Submit / Send / Delete — you confirm in the terminal
-- Persists your browser session so you log in once, never again
+```
+T0 · cli_run, cli_which           ← gh, stripe, gcloud, npm, git, curl, …
+T1 · http_fetch, graphql_query    ← any REST/GraphQL API directly
+T2 · mcp__<server>__<tool>        ← any MCP server you register in ./mcps.json
+T3 · browser_*                    ← Playwright · LAST RESORT only
+```
 
-Both speak `BroadcastChannel('fall-signal')` — same mesh as every tool in the estate.
+The agent picks per step. State your tier choice. Justify T3.
+
+**Lazy-load:** Playwright only imports if a browser tool is actually called. Zero startup cost when the job is API-only.
 
 ---
 
-## Setup (3 minutes)
-
-### 1. Install Claude Code (skip if you have it)
+## Setup (3 min)
 
 ```bash
+# 1. Install Claude Code (subscription auth — one time)
 npm i -g @anthropic-ai/claude-code
-```
+claude                     # OAuth · /quit when done
 
-### 2. Authenticate against your subscription
-
-```bash
-claude
-# OAuth flow opens in your browser · sign in · /quit when done
-# credentials write to ~/.claude/.credentials.json
-```
-
-### 3. Clone and run
-
-```bash
+# 2. Clone + deps
 git clone https://github.com/sjgant80-hub/si-didy-agent
 cd si-didy-agent
 npm install
+
+# 3. (Optional) install Chromium if you'll use the browser tier
 npx playwright install chromium
 
-node agent.mjs ./examples/UPWORK-EXAMPLE-BRIEF.txt
+# 4. Make sure CLIs you care about are on PATH:
+gh --version           # GitHub
+stripe --version       # Stripe (optional)
+# etc.
+
+# 5. Run on a brief
+node agent.mjs ./examples/GITHUB-AUDIT-BRIEF.txt
 ```
 
-First run output:
+First-run output:
 
 ```
-◊·κ=1 · si-didy-agent
+◊·κ=1 · si-didy-agent v2.0 · 4-tier sovereign
 ◊ auth: Claude Code subscription ✓ (no per-token API charges)
-◊ launching Chromium · persistent profile: ./si-didy-profile
-◊ Chromium open. If you see a login page, log in now.
-  [press ENTER when ready to hand off]
-```
 
-If you see `auth: ANTHROPIC_API_KEY` instead — the OAuth step didn't take. Run `claude` again, complete the flow, retry.
+◊ tiers loaded:
+   T0 · CLI       · 30 commands allowed
+   T1 · HTTP      · REST + GraphQL ready
+   T2 · MCP proxy · (none registered · create ./mcps.json to add)
+   T3 · Browser   · Playwright (lazy · loaded on first browser_* call)
+```
 
 ---
 
-## Writing briefs
+## Routing rules
 
-A brief is just a `.txt` file. The shape:
+| task | tier | how |
+|---|---|---|
+| Create a GitHub repo | **T0** | `gh repo create` |
+| List a user's repos | **T0** | `gh api users/X/repos` |
+| Diff two branches | **T0** | `git diff` |
+| Post a Stripe charge | **T0** | `stripe charges create` |
+| Query Linear/Shopify GraphQL | **T1** | `graphql_query` |
+| Call any REST API | **T1** | `http_fetch` with `${env:TOKEN}` |
+| Talk to OnlyBrains/fallcore | **T2** | register in `mcps.json` |
+| Edit a web profile with no API | **T3** | Playwright (rare · justified) |
+
+The agent states its tier choice in the terminal log:
 
 ```
-OBJECTIVE: Update my LinkedIn profile headline.
-
-NEW HEADLINE (copy verbatim):
-  Sovereign AI Tools You Own Forever · 60+ Live Builds · No SaaS Rent
-
-STEPS:
-  1. Navigate to linkedin.com/in/your-handle
-  2. Click the edit-profile pencil
-  3. Replace the headline field with the NEW HEADLINE above
-  4. Before clicking Save: ask user to confirm
-  5. After Save, screenshot to verify
-
-RULES:
-  - If LinkedIn shows a login screen, pause and ask
-  - Don't touch any other field
-  - If headline already matches, skip and tell me
+  T0 · cli_run {"cmd":"gh","args":["api","users/teslasolar/repos"]}
+  T1 · http_fetch {"url":"https://api.stripe.com/v1/charges","method":"POST"}
+  T3 · browser_navigate {"url":"https://upwork.com/..."}
 ```
-
-See [`examples/`](./examples) for working briefs.
 
 ---
 
-## Safety
+## Auth via env interpolation
 
-Every irreversible action (Save / Submit / Send / Delete / Confirm) — the agent stops and asks in the terminal:
+Write `${env:VAR_NAME}` anywhere a header, arg, or body is needed. Replaced at call time. Never appears in logs.
 
 ```
-  ◊ agent asks → ready to save the new headline? [yes/no]
+http_fetch {
+  url: "https://api.github.com/user",
+  headers: { "Authorization": "Bearer ${env:GH_TOKEN}" }
+}
+```
+
+The agent can call `list_env_keys` to see which auth vars are available (names only — never values).
+
+---
+
+## Safety · pause-before-irreversible
+
+The agent calls **`ask_user`** before any Save / Submit / Send / Delete / Confirm / payment — regardless of tier. This applies to CLI just as much as to browser:
+
+```
+  ◊ agent asks → about to run: gh repo delete sjgant80-hub/test-repo
+                 confirm? [yes/no]
   >
 ```
 
-Type `yes` to proceed. Anything else aborts that step. The agent never unilaterally commits changes.
+Type `yes`/`go` to proceed. Anything else aborts the step.
 
-Hard boundaries inherited from Anthropic safety rules:
-- Cannot modify system files
-- Cannot accept terms or sharing permissions
-- Cannot execute financial trades
-- Cannot share confidential documents
+Inherited Anthropic safety rules: cannot modify system files, cannot accept terms, cannot execute financial trades, cannot share confidential docs — regardless of brief.
 
 ---
 
-## MCP tools the agent has
+## Optional: Tier 2 MCP proxy
 
-| tool | what it does |
+Create `./mcps.json` next to `agent.mjs`:
+
+```json
+{
+  "onlybrains": {
+    "command": "node",
+    "args": ["/path/to/onlybrains-mcp-server.mjs"]
+  },
+  "fallcore": {
+    "command": "node",
+    "args": ["/path/to/fallcore-mcp.mjs"]
+  }
+}
+```
+
+Each server's tools become available as `mcp__onlybrains__<tool>`. The agent treats them as Tier 2 — between HTTP and browser.
+
+---
+
+## CLI allowlist
+
+Default allowed: `gh`, `git`, `stripe`, `gcloud`, `aws`, `az`, `npm`, `npx`, `node`, `deno`, `bun`, `yarn`, `pnpm`, `curl`, `jq`, `wget`, `python`, `python3`, `py`, `claude`, `code`, `echo`, `cat`, `ls`, `dir`, `tar`, `zip`, `unzip`.
+
+Extend per session:
+
+```bash
+$env:SIDIDY_CLI_ALLOW = "docker,kubectl,terraform"
+node agent.mjs ./brief.txt
+```
+
+Commands outside the allowlist are rejected with the full list returned so the agent can pivot to T1 (`http_fetch`).
+
+---
+
+## Briefs
+
+A brief is just a `.txt` file telling the agent what to do. Three included:
+
+| brief | tier exercised |
 |---|---|
-| `screenshot` | see the current page state |
-| `click` | x,y · left/right/middle · 1/2/3 clicks |
-| `type` | type text at the current focus |
-| `key` | press a key or combo (Enter, Control+a, Tab) |
-| `scroll` | up/down/left/right by N pixels |
-| `wait` | N seconds for the page to settle |
-| `navigate` | go to a URL |
-| `upload_file` | set a path on a file input |
-| `ask_user` | pause · yes/no in terminal |
-| `current_url` | read the current URL |
+| `examples/GITHUB-AUDIT-BRIEF.txt` | **T0 only** · estate health report via `gh` |
+| `examples/LINKEDIN-HEADLINE-EXAMPLE.txt` | **T3** · LinkedIn profile (no API exists) |
+| `examples/UPWORK-BRIEF.txt` | **T3** · Upwork profile repositioning |
 
-All exposed via an **in-process MCP server** registered with the Agent SDK. No external MCP daemons. No Docker.
+Briefs can mix tiers freely. State the tier per step or let the agent route automatically.
 
 ---
 
-## Use cases that pay back
-
-| brief | time saved |
-|---|---|
-| Upwork profile + portfolio repositioning | ~60 min |
-| LinkedIn post via fallpost → live | ~10 min |
-| Stripe payout / tax form fill | ~25 min |
-| GitHub new-repo setup × 10 | ~40 min |
-| Mass-reply to Upwork messages | ~30 min |
-| Update fall-registry entries via web UI | ~20 min |
-
----
-
-## Why sovereign
-
-Every "AI agent that drives your computer" SaaS sees your screen on their servers, logs every brief, bills per action, holds your session in their cloud.
-
-si-didy-agent:
-- One Node script you can read in 10 minutes — ~280 lines
-- Chromium runs locally — your screen never leaves your machine
-- Brief lives on your disk as plain text
-- Claude subscription you already pay — no extra billing
-- Session lives in `./si-didy-profile` — gitignore it, encrypt it, delete it
-- MIT licensed — fork it, modify it, white-label it
-
----
-
-## For developers · architecture
+## Architecture
 
 ```
 brief.txt
@@ -171,16 +184,32 @@ agent.mjs
    │      │       OR ANTHROPIC_API_KEY (fallback)
    │      └── model: claude-sonnet-4-5
    │
-   ├── createSdkMcpServer({ name: 'browser', tools: [...] })
-   │      ├── screenshot / click / type / key / scroll / wait
-   │      ├── navigate / upload_file / current_url
-   │      └── ask_user  ← the pause-before-save gate
+   ├── 4 in-process MCP servers + meta
+   │      ├── cli       · cli_run, cli_which       (T0)
+   │      ├── http      · http_fetch, graphql_query (T1)
+   │      ├── (mcps.json proxies)                  (T2 · optional)
+   │      ├── browser   · browser_* × 9            (T3 · lazy)
+   │      └── meta      · ask_user, list_env_keys  (gate)
    │
-   └── playwright.chromium.launchPersistentContext('./si-didy-profile')
-          └── visible Chromium · you can grab the mouse
+   └── single process · no Docker · no daemons
 ```
 
-The agent loop is managed by the Agent SDK. We provide the tools; the SDK handles message-loop iteration, tool-result formatting, error retry. The pause-before-save is implemented as a tool the agent is instructed to call, not a permission prompt — this keeps the SDK in `bypassPermissions` mode for performance.
+All tools are in-process via `createSdkMcpServer`. Playwright is lazy-loaded — `import('playwright')` only runs on first browser tool invocation. The agent's startup is sub-second when no browser tier is used.
+
+---
+
+## Why sovereign
+
+Every "AI agent that drives your computer" SaaS sees your screen on their servers, logs every brief, bills per action, holds your session in their cloud.
+
+si-didy-agent v2:
+- Single Node script · ~600 lines · readable in 15 minutes
+- Runs locally · your screen never leaves your machine
+- Brief lives on your disk as plain text
+- Claude subscription you already pay · no extra billing
+- Browser session in `./si-didy-profile` · gitignore it, encrypt it, delete it
+- CLI allowlist enforces what the agent can spawn
+- MIT licensed · fork it, modify it, white-label it
 
 ---
 

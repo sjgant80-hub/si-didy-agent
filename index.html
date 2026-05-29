@@ -60,10 +60,18 @@ footer .glyph{color:var(--gold);margin:0 6px}
       <span class="sub">sovereign computer-use · subscription-powered · ◊·κ=1</span>
     </h1>
   </div>
-  <div class="kappa">v1.0 · prime 379 · MIT</div>
+  <div class="kappa">v2.0 · 4-tier · prime 379 · MIT</div>
 </header>
 
-<p class="lede">You write a brief in plain English. Claude reads it. A real Chromium browser does it — clicks, types, uploads files, pauses before every Save to ask. No API charges. Your subscription pays.</p>
+<p class="lede">You write a brief in plain English. The agent picks the cheapest tier that finishes the job — CLI when possible, HTTP when there's an API, MCP when registered, browser only as last resort. No API charges. Your Claude subscription pays.</p>
+
+<div class="callout" style="margin:24px 0">
+  <p style="font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:0.24em;color:var(--gold);text-transform:uppercase">◊ v2 · the four-tier cascade</p>
+  <pre style="margin:14px 0 0;font-size:12px;line-height:1.7"><span style="color:var(--gold)">T0</span> · cli_run, cli_which       <span style="color:var(--mute)">← gh, stripe, gcloud, npm, git, curl, …</span>
+<span style="color:var(--gold)">T1</span> · http_fetch, graphql_query <span style="color:var(--mute)">← any REST/GraphQL API directly</span>
+<span style="color:var(--gold)">T2</span> · mcp__&lt;server&gt;__&lt;tool&gt;     <span style="color:var(--mute)">← any MCP you register in ./mcps.json</span>
+<span style="color:var(--gold)">T3</span> · browser_*                <span style="color:var(--mute)">← Playwright · LAST RESORT only · lazy-loaded</span></pre>
+</div>
 
 <div class="cta-row">
   <a href="https://github.com/sjgant80-hub/si-didy-agent" class="btn">◊ Get the code</a>

@@ -1,0 +1,35 @@
+═══════════════════════════════════════════════════════════════════
+  EXAMPLE BRIEF · Upwork profile reposition (T3 browser — valid case)
+  Drop in:  node agent.mjs ./examples/UPWORK-BRIEF.txt
+  Demonstrates: when the browser tier IS the right answer
+═══════════════════════════════════════════════════════════════════
+
+OBJECTIVE
+Update the Upwork freelancer profile at upwork.com/freelancers/<your-handle>
+to a sovereign-positioned version.
+
+TIER NOTE
+Upwork does NOT expose freelancer-side profile-edit APIs. T0/T1/T2 unavailable.
+T3 browser is the only path. Log this reasoning before reaching for browser_*.
+
+INPUTS
+  Target URL: https://www.upwork.com/freelancers/<your-handle>
+  New headline (verbatim):
+    Sovereign AI Tools You Own Forever · 60+ Live Builds · No SaaS Rent
+
+STEPS
+  1. browser_navigate to the Target URL.
+  2. browser_screenshot to confirm we're on the profile editor (not login).
+  3. If a login page is visible: ask_user "Please log in manually then say go."
+     Wait for "go" before continuing.
+  4. Find the pencil/edit icon next to the headline. browser_click it.
+  5. browser_key "Control+a" to select existing headline.
+  6. browser_type the New headline verbatim.
+  7. Find the Save button. ask_user "Ready to save the new headline? [yes/no]"
+  8. Only if user says yes/go: browser_click the Save button.
+  9. browser_screenshot to verify the save took.
+
+RULES
+  - Do not touch any other profile field.
+  - If the page asks for any other consent (terms, GDPR, marketing): ask_user.
+  - On any unexpected modal: screenshot and ask_user.

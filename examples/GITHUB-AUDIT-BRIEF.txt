@@ -1,0 +1,39 @@
+═══════════════════════════════════════════════════════════════════
+  EXAMPLE BRIEF · GitHub estate audit (T0 cli_run · NO browser needed)
+  Drop in:  node agent.mjs ./examples/GITHUB-AUDIT-BRIEF.txt
+  Demonstrates: "playwright is for noobs · this is the API path"
+═══════════════════════════════════════════════════════════════════
+
+OBJECTIVE
+Produce a quick estate health report for sjgant80-hub:
+  - Total public repos
+  - Number with GitHub Pages enabled
+  - Repos with no README.md
+  - Repos with no LICENSE
+  - Most-starred repo
+  - Last-updated repo
+
+ROUTING
+Use T0 cli_run with gh (GitHub CLI). NOT a browser. NOT a screenshot.
+gh is already authenticated on this machine.
+
+STEPS
+  1. Check gh is available: cli_which gh
+  2. List repos:
+       gh api users/sjgant80-hub/repos?per_page=100&page=1
+       (paginate if needed — append &page=2 etc.)
+  3. For each repo, note: name, has_pages, stargazers_count, updated_at
+  4. For up to 10 repos sampled at random, also pull contents:
+       gh api repos/sjgant80-hub/<name>/contents
+       Check whether README.md and LICENSE exist
+  5. Compile a report in plain text · counts + top-3 starred + top-3 stale
+  6. Print the report. Do not create any files. Do not commit anything.
+
+DONE-CONDITION
+Report printed to terminal. No browser opened (T3 should remain dormant).
+
+NOTES
+- This whole task should complete with zero browser tier usage.
+- Cost should be well under $0.50 on subscription auth.
+- If gh isn't on PATH, the agent should fall back to T1 (http_fetch with
+  api.github.com) using ${env:GH_TOKEN} for auth.
