@@ -1,343 +1,437 @@
-═══════════════════════════════════════════════════════════════════
-  si-didy · UPWORK FULL WORKFLOW · si-didy runs my Upwork end-to-end
-  ◊·κ=1 · sovereign · uses subscription auth · no API charges
+═══════════════════════════════════════════════════════════════════════
+  si-didy · UPWORK FULL AUTONOMOUS WORKFLOW · ◊·κ=1
+  si-didy executes the ENTIRE UPWORK ELITE REPOSITIONING PACK end-to-end
+  + runs the daily proposal loop autonomously thereafter
 
-  RUN:    node agent.mjs ./examples/UPWORK-FULL-WORKFLOW.txt
+  RUN ONCE (initial repositioning + first proposal pass):
+    node agent.mjs ./examples/UPWORK-FULL-WORKFLOW.txt
 
-  WHAT IT DOES (one autonomous pass):
-    1. Open Upwork · pause if not logged in
-    2. Reposition the profile (headline + overview + categories + rate)
-    3. Pull my saved job-search feed
-    4. Triage each fresh job against my positioning
-    5. For matches: draft a complete proposal via the Copy Gate frame
-    6. Queue drafts in ./upwork-queue/  (one .md per job)
-    7. Pause · ask me to review the queue before any submission
-    8. On my "go": copy each approved draft to clipboard + open the
-       Upwork apply URL for one-click paste-and-send
-═══════════════════════════════════════════════════════════════════
+  RUN DAILY (proposal loop only · skips repositioning if already done):
+    node agent.mjs ./examples/UPWORK-FULL-WORKFLOW.txt --mode=daily
+═══════════════════════════════════════════════════════════════════════
 
-IDENTITY · WHO I AM ON UPWORK
-  Handle:    sjgant   (verify in step 0)
+WHAT THIS BRIEF DOES (one autonomous pass, no babysitting)
+
+  PHASE 0 · AUTH
+    Open Upwork. If logged in: continue. If not: pause once, ask
+    user to log in manually, wait for "go", then continue.
+
+  PHASE 1 · PROFILE REPOSITIONING  (one-shot · only runs if not done)
+    Execute every step in UPWORK-SIMON-PACK Sections A-D autonomously:
+      A1  · paste new headline
+      A2  · bump hourly rate $50 → $185
+      A3  · turn Availability badge ON ("As needed - open to offers")
+      A4  · leave Boost OFF
+      B   · paste new Overview (full bio, line breaks preserved)
+      C   · add all 20 Skills (one at a time, autocomplete each)
+      D   · build 6 portfolio entries · title + description + URL each
+            (screenshot capture: see PHASE 1.5)
+
+  PHASE 1.5 · PORTFOLIO SCREENSHOT CAPTURE
+    For each of the 6 portfolio URLs in the pack:
+      browser_navigate → wait for paint → browser_screenshot →
+      save as ./upwork-portfolio/0X-name.png
+    Then upload each screenshot into the matching Upwork portfolio
+    slot. Pause once before clicking "Save" on each entry.
+
+  PHASE 2 · PROPOSAL LOOP  (runs every invocation)
+    a) Pull "Most recent" jobs from these saved searches:
+         · AI Development
+         · AI Agent Development
+         · Custom Software Development
+         · JavaScript
+    b) For each job, run TRIAGE FILTER (below).
+    c) For each survivor, run ARCHETYPE MATCH (UPWORK-SIMON-PACK §H).
+    d) For each survivor, run FALLMAP-AS-BAIT prep (§E).
+    e) Draft proposal using one of 3 templates (§F) matched to job.
+    f) Save draft to ./upwork-queue/YYYY-MM-DD/{job-id}.md
+    g) On finish: print queue summary. Pause for human review.
+
+  PHASE 3 · SEND APPROVED  (only on explicit user "go")
+    For each draft in the queue user marks "send":
+      browser_navigate to job apply URL
+      browser_type the proposal body verbatim
+      browser_screenshot final state
+      PAUSE → ask_user "Submit? [yes/no]"
+      Only on "yes" → browser_click Submit
+      Log result to ./upwork-log/YYYY-MM-DD.jsonl
+
+  PHASE 4 · DAILY OPS LOG  (every invocation, end of run)
+    Append today's metrics to ./upwork-log/metrics.jsonl:
+      { date, jobs_seen, jobs_triaged_in, drafts_made,
+        sent, replies, interviews, hired, ghosted }
+
+═══════════════════════════════════════════════════════════════════════
+  IDENTITY  ·  WHO si-didy IS ACTING AS
+═══════════════════════════════════════════════════════════════════════
+
+  Operator:  Simon Gant · sjgant
   Profile:   https://www.upwork.com/freelancers/~01xxxxxxxxxxxxxxxx
-             (if the URL is different, ask_user for the correct one)
+             (if not the right URL: ask_user "paste your real Upwork
+             profile URL" before starting Phase 1)
   Hub:       https://www.ai-nativesolutions.com
   GitHub:    https://github.com/sjgant80-hub
-  Prime:     379
+  Email:     (Upwork-registered · si-didy must not reveal it)
+  Seal:      ◊  (closing glyph on every public artefact)
 
-THE POSITIONING (use this verbatim everywhere)
-  Headline:
-    Sovereign AI Tools You Own Forever · 60+ Live Builds · No SaaS Rent
+═══════════════════════════════════════════════════════════════════════
+  CANONICAL SOURCE  ·  THE PACK IS THE SPEC
+═══════════════════════════════════════════════════════════════════════
 
-  Sub-headline (if profile has a "title" or "specialization" field):
-    Single-file HTML apps · client-installable · no infrastructure rent
+  The full repositioning content lives at:
+    ./examples/UPWORK-SIMON-PACK.txt   (shipped alongside this brief)
 
-  Hourly rate target:  $185 / hr
-  Minimum project:     $2,500
+  si-didy MUST read that pack first and use every "▼ COPY ▼ ... ▲ END ▲"
+  block verbatim. Do NOT paraphrase, shorten, or "improve" the pack
+  content. The pack has already been tone-graded through Copy Gate.
 
-  Overview / Bio (paste verbatim · keep paragraph breaks):
-    ─────────────────────────────────────────────────────────────────
-    I build sovereign software — single-file apps your clients
-    download, run forever, and never pay rent on.
+  Pack sections si-didy will execute:
+    A1  Headline                           → Profile settings · Title
+    A2  Hourly rate                        → Profile settings · Rate
+    A3  Availability                       → Profile · Availability badge
+    A4  Boost                              → Leave OFF
+    B   Overview (full bio)                → Profile settings · Overview
+    C   20 Skills                          → Profile · Skills section
+    D   6 Portfolio entries                → Portfolio section ×6
+    E   FallMap-as-bait integration        → injected into every proposal
+    F1  Custom AI Build template           → for $5k+ build jobs
+    F2  AI Agent / Automation template     → for $2-5k automation jobs
+    F3  Discovery / Audit template         → for consult / audit jobs
+    G   Daily Ops Loop                     → cadence si-didy follows
+    H   5 Buyer Archetypes                 → matched in Phase 2 step c
 
-    60+ live builds across the AI-Native Solutions estate
-    (ai-nativesolutions.com). Each one ships as a single HTML file:
-    no servers, no subscriptions, no vendor lock. Open it from
-    file://, it works.
+═══════════════════════════════════════════════════════════════════════
+  PHASE 1 · DETAILED EXECUTION  ·  PROFILE REPOSITIONING
+═══════════════════════════════════════════════════════════════════════
 
-    What I'm best at:
-    · Custom AI-powered tools your clients actually own
-    · Sovereign single-file architectures (one HTML file deliverable)
-    · Recursive subagent design (Claude Agent SDK · 4-tier routing)
-    · Domain-specific LLM apps (legal · trading · governance · learning)
-    · Client work that ships as a real artifact, not a SaaS dependency
+STEP 1.1 · GUARD · "already done?" check
+  Read ./upwork-state.json. If { reposition_complete: true } SKIP to
+  PHASE 2. Otherwise proceed.
 
-    Recent shipped: ShadowCompass (Jungian shadow-work platform),
-    Copy Gate (6-layer tone-engine MIT), FallLearn (free 7-module
-    AI course + Kids Edition for ages 8-14), FallForce (governance
-    engine with audit chains), Apex Procurement (RFQ pipeline for
-    a real client).
+STEP 1.2 · HEADLINE  (Pack A1)
+  · browser_navigate https://www.upwork.com/freelancers/settings/profile
+  · Find "Title" field · browser_click pencil
+  · browser_key "Control+a"
+  · browser_type (verbatim from Pack A1)
+  · browser_click Save  ← PAUSE: ask_user "Headline ready to save? [yes/no]"
 
-    How I work:
-    · Async-friendly · I write fast, ship daily, screencast progress
-    · Sovereignty-first · your data and your tool stay on your machine
-    · Single-author · no junior outsourcing · what you see is what
-      I built
-    · 14-point build gate · brand-as-identity rule · Mansoor's
-      6-point hardening for any tool touching client data
+STEP 1.3 · HOURLY RATE  (Pack A2)
+  · Find Rates → Hourly rate · browser_click edit
+  · browser_key "Control+a" · browser_type "185"
+  · browser_click Save  ← PAUSE before save
 
-    Rate is $185 / hr. Minimum engagement $2,500. I'd rather build
-    you something real than nickel-and-dime a discovery call.
-    ─────────────────────────────────────────────────────────────────
+STEP 1.4 · AVAILABILITY  (Pack A3)
+  · Find Availability badge toggle
+  · Set: "As needed - open to offers"
+  · Save  ← PAUSE before save
 
-  Categories (pick all that apply on profile · in this priority):
-    1. AI Apps & Integrations
-    2. Web Application Development
-    3. Generative AI
-    4. AI Agent Development
-    5. Other AI Services
+STEP 1.5 · BOOST  (Pack A4)
+  · Verify Boost = OFF · no action if already off
 
-  Skills (top 12 · pinned · in this order):
-    Claude API · Anthropic Agent SDK · System Prompts · LangChain ·
-    OpenAI API · LLM Application Development · HTML5 · Vanilla JS ·
-    IndexedDB · WebGPU · Single-Page Application · MCP
+STEP 1.6 · OVERVIEW BIO  (Pack B · full block)
+  · Find Overview field · browser_click pencil
+  · browser_key "Control+a" · Delete
+  · browser_type the Pack B block VERBATIM, line breaks preserved
+    (paste it as one operation if possible · 200+ chars)
+  · Save  ← PAUSE: ask_user "Overview ready to save? [yes/no]"
 
-  Portfolio (4 cards · in this order)
-    1. ShadowCompass — Jungian Shadow Work Platform
-       URL: https://sjgant80-hub.github.io/shadowcompass/
-       Caption: "Sovereign single-file Jungian platform. WebLLM baked
-       in for offline use. 7 territories, 9 quests, dialogue mode.
-       Free always. Pro for memory."
+STEP 1.7 · 20 SKILLS  (Pack C)
+  · Find Skills section · browser_click "Add skill"
+  · For each of the 20 skills in Pack C:
+      browser_type skill_name
+      wait for autocomplete dropdown
+      browser_click the matching autocomplete entry
+      verify it appears as a chip
+  · Save  ← PAUSE before save
+  · If any skill has no autocomplete match: log it and continue ·
+    Upwork sometimes renames skills; si-didy reports any misses at
+    end of phase 1.
 
-    2. FallLearn — AI Skills Course + Kids Edition
-       URL: https://sjgant80-hub.github.io/falllearn/
-       Caption: "7-module course teaching context architecture + a
-       Kids Edition (ages 8-14) where they design their own AI buddy.
-       All in one HTML file. Free always."
+STEP 1.8 · PORTFOLIO  (Pack D · 6 entries)
+  For each of the 6 entries (D1..D6):
+    1. browser_navigate to entry's project URL (e.g. ai-nativesolutions.com)
+    2. wait 2s for paint
+    3. browser_screenshot → save as ./upwork-portfolio/0X-name.png
+    4. browser_navigate back to Upwork portfolio editor
+    5. browser_click "Add new project"
+    6. browser_type the Pack title verbatim
+    7. browser_type the Pack description verbatim
+    8. browser_type the Pack project URL verbatim
+    9. Upload the saved screenshot
+    10. ← PAUSE: ask_user "Portfolio entry {N} ready to save? [yes/no]"
+    11. On yes: browser_click Save
 
-    3. Copy Gate — 6-Layer Tone Engine
-       URL: https://sjgant80-hub.github.io/copy-gate/
-       Caption: "Run any copy through 6 layers (Jung · Freud · Sales 101
-       · SEO · AI-SEO · Platform). Single file. MIT. The tone engine
-       every Fall* tool uses."
+STEP 1.9 · MARK COMPLETE
+  Write { reposition_complete: true, date: today } to ./upwork-state.json
 
-    4. ai-nativesolutions.com — The Estate Hub
-       URL: https://www.ai-nativesolutions.com
-       Caption: "Luxury-brutalist hub showing 35+ sovereign tools.
-       Every one ships as a single HTML file. This is what client
-       work looks like when it's owned, not rented."
+═══════════════════════════════════════════════════════════════════════
+  PHASE 2 · PROPOSAL LOOP  ·  EVERY INVOCATION
+═══════════════════════════════════════════════════════════════════════
 
-═══════════════════════════════════════════════════════════════════
-THE WORKFLOW
-═══════════════════════════════════════════════════════════════════
+STEP 2.1 · PULL FEEDS
+  For each of these 4 categories:
+    https://www.upwork.com/nx/search/jobs/?sort=recency&q=AI%20Development
+    https://www.upwork.com/nx/search/jobs/?sort=recency&q=AI%20Agent
+    https://www.upwork.com/nx/search/jobs/?sort=recency&q=Custom%20Software
+    https://www.upwork.com/nx/search/jobs/?sort=recency&q=JavaScript%20AI
 
-STEP 0 · AUTH CHECK
-  T3 · browser_navigate to https://www.upwork.com/nx/find-work/
-  browser_screenshot.
-  If a login screen is visible:
-    ask_user "Please log in to Upwork in the open browser, then say
-              'go' when you see the Find Work page."
-    Wait for "go". Re-screenshot to confirm.
-  If logged in: continue silently.
+  · browser_navigate to each
+  · Scrape top 25 jobs · capture: title, budget, hourly, posted_time,
+    client_country, proposals_count, job_url, full_description
+  · Dedupe by job_url across all 4 lists
+  · Dedupe against ./upwork-log/seen-jobs.jsonl (skip jobs si-didy
+    already triaged in a previous run)
+  · Append new jobs to seen-jobs.jsonl
 
-STEP 1 · PROFILE REPOSITIONING (skip if already done · ask first)
-  ask_user "Has the profile already been repositioned with the v1.2
-            elite content? [yes/skip/no]"
+STEP 2.2 · TRIAGE FILTER  (hard-coded · do not relax)
+  SKIP a job if ANY of these are true:
+    · Hourly < $80
+    · Fixed budget < $1,500
+    · "Entry level" or "Looking for the cheapest" wording
+    · Wordpress / Webflow / Squarespace clone work
+    · 50+ proposals already submitted
+    · Client has 0 hires AND 0 spend AND posted < 7 days ago
+    · Job posted from country in [list user can edit in
+      ./upwork-skiplist.json · default empty]
+    · Description mentions "ChatGPT wrapper" or "Zapier chain"
+      with no custom component
 
-  If "yes" or "skip": jump to STEP 2.
-  If "no":
-    1.1 browser_navigate to my profile URL.
-    1.2 Find and click the pencil/edit icon next to the HEADLINE.
-    1.3 Select all (Control+a) · browser_type the verbatim headline.
-    1.4 ask_user "Save the new headline? [yes/no]"
-    1.5 On yes: browser_click Save · screenshot to confirm.
-    1.6 Repeat for: Overview/Bio · Hourly Rate · Categories · Skills
-    1.7 After each save: screenshot + brief ack to me.
-    1.8 If a field doesn't exist or layout differs: screenshot,
-        ask_user how to handle.
+  PROCEED with a job if ALL these are true:
+    · Mentions AI / LLM / agent / automation / custom build
+    · Hourly $80-$300 OR fixed $2,500+
+    · Posted within last 48h
+    · < 25 proposals already submitted
 
-STEP 2 · PULL FRESH JOBS (Tier 1 if RSS available · else Tier 3)
-  Try T1 first:
-    Upwork RSS feeds exist for saved searches.
-    ask_user "Paste your saved-search RSS URL (Upwork → Find Work
-              → My Saved Searches → RSS icon)."
-    Once provided · http_fetch the URL · parse · get last 20 items.
+STEP 2.3 · ARCHETYPE MATCH  (Pack §H)
+  For each survivor, identify which of the 5 archetypes fits:
+    1. THE BURNED FOUNDER       (specific SaaS names mentioned)
+    2. THE COMPLIANCE-NERVOUS   (legal/finance/healthcare/GDPR/on-prem)
+    3. THE AGENCY RESELLER      (white-label / for our clients)
+    4. THE BOOTSTRAPPER         (solo founder / small budget)
+    5. THE ENTERPRISE TIRE-KICK (vague / "exploratory" / unrealistic)
+  Store match in draft frontmatter. Skip archetype 5 (low-ROI).
 
-  Fallback T3 if no RSS:
-    browser_navigate to https://www.upwork.com/nx/search/jobs/?
-                       sort=recency&q=AI+app
-    Scrape job cards · titles + URLs + budget snippets.
+STEP 2.4 · FALLMAP-AS-BAIT  (Pack §E)
+  For each survivor:
+    · Extract the 1-line workflow they're trying to solve
+    · Pre-fill at: https://sjgant80-hub.github.io/fallmap/?w=<encoded>
+    · Capture the share link · this becomes the first line of the
+      proposal (the asymmetric move)
 
-STEP 3 · TRIAGE EACH JOB
-  For each job · run the TRIAGE FILTER:
-    SKIP if:
-      · Hourly cap below $80 (we won't compete on price)
-      · Fixed budget below $1,500
-      · Requires team of 5+ (we're single-author)
-      · "Looking for cheapest" or "low budget" in description
-      · Wordpress · Shopify theme · pure design · pure SEO copywriting
-      · 50+ proposals already (too noisy)
-      · Client has 0 hires + 0 reviews (unscored)
+STEP 2.5 · TEMPLATE SELECT  (Pack §F)
+  · If job mentions "custom app", "build me", "MVP", "from scratch"
+    AND budget >= $5k:                   → Template F1
+  · If job mentions "automation", "agent", "n8n", "Zapier", "workflow"
+    AND budget $2k-$5k:                  → Template F2
+  · If job mentions "consultation", "audit", "advice", "discovery":
+                                          → Template F3
+  · Default fallback:                     → Template F2
 
-    PROCEED if:
-      · AI / LLM / agent / automation in the title or description
-      · Custom build (not template / theme / plugin)
-      · Single-file / sovereign / self-hosted / no-cloud is mentioned
-        OR matches the sovereign positioning naturally
-      · Hourly $80-$300 OR fixed $2,500+
-      · Client has 1+ verified hire and $5K+ spent
-      · "Long-term" / "ongoing" / "retainer" boost score
+STEP 2.6 · DRAFT WITH COPY GATE FRAME
+  Take the chosen template VERBATIM. Fill ONLY the [bracketed] bits:
+    [ONE-LINE OPENER REFERENCING THEIR SPECIFIC TECH OR FEATURE]
+       → si-didy generates from job description, 1 sentence,
+         must quote at least one phrase from their post
+    [pick one portfolio URL]
+       → match to archetype:
+           Compliance-nervous     → fallforce or fallaccount
+           Burned founder         → fallpost or fallmap
+           Agency reseller        → trilogy-forge or AIN hub
+           Bootstrapper           → fallmap (use as proof + bait)
+    [paste FallMap link with their workflow prefilled]
+       → from Step 2.4
+    [their specific pain point — quote it] / [SaaS X they mentioned] /
+    [their rough monthly cost]
+       → extract verbatim from job description
 
-  Log each triage decision (skip/proceed + 1-line reason).
+  DO NOT add new paragraphs. DO NOT remove the "Bespoke / no hourly
+  pyramid schemes" line. DO NOT change the closing "— Simon" line.
 
-STEP 4 · DRAFT PROPOSAL (use the COPY GATE frame)
-  For each PROCEED job · generate a proposal using these 6 layers:
+STEP 2.7 · QUEUE WRITE
+  Save to ./upwork-queue/YYYY-MM-DD/{job-id}.md with frontmatter:
+  ─────
+  ---
+  job_id:        <upwork id>
+  job_url:       <full url>
+  title:         <job title>
+  budget:        <hourly $X-Y OR fixed $X>
+  archetype:     <1..5>
+  template:      <F1 | F2 | F3>
+  fallmap_link:  <prefilled url>
+  proposals_at_draft: <count>
+  drafted_at:    <ISO timestamp>
+  status:        pending_review
+  ---
 
-  LAYER 1 · JUNG (archetypal voice + shadow surfacing)
-    Open by naming what they actually want — not what they wrote.
-    "You probably don't want another AI agency · you want something
-     that works without their meter running."
+  <proposal body · ready to paste>
+  ─────
 
-  LAYER 2 · FREUD (puncture the rationalised want)
-    Name the gap between ego ("we need a chatbot") and id ("we want
-    to stop paying $4k/mo to OpenAI · we want to own our pipeline").
+STEP 2.8 · QUEUE SUMMARY
+  Print to terminal:
+    "◊ drafted N proposals · queue: ./upwork-queue/YYYY-MM-DD/
+     · top picks (highest budget × lowest competition):
+        1. {title} · {budget} · {proposals} other applicants
+        2. ...
+     · review with: ls / open files / mark each as 'send' or 'skip'
+     · then run: node agent.mjs ./examples/UPWORK-FULL-WORKFLOW.txt --mode=send"
 
-  LAYER 3 · SALES 101 (hook · stakes · specificity · proof)
-    Hook: one line they didn't expect.
-    Stakes: what continues to cost them if they hire generic.
-    Specificity: pick ONE estate tool that's structurally relevant
-                 and reference it with the URL.
-    Proof: 3 specific lines from my history that match their need.
-    CTA: one clear next step. No "happy to discuss" mush.
+═══════════════════════════════════════════════════════════════════════
+  PHASE 3 · SEND APPROVED  (--mode=send only)
+═══════════════════════════════════════════════════════════════════════
 
-  LAYER 4 · SEO (light · just keyword match)
-    Use the exact keywords from their job post in the proposal so
-    Upwork's search matches.
+STEP 3.1 · COLLECT
+  Read ./upwork-queue/YYYY-MM-DD/*.md
+  Filter to status: send  (user edits each .md to flip pending_review
+  → send before running --mode=send)
 
-  LAYER 5 · AI-SEO (citation-shape)
-    Bullet structure · table if applicable · attributable claims
-    ("60+ live builds at ai-nativesolutions.com").
+STEP 3.2 · BOOST DECISION
+  For each send-marked draft:
+    If budget >= $5,000 fixed OR hourly_max >= $150:
+      Suggest boosting the proposal (3-5 connects).
+      ← PAUSE: ask_user "Boost this proposal? [yes/no]"
+    Else: do not boost (Pack G discipline)
 
-  LAYER 6 · PLATFORM (Upwork-native)
-    Length: 180-280 words max.
-    Open with their NAME (extract from "Hi [name]" patterns or
-    "[Company Name] is hiring..."). If no name: "Hi —"
-    Close with a specific availability ("I can scope this Thursday
-    or Friday. 30 min, free, no pitch.").
-    Add ONE estate URL inline.
+STEP 3.3 · CONNECT BUDGET CHECK
+  Before sending: browser_navigate to connects page · capture balance.
+  If balance < (sum of required connects + 5 buffer):
+    Pause · ask_user to top up before proceeding.
 
-  STRUCTURE (proposal template):
-    Hi [name],
+STEP 3.4 · SEND LOOP
+  For each draft:
+    a. browser_navigate to job's apply URL
+    b. wait for proposal form to render
+    c. browser_screenshot · verify on apply page (not login, not error)
+    d. browser_key "Tab" through to proposal body field
+    e. browser_key "Control+a" · clear any default text
+    f. browser_type the proposal body VERBATIM from the .md
+    g. If job requires answers to screening questions:
+         browser_screenshot · ← PAUSE: ask_user to answer in chat ·
+         si-didy types each answer verbatim from user response
+    h. browser_screenshot · final review
+    i. ← PAUSE: ask_user "Submit this proposal? [yes/no/edit]"
+       · yes  → browser_click Submit · screenshot success
+       · edit → reload .md and re-type
+       · no   → skip, leave .md status=skipped
+    j. On submit: append to ./upwork-log/YYYY-MM-DD.jsonl
+       { ts, job_id, title, template, archetype, connects_used,
+         boosted, fallmap_link, result: "sent" }
+    k. Move .md to ./upwork-queue/YYYY-MM-DD/sent/
 
-    [Jung layer · name what they actually want · 1-2 sentences]
+STEP 3.5 · BATCH CAP
+  Hard stop at 8 sends per day (Pack G discipline).
+  If 8 reached: print warning, stop the loop.
 
-    [Freud layer · puncture the surface ask · 1 sentence]
+═══════════════════════════════════════════════════════════════════════
+  PHASE 4 · DAILY OPS METRICS
+═══════════════════════════════════════════════════════════════════════
 
-    [Sales 101 · here's why I match · 3-5 bullets · each one specific]
-    · [Specific match #1 from their description]
-    · [Specific match #2 from their description]
-    · [Reference ONE estate tool with URL]
-    · [3rd or 4th if relevant]
+Append to ./upwork-log/metrics.jsonl at end of every invocation:
+  {
+    date: today,
+    mode: "full" | "daily" | "send",
+    jobs_seen: <count>,
+    jobs_triaged_in: <count>,
+    drafts_made: <count>,
+    sent: <count this run>,
+    by_template: { F1: n, F2: n, F3: n },
+    by_archetype: { 1: n, 2: n, 3: n, 4: n },
+    connects_used_this_run: <n>
+  }
 
-    [CTA · concrete next step · time-anchored · no fluff]
+Weekly summary (run on Sunday):
+  · response_rate = replies / sent  (read from notifications scrape)
+  · interview_rate = interviews / sent
+  · best template by reply rate
+  · ← print to terminal as "Pack §G weekly metrics"
 
-    [signature]
-    Simon · sjgant80-hub.github.io · ai-nativesolutions.com
+═══════════════════════════════════════════════════════════════════════
+  SAFETY RULES  ·  HARD STOPS
+═══════════════════════════════════════════════════════════════════════
 
-  Save each proposal to ./upwork-queue/<jobid>.md with this header:
-    # [Job title]
-    URL:      [job apply URL]
-    Budget:   [budget snippet]
-    Client:   [name if extractable]
-    Reasoning: [1 line · why this matched]
-    Triage score: [1-10]
-    Generated: [ISO timestamp]
-    ─────
-    [proposal body]
+NEVER (without explicit ask_user yes for THIS specific action):
+  · Click Submit on a proposal
+  · Click Save on profile changes
+  · Change hourly rate, availability, or billing settings beyond
+    what's in Pack A1-A4
+  · Decline or withdraw a sent proposal
+  · Reply to a client message (DMs/chat)
+  · Open or modify any saved payment method
+  · Change profile photo or visibility
+  · Accept any new Upwork ToS or policy updates
+  · Submit anything that mentions credit cards, bank accounts, or
+    personal ID numbers
 
-STEP 5 · QUEUE REVIEW
-  After all jobs drafted:
-    1. List the queue: `ls ./upwork-queue/`
-    2. Summarise: "{n} drafts ready · highest scores: {top 3 titles}"
-    3. ask_user "Open the queue folder to review? [yes/skip]"
-    4. On yes: T0 · cli_run "code ./upwork-queue" (or platform
-       equivalent to open in editor)
-    5. ask_user "Mark drafts to send · either say 'send all' OR
-                paste a list of jobids · OR say 'skip'"
+ALWAYS:
+  · Use the saved Chromium profile in ./si-didy-profile/  (session
+    persists · login is one-time)
+  · State tier choice in terminal: T3 is the ONLY tier used here
+    (Upwork has no freelancer-side API · T0/T1/T2 don't apply)
+  · Screenshot before every destructive action
+  · Log every decision to ./upwork-log/YYYY-MM-DD.jsonl
+  · Quote the Pack verbatim · no creative rewriting
 
-STEP 6 · SEND APPROVED
-  For each approved jobid:
-    6.1 Read ./upwork-queue/<jobid>.md
-    6.2 Extract the proposal body (everything after the "─────" line)
-    6.3 T0 · cli_run to copy to clipboard:
-        Windows: `echo "<body>" | clip`
-        Mac:     `pbcopy < <(echo "<body>")`
-        Linux:   `xclip -selection clipboard`
-        (use shell-safe escaping for the body)
-    6.4 T3 · browser_navigate to the job apply URL.
-    6.5 browser_screenshot to confirm we're on the proposal page.
-    6.6 ask_user "I copied the proposal to your clipboard and opened
-                  the apply page. Paste it (Ctrl+V) in the cover
-                  letter field, set bid amount, then say 'sent' or
-                  'skip' to move to the next one."
-    6.7 On "sent": log to ./upwork-queue/SENT.log with timestamp.
-        On "skip": log to ./upwork-queue/SKIPPED.log with reason.
+CONNECT BUDGET:
+  · Default cap per run: 30 connects
+  · ← PAUSE if a single proposal needs > 6 connects
+  · Boosted Proposals only on $5k+ jobs (Pack A4 + G)
 
-STEP 7 · END-OF-RUN SUMMARY
-  Print:
-    · Jobs found:       N
-    · Triaged in:       N
-    · Drafts queued:    N
-    · Sent:             N
-    · Skipped:          N
-    · Next run:         (suggest cron · e.g. every 4 hours)
+CONFIDENTIALITY:
+  · Do not paste Upwork-internal job IDs or client names into
+    external tools (e.g. FallMap query strings · use generic
+    workflow language instead)
+  · The .md drafts contain client details · gitignore ./upwork-queue/
+    (already gitignored in si-didy-agent · verify on first run)
 
-═══════════════════════════════════════════════════════════════════
-SAFETY · NON-NEGOTIABLE
-═══════════════════════════════════════════════════════════════════
-  · NEVER auto-submit a proposal. Always pause for human paste-and-send.
-  · NEVER change billing info, payment methods, or account settings.
-  · NEVER decline / withdraw a sent proposal without ask_user.
-  · NEVER message a client (DMs / chat) without ask_user.
-  · NEVER edit my profile photo, hourly rate, or availability
-    without explicit ask_user confirmation each time.
-  · If Upwork shows ANY captcha, 2FA, or unusual modal:
-    screenshot + ask_user · do not bypass.
-  · If a job description mentions illegal work, scam patterns
-    (offshore wire / crypto pyramid / "easy money"): skip silently
-    + flag in ./upwork-queue/SKIPPED.log with reason "RED_FLAG".
+═══════════════════════════════════════════════════════════════════════
+  TIER NOTE  ·  WHY THIS IS T3
+═══════════════════════════════════════════════════════════════════════
 
-═══════════════════════════════════════════════════════════════════
-EXAMPLE PROPOSAL (what good looks like)
-═══════════════════════════════════════════════════════════════════
-Hi Sarah,
+Upwork exposes ZERO freelancer-side APIs for:
+  · Profile editing
+  · Proposal submission
+  · Job feed (the public API is buyer-side · gated to enterprise)
+  · Connects management
+  · Messages
 
-You wrote "we need a chatbot" but I think you actually want to
-stop paying OpenAI $4K a month while still owning the
-conversation tier. That's a different build.
+T0 / T1 / T2 are unavailable for this workflow. T3 (Playwright) is
+the only path. si-didy should log this reasoning at top of every run:
 
-Most agencies will hand you another wrapper around someone
-else's API. I build sovereign single-file tools — your clients
-download an HTML file and the tool works from `file://`, no
-infrastructure rent.
+  "◊ tier T3 selected · Upwork has no freelancer API · browser is
+   the only sovereign path."
 
-Three specific matches for what you described:
-· Your "100+ patient intake forms" maps cleanly to the sovereign
-  pattern I shipped for legal intake (HIPAA-friendly, IndexedDB,
-  works offline, exports JSON when you need to integrate).
-· Your "branded for each clinic" requirement is exactly what my
-  forge engine does — config in → branded HTML out. See
-  ai-nativesolutions.com for the live estate.
-· Your "no ongoing SaaS rent" line is the whole reason I
-  exist. WebLLM baked into the chat tier means zero API cost
-  after first load for the patient-facing flow.
+═══════════════════════════════════════════════════════════════════════
+  SCHEDULING  ·  CRON / TASK SCHEDULER
+═══════════════════════════════════════════════════════════════════════
 
-I can scope this Thursday or Friday. 30 minutes, free, no pitch
-— I'll show you the architecture and you'll know in 10 if it's
-a fit.
+WINDOWS Task Scheduler:
+  · Open Task Scheduler · Create Basic Task
+  · Trigger: Daily at 08:15 GMT
+  · Action: Start a program
+    Program:   node.exe
+    Arguments: agent.mjs .\examples\UPWORK-FULL-WORKFLOW.txt --mode=daily
+    Start in:  C:\Users\sjgan\Downloads\si-didy-agent
+  · Run only if user logged on  (so Chromium can use the profile)
 
-Simon · sjgant80-hub.github.io · ai-nativesolutions.com
+LINUX / MAC cron:
+  15 8 * * 1-5 cd ~/si-didy-agent && \
+    /usr/bin/node agent.mjs ./examples/UPWORK-FULL-WORKFLOW.txt \
+    --mode=daily >> ./upwork-log/cron.log 2>&1
 
-═══════════════════════════════════════════════════════════════════
-RUN IT
-═══════════════════════════════════════════════════════════════════
-  node agent.mjs ./examples/UPWORK-FULL-WORKFLOW.txt
+The 08:15 GMT slot maps to Pack G's "MORNING (8:00 GMT)" window.
 
-  If running for the first time, expect 60-90 seconds of browser
-  startup + auth check. The actual proposal drafting takes
-  ~20 seconds per job (subscription auth via Claude Code).
+═══════════════════════════════════════════════════════════════════════
+  END OF BRIEF · ◊·κ=1
+═══════════════════════════════════════════════════════════════════════
 
-  Suggested cadence:
-    morning  · 7am  · pull overnight jobs
-    midday   · 1pm  · catch fresh posts
-    evening  · 7pm  · final pass before EU/US wind-down
+si-didy: before starting, READ THE PACK at
+   ./examples/UPWORK-SIMON-PACK.txt
+and treat every "▼ COPY ▼ ... ▲ END ▲" block as immutable source.
 
-  Cron template (Linux/Mac):
-    0 7,13,19 * * * cd /path/to/si-didy-agent && \
-      node agent.mjs ./examples/UPWORK-FULL-WORKFLOW.txt \
-      >> ./upwork-queue/run.log 2>&1
+Then proceed in order: Phase 0 → 1 → 2 → 3 → 4.
 
-  Windows scheduler:
-    Action: node agent.mjs ./examples/UPWORK-FULL-WORKFLOW.txt
-    Trigger: daily at 07:00, 13:00, 19:00
-    Working dir: C:\Users\sjgan\Downloads\si-didy-agent
-═══════════════════════════════════════════════════════════════════
+Print at start:
+  ◊ si-didy-agent · UPWORK FULL AUTONOMOUS WORKFLOW
+  ◊ tier T3 (Playwright) · Upwork has no freelancer API
+  ◊ pack source: UPWORK-SIMON-PACK.txt
+  ◊ mode: <full | daily | send>
+  ◊ starting phase 0 (auth check)...

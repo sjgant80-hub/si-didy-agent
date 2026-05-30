@@ -4,3 +4,10 @@ package-lock.json
 .DS_Store
 *.log
 .env
+
+# Upwork autonomous workflow artefacts (client data + session)
+upwork-queue/
+upwork-log/
+upwork-portfolio/
+upwork-state.json
+upwork-skiplist.json
