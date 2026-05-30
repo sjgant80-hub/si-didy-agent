@@ -1,0 +1,15 @@
+{
+  "_doc": "Copy this to ./mcps.json to wire T2 estate MCPs into si-didy. Edit paths to where you cloned each MCP server. The agent spawns each as stdio · their tools become callable as mcp__<name>__<tool>.",
+
+  "onlybrains": {
+    "command": "node",
+    "args": ["../onlybrains-mcp/index.mjs"],
+    "_purpose": "PLC / SCADA / xchg rates · industrial control + crypto"
+  },
+
+  "fallcore": {
+    "command": "node",
+    "args": ["../fallcore-mcp/index.mjs"],
+    "_purpose": "Sovereign LLM cascade · BYOK + local Ollama fallback"
+  }
+}

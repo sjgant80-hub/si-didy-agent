@@ -14,6 +14,37 @@ Landing: [sjgant80-hub.github.io/si-didy-agent](https://sjgant80-hub.github.io/s
 
 ---
 
+## What's new in v2.2 · the digital-twin layers (n=4 → n=∞)
+
+si-didy is no longer a "tool driver." It's Simon's **digital twin** — it knows the whole 60+ tool estate, calls APIs instead of clicking buttons when it can, forges new tools when one doesn't exist, spawns sub-twins for parallel sub-missions, and **learns from every run**.
+
+The 7-level recursion (v20.1 seed cosmology · φ=1.618 · κ=0.618):
+
+```
+n=1 · drive one thing       (browser click)
+n=2 · run one mission       (brief)
+n=3 · chat with operator    (REPL)
+n=4 · ESTATE-AWARE          → estate_query before anything
+n=5 · ESTATE-CALLER         → estate_call instead of opening a browser
+n=6 · ESTATE-FORGER         → forge_request when no tool exists yet
+n=7 · SELF-SPAWNER          → subagent_spawn for sub-missions
+n=∞ · SELF-LEARNER          → learn_log compounds the twin
+```
+
+**Estate manifest** (`./estate.json`) — every tool Simon shipped, indexed by intent. si-didy queries this first.
+
+**New MCPs** (in addition to cli/http/browser/memory/meta):
+- `estate_query` · "what does the estate have for X?"
+- `estate_call` · T1 HTTP wrapper that calls any estate tool's API
+- `forge_request` · POSTs a spec to fallcore-factory · spawns new sovereign tools
+- `subagent_spawn` · recursive child si-didy with a sub-brief · n=7
+- `learn_log` / `learn_recall` · the twin compounds across missions
+- `pack_edit` · self-editing playbooks (pauses for `yes`)
+
+**mcps.json template** (`./mcps.example.json`) — copy + edit to wire onlybrains + fallcore-mcp as T2 sources.
+
+---
+
 ## What's new in v2.1 · chat mode + platform packs
 
 You can now run si-didy as a **persistent chat-driven autonomous agent**:

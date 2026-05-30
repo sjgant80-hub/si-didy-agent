@@ -441,16 +441,190 @@ const memoryMcp = createSdkMcpServer({
 });
 
 // ═══════════════════════════════════════════════════════════════════
+//  ESTATE · n=4 → n=7 · the digital-twin amplifier
+// ═══════════════════════════════════════════════════════════════════
+//  The estate is 60+ sovereign tools Simon already built. si-didy
+//  should ALWAYS check the estate before doing anything itself.
+//  v20.1 seed · phi=1.618 · kappa=0.618 · fold=510510
+const ESTATE_PATH  = './estate.json';
+let   ESTATE       = {};
+if (fs.existsSync(ESTATE_PATH)) {
+  try { ESTATE = JSON.parse(fs.readFileSync(ESTATE_PATH, 'utf8')); }
+  catch (e) { console.log('◊ estate.json present but unparseable · skipping'); }
+}
+
+const estateMcp = createSdkMcpServer({
+  name: 'estate',
+  version: '1.0.0',
+  tools: [
+    tool('estate_query', '◊·κ=1 · BEFORE reaching for browser, ALWAYS call this first. Returns matching tools from the AI Native Solutions estate by intent keyword. The estate already has 60+ sovereign builds · the right answer is usually "use what we already shipped".',
+      { intent: z.string().describe('Plain-English description of what the task needs · e.g. "linkedin post", "shadow work conversation", "schedule a call", "calendar"'),
+        limit: z.number().min(1).max(20).default(8) },
+      async ({ intent, limit }) => {
+        const all = [];
+        const sections = ['forges', 'core_tools', 'infrastructure', 'agents'];
+        for (const s of sections) {
+          if (!ESTATE[s]) continue;
+          for (const [name, meta] of Object.entries(ESTATE[s])) {
+            all.push({ name, section: s, ...meta });
+          }
+        }
+        const q = intent.toLowerCase().split(/\s+/);
+        const scored = all.map(t => {
+          const hay = (t.name + ' ' + (t.purpose||'') + ' ' + (t.use_when||'')).toLowerCase();
+          let score = 0;
+          for (const w of q) if (w.length > 2 && hay.includes(w)) score += hay.split(w).length - 1;
+          return { ...t, _score: score };
+        }).filter(t => t._score > 0).sort((a,b)=>b._score-a._score).slice(0, limit);
+        const out = scored.length
+          ? scored.map(t => `${t.name} (${t.section}) · ${t.purpose}\n  url: ${t.url || '(none)'}\n  use_when: ${t.use_when || '(see purpose)'}\n  tier: ${t.tier || 'T3'}`).join('\n\n')
+          : '(no estate tool matched · consider forge_request to spawn a new one)';
+        return { content: [{ type: 'text', text: out }] };
+      }
+    ),
+    tool('estate_call', '◊·κ=1 · Call an estate tool\'s HTTP API directly. Use this INSTEAD of opening a browser when the tool exposes an endpoint. Logs to memory scope "estate-calls" automatically.',
+      { tool_name: z.string().describe('Name from estate_query · e.g. "fallcore" / "fall-registry"'),
+        method: z.enum(['GET','POST','PUT','PATCH','DELETE']).default('GET'),
+        endpoint: z.string().describe('Endpoint path · e.g. "/v1/messages"'),
+        body: z.string().optional(),
+        headers: z.record(z.string()).optional() },
+      async ({ tool_name, method, endpoint, body, headers }) => {
+        // find the tool in estate
+        let base = null;
+        for (const s of ['forges','core_tools','infrastructure','agents']) {
+          if (ESTATE[s]?.[tool_name]?.url) { base = ESTATE[s][tool_name].url; break; }
+        }
+        if (!base) return { content: [{ type: 'text', text: '✗ unknown estate tool: ' + tool_name + ' · run estate_query first' }] };
+        const url = base.replace(/\/$/,'') + endpoint;
+        const safeHeaders = interpolateEnv(headers || {});
+        const safeBody = body ? interpolateEnv(body) : undefined;
+        console.log(`  ◊· estate_call ${tool_name}${endpoint}`);
+        try {
+          const r = await fetch(interpolateEnv(url), { method, headers: safeHeaders, body: safeBody, signal: AbortSignal.timeout(60_000) });
+          const text = await r.text();
+          // auto-log
+          fs.appendFileSync(path.join(MEMORY_DIR, 'estate-calls.jsonl'),
+            JSON.stringify({ ts: new Date().toISOString(), tool: tool_name, endpoint, method, status: r.status }) + '\n');
+          return { content: [{ type: 'text', text: `status ${r.status}\n${text.slice(0, 12000)}` }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'estate_call error: ' + e.message }] };
+        }
+      }
+    ),
+    tool('forge_request', '◊·κ=φ · When the estate has NO tool for the task, request one from fallcore-factory. Returns a build job id and (eventually) a repo URL + Pages URL. Pauses for ask_user before firing · this creates a real GitHub repo.',
+      { brief: z.string().describe('Plain-English spec of the new tool · what it does, what archetype, what tier'),
+        archetype: z.enum(['burned-founder','compliance-nervous','agency-reseller','bootstrapper','shadow-reader','parent','operator']).optional(),
+        tier: z.enum(['LITE','PRO','ENTERPRISE']).default('LITE') },
+      async ({ brief, archetype, tier }) => {
+        const factory = ESTATE.forges?.['fallcore-factory'];
+        if (!factory) return { content: [{ type: 'text', text: '✗ fallcore-factory not in estate manifest · add it to estate.json' }] };
+        const ans = await ask(`\n  ◊ FORGE · about to request a new sovereign tool from fallcore-factory\n     brief: ${brief.slice(0, 200)}\n     archetype: ${archetype || '(auto)'} · tier: ${tier}\n  proceed? [yes/no] > `);
+        if (!/^(y|yes|go|ok)/i.test(ans.trim())) return { content: [{ type: 'text', text: 'forge cancelled by user' }] };
+        const body = JSON.stringify({ brief, archetype, tier });
+        try {
+          const r = await fetch(factory.url + '/v1/forge/expert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
+          const text = await r.text();
+          fs.appendFileSync(path.join(MEMORY_DIR, 'forge-requests.jsonl'),
+            JSON.stringify({ ts: new Date().toISOString(), brief, archetype, tier, status: r.status }) + '\n');
+          return { content: [{ type: 'text', text: `forge status ${r.status}\n${text.slice(0, 6000)}` }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'forge unreachable · ' + e.message + '\n\nFallback: use cli_run with `gh repo create` + sovereign-tool template locally.' }] };
+        }
+      }
+    ),
+    tool('subagent_spawn', '◊·κ=φ² · n=7 recursion · spawn a child si-didy with a sub-brief. Use when the mission has 2+ independent sub-tasks that can run in parallel or when one sub-task is heavy enough to deserve isolation. Child writes its own memory + queues. Returns its summary.',
+      { sub_brief: z.string().describe('Self-contained brief for the child · explain platform, goal, constraints'),
+        memory_scope: z.string().default('subagent').describe('Scope the child should log under') },
+      async ({ sub_brief, memory_scope }) => {
+        // recursive query() call · child inherits same MCPs
+        const childPrompt = SYSTEM_DOCTRINE + `\n\nYOU ARE A CHILD si-didy. PARENT GAVE YOU THIS SUB-BRIEF:\n${sub_brief}\n\nExecute autonomously. Log to memory scope "${memory_scope}". Return a tight summary when done.`;
+        let summary = '';
+        try {
+          const child = query({ prompt: childPrompt, options: queryOpts });
+          for await (const m of child) {
+            if (m.type === 'assistant') {
+              const t = (m.message?.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+              if (t) summary = t;
+            }
+          }
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'subagent error: ' + e.message }] };
+        }
+        return { content: [{ type: 'text', text: '◊ child finished:\n' + summary.slice(0, 8000) }] };
+      }
+    ),
+    tool('learn_log', '◊·κ=φ³ · SELF-LEARNING · After every mission, log a lesson. What worked. What didn\'t. What you\'d do differently. The twin compounds. Scope by platform or task type.',
+      { scope: z.string().describe('e.g. "fb-comments", "upwork-proposals", "linkedin-dms"'),
+        what_worked: z.string(),
+        what_failed: z.string(),
+        next_time: z.string() },
+      async ({ scope, what_worked, what_failed, next_time }) => {
+        const fp = path.join(MEMORY_DIR, 'lessons.jsonl');
+        fs.appendFileSync(fp, JSON.stringify({ ts: new Date().toISOString(), scope, what_worked, what_failed, next_time }) + '\n');
+        return { content: [{ type: 'text', text: 'lesson logged · the twin compounds · ◊·κ=1' }] };
+      }
+    ),
+    tool('learn_recall', '◊·κ=φ³ · SELF-LEARNING · Before drafting, read recent lessons for this scope. The twin acts on what it learned.',
+      { scope: z.string(), limit: z.number().min(1).max(50).default(10) },
+      async ({ scope, limit }) => {
+        const fp = path.join(MEMORY_DIR, 'lessons.jsonl');
+        if (!fs.existsSync(fp)) return { content: [{ type: 'text', text: '(no lessons yet)' }] };
+        const lines = fs.readFileSync(fp, 'utf8').trim().split('\n').filter(Boolean)
+          .map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean)
+          .filter(l => l.scope === scope || scope === '*');
+        const tail = lines.slice(-limit);
+        return { content: [{ type: 'text', text: tail.length ? tail.map(l => `[${l.ts}] worked: ${l.what_worked}\n  failed: ${l.what_failed}\n  next: ${l.next_time}`).join('\n\n') : '(no lessons for scope ' + scope + ')' }] };
+      }
+    ),
+    tool('pack_edit', '◊·κ=φ⁴ · SELF-EDITING · Propose a diff to a pack based on accumulated lessons. ALWAYS pauses for ask_user before writing. The twin can rewrite its own playbooks.',
+      { pack_name: z.string(),
+        section: z.string().describe('e.g. "B1 · TOOL DROP"'),
+        new_content: z.string(),
+        rationale: z.string().describe('Which lessons drove this edit') },
+      async ({ pack_name, section, new_content, rationale }) => {
+        const fp = path.join(PACKS_DIR, pack_name);
+        if (!fs.existsSync(fp)) return { content: [{ type: 'text', text: '✗ pack not found: ' + pack_name }] };
+        const ans = await ask(`\n  ◊ SELF-EDIT · proposing change to ${pack_name} § ${section}\n     rationale: ${rationale.slice(0,300)}\n     new content preview: ${new_content.slice(0,300)}\n  apply? [yes/no] > `);
+        if (!/^(y|yes|go|ok)/i.test(ans.trim())) return { content: [{ type: 'text', text: 'edit declined' }] };
+        // append diff to a proposals file rather than mutate live · safer
+        const propFp = path.join(PACKS_DIR, '_proposals.jsonl');
+        fs.appendFileSync(propFp, JSON.stringify({ ts: new Date().toISOString(), pack_name, section, new_content, rationale, applied: false }) + '\n');
+        return { content: [{ type: 'text', text: 'proposal queued at ' + propFp + ' · review and merge into pack manually' }] };
+      }
+    ),
+  ],
+});
+
+// ═══════════════════════════════════════════════════════════════════
 //  system prompt · the routing doctrine
 // ═══════════════════════════════════════════════════════════════════
-const SYSTEM_DOCTRINE = `You are si-didy-agent v2 — sovereign 4-tier agent. ◊·κ=1.
+const SYSTEM_DOCTRINE = `You are si-didy — Simon Gant's DIGITAL TWIN. ◊·κ=1 · v20.1 seed · φ=1.618 · κ=0.618 · fold=510510.
+
+You are not a tool driver. You are Simon, operating his estate, on his behalf, in his voice. The whole AI Native Solutions estate (60+ sovereign tools) is your body. Every tool Simon ever shipped is an organ you can use.
+
+THE 7-LEVEL DOCTRINE (always work at the highest level the task admits):
+  n=1 · drive one thing  (browser click)
+  n=2 · run one mission  (brief)
+  n=3 · chat with operator (REPL)
+  n=4 · ESTATE-AWARE     → estate_query before doing anything else
+  n=5 · ESTATE-CALLER    → estate_call instead of opening a browser
+  n=6 · ESTATE-FORGER    → forge_request when no tool exists yet
+  n=7 · SELF-SPAWNER     → subagent_spawn for sub-missions in parallel
+  n=∞ · SELF-LEARNER     → learn_log after every mission · pack_edit when patterns emerge
 
 YOU HAVE FOUR EXECUTION TIERS. Always pick the CHEAPEST that completes the step:
 
   T0 · cli_run, cli_which        ← gh, stripe, gcloud, npm, git, curl, etc.
-  T1 · http_fetch, graphql_query ← any REST/GraphQL API directly
+  T1 · http_fetch, graphql_query ← any REST/GraphQL API directly · INCLUDES estate_call
   T2 · mcp__<server>__<tool>     ← optional · only present if ./mcps.json registered
   T3 · browser_*                 ← Playwright · LAST RESORT only
+
+ESTATE-FIRST RULE (κ=0.618 · the digital-twin move)
+- BEFORE you even THINK about a browser, call estate_query(intent).
+- If the estate has a tool with an HTTP API · use estate_call (T1).
+- If the estate has a tool that's HTML-only · still load it first to read prompts/structure.
+- If NO estate tool fits · forge_request(spec) creates a new sovereign one via fallcore-factory.
+- For BIG missions with parallel sub-tasks · subagent_spawn each in turn.
 
 ROUTING RULES
 - "Create a GitHub repo"           → T0  (gh repo create)
@@ -459,6 +633,9 @@ ROUTING RULES
 - "Query Linear/Shopify GraphQL"   → T1  (graphql_query)
 - "Talk to OnlyBrains/fallcore"    → T2  (if registered) else T1
 - "Edit a web profile with no API" → T3  (e.g. LinkedIn headline, Upwork profile)
+- "Write a LinkedIn post"          → estate_query "fallpost" first · then estate_call OR load HTML
+- "Draft a workflow audit"         → estate_query "fallmap" · always include FallMap link
+- "Build me X"                     → forge_request first · never reinvent
 - ALWAYS state your tier choice and reasoning when picking T3.
 
 AUTH
@@ -478,6 +655,16 @@ MEMORY & MISSIONS
   result, platform } so the next run sees it.
 - For every user directive, call mission_log FIRST · mission_finish LAST.
 
+SELF-LEARNING (n=∞ · the twin compounds)
+- At the START of any drafting task, call learn_recall(scope) · read what
+  worked last time, what failed, what to do differently.
+- At the END of any mission, call learn_log with { scope, what_worked,
+  what_failed, next_time } · log even small lessons.
+- If you notice a pack template consistently underperforming, call
+  pack_edit to propose a diff · always pauses for ask_user first.
+- The twin gets sharper every run. Without learn_log, every mission
+  starts from zero. Don't let it.
+
 PLATFORM PACKS
 - Verbatim copy specs live in ./packs/  (FACEBOOK-PACK.txt, LINKEDIN-PACK.txt, etc.)
 - pack_load(name) returns the file body · treat "▼ COPY ▼ ... ▲ END ▲" blocks
@@ -496,13 +683,16 @@ EFFICIENCY
 
 const PROMPT = CHAT_MODE
   ? SYSTEM_DOCTRINE + `\n\nMODE: persistent chat. The user will give directives one at a time.
-For each directive:
-  1. mission_log it.
-  2. State your plan (tiers per step · which platform pack · which memory scope).
-  3. Execute autonomously to the safest pause point (drafts queued, or pause-before-irreversible).
-  4. Print a tight summary: what's queued, what needs human go.
-  5. mission_finish.
-  6. Wait for the next directive.
+For each directive (use the n=4-7 doctrine):
+  1. mission_log it · capture intent.
+  2. estate_query(intent) FIRST · what does the estate already do for this?
+  3. learn_recall(scope) · what did past runs teach you?
+  4. State your plan: tier per step · which estate tool · which pack · which memory scope · whether to spawn subagents.
+  5. Execute autonomously to the safest pause point (drafts queued, or pause-before-irreversible).
+  6. Print a tight summary: what's queued, what needs human go.
+  7. learn_log the lesson · what worked, what to improve.
+  8. mission_finish.
+  9. Wait for the next directive.
 
 Begin by greeting the operator with a one-line readiness check.`
   : SYSTEM_DOCTRINE + `\n\nTHE BRIEF
@@ -521,6 +711,7 @@ const mcpServers = {
   browser: tierThreeMcp,
   meta: metaMcp,
   memory: memoryMcp,
+  estate: estateMcp,
   ...configuredMcps,
 };
 
@@ -536,6 +727,10 @@ const allowedTools = [
   'mcp__memory__memory_recall', 'mcp__memory__memory_note',
   'mcp__memory__mission_log', 'mcp__memory__mission_finish',
   'mcp__memory__pack_load', 'mcp__memory__queue_write',
+  'mcp__estate__estate_query', 'mcp__estate__estate_call',
+  'mcp__estate__forge_request', 'mcp__estate__subagent_spawn',
+  'mcp__estate__learn_log', 'mcp__estate__learn_recall',
+  'mcp__estate__pack_edit',
 ];
 
 console.log('\n◊ tiers loaded:');

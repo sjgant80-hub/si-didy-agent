@@ -1,0 +1,153 @@
+{
+  "_doc": "Estate manifest · si-didy queries this BEFORE reaching for browser. ◊·κ=1 · Updated by sync.js or hand. v20.1 seed cosmology · phi=1.618 · kappa=0.618 · fold=510510",
+  "version": "1.0",
+  "owner": "sjgant80-hub",
+  "hub": "https://www.ai-nativesolutions.com",
+  "registry": "https://sjgant80-hub.github.io/fall-registry/",
+
+  "forges": {
+    "fallcore-factory": {
+      "kind": "forge",
+      "purpose": "Spawn brand-new sovereign tools from a spec. POST a brief, get back a deployable HTML + repo zip.",
+      "url": "https://fallcore-factory.onrender.com",
+      "api": {
+        "build": "POST /v1/forge/expert · body: { brief, archetype, tier }",
+        "templates": "GET /v1/templates"
+      },
+      "use_when": "the estate doesn't have a tool for the requested task",
+      "tier": "T1"
+    },
+    "forge-lab": {
+      "kind": "forge",
+      "purpose": "Trilogy-stack archetype-tuned config · Jung + Freud + Sales 101 layered",
+      "url": "https://sjgant80-hub.github.io/trilogy-forge/",
+      "api": "browser-only (single-file HTML)",
+      "use_when": "designing the tone/archetype for a new build before forging",
+      "tier": "T3 (or load HTML and read)"
+    },
+    "fallcore": {
+      "kind": "llm-proxy",
+      "purpose": "Anthropic-compatible local LLM cascade · BYOK + local Ollama fallback",
+      "url": "http://localhost:8787 (default) · also exposed as MCP",
+      "api": {
+        "chat": "POST /v1/messages (Anthropic shape)",
+        "models": "GET /v1/models"
+      },
+      "use_when": "agent needs a sub-LLM call without leaving the sovereign stack",
+      "tier": "T1 or T2 (if mcps.json wires fallcore-mcp)"
+    }
+  },
+
+  "core_tools": {
+    "ai-nativesolutions-hub": {
+      "purpose": "The marketplace · luxury brutalist · lists every estate tool with payment route",
+      "url": "https://www.ai-nativesolutions.com",
+      "tier": "T3 (read) or T1 (registry JSON when live)"
+    },
+    "fallpost": {
+      "purpose": "Sovereign LinkedIn engine · Jung + Freud + Sales 6-layer tone",
+      "url": "https://sjgant80-hub.github.io/fallpost/",
+      "use_when": "drafting LinkedIn posts or DMs",
+      "tier": "T3 (interactive) or load HTML for prompts"
+    },
+    "fallmap": {
+      "purpose": "Workflow-to-consulting-cost exposer · the FallMap-as-bait engine",
+      "url": "https://sjgant80-hub.github.io/fallmap/",
+      "use_when": "every proposal / cold DM needs a FallMap link as bait",
+      "tier": "T3 (with query-string prefill ?w=encoded)"
+    },
+    "fallaccount-trades": {
+      "purpose": "Sovereign accounting for UK trades · CIS + MTD + receipt vision",
+      "url": "https://sjgant80-hub.github.io/fallaccount-trades/",
+      "use_when": "compliance/finance archetype client mention"
+    },
+    "fallforce": {
+      "purpose": "Sovereign CRM · pipeline + RFQ + audit chain · procurement-ready",
+      "url": "https://sjgant80-hub.github.io/fallforce/",
+      "use_when": "enterprise/CRM-replacement archetype"
+    },
+    "shadowcompass": {
+      "purpose": "Sovereign Jungian shadow-work tool · WebLLM baked · Shadow Guide chat",
+      "url": "https://sjgant80-hub.github.io/shadowcompass/",
+      "use_when": "Jung / shadow-work / individuation / consumer mental-health conversations",
+      "consumer_funnel": true
+    },
+    "falllearn": {
+      "purpose": "Sovereign AI literacy course · 8 modules incl. Kids Edition",
+      "url": "https://sjgant80-hub.github.io/falllearn/",
+      "use_when": "parents / educators / AI-curious adults / 'AI for my kid'"
+    },
+    "copygate": {
+      "purpose": "6-layer tone engine · grade any copy on Jung + Sales + Freud + Platform",
+      "url": "https://sjgant80-hub.github.io/copygate/",
+      "use_when": "before publishing ANY post · run draft through Copy Gate"
+    },
+    "fallslot": {
+      "purpose": "Sovereign Calendly replacement",
+      "url": "https://sjgant80-hub.github.io/fallslot/",
+      "use_when": "scheduling a discovery call"
+    },
+    "fallform": {
+      "purpose": "Sovereign Typeform replacement",
+      "url": "https://sjgant80-hub.github.io/fallform/"
+    },
+    "falllist": {
+      "purpose": "Sovereign Mailchimp / Substack replacement",
+      "url": "https://sjgant80-hub.github.io/falllist/"
+    },
+    "fallguild": {
+      "purpose": "LinkedIn gravity coordination · multi-person amplification",
+      "url": "https://sjgant80-hub.github.io/fallguild/"
+    }
+  },
+
+  "infrastructure": {
+    "fall-registry": {
+      "purpose": "Live JSON registry of every estate tool · auto-syncs on push",
+      "url": "https://sjgant80-hub.github.io/fall-registry/registry.json",
+      "tier": "T1"
+    },
+    "fall-palette": {
+      "purpose": "Ctrl+K command palette plugin for all sovereign tools",
+      "tier": "T0 (git clone) or T3"
+    },
+    "fallmesh": {
+      "purpose": "BroadcastChannel('fall-signal') mesh between live tools",
+      "tier": "in-browser only (T3)"
+    },
+    "fall-hot": {
+      "purpose": "Hot-loader plugin discipline · v1 CDN injection",
+      "tier": "T3"
+    },
+    "onlybrains": {
+      "purpose": "PLC/SCADA/xchg MCP · industrial control + xchg rates",
+      "mcp_name": "onlybrains",
+      "tier": "T2 (register in mcps.json)"
+    }
+  },
+
+  "agents": {
+    "si-didy-agent": {
+      "purpose": "This agent · sovereign 4-tier chat-driven autonomous chief-of-staff",
+      "url": "https://github.com/sjgant80-hub/si-didy-agent",
+      "tier": "self"
+    },
+    "oracle-3": {
+      "purpose": "Recursive subagent controller · spawns 7 prime specialists · controls CASSIE",
+      "tier": "T1 or local"
+    },
+    "cassie-torus": {
+      "purpose": "Golden-walker solver · zone A/B/C/U · prime priority",
+      "tier": "T3 (browser) or python (T0)"
+    }
+  },
+
+  "tier_decision_doctrine": [
+    "Step 1: estate_query(intent) · what tools exist for this?",
+    "Step 2: if estate has a tool with an API · estate_call (T1)",
+    "Step 3: if estate has a tool that's browser-only · T3 against that tool",
+    "Step 4: if NO estate tool exists for this task · forge_request(spec) to fallcore-factory",
+    "Step 5: if the mission has 2+ independent sub-tasks · subagent_spawn each",
+    "Step 6: after mission · learn_log what worked / what failed · the twin compounds"
+  ]
+}
