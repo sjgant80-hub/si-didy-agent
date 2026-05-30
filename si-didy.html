@@ -52,7 +52,7 @@ header .stat{color:var(--cream-dim);font-size:11px;letter-spacing:1px}
 header .stat b{color:var(--cream)}
 
 aside.left,aside.right{background:var(--void);overflow-y:auto;padding:12px}
-main{background:var(--void);display:flex;flex-direction:column;min-width:0;border-left:1px solid var(--void-3);border-right:1px solid var(--void-3)}
+main{background:var(--void);display:flex;flex-direction:column;min-width:0;min-height:0;border-left:1px solid var(--void-3);border-right:1px solid var(--void-3)}
 
 .panel{margin-bottom:18px}
 .panel h2{margin:0 0 8px 0;font-size:10px;letter-spacing:2px;color:var(--brass);text-transform:uppercase;border-bottom:1px solid var(--brass-dim);padding-bottom:4px}
@@ -83,7 +83,7 @@ main{background:var(--void);display:flex;flex-direction:column;min-width:0;borde
 .meter .n{color:var(--cream);width:30px;text-align:right;font-size:11px}
 
 /* chat */
-.transcript{flex:1;overflow-y:auto;padding:18px 24px}
+.transcript{flex:1;overflow-y:auto;min-height:0;padding:18px 24px}
 .turn{margin-bottom:18px}
 .turn .role{font-size:10px;color:var(--brass);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
 .turn.you .role{color:var(--ox)}
@@ -174,7 +174,7 @@ main{background:var(--void);display:flex;flex-direction:column;min-width:0;borde
       </div>
     </div>
     <div class="composer">
-      <textarea id="dir" placeholder="you ◊  type a directive ·   examples:   promote shadowcompass on my fb page   ·   upwork morning run   ·   find me 3 ai founder groups on fb"></textarea>
+      <textarea id="dir" placeholder="you ◊  type a directive · Enter to send · Shift+Enter for newline   ·   examples:   promote shadowcompass on my fb page   ·   upwork morning run   ·   find me 3 ai founder groups on fb"></textarea>
       <div class="actions">
         <button class="primary" id="send">SEND ◊</button>
         <button class="dim" id="clear">clear</button>
@@ -335,7 +335,13 @@ async function sendDirective(){
   await fetch('/directive', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ directive: d }) });
 }
 $('#send').onclick = sendDirective;
-$('#dir').addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); sendDirective(); } });
+$('#dir').addEventListener('keydown', e => {
+  // Enter = send · Shift+Enter = newline
+  if (e.key === 'Enter' && !e.shiftKey && !e.altKey && !e.isComposing) {
+    e.preventDefault();
+    sendDirective();
+  }
+});
 
 // queues
 async function refreshQueues(){

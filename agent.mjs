@@ -66,20 +66,44 @@ const CLI_EXTRA = (process.env.SIDIDY_CLI_ALLOW || '').split(',').map(s => s.tri
 const CLI_ALLOW = new Set([...CLI_DEFAULT_ALLOW, ...CLI_EXTRA]);
 
 // ───────────── auth detection ─────────────
-const credsPath = path.join(os.homedir(), '.claude', '.credentials.json');
-const hasSubAuth = fs.existsSync(credsPath);
-const hasApiKey  = !!process.env.ANTHROPIC_API_KEY;
+// Claude Code stores credentials in several places depending on OS/version:
+//   ~/.claude/.credentials.json   (older path · some setups)
+//   ~/.claude/auth.json           (newer path)
+//   Windows Credential Manager    (current Win install)
+//   Mac Keychain                  (current Mac install)
+// The SDK will pull from whichever the active `claude` CLI uses. So the
+// real check is: does the `claude` CLI exist on PATH (any signal of install)?
+const credsPaths = [
+  path.join(os.homedir(), '.claude', '.credentials.json'),
+  path.join(os.homedir(), '.claude', 'auth.json'),
+];
+const hasCredsFile = credsPaths.some(p => fs.existsSync(p));
+const hasClaudeDir = fs.existsSync(path.join(os.homedir(), '.claude'));
+const hasApiKey    = !!process.env.ANTHROPIC_API_KEY;
+
+// probe for `claude` CLI on PATH
+let hasClaudeCli = false;
+try {
+  const probeCmd = process.platform === 'win32' ? 'where' : 'which';
+  const probe = await import('node:child_process').then(m => m.spawnSync(probeCmd, ['claude'], { encoding: 'utf8' }));
+  hasClaudeCli = probe.status === 0 && probe.stdout.trim().length > 0;
+} catch {}
 
 console.log('◊·κ=1 · si-didy-agent v2.0 · 4-tier sovereign\n');
-if (hasSubAuth)      console.log('◊ auth: Claude Code subscription ✓ (no per-token API charges)');
-else if (hasApiKey)  console.log('◊ auth: ANTHROPIC_API_KEY (per-token billing)');
-else {
-  console.error('✗ no auth · run  claude  to OAuth · or set ANTHROPIC_API_KEY');
+if (hasApiKey) {
+  console.log('◊ auth: ANTHROPIC_API_KEY (per-token billing)');
+} else if (hasClaudeCli || hasCredsFile || hasClaudeDir) {
+  console.log('◊ auth: Claude Code subscription detected (no per-token API charges)');
+  if (!hasCredsFile) console.log('   (credentials in OS keystore · SDK will pull via `claude` CLI)');
+} else {
+  console.error('✗ no auth detected');
+  console.error('  fix: open PowerShell · run  claude  and complete OAuth · then retry');
+  console.error('  or:  $env:ANTHROPIC_API_KEY = "sk-ant-..."  then retry');
   process.exit(1);
 }
 
 let BRIEF = '';
-if (!CHAT_MODE) {
+if (!CHAT_MODE && !SERVER_MODE) {
   if (!fs.existsSync(PACK_PATH)) { console.error('✗ brief not found:', PACK_PATH); process.exit(1); }
   BRIEF = fs.readFileSync(PACK_PATH, 'utf8');
 }
