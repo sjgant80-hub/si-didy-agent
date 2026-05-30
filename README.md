@@ -14,6 +14,32 @@ Landing: [sjgant80-hub.github.io/si-didy-agent](https://sjgant80-hub.github.io/s
 
 ---
 
+## What's new in v2.3 · the cockpit · si-didy.html
+
+Open `si-didy.html` in your browser. Type a directive. Watch the twin work.
+
+```bash
+node agent.mjs --server     # boots cockpit at http://localhost:1618
+```
+
+Then either:
+- Open `http://localhost:1618/` (served by the agent)
+- OR open `si-didy.html` from file:// directly (sovereign · runs from disk)
+
+Six live panels:
+- **Chat transcript** — your directives left, sididy + tier-coloured tool chips right
+- **Mission tree** — every directive, sub-spawns indented
+- **Tier meter** — live bars for T0/T1/T2/T3/memory · so you see the κ-discipline
+- **Estate map** — every estate tool, lit when sididy touches it
+- **Queues** — drafts waiting your `yes` · click to review
+- **Lessons feed** — the self-learning log scrolling as the twin compounds
+- **Ask cards** — inline `yes / no / edit` buttons whenever sididy needs your call
+
+Auth: same Claude Code subscription. No per-token cost. Localhost-only by default.
+Sovereign single-file HTML. Aesthetics: oxblood · brass · cream · void.
+
+---
+
 ## What's new in v2.2 · the digital-twin layers (n=4 → n=∞)
 
 si-didy is no longer a "tool driver." It's Simon's **digital twin** — it knows the whole 60+ tool estate, calls APIs instead of clicking buttons when it can, forges new tools when one doesn't exist, spawns sub-twins for parallel sub-missions, and **learns from every run**.

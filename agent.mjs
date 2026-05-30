@@ -36,8 +36,10 @@ import { spawn } from 'node:child_process';
 
 // ───────────── config ─────────────
 const ARGS         = process.argv.slice(2);
-const CHAT_MODE    = ARGS.includes('--chat') || ARGS.length === 0;
-const PACK_PATH    = CHAT_MODE ? null : ARGS.find(a => !a.startsWith('--'));
+const SERVER_MODE  = ARGS.includes('--server');
+const CHAT_MODE    = !SERVER_MODE && (ARGS.includes('--chat') || ARGS.length === 0);
+const PACK_PATH    = (CHAT_MODE || SERVER_MODE) ? null : ARGS.find(a => !a.startsWith('--'));
+const SERVER_PORT  = parseInt(process.env.SIDIDY_PORT || '1618', 10); // φ port · phi is home
 const USER_DATA    = './si-didy-profile';
 const VIEWPORT     = { width: 1280, height: 800 };
 const MAX_TURNS    = 200;
@@ -84,7 +86,7 @@ if (!CHAT_MODE) {
 
 // ───────────── readline ─────────────
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-const ask = q => new Promise(r => rl.question(q, r));
+let ask = q => new Promise(r => rl.question(q, r));   // re-assignable so --server can override
 
 // ───────────── env interpolation ─────────────
 // Replaces ${env:VAR_NAME} with process.env.VAR_NAME · never logs the value
@@ -778,7 +780,183 @@ const queryOpts = {
   maxTurns: MAX_TURNS
 };
 
-if (CHAT_MODE) {
+// ═══════════════════════════════════════════════════════════════════
+//  COCKPIT · --server · HTTP + SSE · sovereign cockpit transport
+// ═══════════════════════════════════════════════════════════════════
+let sseClients = [];          // active EventSource connections
+const pendingAsks = new Map(); // ask_id → resolver
+let askCounter = 0;
+function broadcast(event) {
+  const line = `data: ${JSON.stringify(event)}\n\n`;
+  for (const res of sseClients) {
+    try { res.write(line); } catch {}
+  }
+}
+function tierOf(toolName) {
+  if (toolName.includes('cli')) return 'T0';
+  if (toolName.includes('http') || toolName.includes('graphql')) return 'T1';
+  if (toolName.includes('browser')) return 'T3';
+  if (toolName.includes('meta')) return '··';
+  if (toolName.includes('memory') || toolName.includes('estate')) return '◊·';
+  return 'T2';
+}
+
+if (SERVER_MODE) {
+  const http = await import('node:http');
+  // override ask() to route through cockpit
+  ask = (question) => new Promise(resolve => {
+    const id = ++askCounter;
+    pendingAsks.set(id, resolve);
+    broadcast({ type: 'ask_user', id, question });
+    console.log(`  ◊ cockpit ask #${id}: ${question.slice(0,120)}`);
+  });
+
+  const COCKPIT_HTML_PATH = './si-didy.html';
+  const server = http.createServer(async (req, res) => {
+    const url = new URL(req.url, `http://${req.headers.host}`);
+
+    // CORS for localhost dev
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    if (req.method === 'OPTIONS') { res.writeHead(204); return res.end(); }
+
+    // serve the cockpit HTML
+    if (url.pathname === '/' || url.pathname === '/cockpit') {
+      if (!fs.existsSync(COCKPIT_HTML_PATH)) {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        return res.end('si-didy.html not found · clone the full repo');
+      }
+      const body = fs.readFileSync(COCKPIT_HTML_PATH);
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      return res.end(body);
+    }
+
+    // SSE event stream
+    if (url.pathname === '/events') {
+      res.writeHead(200, {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+      });
+      res.write('data: ' + JSON.stringify({ type: 'hello', port: SERVER_PORT, ts: new Date().toISOString() }) + '\n\n');
+      sseClients.push(res);
+      req.on('close', () => { sseClients = sseClients.filter(r => r !== res); });
+      return;
+    }
+
+    // POST a directive
+    if (url.pathname === '/directive' && req.method === 'POST') {
+      let body = '';
+      req.on('data', c => body += c);
+      req.on('end', async () => {
+        try {
+          const { directive } = JSON.parse(body);
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ ok: true }));
+          // fire the mission asynchronously
+          runDirective(directive).catch(e => broadcast({ type: 'error', message: e.message }));
+        } catch (e) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ ok: false, error: e.message }));
+        }
+      });
+      return;
+    }
+
+    // POST a reply to a pending ask_user
+    if (url.pathname.startsWith('/reply/') && req.method === 'POST') {
+      const id = parseInt(url.pathname.split('/')[2], 10);
+      let body = '';
+      req.on('data', c => body += c);
+      req.on('end', () => {
+        const { answer } = JSON.parse(body || '{}');
+        const resolver = pendingAsks.get(id);
+        if (resolver) {
+          pendingAsks.delete(id);
+          resolver(answer || '');
+          broadcast({ type: 'ask_resolved', id, answer });
+        }
+        res.writeHead(200); res.end('{}');
+      });
+      return;
+    }
+
+    // GET queues (list drafts)
+    if (url.pathname === '/queues') {
+      const list = [];
+      if (fs.existsSync(QUEUES_DIR)) {
+        const walk = (dir) => {
+          for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+            const fp = path.join(dir, e.name);
+            if (e.isDirectory()) walk(fp);
+            else if (e.name.endsWith('.md')) {
+              const body = fs.readFileSync(fp, 'utf8');
+              list.push({ path: fp, body });
+            }
+          }
+        };
+        walk(QUEUES_DIR);
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify(list));
+    }
+
+    res.writeHead(404); res.end('not found');
+  });
+
+  // hook into query lifecycle: helper to run one directive end-to-end
+  async function runDirective(directive) {
+    const directiveTs = new Date().toISOString();
+    broadcast({ type: 'directive', directive, ts: directiveTs });
+    const prompt = SYSTEM_DOCTRINE + `\n\nMODE: cockpit · live HTML control plane.
+
+USER DIRECTIVE (${directiveTs}):
+${directive}
+
+Execute the n=4-7 doctrine. Estate-first. Log mission. Stream tier calls. Pause via ask_user when irreversible. learn_log at end.`;
+    let lastText = '';
+    try {
+      const result = query({ prompt, options: queryOpts });
+      for await (const msg of result) {
+        if (msg.type === 'assistant') {
+          const text = (msg.message?.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+          if (text && text !== lastText) {
+            broadcast({ type: 'assistant', text, ts: new Date().toISOString() });
+            lastText = text;
+          }
+          for (const t of (msg.message?.content || []).filter(b => b.type === 'tool_use')) {
+            broadcast({
+              type: 'tool_call',
+              tier: tierOf(t.name),
+              name: t.name.replace(/^mcp__[^_]+__/, ''),
+              full_name: t.name,
+              input_preview: JSON.stringify(t.input).slice(0, 200),
+              ts: new Date().toISOString(),
+            });
+          }
+        } else if (msg.type === 'result') {
+          broadcast({
+            type: 'mission_complete',
+            turns: msg.num_turns,
+            cost: msg.total_cost_usd,
+            is_error: msg.is_error,
+            ts: new Date().toISOString(),
+          });
+        }
+      }
+    } catch (e) {
+      broadcast({ type: 'error', message: e.message });
+    }
+  }
+
+  // boot
+  server.listen(SERVER_PORT, () => {
+    console.log(`\n◊ cockpit live · http://localhost:${SERVER_PORT}`);
+    console.log(`◊ open  http://localhost:${SERVER_PORT}/  in your browser`);
+    console.log(`◊ SSE events at /events · POST directives at /directive\n`);
+  });
+} else if (CHAT_MODE) {
   // ──────── persistent chat REPL ────────
   console.log('\n◊ chat mode · type a directive · "exit" to quit');
   console.log('◊ example: "promote ShadowCompass on my FB page" · "upwork morning run" · "find 5 AI founder groups on FB"');

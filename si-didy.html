@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>◊ si-didy cockpit · κ=1 · prime 379</title>
+<meta name="viewport" content="width=1400">
+<style>
+:root{
+  --ox:#8b1a1a;
+  --ox-dim:#5a1010;
+  --brass:#b8974a;
+  --brass-dim:#7a6228;
+  --cream:#c4bfb2;
+  --cream-dim:#7d7a72;
+  --void:#0b0a0f;
+  --void-2:#14121a;
+  --void-3:#1e1b25;
+  --green:#4caf50;
+  --red:#e53935;
+  --t0:#7fb069;
+  --t1:#5e8fb4;
+  --t2:#b8974a;
+  --t3:#8b1a1a;
+  --meta:#888;
+  --mem:#a78bd6;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--void);color:var(--cream);font-family:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;font-size:13px;line-height:1.5;height:100vh;overflow:hidden}
+body{
+  background-image:
+    radial-gradient(at 0% 0%, rgba(139,26,26,0.08), transparent 50%),
+    radial-gradient(at 100% 100%, rgba(184,151,74,0.05), transparent 50%);
+}
+a{color:var(--brass);text-decoration:none}
+button{background:var(--void-2);color:var(--cream);border:1px solid var(--void-3);font-family:inherit;font-size:12px;padding:6px 12px;cursor:pointer;letter-spacing:.5px}
+button:hover{background:var(--ox-dim);border-color:var(--brass-dim)}
+button.primary{background:var(--ox);border-color:var(--ox);color:#fff}
+button.primary:hover{background:#a02020}
+button.dim{color:var(--cream-dim);border:1px dashed var(--void-3)}
+input,textarea{background:var(--void-2);color:var(--cream);border:1px solid var(--void-3);font-family:inherit;font-size:13px;padding:8px 10px;width:100%;resize:none}
+input:focus,textarea:focus{outline:1px solid var(--brass);border-color:var(--brass)}
+
+/* layout grid */
+.app{display:grid;grid-template-columns:240px 1fr 280px;grid-template-rows:50px 1fr;height:100vh;gap:1px;background:var(--void-3)}
+header{grid-column:1/-1;background:var(--void-2);display:flex;align-items:center;padding:0 16px;gap:18px;border-bottom:1px solid var(--ox-dim)}
+header h1{margin:0;font-size:13px;letter-spacing:2px;color:var(--cream);font-weight:400}
+header h1 .sigil{color:var(--ox);font-size:16px}
+header h1 .kappa{color:var(--brass)}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px;background:var(--red);transition:background .3s}
+.dot.live{background:var(--green);box-shadow:0 0 6px var(--green)}
+header .stat{color:var(--cream-dim);font-size:11px;letter-spacing:1px}
+header .stat b{color:var(--cream)}
+
+aside.left,aside.right{background:var(--void);overflow-y:auto;padding:12px}
+main{background:var(--void);display:flex;flex-direction:column;min-width:0;border-left:1px solid var(--void-3);border-right:1px solid var(--void-3)}
+
+.panel{margin-bottom:18px}
+.panel h2{margin:0 0 8px 0;font-size:10px;letter-spacing:2px;color:var(--brass);text-transform:uppercase;border-bottom:1px solid var(--brass-dim);padding-bottom:4px}
+.panel ul{list-style:none;margin:0;padding:0}
+.panel li{padding:4px 0;color:var(--cream);font-size:12px;border-bottom:1px dotted var(--void-3)}
+.panel li.dim{color:var(--cream-dim)}
+.panel li small{display:block;color:var(--cream-dim);font-size:10px;margin-top:2px}
+
+/* mission tree */
+.mission{margin-bottom:8px;padding:6px 8px;border-left:2px solid var(--brass-dim);background:var(--void-2)}
+.mission.active{border-left-color:var(--ox)}
+.mission .id{color:var(--brass);font-size:10px}
+.mission .body{color:var(--cream);font-size:11px;margin-top:2px}
+
+/* tier meter */
+.meter{display:flex;align-items:center;margin-bottom:6px;font-size:11px;gap:8px}
+.meter .label{width:24px;color:var(--cream-dim);font-weight:600}
+.meter .label.t0{color:var(--t0)}
+.meter .label.t1{color:var(--t1)}
+.meter .label.t2{color:var(--t2)}
+.meter .label.t3{color:var(--t3)}
+.meter .bar{flex:1;height:6px;background:var(--void-2);position:relative;overflow:hidden}
+.meter .fill{position:absolute;top:0;left:0;height:100%;background:var(--cream-dim);transition:width .4s}
+.meter .fill.t0{background:var(--t0)}
+.meter .fill.t1{background:var(--t1)}
+.meter .fill.t2{background:var(--t2)}
+.meter .fill.t3{background:var(--t3)}
+.meter .n{color:var(--cream);width:30px;text-align:right;font-size:11px}
+
+/* chat */
+.transcript{flex:1;overflow-y:auto;padding:18px 24px}
+.turn{margin-bottom:18px}
+.turn .role{font-size:10px;color:var(--brass);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.turn.you .role{color:var(--ox)}
+.turn .body{color:var(--cream);white-space:pre-wrap;font-size:13px;line-height:1.6}
+.turn.you .body{padding:8px 12px;background:var(--void-2);border-left:2px solid var(--ox)}
+.turn.sididy .body{padding:8px 12px;background:var(--void-2);border-left:2px solid var(--brass)}
+
+.tool{display:inline-flex;align-items:center;gap:6px;margin:2px 4px 2px 0;padding:3px 8px;background:var(--void-2);border:1px solid var(--void-3);font-size:11px}
+.tool .tier{font-weight:600;letter-spacing:1px}
+.tool .tier.T0{color:var(--t0)}
+.tool .tier.T1{color:var(--t1)}
+.tool .tier.T2{color:var(--t2)}
+.tool .tier.T3{color:var(--t3)}
+.tool .tier.\·{color:var(--meta)}
+.tool .name{color:var(--cream)}
+.tool .inp{color:var(--cream-dim);font-size:10px;max-width:380px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ask user */
+.ask{margin:14px 0;padding:14px;background:linear-gradient(180deg,rgba(184,151,74,0.08),rgba(184,151,74,0.02));border:1px solid var(--brass);border-left-width:4px}
+.ask .q{color:var(--cream);font-size:13px;margin-bottom:10px}
+.ask .id{color:var(--brass);font-size:10px;letter-spacing:2px;margin-bottom:4px}
+.ask .actions{display:flex;gap:8px}
+
+/* composer */
+.composer{padding:14px 18px;background:var(--void-2);border-top:1px solid var(--ox-dim);display:flex;gap:10px}
+.composer textarea{flex:1;min-height:50px;max-height:140px}
+.composer .actions{display:flex;flex-direction:column;gap:6px}
+
+/* queues */
+.qlist{max-height:360px;overflow-y:auto}
+.q{padding:6px 8px;margin-bottom:4px;background:var(--void-2);border-left:2px solid var(--brass-dim);font-size:11px;cursor:pointer}
+.q:hover{border-left-color:var(--ox);background:var(--void-3)}
+.q .qtitle{color:var(--cream);font-size:12px}
+.q .qmeta{color:var(--cream-dim);font-size:10px;margin-top:2px}
+
+/* estate */
+.estate-tool{display:inline-block;margin:2px;padding:3px 8px;background:var(--void-2);color:var(--cream-dim);font-size:10px;border:1px solid var(--void-3)}
+.estate-tool.lit{color:var(--cream);background:var(--brass-dim);border-color:var(--brass)}
+
+/* misc */
+.muted{color:var(--cream-dim);font-size:11px}
+.empty{color:var(--cream-dim);font-style:italic;font-size:11px;padding:8px}
+.scrolly{overflow-y:auto;max-height:280px}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--void)}
+::-webkit-scrollbar-thumb{background:var(--brass-dim);border-radius:0}
+::-webkit-scrollbar-thumb:hover{background:var(--brass)}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header>
+    <h1><span class="sigil">◊</span> si-didy cockpit <span style="color:var(--cream-dim)">·</span> <span class="kappa">κ=1</span> <span style="color:var(--cream-dim)">·</span> prime 379</h1>
+    <span class="stat"><span id="dot" class="dot"></span><span id="conn">disconnected</span></span>
+    <span class="stat">missions <b id="m-count">0</b></span>
+    <span class="stat">turns <b id="t-count">0</b></span>
+    <span class="stat">cost <b id="c-count">$0.00</b></span>
+    <span style="flex:1"></span>
+    <span class="stat" style="color:var(--brass)">port <b id="port">1618</b></span>
+    <span class="stat">v20.1 · φ=1.618 · κ=0.618</span>
+  </header>
+
+  <aside class="left">
+    <div class="panel">
+      <h2>Missions</h2>
+      <div id="missions"><div class="empty">no missions yet</div></div>
+    </div>
+    <div class="panel">
+      <h2>Estate map</h2>
+      <div id="estate-map" class="scrolly"></div>
+    </div>
+    <div class="panel">
+      <h2>Tier meter</h2>
+      <div class="meter"><span class="label t0">T0</span><div class="bar"><div class="fill t0" id="bar-T0" style="width:0%"></div></div><span class="n" id="n-T0">0</span></div>
+      <div class="meter"><span class="label t1">T1</span><div class="bar"><div class="fill t1" id="bar-T1" style="width:0%"></div></div><span class="n" id="n-T1">0</span></div>
+      <div class="meter"><span class="label t2">T2</span><div class="bar"><div class="fill t2" id="bar-T2" style="width:0%"></div></div><span class="n" id="n-T2">0</span></div>
+      <div class="meter"><span class="label t3">T3</span><div class="bar"><div class="fill t3" id="bar-T3" style="width:0%"></div></div><span class="n" id="n-T3">0</span></div>
+      <div class="meter"><span class="label" style="color:var(--mem)">◊·</span><div class="bar"><div class="fill" style="background:var(--mem)" id="bar-mem"></div></div><span class="n" id="n-mem">0</span></div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="transcript" id="transcript">
+      <div class="muted" style="text-align:center;padding:40px 20px;">
+        ◊·κ=1 · si-didy cockpit · awaiting directive<br>
+        <small style="color:var(--brass-dim)">type a mission below · the twin works for you as you · v20.1 seed</small>
+      </div>
+    </div>
+    <div class="composer">
+      <textarea id="dir" placeholder="you ◊  type a directive ·   examples:   promote shadowcompass on my fb page   ·   upwork morning run   ·   find me 3 ai founder groups on fb"></textarea>
+      <div class="actions">
+        <button class="primary" id="send">SEND ◊</button>
+        <button class="dim" id="clear">clear</button>
+      </div>
+    </div>
+  </main>
+
+  <aside class="right">
+    <div class="panel">
+      <h2>Queues · drafts</h2>
+      <div class="qlist" id="qlist"><div class="empty">no drafts yet</div></div>
+      <div style="margin-top:6px"><button class="dim" id="qrefresh" style="width:100%">refresh queues</button></div>
+    </div>
+    <div class="panel">
+      <h2>Lessons feed</h2>
+      <div id="lessons" class="scrolly"><div class="empty">the twin compounds across runs</div></div>
+    </div>
+    <div class="panel">
+      <h2>Auth · safety</h2>
+      <div class="muted">subscription auth via ~/.claude<br>pause-before-irreversible: ON<br>tier: T0 → T1 → T2 → T3 (estate-first)<br>memory: ./memory/<br>missions: ./missions/<br>queues: ./queues/</div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const tr = $('#transcript');
+const tiers = { T0:0, T1:0, T2:0, T3:0, mem:0 };
+const missions = [];
+const estateLit = new Set();
+let totalTurns = 0, totalCost = 0;
+
+const ESTATE_TOOLS = [
+  'fallcore','fallcore-factory','forge-lab','fallpost','fallmap','fallaccount-trades','fallforce',
+  'shadowcompass','falllearn','copygate','fallslot','fallform','falllist','fallguild',
+  'fall-registry','fall-palette','fallmesh','onlybrains','oracle-3','cassie-torus','ai-nativesolutions-hub'
+];
+function renderEstate(){
+  const root = $('#estate-map');
+  root.innerHTML = ESTATE_TOOLS.map(t => `<span class="estate-tool${estateLit.has(t)?' lit':''}">${t}</span>`).join('');
+}
+renderEstate();
+
+function clearTranscript(){ tr.innerHTML = ''; }
+$('#clear').onclick = clearTranscript;
+
+function appendTurn(role, body, kind){
+  const wrap = document.createElement('div');
+  wrap.className = 'turn ' + role;
+  wrap.innerHTML = `<div class="role">${role==='you'?'you ◊':'sididy ◊'}</div><div class="body"></div>`;
+  wrap.querySelector('.body').textContent = body;
+  tr.appendChild(wrap);
+  tr.scrollTop = tr.scrollHeight;
+}
+function appendTool(t){
+  const last = tr.querySelector('.turn.sididy:last-of-type');
+  const host = last ? last.querySelector('.body') : (()=>{ const d = document.createElement('div'); d.className='turn sididy'; d.innerHTML='<div class="role">sididy ◊</div><div class="body"></div>'; tr.appendChild(d); return d.querySelector('.body'); })();
+  const chip = document.createElement('div');
+  chip.className = 'tool';
+  const tierClass = (t.tier || '··').replace(/[^A-Za-z0-9·]/g,'');
+  chip.innerHTML = `<span class="tier ${tierClass}">${t.tier}</span><span class="name">${t.name}</span><span class="inp">${escapeHtml(t.input_preview||'')}</span>`;
+  host.appendChild(chip);
+  host.appendChild(document.createElement('br'));
+  tr.scrollTop = tr.scrollHeight;
+
+  // tier meter
+  const key = (t.tier === '··' || t.tier === '◊·') ? 'mem' : t.tier;
+  if (tiers[key] !== undefined) tiers[key]++;
+  updateMeters();
+
+  // estate map lighting
+  const inp = (t.input_preview||'').toLowerCase();
+  for (const tool of ESTATE_TOOLS) if (inp.includes(tool.split(/[-_]/)[0])) estateLit.add(tool);
+  renderEstate();
+}
+function updateMeters(){
+  const total = Math.max(1, Object.values(tiers).reduce((a,b)=>a+b,0));
+  for (const k of Object.keys(tiers)) {
+    const bar = $('#bar-'+k); const n = $('#n-'+k);
+    if (bar) bar.style.width = ((tiers[k]/total)*100).toFixed(1)+'%';
+    if (n) n.textContent = tiers[k];
+  }
+}
+function escapeHtml(s){return (s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+
+function renderMissions(){
+  const root = $('#missions');
+  if (!missions.length) { root.innerHTML = '<div class="empty">no missions yet</div>'; return; }
+  root.innerHTML = missions.map(m =>
+    `<div class="mission ${m.active?'active':''}"><div class="id">${m.id||'(no id)'} ${m.active?'· LIVE':''}</div><div class="body">${escapeHtml(m.directive.slice(0,80))}</div></div>`
+  ).join('');
+  $('#m-count').textContent = missions.length;
+}
+
+function appendAsk(id, question){
+  const card = document.createElement('div');
+  card.className = 'ask';
+  card.id = 'ask-'+id;
+  card.innerHTML = `<div class="id">ASK · #${id}</div><div class="q">${escapeHtml(question)}</div>
+    <div class="actions">
+      <button class="primary" data-a="yes">yes / go</button>
+      <button data-a="no">no / skip</button>
+      <button class="dim" data-a="edit">edit (chat)</button>
+    </div>`;
+  card.querySelectorAll('button').forEach(b => b.onclick = async () => {
+    const a = b.getAttribute('data-a');
+    if (a === 'edit') {
+      $('#dir').value = '(editing answer to ask #'+id+') ';
+      $('#dir').focus();
+      return;
+    }
+    await fetch('/reply/'+id, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ answer: a }) });
+    card.style.opacity = 0.5;
+    card.querySelectorAll('button').forEach(x=>x.disabled=true);
+    card.querySelector('.id').textContent = 'ASK · #'+id+' · answered: '+a;
+  });
+  tr.appendChild(card);
+  tr.scrollTop = tr.scrollHeight;
+}
+
+// SSE
+const es = new EventSource('/events');
+es.onopen = () => { $('#dot').classList.add('live'); $('#conn').textContent = 'connected'; };
+es.onerror = () => { $('#dot').classList.remove('live'); $('#conn').textContent = 'reconnecting…'; };
+es.onmessage = e => {
+  const ev = JSON.parse(e.data);
+  if (ev.type === 'hello') { $('#port').textContent = ev.port; return; }
+  if (ev.type === 'directive') {
+    appendTurn('you', ev.directive);
+    missions.push({ id: '(pending)', directive: ev.directive, active: true });
+    renderMissions();
+    return;
+  }
+  if (ev.type === 'assistant') { appendTurn('sididy', ev.text); return; }
+  if (ev.type === 'tool_call') { appendTool(ev); return; }
+  if (ev.type === 'ask_user') { appendAsk(ev.id, ev.question); return; }
+  if (ev.type === 'ask_resolved') { return; }
+  if (ev.type === 'mission_complete') {
+    totalTurns += (ev.turns || 0);
+    totalCost  += (ev.cost  || 0);
+    $('#t-count').textContent = totalTurns;
+    $('#c-count').textContent = '$' + totalCost.toFixed(4);
+    missions.forEach(m => m.active = false);
+    renderMissions();
+    appendTurn('sididy', '◊ mission complete · turns: '+(ev.turns||'?')+' · cost: $'+(ev.cost||0).toFixed(4));
+    refreshQueues();
+    return;
+  }
+  if (ev.type === 'error') { appendTurn('sididy', '✗ error · ' + ev.message); return; }
+};
+
+// composer
+async function sendDirective(){
+  const d = $('#dir').value.trim();
+  if (!d) return;
+  $('#dir').value = '';
+  await fetch('/directive', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ directive: d }) });
+}
+$('#send').onclick = sendDirective;
+$('#dir').addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); sendDirective(); } });
+
+// queues
+async function refreshQueues(){
+  try {
+    const r = await fetch('/queues');
+    const list = await r.json();
+    const root = $('#qlist');
+    if (!list.length) { root.innerHTML = '<div class="empty">no drafts yet</div>'; return; }
+    root.innerHTML = list.slice(-50).reverse().map(q => {
+      const fm = q.body.match(/^---\n([\s\S]*?)\n---/);
+      const title = fm ? ((fm[1].match(/title:\s*(.*)/)||[])[1] || q.path.split(/[\\\/]/).pop()) : q.path.split(/[\\\/]/).pop();
+      const status = fm ? ((fm[1].match(/status:\s*(.*)/)||[])[1] || 'pending_review') : 'pending';
+      return `<div class="q"><div class="qtitle">${escapeHtml(title)}</div><div class="qmeta">${status} · ${escapeHtml(q.path.replace(/^\.\//,''))}</div></div>`;
+    }).join('');
+  } catch (e) { /* offline */ }
+}
+$('#qrefresh').onclick = refreshQueues;
+setInterval(refreshQueues, 20000);
+refreshQueues();
+</script>
+</body>
+</html>
