@@ -228,29 +228,31 @@ Save as: Upwork-Portfolio/03-fallmap.png
 ▲ END ▲
 
 ─────────────────────────────────────────────────
-PORTFOLIO ENTRY 4 — fallaccount Trades
+PORTFOLIO ENTRY 4 — fallvault · Sovereign Emergency Backup  (swap-in: universal hook · beats vertical-specific)
 ─────────────────────────────────────────────────
 
 ▼ TITLE ▼
-fallaccount Trades · Sovereign Bookkeeping for UK Builders & Trades
+fallvault · Sovereign Emergency Backup · One HTML file · AES-256-GCM
 ▲ END ▲
 
 ▼ DESCRIPTION ▼
-Real sovereign accounting for UK sole traders — CIS tax calculation, MTD-ready, receipt-photo scan with vision-LLM extraction, and a natural-language "Ask the Books" query interface ("how much VAT do I owe this quarter?"). Built for a real builder client. Every transaction prevHash-linked into an audit chain. Single HTML file. Data in IndexedDB. Optional cloud sync if the user wants it.
+A single HTML file that backs up your laptop's source code, configs and notes — encrypted in your browser with AES-256-GCM (key derived via PBKDF2-SHA256 · 200k iterations) before anything ever leaves your machine. Push the encrypted output to a private GitHub repo. Lose your laptop? Clone the repo on any new machine, open the HTML, type your passphrase. Your files come back.
 
-Tech: Vanilla JavaScript · IndexedDB · Anthropic Claude vision API for receipts · BYOK · Ed25519 audit chain · PWA installable
+Auto-skips noise: any folder with a .git inside (it's already on GitHub), node_modules, AppData, media, binaries. What's left is the part that's actually a pain to rebuild — your source.
 
-Obsoletes: Xero (£36/mo · per-feature gating), QuickBooks (£17/mo), FreeAgent. Trader pays £0/mo after build delivered.
+Tech: Vanilla JavaScript · Node.js for the walker · WebCrypto for browser-side decrypt · AES-256-GCM · PBKDF2-SHA256 200k · MIT licensed · zero external deps · runs from file://
+
+Obsoletes: Dropbox ($12/mo · reads your files), iCloud ($10/mo · reads your files), Backblaze ($9/mo · server-side encryption only), Carbonite, OneDrive. After install: £0/mo forever. GitHub holds the bytes · you hold the key.
 ▲ END ▲
 
 ▼ PROJECT LINK ▼
-https://sjgant80-hub.github.io/fallaccount-trades/
+https://sjgant80-hub.github.io/fallvault/
 ▲ END ▲
 
 ▼ SCREENSHOT ▼
-URL to capture: https://sjgant80-hub.github.io/fallaccount-trades/
-Snip: the dashboard view showing the transaction list + the "Ask the Books" input box (with an example query typed in if possible). Bonus: open the receipt-scan modal for a second screenshot showing the vision parse in action.
-Save as: Upwork-Portfolio/04-fallaccount.png
+URL to capture: https://sjgant80-hub.github.io/fallvault/
+Snip: the hero of the landing page showing the "honest comparison" table (Dropbox / iCloud / Backblaze vs fallvault) — that's the highest-converting frame. Or alternatively, capture the live AES-256-GCM demo section mid-encrypt.
+Save as: Upwork-Portfolio/04-fallvault.png
 ▲ END ▲
 
 ─────────────────────────────────────────────────

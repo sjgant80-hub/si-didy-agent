@@ -1,7 +1,7 @@
 {
-  "_doc": "Estate manifest · auto-synced from GitHub · 2026-05-30T12:07:38.212Z. v20.1 seed cosmology · phi=1.618 · kappa=0.618 · fold=510510. si-didy queries this BEFORE reaching for browser.",
+  "_doc": "Estate manifest · auto-synced from GitHub · 2026-05-30T14:55:19.248Z. v20.1 seed cosmology · phi=1.618 · kappa=0.618 · fold=510510. si-didy queries this BEFORE reaching for browser.",
   "version": "2.0-synced",
-  "synced_at": "2026-05-30T12:07:38.212Z",
+  "synced_at": "2026-05-30T14:55:19.248Z",
   "owners": [
     "sjgant80-hub",
     "teslasolar"
@@ -435,6 +435,15 @@
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fallslot/",
       "use_when": "sovereign scheduling · Calendly replacement",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallvault": {
+      "purpose": "Sovereign emergency backup · one HTML file · AES-256-GCM in your browser · MIT · ◊·κ=1",
+      "repo": "https://github.com/sjgant80-hub/fallvault",
+      "stars": 0,
+      "pushed": "2026-05-30T14:48:20Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallvault/",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
     "flux-api": {
@@ -1902,7 +1911,7 @@
       "purpose": "Canonical index of Fall sovereign plugins · machine-readable manifest for fall-hot watchers",
       "repo": "https://github.com/sjgant80-hub/fall-registry",
       "stars": 0,
-      "pushed": "2026-05-29T23:11:11Z",
+      "pushed": "2026-05-30T14:55:03Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fall-registry/",
       "tier": "T3 (load HTML) or T1 if API exposed"
@@ -2025,7 +2034,7 @@
       "purpose": "Konomi Standard",
       "repo": "https://github.com/teslasolar/KonomiStandard",
       "stars": 3,
-      "pushed": "2026-05-30T11:56:14Z",
+      "pushed": "2026-05-30T14:34:30Z",
       "has_pages": true,
       "url": "https://teslasolar.github.io/KonomiStandard/",
       "tier": "T3 (load HTML) or T1 if API exposed"
@@ -2118,7 +2127,7 @@
       "purpose": "Sovereign computer-use agent · Claude Agent SDK + Playwright · subscription auth · ◊·κ=1 · prime 379",
       "repo": "https://github.com/sjgant80-hub/si-didy-agent",
       "stars": 0,
-      "pushed": "2026-05-30T12:04:19Z",
+      "pushed": "2026-05-30T14:41:21Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/si-didy-agent/",
       "tier": "T3 (load HTML) or T1 if API exposed"
