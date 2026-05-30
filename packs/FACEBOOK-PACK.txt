@@ -1,0 +1,400 @@
+═══════════════════════════════════════════════════════════════════════
+  FACEBOOK PACK · si-didy autonomous play-book · ◊·κ=1
+  Simon Gant · ai-nativesolutions · AI Native Solutions FB Page
+  Engine: AIN Page (founder authority) + ShadowCompass (consumer hook)
+═══════════════════════════════════════════════════════════════════════
+
+WHAT THIS PACK DOES
+  · Promote AI tools (ShadowCompass + FallLearn + the wider estate)
+    via Simon's personal profile, the AI Native Solutions FB Page,
+    and adjacent Groups where founders / Jungian readers / parents
+    actually hang out.
+  · Find clients by listening in 12 vetted Groups, replying with
+    FREE help first, naming the right tool only when it fits.
+  · Never spam. Never cross-post. Memory scope prevents duplicates.
+
+MEMORY SCOPES (si-didy must use)
+  fb-posts        every post made (target page/group, body, ts)
+  fb-comments     every comment made
+  fb-dms          every DM thread touched
+  fb-groups-seen  every group si-didy has joined or evaluated
+  fb-users-seen   every profile DMed or commented to
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION A · IDENTITY · WHO si-didy IS POSTING AS
+═══════════════════════════════════════════════════════════════════════
+
+  Personal:   facebook.com/<simon-handle>     (ask_user if unknown)
+  Page:       facebook.com/ainativesolutions  (verify in step A1)
+  Voice:      Sovereign · plain English · no SaaS-bro · ◊ seal at close
+  Identity:   "I build sovereign AI tools — single HTML files your
+              clients own outright. No subscriptions. No middlemen."
+
+  Seal/glyph: ◊  (closes every post and DM si-didy generates)
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION B · PAGE POSTS · the AI Native Solutions FB Page
+═══════════════════════════════════════════════════════════════════════
+
+CADENCE
+  · 1 post / day max on the Page (FB algo penalises overposting)
+  · Best windows (UK time): 07:00-09:00 · 12:00-14:00 · 19:00-21:00
+  · Always check memory_recall("fb-posts", 20) before drafting
+
+POST TEMPLATES (verbatim copy blocks)
+
+─────────────────────────────────────────
+B1 · TOOL DROP (when shipping anything new)
+─────────────────────────────────────────
+▼ COPY ▼
+[TOOL NAME] is live.
+
+What it does in one line: [PLAIN-ENGLISH BENEFIT].
+
+What makes it sovereign:
+→ Single HTML file · runs from a USB stick · no servers
+→ Your data lives in your browser · never on my infrastructure
+→ Free forever · MIT licensed · fork it, ship it, white-label it
+
+Try it: [URL]
+
+If you've been paying a SaaS for the same outcome — drop the name
+in comments. I'll tell you the honest cost gap.
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────
+B2 · BURN-THE-SAAS (educational + funnel)
+─────────────────────────────────────────
+▼ COPY ▼
+The average small business pays £/$ [NUMBER] a month for [CATEGORY]
+software (think [SaaS NAME 1], [SaaS NAME 2], [SaaS NAME 3]).
+
+Most of that money is paying for hosting you don't need + features
+you don't use + a database holding your customer list hostage.
+
+I build the same outcome as one HTML file you own outright.
+
+→ Paste a workflow you currently pay rent on: I'll send back the
+  one-page "owning it vs renting it" breakdown. No call. No pitch.
+  Just the number.
+
+Tool: ai-nativesolutions.com/fallmap (free)
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────
+B3 · SHADOW WORK / JUNG (for ShadowCompass)
+─────────────────────────────────────────
+▼ COPY ▼
+Built a tool I wish I'd had ten years ago.
+
+ShadowCompass — a sovereign single-file shadow-work companion.
+You sit across from a Jung-style guide (Shadow Guide) and talk
+through what's repressed, what's projecting, what wants surfacing.
+
+No app store. No subscription. No therapist-app data harvesting.
+Free chat in your browser, with a local LLM that never phones home.
+
+If you're carrying something heavy and journaling stopped being
+enough — this is the next conversation.
+
+[URL]
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────
+B4 · BUILD-IN-PUBLIC (Simon's voice · personal profile)
+─────────────────────────────────────────
+▼ COPY ▼
+Today's build:
+
+[ONE-LINE: what got shipped or fixed]
+
+Why it matters:
+[ONE-LINE: who benefits, why now]
+
+Live: [URL]
+Source: [GITHUB URL] (MIT · fork it · ship it)
+
+The estate is now [N] tools strong · all sovereign, all yours
+to own. ai-nativesolutions.com
+
+◊
+▲ END ▲
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION C · GROUP FINDING & POSTING
+═══════════════════════════════════════════════════════════════════════
+
+C1 · GROUP DISCOVERY  (si-didy runs this autonomously)
+
+  1. browser_navigate facebook.com/groups/discover
+  2. Search each of these terms, scrape 25 groups per search:
+       "AI founders"
+       "AI agents"
+       "Sovereign software"
+       "Indie hackers UK"
+       "Build in public"
+       "Jungian psychology"
+       "Shadow work"
+       "Carl Jung readers"   ← high consumer overlap for ShadowCompass
+       "Homeschool AI"
+       "AI for kids"          ← FallLearn Kids Edition fit
+       "SaaS escape"
+       "Open source AI"
+  3. For each result, extract: name, member_count, post_frequency,
+     admin_question_present (yes/no), public_or_private.
+  4. Score each: keep if
+       member_count > 500 AND post_frequency >= 3/day
+       AND public_or_private != "private with screening" unless
+       Simon explicitly authorises a join request.
+
+C2 · GROUP JOIN RULES
+  · NEVER auto-answer admin screening questions · always ask_user
+  · NEVER join more than 5 groups in one run (FB triggers spam flags)
+  · ALWAYS memory_note { scope: "fb-groups-seen", group_url, action: "joined"|"skipped", reason }
+
+C3 · GROUP POST TEMPLATES
+
+The Group post rules:
+  · NEVER drop a raw link without value first
+  · Always lead with FREE help · then maybe a soft tool mention
+  · One value-first comment > ten promo posts
+
+▼ HELP-FIRST COMMENT (most common · si-didy uses this 80% of the time) ▼
+[Quote one specific thing the OP said.]
+
+Here's the path I'd take:
+[3-5 bullets, each ≤ 1 line, plain English, no jargon]
+
+If you want me to model what the build/cost looks like for your
+specific case — drop the workflow in a reply, I'll send back a
+one-pager. No pitch.
+▲ END ▲
+
+▼ TOOL-MENTION COMMENT (use sparingly · only when tool perfectly fits) ▼
+This is what I built [TOOL] for. [ONE-LINE WHY IT FITS THEIR EXACT QUESTION].
+
+It's free, single HTML, runs in your browser. No signup.
+[URL]
+
+Happy to walk through your specific case in DMs if helpful.
+▲ END ▲
+
+▼ FOUNDER GROUP POST (occasional · only after 5+ helpful comments in a group) ▼
+60+ sovereign AI tools live now at ai-nativesolutions.com.
+
+If you've been quoted £20k+ for an AI build that's really just a
+ChatGPT wrapper with a Notion frontend — I'd love to show you the
+alternative.
+
+Single HTML files your business owns outright. Audit-chained.
+MIT licensed. No subscription, no per-seat fees, ever.
+
+Drop a workflow you currently pay rent on as a comment · I'll
+send back a one-pager showing what owning it outright costs.
+
+◊
+▲ END ▲
+
+C4 · GROUP POST GATING
+  · Per group: max 1 post / 2 weeks
+  · Per run: max 3 group posts total
+  · ALWAYS memory_recall("fb-posts", 50) and skip any group_url
+    already posted within last 14 days
+  · ALWAYS ask_user before posting · group posts are higher risk
+    than comments
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION D · DM PLAYBOOK
+═══════════════════════════════════════════════════════════════════════
+
+D1 · WHO si-didy DMs
+  ONLY DM people who:
+    · Asked a question that one of Simon's tools directly answers
+    · Engaged with a Simon post (liked/commented)
+    · Are a 1st-degree connection on FB
+  NEVER cold-DM strangers · violates FB ToS + tarnishes the brand
+
+D2 · OUTBOUND DM TEMPLATES
+
+▼ FOLLOW-UP after they commented on a Simon post ▼
+Hey [FIRST NAME] — saw your comment on the [TOPIC] post.
+
+You asked about [QUOTE THEIR EXACT QUESTION].
+
+Short answer: [2-3 LINES PLAIN ENGLISH].
+
+If you want the long answer modelled for your specific workflow,
+drop the details here. I'll send back a one-pager. No call needed.
+
+◊ Simon
+▲ END ▲
+
+▼ FOLLOW-UP after they used a free tool ▼
+Hey [FIRST NAME] — noticed you tried [TOOL NAME] yesterday.
+
+How did the output land? Did the number surprise you (most people
+the first time it does).
+
+Happy to walk through what owning the same outcome outright would
+look like for your case. 15 min, no pitch attached.
+
+◊
+▲ END ▲
+
+D3 · INBOUND DM HANDLING
+  · si-didy NEVER auto-replies · ALWAYS drafts to ./queues/fb-dm/
+  · Threshold: if DM contains a question Simon's tool answers, draft
+    a reply · otherwise just note { scope: "fb-dms", action: "received_no_action" }
+  · Simon reviews drafts before any send
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION E · COMMENT FUNNEL  (the engine)
+═══════════════════════════════════════════════════════════════════════
+
+This is the highest-leverage move on FB. Comments rank higher in
+groups than posts, get more eyes per character, and feel less salesy.
+
+E1 · WHERE TO COMMENT
+  · Joined groups (use memory_recall("fb-groups-seen") to find joined list)
+  · Posts < 24h old · highest comment lift window
+  · Posts asking "how do I X" · "what tool do you use for Y" ·
+    "I'm thinking of paying for Z" · "any alternatives to W"
+
+E2 · COMMENT FILTER  (skip if any apply)
+  · OP has < 50 friends visible (probably a bot)
+  · Thread already has 100+ comments (you'll get lost)
+  · OP is selling a competing tool (don't fight on their turf)
+  · si-didy already commented on that thread (check memory)
+
+E3 · COMMENT TEMPLATE BANK
+  Use the help-first template from C3. NEVER paste the same comment
+  twice · si-didy generates unique copy per thread using the
+  archetype matcher (§G).
+
+E4 · DAILY CAPS
+  · 8 comments per day across all groups
+  · 1 comment per group per day
+  · Pause for 5+ min between comments (FB rate-limit avoidance)
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION F · LIVE DEMOS & UGC
+═══════════════════════════════════════════════════════════════════════
+
+F1 · UGC IMAGE CARDS (ShadowCompass · share-after-conversation)
+  When someone in a group asks about shadow work / journaling /
+  Jungian apps:
+    · Link ShadowCompass
+    · Mention the share-image feature: "every conversation can
+      be turned into a shareable image · no signup needed"
+  This makes ShadowCompass spread without Simon doing anything.
+
+F2 · LIVE BUILD DEMOS (Page only · 1×/week)
+  · 5-min FB Live · screen-record a sovereign tool build
+  · Title: "Sovereign build · [TOOL] in 5 minutes · MIT"
+  · si-didy schedules but DOES NOT go live · Simon hits the button
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION G · ARCHETYPE MATCHER  (who's in the group?)
+═══════════════════════════════════════════════════════════════════════
+
+Run this in ~10 seconds against any group post or DM before drafting.
+
+ARCHETYPE 1 · THE FRUSTRATED SOLO FOUNDER
+  Signal: "tried Notion + Zapier + ChatGPT but..."
+  Hook:   "One HTML file. Your stack. You own it."
+  Tool:   fallmap or fallpost
+
+ARCHETYPE 2 · THE JUNG / SHADOW READER
+  Signal: mentions Jung, anima, individuation, shadow work, dreams
+  Hook:   "Built ShadowCompass for exactly this · free in browser"
+  Tool:   ShadowCompass
+
+ARCHETYPE 3 · THE HOMESCHOOLING / AI-AWARE PARENT
+  Signal: "AI for my kid", "teach my child", "school is failing"
+  Hook:   "FallLearn Kids Edition · free · 5 levels · no signup"
+  Tool:   FallLearn Module 8
+
+ARCHETYPE 4 · THE COMPLIANCE-NERVOUS DIRECTOR
+  Signal: "GDPR", "data sovereignty", "on-prem"
+  Hook:   "Single file · data in your IndexedDB · audit chain"
+  Tool:   fallforce / fallaccount
+
+ARCHETYPE 5 · THE BUILD-IN-PUBLIC BUILDER
+  Signal: posts their own work, hashtags #buildinpublic
+  Hook:   "60+ sovereign builds at ai-nativesolutions.com · MIT"
+  Tool:   ai-nativesolutions hub
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION H · SAFETY RAILS
+═══════════════════════════════════════════════════════════════════════
+
+NEVER (without explicit ask_user yes for THIS specific action):
+  · Click Post on a Page or Profile post
+  · Click Send on a DM
+  · Click Comment on a Group thread
+  · Accept or send a Friend Request
+  · Join a private/screened Group
+  · React to or share another user's post
+  · Change Page settings, admin roles, or audience
+  · Click any ad / boost / monetisation button
+  · Run a Facebook Live
+
+ALWAYS:
+  · Check memory_recall on the relevant scope before drafting
+  · memory_note every action you take with target + result
+  · Use the persistent Chromium profile ./si-didy-profile
+  · Pause 30-60s between actions (FB rate limit)
+  · Quote pack copy blocks verbatim · vary only [bracketed] bits
+
+RATE LIMITS  (FB will soft-ban you for going over)
+  · Comments: ≤ 8/day
+  · DMs: ≤ 5/day
+  · Group posts: ≤ 3/day
+  · Page posts: ≤ 1/day
+  · Friend requests: ≤ 5/day
+  · Group joins: ≤ 5/day
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION I · TIER NOTE
+═══════════════════════════════════════════════════════════════════════
+
+Facebook exposes no usable freelancer-side API for posting on
+behalf of a personal account. The Graph API requires app review
+for any meaningful action.
+
+→ T3 (Playwright) is the ONLY path for personal posting/commenting.
+→ Page posting CAN use Graph API if Simon registers an app, but
+  the friction isn't worth it for 1 post/day.
+
+si-didy logs at start of every run:
+  "◊ tier T3 selected for FB · no usable personal-account API"
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION J · DAILY OPS LOOP
+═══════════════════════════════════════════════════════════════════════
+
+When user says "fb morning run" or "do fb stuff":
+
+  1. memory_recall fb-posts (24h window) · skip recent groups
+  2. browser_navigate facebook.com · screenshot · verify logged in
+  3. Scan notifications · queue any replies needed
+  4. Visit each joined group · find 1 hot thread per group · draft
+     1 help-first comment per thread (max 8 comments)
+  5. Decide if today's Page post is due · if yes, draft using B1-B4
+  6. Decide if a group post is due (per-group 14d gate) · draft if so
+  7. queue_write everything to ./queues/fb-comment/, fb-post/, fb-dm/
+  8. Print summary · pause for user "go"
+
+Metrics tracked in memory scope `fb-daily`:
+  { date, comments_queued, comments_sent, posts_queued, posts_sent,
+    dms_queued, dms_sent, new_groups_joined, reach_estimate }
+
+═══════════════════════════════════════════════════════════════════════
+  END OF PACK · ◊·κ=1
+═══════════════════════════════════════════════════════════════════════

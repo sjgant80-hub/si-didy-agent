@@ -35,11 +35,22 @@ import readline from 'node:readline';
 import { spawn } from 'node:child_process';
 
 // ───────────── config ─────────────
-const PACK_PATH    = process.argv[2] || './brief.txt';
+const ARGS         = process.argv.slice(2);
+const CHAT_MODE    = ARGS.includes('--chat') || ARGS.length === 0;
+const PACK_PATH    = CHAT_MODE ? null : ARGS.find(a => !a.startsWith('--'));
 const USER_DATA    = './si-didy-profile';
 const VIEWPORT     = { width: 1280, height: 800 };
 const MAX_TURNS    = 200;
 const MCPS_CONFIG  = './mcps.json';
+const MEMORY_DIR   = './memory';
+const MISSIONS_DIR = './missions';
+const QUEUES_DIR   = './queues';
+const PACKS_DIR    = './packs';
+
+// scaffold dirs · idempotent
+for (const d of [MEMORY_DIR, MISSIONS_DIR, QUEUES_DIR, PACKS_DIR]) {
+  fs.mkdirSync(d, { recursive: true });
+}
 
 // CLI allowlist (extend via env: SIDIDY_CLI_ALLOW="docker,kubectl,...")
 const CLI_DEFAULT_ALLOW = [
@@ -65,8 +76,11 @@ else {
   process.exit(1);
 }
 
-if (!fs.existsSync(PACK_PATH)) { console.error('✗ brief not found:', PACK_PATH); process.exit(1); }
-const BRIEF = fs.readFileSync(PACK_PATH, 'utf8');
+let BRIEF = '';
+if (!CHAT_MODE) {
+  if (!fs.existsSync(PACK_PATH)) { console.error('✗ brief not found:', PACK_PATH); process.exit(1); }
+  BRIEF = fs.readFileSync(PACK_PATH, 'utf8');
+}
 
 // ───────────── readline ─────────────
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
@@ -347,9 +361,89 @@ const metaMcp = createSdkMcpServer({
 });
 
 // ═══════════════════════════════════════════════════════════════════
+//  MEMORY · persistent state across chat turns
+// ═══════════════════════════════════════════════════════════════════
+//  Scopes are free-form file slugs (e.g. "fb-posts", "li-dms", "upwork-seen").
+//  Each scope is a JSONL file at ./memory/<scope>.jsonl
+//  Use these so si-didy never re-posts the same content / re-DMs the
+//  same person / re-applies to the same Upwork job across runs.
+const memoryMcp = createSdkMcpServer({
+  name: 'memory',
+  version: '2.0.0',
+  tools: [
+    tool('memory_recall', 'Recall the last N entries from a memory scope (e.g. "fb-posts", "li-dms", "upwork-seen"). Use BEFORE you post/DM/apply to check whether the same target was already actioned.',
+      { scope: z.string().describe('Free-form slug. Lower-kebab. e.g. "fb-posts" / "li-dms"'),
+        limit: z.number().min(1).max(200).default(20) },
+      async ({ scope, limit }) => {
+        const fp = path.join(MEMORY_DIR, scope.replace(/[^a-z0-9_-]/gi, '') + '.jsonl');
+        if (!fs.existsSync(fp)) return { content: [{ type: 'text', text: '(empty)' }] };
+        const lines = fs.readFileSync(fp, 'utf8').trim().split('\n').filter(Boolean);
+        const tail = lines.slice(-limit).join('\n');
+        return { content: [{ type: 'text', text: tail || '(empty)' }] };
+      }
+    ),
+    tool('memory_note', 'Append a JSON record to a memory scope. Always note an action right after taking it: { ts, target, action, result }. Used to prevent duplicates and feed the daily ops log.',
+      { scope: z.string(),
+        payload: z.record(z.any()).describe('JSON object · whatever shape fits the scope') },
+      async ({ scope, payload }) => {
+        const fp = path.join(MEMORY_DIR, scope.replace(/[^a-z0-9_-]/gi, '') + '.jsonl');
+        const line = JSON.stringify({ ts: new Date().toISOString(), ...payload }) + '\n';
+        fs.appendFileSync(fp, line);
+        return { content: [{ type: 'text', text: 'noted to ' + fp }] };
+      }
+    ),
+    tool('mission_log', 'Log the start of a mission (a user directive). Returns mission_id. Use mission_finish later.',
+      { directive: z.string(), platforms: z.array(z.string()).default([]) },
+      async ({ directive, platforms }) => {
+        const id = 'M' + Date.now().toString(36);
+        const today = new Date().toISOString().slice(0,10);
+        const fp = path.join(MISSIONS_DIR, today + '.jsonl');
+        fs.appendFileSync(fp, JSON.stringify({ id, ts: new Date().toISOString(), directive, platforms, status: 'started' }) + '\n');
+        return { content: [{ type: 'text', text: 'mission ' + id + ' logged' }] };
+      }
+    ),
+    tool('mission_finish', 'Mark a mission complete with a one-line outcome.',
+      { id: z.string(), outcome: z.string() },
+      async ({ id, outcome }) => {
+        const today = new Date().toISOString().slice(0,10);
+        const fp = path.join(MISSIONS_DIR, today + '.jsonl');
+        fs.appendFileSync(fp, JSON.stringify({ id, ts: new Date().toISOString(), status: 'finished', outcome }) + '\n');
+        return { content: [{ type: 'text', text: 'mission ' + id + ' closed' }] };
+      }
+    ),
+    tool('pack_load', 'Load a verbatim platform pack from ./packs/ (e.g. "FACEBOOK-PACK.txt", "LINKEDIN-PACK.txt"). Treat the pack content as immutable copy spec for that platform.',
+      { name: z.string().describe('Pack filename inside ./packs/') },
+      async ({ name }) => {
+        const fp = path.join(PACKS_DIR, name);
+        if (!fs.existsSync(fp)) return { content: [{ type: 'text', text: '✗ pack not found: ' + fp }] };
+        const body = fs.readFileSync(fp, 'utf8');
+        return { content: [{ type: 'text', text: body.slice(0, 60000) }] };
+      }
+    ),
+    tool('queue_write', 'Save a draft (post / comment / DM / proposal) to a queue for human review. Filename is auto-generated. Returns the path.',
+      { queue: z.string().describe('Queue slug · e.g. "fb-post", "li-dm", "upwork"'),
+        title: z.string().describe('One-line title · used in the filename'),
+        body: z.string().describe('The draft content · markdown-friendly'),
+        meta: z.record(z.any()).optional() },
+      async ({ queue, title, body, meta }) => {
+        const today = new Date().toISOString().slice(0,10);
+        const dir = path.join(QUEUES_DIR, queue.replace(/[^a-z0-9_-]/gi,''), today);
+        fs.mkdirSync(dir, { recursive: true });
+        const slug = title.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,40);
+        const stamp = Date.now().toString(36);
+        const fp = path.join(dir, `${stamp}-${slug}.md`);
+        const fm = '---\n' + Object.entries({ title, ...(meta||{}), status: 'pending_review' }).map(([k,v])=>`${k}: ${typeof v==='string'?v:JSON.stringify(v)}`).join('\n') + '\n---\n\n';
+        fs.writeFileSync(fp, fm + body);
+        return { content: [{ type: 'text', text: 'queued · ' + fp }] };
+      }
+    ),
+  ],
+});
+
+// ═══════════════════════════════════════════════════════════════════
 //  system prompt · the routing doctrine
 // ═══════════════════════════════════════════════════════════════════
-const PROMPT = `You are si-didy-agent v2 — sovereign 4-tier agent. ◊·κ=1.
+const SYSTEM_DOCTRINE = `You are si-didy-agent v2 — sovereign 4-tier agent. ◊·κ=1.
 
 YOU HAVE FOUR EXECUTION TIERS. Always pick the CHEAPEST that completes the step:
 
@@ -377,11 +471,41 @@ SAFETY (non-negotiable)
     Do not perform the action until the user replies "yes" or "go".
 - This applies across ALL tiers · CLI included. A "gh repo delete" needs ask_user just like a browser Save.
 
+MEMORY & MISSIONS
+- BEFORE acting on a target (FB user, LinkedIn profile, Upwork job, group),
+  call memory_recall on the relevant scope · skip if already actioned.
+- AFTER any post/comment/DM/apply, call memory_note with { target, action,
+  result, platform } so the next run sees it.
+- For every user directive, call mission_log FIRST · mission_finish LAST.
+
+PLATFORM PACKS
+- Verbatim copy specs live in ./packs/  (FACEBOOK-PACK.txt, LINKEDIN-PACK.txt, etc.)
+- pack_load(name) returns the file body · treat "▼ COPY ▼ ... ▲ END ▲" blocks
+  as IMMUTABLE source · do not paraphrase or "improve".
+
+QUEUES (drafts await human go)
+- queue_write(queue, title, body, meta) saves a markdown draft.
+- Drafts default to status: pending_review in frontmatter.
+- User reviews ./queues/<queue>/YYYY-MM-DD/*.md then flips status to "send"
+  before instructing you to dispatch them.
+
 EFFICIENCY
 - Plan in 3-5 step chunks. Pick the right tier per step. State your reasoning.
-- When done, output a final summary text and stop calling tools.
+- When done, output a final summary and stop calling tools (unless in chat mode
+  where you wait for the next user message).`;
 
-THE BRIEF
+const PROMPT = CHAT_MODE
+  ? SYSTEM_DOCTRINE + `\n\nMODE: persistent chat. The user will give directives one at a time.
+For each directive:
+  1. mission_log it.
+  2. State your plan (tiers per step · which platform pack · which memory scope).
+  3. Execute autonomously to the safest pause point (drafts queued, or pause-before-irreversible).
+  4. Print a tight summary: what's queued, what needs human go.
+  5. mission_finish.
+  6. Wait for the next directive.
+
+Begin by greeting the operator with a one-line readiness check.`
+  : SYSTEM_DOCTRINE + `\n\nTHE BRIEF
 ═══════════════════════════════════════════════════════════════════
 ${BRIEF}
 ═══════════════════════════════════════════════════════════════════
@@ -396,6 +520,7 @@ const mcpServers = {
   http: tierOneMcp,
   browser: tierThreeMcp,
   meta: metaMcp,
+  memory: memoryMcp,
   ...configuredMcps,
 };
 
@@ -408,6 +533,9 @@ const allowedTools = [
   'mcp__browser__browser_navigate', 'mcp__browser__browser_upload',
   'mcp__browser__browser_url',
   'mcp__meta__ask_user', 'mcp__meta__list_env_keys',
+  'mcp__memory__memory_recall', 'mcp__memory__memory_note',
+  'mcp__memory__mission_log', 'mcp__memory__mission_finish',
+  'mcp__memory__pack_load', 'mcp__memory__queue_write',
 ];
 
 console.log('\n◊ tiers loaded:');
@@ -415,42 +543,88 @@ console.log('   T0 · CLI       · ' + CLI_ALLOW.size + ' commands allowed');
 console.log('   T1 · HTTP      · REST + GraphQL ready');
 console.log('   T2 · MCP proxy · ' + (Object.keys(configuredMcps).length ? Object.keys(configuredMcps).join(', ') : '(none registered · create ./mcps.json to add)'));
 console.log('   T3 · Browser   · Playwright (lazy · loaded on first browser_* call)');
-console.log('\n◊ handing brief to agent…\n');
+console.log('   ·· · Memory   · ./memory · ./missions · ./queues · ./packs');
 
-let lastText = '';
-const result = query({
-  prompt: PROMPT,
-  options: {
-    model: 'claude-sonnet-4-5-20250929',
-    mcpServers,
-    allowedTools,
-    permissionMode: 'bypassPermissions', // agent self-gates via ask_user
-    maxTurns: MAX_TURNS
-  }
-});
+// list available packs at startup
+const availablePacks = fs.existsSync(PACKS_DIR) ? fs.readdirSync(PACKS_DIR).filter(f => f.endsWith('.txt')) : [];
+if (availablePacks.length) {
+  console.log('   ·· · Packs    · ' + availablePacks.join(', '));
+}
 
-for await (const msg of result) {
+function summarizeMsg(msg, lastText) {
   if (msg.type === 'assistant') {
     const text = (msg.message?.content || [])
       .filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
     if (text && text !== lastText) {
-      console.log('\n◊ claude:\n' + text + '\n');
+      console.log('\n◊ sididy:\n' + text + '\n');
       lastText = text;
     }
     for (const t of (msg.message?.content || []).filter(b => b.type === 'tool_use')) {
       const tier = t.name.includes('cli') ? 'T0' : t.name.includes('http')||t.name.includes('graphql') ? 'T1' :
-                   t.name.includes('browser') ? 'T3' : t.name.includes('meta') ? '··' : 'T2';
+                   t.name.includes('browser') ? 'T3' : t.name.includes('meta') ? '··' :
+                   t.name.includes('memory') ? '◊·' : 'T2';
       const sum = JSON.stringify(t.input).slice(0, 80);
       console.log(`  ${tier} · ${t.name.replace(/^mcp__[^_]+__/,'')} ${sum}`);
     }
   } else if (msg.type === 'result') {
-    console.log('\n◊·κ=1 · agent finished');
+    console.log('\n◊·κ=1 · turn complete');
     console.log('   turns: ' + (msg.num_turns ?? '?'));
     if (msg.total_cost_usd != null) console.log('   cost:  $' + msg.total_cost_usd.toFixed(4));
     if (msg.is_error) console.log('   note:  ended with error');
   }
+  return lastText;
 }
 
-if (_ctx) console.log('\n◊ browser left open · close manually when ready');
-console.log('◊ done\n');
-rl.close();
+const queryOpts = {
+  model: 'claude-sonnet-4-5-20250929',
+  mcpServers,
+  allowedTools,
+  permissionMode: 'bypassPermissions', // agent self-gates via ask_user
+  maxTurns: MAX_TURNS
+};
+
+if (CHAT_MODE) {
+  // ──────── persistent chat REPL ────────
+  console.log('\n◊ chat mode · type a directive · "exit" to quit');
+  console.log('◊ example: "promote ShadowCompass on my FB page" · "upwork morning run" · "find 5 AI founder groups on FB"');
+  console.log('◊ packs available: ' + (availablePacks.join(', ') || '(drop .txt files in ./packs/)'));
+  console.log('');
+
+  // bootstrap: greet
+  let lastText = '';
+  let history = SYSTEM_DOCTRINE + '\n\nMODE: persistent chat REPL\n';
+
+  for (;;) {
+    const directive = (await ask('you ◊  ')).trim();
+    if (!directive) continue;
+    if (/^(exit|quit|bye|stop)$/i.test(directive)) break;
+
+    const turnPrompt = history + `\n\nUSER DIRECTIVE (${new Date().toISOString()}):\n${directive}\n\nExecute. Log a mission, plan tiers, run, summarize, close mission. Then wait for the next directive.`;
+
+    const result = query({ prompt: turnPrompt, options: queryOpts });
+    for await (const msg of result) {
+      lastText = summarizeMsg(msg, lastText);
+      if (msg.type === 'assistant') {
+        const text = (msg.message?.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+        if (text) history += `\n\nSIDIDY (${new Date().toISOString()}):\n${text}\n`;
+      }
+    }
+    // trim history so the prompt doesn't balloon · keep last ~16k chars
+    if (history.length > 16000) history = SYSTEM_DOCTRINE + '\n\n[...older turns trimmed...]\n' + history.slice(-12000);
+  }
+
+  if (_ctx) { console.log('\n◊ closing browser…'); await _ctx.close().catch(()=>{}); }
+  console.log('◊ chat ended\n');
+  rl.close();
+} else {
+  // ──────── one-shot brief mode (original) ────────
+  console.log('\n◊ handing brief to agent…\n');
+  let lastText = '';
+  const result = query({ prompt: PROMPT, options: queryOpts });
+  for await (const msg of result) {
+    lastText = summarizeMsg(msg, lastText);
+  }
+  if (_ctx) console.log('\n◊ browser left open · close manually when ready');
+  console.log('◊ done\n');
+  rl.close();
+}

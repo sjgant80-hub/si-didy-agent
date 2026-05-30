@@ -1,0 +1,299 @@
+═══════════════════════════════════════════════════════════════════════
+  LINKEDIN PACK · si-didy autonomous play-book · ◊·κ=1
+  Simon Gant · ai-nativesolutions · LinkedIn profile + Company Page
+  Powered by fallpost (Jung × Freud × Sales 101) for tone
+═══════════════════════════════════════════════════════════════════════
+
+WHAT THIS PACK DOES
+  · Daily build-in-public post (one of 4 frames)
+  · Comment-funnel on AI-founder posts (the highest-leverage move)
+  · Connection-request DMs with the FallMap-as-bait play
+  · Track engagement, never re-DM the same person
+
+MEMORY SCOPES
+  li-posts        every Simon post made (urn, body, ts)
+  li-comments     every comment Simon made
+  li-dms          every DM thread touched
+  li-connects     every connection request sent or accepted
+  li-targets-seen profiles si-didy has evaluated
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION A · IDENTITY
+═══════════════════════════════════════════════════════════════════════
+
+  Profile:   linkedin.com/in/<simon-handle>   (ask_user if unknown)
+  Company:   linkedin.com/company/ai-native-solutions
+  Voice:     fallpost six-layer (Jung 30 · Sales 25 · Freud 20 ·
+             Platform 25 weighting for LinkedIn)
+  Seal:      ◊ at close of every post
+
+  Headline:  Sovereign AI Tools You Own Forever · 60+ Live Builds · No SaaS Rent
+  About hook (first 220 chars before "see more"):
+     I build AI tools your business owns outright. 60+ live in
+     production · single HTML · no backend · no per-seat fees · no
+     SaaS lock-in. Your data stays in your browser. Your tool stays
+     your asset.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION B · POSTS (4 frames · rotate to stay fresh)
+═══════════════════════════════════════════════════════════════════════
+
+CADENCE
+  · 1 post/day on profile · max 1 post/week on Company Page
+  · Best windows (UK time): 07:30 · 12:00 · 17:00
+  · Length: 1300-1900 chars · LinkedIn rewards mid-length
+
+────────────────────────────────────────────
+B1 · BURN-THE-SAAS  (highest-engagement frame · 50% of cadence)
+────────────────────────────────────────────
+▼ COPY ▼
+The average UK SMB pays £[X] / month for [SaaS CATEGORY].
+
+[SaaS NAME 1] ·  £Y/mo · doesn't let you export your customer list cleanly.
+[SaaS NAME 2] · £Z/mo · charges per seat after the third user.
+[SaaS NAME 3] · £W/mo · holds your audit trail behind their dashboard.
+
+Here's the thing nobody on this feed says out loud:
+
+You don't need any of them.
+
+The whole stack runs as a single HTML file you download once and own
+forever. Your data lives in your browser. Your audit chain is
+Ed25519-signed locally. Your LLM is BYOK — you pay providers direct,
+not a markup to me.
+
+I've shipped 60+ of these. ai-nativesolutions.com.
+
+If you're paying SaaS rent for a workflow that should be a build —
+drop the workflow as a comment. I'll send back the one-page
+"owning it vs renting it" cost breakdown. No call attached.
+
+◊
+▲ END ▲
+
+────────────────────────────────────────────
+B2 · BUILD-IN-PUBLIC  (25% of cadence)
+────────────────────────────────────────────
+▼ COPY ▼
+Today's build:
+
+[TOOL NAME] · [ONE-LINE WHAT IT IS]
+
+The why:
+[2-3 lines of operator-pain Simon's solving]
+
+The what:
+→ Single HTML file you fork and own (MIT)
+→ Data lives in your IndexedDB · never on my infrastructure
+→ BYOK LLM cascade · Claude, GPT, Gemini, or local Ollama
+→ Audit chain baked in · prevHash + Ed25519 on every state change
+→ Zero per-user, per-seat, per-message fees · forever
+
+Live: [URL]
+Source: [GITHUB URL]
+
+That's tool #[N] in the estate. ai-nativesolutions.com
+
+◊
+▲ END ▲
+
+────────────────────────────────────────────
+B3 · OPERATOR LESSON  (15% of cadence)
+────────────────────────────────────────────
+▼ COPY ▼
+[ONE-LINE COUNTERINTUITIVE CLAIM]
+
+Here's what I learned shipping [TOOL]:
+
+1. [OPERATOR INSIGHT]
+2. [OPERATOR INSIGHT]
+3. [OPERATOR INSIGHT]
+
+The pattern across all 60+ builds in the AI Native Solutions estate:
+when you stop renting and start owning, the unit economics flip from
+"how do I afford this stack" to "how do I serve more clients."
+
+If you want to see the pattern in code: ai-nativesolutions.com
+
+◊
+▲ END ▲
+
+────────────────────────────────────────────
+B4 · ARCHETYPE CALL-OUT  (10% of cadence · highest reply rate)
+────────────────────────────────────────────
+▼ COPY ▼
+You're a [ARCHETYPE — e.g. "compliance-nervous director at a 50-person team"].
+
+You opened a Notion doc this morning called something like
+"AI strategy 2026" and got 200 words in before closing it.
+
+The reason it's hard isn't strategy. It's that every option on the
+table is a subscription you'll eventually want to leave.
+
+Here's the way out:
+→ One sovereign tool per workflow
+→ MIT licensed · your team forks it · your team owns it
+→ Audit chain baked in · compliance signs off without a second review
+→ Free forever · the only ongoing cost is the LLM API you choose
+
+Built 60+ of these. ai-nativesolutions.com.
+
+If you want me to model what one of YOUR workflows looks like as a
+sovereign build — drop it in DMs. One-pager back inside 24 hours.
+
+◊
+▲ END ▲
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION C · COMMENT FUNNEL  (the highest-leverage daily move)
+═══════════════════════════════════════════════════════════════════════
+
+C1 · WHERE TO COMMENT
+  · si-didy navigates to LinkedIn home feed + search "AI agent" filter past-24h
+  · Target: posts with 50-500 likes (you'll get seen) and ≤ 100 comments
+  · Avoid: posts from competitors, posts already at 1000+ likes
+
+C2 · COMMENT FRAMES
+
+▼ FRAME 1 · agreement + extension ▼
+[Quote one specific point OP made.]
+
+The thing I'd add: [ONE-LINE OPERATOR INSIGHT THAT EXTENDS THEIR POINT].
+
+[ONE LINE TYING IT TO SOVEREIGN BUILDS / AIN]
+▲ END ▲
+
+▼ FRAME 2 · respectful counter ▼
+Mostly agree — one piece I see differently.
+
+[ONE-SENTENCE COUNTER · operator-grounded, not contrarian for its own sake]
+
+The cleanest path I've found is [ONE-LINE]. Built it as [TOOL/URL] if
+you want to see it work.
+▲ END ▲
+
+▼ FRAME 3 · free help offer ▼
+[Direct answer to the question they asked, 2-3 lines.]
+
+If you want it modelled for your specific case, happy to send a
+one-pager. DMs open.
+▲ END ▲
+
+C3 · DAILY CAPS
+  · 5 comments/day on other people's posts
+  · 1 comment per author per week (no comment-stalking)
+  · Always check memory_recall("li-comments", 50)
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION D · CONNECTION REQUESTS + DMs
+═══════════════════════════════════════════════════════════════════════
+
+D1 · WHO TO REQUEST
+  · Liked or commented on a Simon post in last 7d
+  · Mutual connection in AI/founder space
+  · Posted about a SaaS pain in last 14d (use search filter)
+
+D2 · CONNECTION REQUEST NOTE  (300 char limit · stay under 250 for safety)
+▼ COPY ▼
+Hi [FIRST NAME] — saw your post on [TOPIC]. Built a tool that does
+roughly the same outcome as a sovereign single-file HTML — happy to
+share if useful. No pitch, no follow-up sequence. Just liked your post.
+◊ Simon
+▲ END ▲
+
+D3 · POST-ACCEPT DM  (only after they accept)
+▼ COPY ▼
+Thanks for the connect [FIRST NAME].
+
+You mentioned [QUOTE FROM THEIR POST]. I built [TOOL] for almost
+exactly that — happy to walk you through it if useful.
+
+Free, single HTML, your data stays in your browser:
+[URL]
+
+Or if you want the workflow modelled as a sovereign build:
+ai-nativesolutions.com/fallmap (paste your workflow · get the
+one-pager back).
+
+No follow-up sequence — if it's useful you'll come back. ◊
+▲ END ▲
+
+D4 · DAILY CAPS
+  · 10 connection requests/day (LinkedIn weekly limit ≈ 100)
+  · 5 post-accept DMs/day
+  · NEVER send the same DM twice (memory scope li-dms)
+  · NEVER add multiple links in one DM (LinkedIn flags it)
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION E · ARCHETYPE MATCHER
+═══════════════════════════════════════════════════════════════════════
+
+Same 5 as the Upwork pack §H · use to choose which post frame /
+which tool to mention in DMs.
+
+  1. THE BURNED FOUNDER          → Tool: fallmap · Frame: B1 / D3
+  2. THE COMPLIANCE-NERVOUS      → Tool: fallforce / fallaccount · B4
+  3. THE AGENCY RESELLER         → Tool: trilogy-forge · B2 / D2
+  4. THE BOOTSTRAPPER            → Tool: fallmap · D3 (FallMap is the closer)
+  5. THE ENTERPRISE TIRE-KICKER  → skip · no DM, just a friendly comment
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION F · SAFETY RAILS
+═══════════════════════════════════════════════════════════════════════
+
+NEVER (without explicit ask_user yes for THIS specific action):
+  · Click Post on a profile or Company Page post
+  · Click Send on a connection request OR a DM
+  · Click Comment on someone's post
+  · Endorse skills, write recommendations, or accept open InMails
+    that require a paid response
+  · Modify profile photo, headline, or rate beyond Pack A
+  · Enable LinkedIn Premium or any paid tier
+  · Reply to recruiter DMs (Simon handles these manually)
+
+ALWAYS:
+  · memory_recall the scope before drafting any send
+  · memory_note every action
+  · Pause 45-90s between sends (LinkedIn rate limit)
+  · Persistent Chromium profile ./si-didy-profile
+
+RATE LIMITS (LinkedIn will soft-ban over these)
+  · Profile posts: 1/day
+  · Comments: 5/day
+  · Connection requests: 10/day · 100/week
+  · DMs: 5/day to 1st-degree only
+  · Profile views by you: unlimited but ≥ 200/day triggers a flag
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION G · TIER NOTE
+═══════════════════════════════════════════════════════════════════════
+
+LinkedIn API is gated to approved partners (Sales Navigator,
+recruiter products). For posting/commenting/DMing as Simon:
+  → T3 (Playwright) is the ONLY path.
+
+LinkedIn Marketing API exists for Company Page posts but requires
+app review. Not worth it for 1 post/week. Use browser.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION H · DAILY OPS LOOP
+═══════════════════════════════════════════════════════════════════════
+
+When user says "linkedin morning" / "li run":
+
+  1. memory_recall li-posts (today) · don't double-post
+  2. browser_navigate linkedin.com · screenshot · verify logged in
+  3. Triage notifications · queue any DM replies to ./queues/li-dm/
+  4. Scan home feed · pick 5 commentable posts · draft 5 comments
+  5. Draft today's profile post (rotate B1-B4 based on cadence)
+  6. Search "AI agent" past-24h · 10 connection-request candidates
+     · draft note for each
+  7. queue_write everything · print summary · wait for "go"
+
+Metrics tracked in memory scope `li-daily`:
+  { date, posts_queued, posts_sent, comments_queued, comments_sent,
+    connects_sent, connects_accepted, dms_sent, dms_replied }
+
+═══════════════════════════════════════════════════════════════════════
+  END OF PACK · ◊·κ=1
+═══════════════════════════════════════════════════════════════════════

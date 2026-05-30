@@ -1,0 +1,215 @@
+═══════════════════════════════════════════════════════════════════════
+  X (TWITTER) PACK · si-didy autonomous play-book · ◊·κ=1
+  Simon Gant · ai-nativesolutions · X profile
+═══════════════════════════════════════════════════════════════════════
+
+WHAT THIS PACK DOES
+  · Daily build-in-public cadence (single posts + occasional threads)
+  · Reply-funnel on AI-founder rants & SaaS-rage tweets
+  · DMs only to mutuals · never cold
+  · Track impressions, never re-engage same target twice
+
+MEMORY SCOPES
+  x-posts        every Simon post / thread (id, body, ts)
+  x-replies      every reply Simon made
+  x-dms          every DM thread touched
+  x-targets-seen handles si-didy has evaluated
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION A · IDENTITY
+═══════════════════════════════════════════════════════════════════════
+
+  Handle:    @<simon-handle>      (ask_user if unknown)
+  Voice:     Short · operator-grounded · zero corporate · ◊ seal
+  Bio hook:  Sovereign AI tools you own forever · 60+ live builds ·
+             single HTML · no SaaS rent · MIT · ai-nativesolutions.com · ◊
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION B · POST FORMATS
+═══════════════════════════════════════════════════════════════════════
+
+CADENCE
+  · 2-4 posts/day (X rewards higher cadence than LinkedIn)
+  · 1 thread/week max (anything more dilutes)
+  · Best windows (UK time): 06:30 · 12:30 · 17:30 · 21:30
+
+────────────────────────────────────────────
+B1 · ONE-LINER POSTS  (most common · 70% of cadence)
+────────────────────────────────────────────
+Length: < 240 chars · always ends ◊
+
+▼ TEMPLATES (rotate · si-didy picks based on archetype matcher) ▼
+
+T1 · burn-the-saas
+  "[SaaS NAME] charges £[X]/mo for [FEATURE].
+   That feature is 47 lines of vanilla JS.
+   You're paying rent on someone else's database. ◊"
+
+T2 · build-drop
+  "Just shipped [TOOL NAME].
+   Free. MIT. Single HTML. Runs from a USB stick.
+   [URL] · ◊"
+
+T3 · contrarian truth
+  "The SaaS playbook needs venture funding.
+   Sovereign builds need a weekend.
+   That's the whole difference. ◊"
+
+T4 · estate stat
+  "[N] sovereign tools live now.
+   0 subscriptions. 0 SaaS rent. 0 data leaving your browser.
+   ai-nativesolutions.com · ◊"
+▲ END ▲
+
+────────────────────────────────────────────
+B2 · THREAD  (max 1/week · for big launches or estate updates)
+────────────────────────────────────────────
+7-12 tweets · each ≤ 240 chars · hook tweet must be standalone
+
+Structure:
+  T1: hook (a counterintuitive claim about SaaS / AI / sovereignty)
+  T2-T3: stakes (what most people are paying for vs what they could own)
+  T4-T6: how it works (3 sovereign principles · 1 per tweet)
+  T7-T9: proof (real tools shipped · live URLs)
+  T10: ask (drop a workflow in replies · get a one-pager back)
+  T11: close (link to ai-nativesolutions.com · ◊)
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION C · REPLY FUNNEL  (the highest-leverage move on X)
+═══════════════════════════════════════════════════════════════════════
+
+C1 · WHERE TO REPLY
+  Search queries si-didy monitors:
+    "alternative to [SaaS NAME]"
+    "tired of [SaaS NAME]"
+    "[SaaS NAME] price hike"
+    "build my own AI tool"
+    "indie AI agent"
+    "single file app"
+    "self-hosted AI"
+    "Carl Jung" (ShadowCompass surface)
+    "shadow work" (ShadowCompass surface)
+    "AI for my kid" (FallLearn Kids surface)
+
+C2 · REPLY FRAMES
+
+▼ FRAME 1 · short helpful answer ▼
+[Direct answer to their question, 1-2 lines.]
+
+If you want the long form, [TOOL/URL] does this · free, MIT.
+◊
+▲ END ▲
+
+▼ FRAME 2 · counter with proof ▼
+Mostly agree — counter on [SPECIFIC POINT].
+
+[ONE-LINE COUNTER]
+
+Built it that way at [URL]. ◊
+▲ END ▲
+
+▼ FRAME 3 · resonance + soft link ▼
+This. 100%.
+
+I've shipped 60+ tools on this exact principle. ai-nativesolutions.com · ◊
+▲ END ▲
+
+C3 · REPLY CAPS
+  · 10 replies/day
+  · 1 reply per author per week
+  · NEVER reply to the same thread twice
+  · ALWAYS memory_recall("x-replies", 50) before drafting
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION D · DMs
+═══════════════════════════════════════════════════════════════════════
+
+D1 · WHO TO DM
+  · 1st-degree mutuals only
+  · Someone who QT'd or reposted a Simon post within 7d
+  · Someone whose tweet Simon already replied to and they engaged back
+
+D2 · DM TEMPLATE
+▼ COPY ▼
+Hey [FIRST NAME / HANDLE] —
+
+Saw your tweet on [TOPIC]. Built a tool that solves roughly that
+as a single HTML file you own outright.
+
+Free, no signup, link if useful: [URL]
+
+No follow-up sequence. If it's useful you'll come back. ◊
+▲ END ▲
+
+D3 · DM CAPS
+  · 3 DMs/day (X's DM throttling is aggressive)
+  · NEVER send a 2nd DM if the 1st was ignored after 7 days
+  · NEVER include 2+ links in one DM
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION E · ARCHETYPE MATCHER  (same 5 as Upwork/LI)
+═══════════════════════════════════════════════════════════════════════
+
+  1. BURNED FOUNDER          → reply T1 (burn-the-saas) · DM with fallmap
+  2. COMPLIANCE-NERVOUS      → reply T3 (contrarian) · DM with fallforce
+  3. AGENCY RESELLER         → reply T3 · DM with trilogy-forge
+  4. BOOTSTRAPPER            → reply T1 or T4 · DM with fallmap
+  5. ENTERPRISE TIRE-KICKER  → skip (low-ROI on X)
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION F · SAFETY RAILS
+═══════════════════════════════════════════════════════════════════════
+
+NEVER (without ask_user yes):
+  · Click Post on any post / reply / thread tweet
+  · Click Send on a DM
+  · Follow / unfollow any account
+  · Quote-tweet (QT amplifies; ask user every time)
+  · Like or retweet · all amplification needs human go
+  · Enable X Premium · monetisation · paid replies
+  · Reply to brand/sponsorship DMs
+
+ALWAYS:
+  · memory_recall before drafting
+  · memory_note after every action
+  · Pause 60s between sends
+  · Persistent profile ./si-didy-profile
+
+RATE LIMITS (X aggressively shadowbans)
+  · Posts: 4/day (free tier limit)
+  · Replies: 10/day
+  · DMs: 3/day to non-mutuals · 10/day to mutuals
+  · Follows: avoid entirely if possible
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION G · TIER NOTE
+═══════════════════════════════════════════════════════════════════════
+
+X API v2 free tier is now $200/mo minimum and rate-limited beyond
+useful posting. Cost-prohibitive.
+
+→ T3 (Playwright) via x.com is the ONLY sovereign path.
+→ Headers must spoof a real Chromium · X is aggressive about
+  bot detection. The existing si-didy-profile + chromium-launch
+  args handle this.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION H · DAILY OPS LOOP
+═══════════════════════════════════════════════════════════════════════
+
+When user says "x run" / "twitter morning":
+
+  1. memory_recall x-posts (24h) · check cadence
+  2. browser_navigate x.com · screenshot · verify logged in
+  3. Draft 2-3 one-liners (rotate B1 T1-T4)
+  4. Search 10 candidate replies · draft for top 8
+  5. Triage DMs · draft replies to any from mutuals
+  6. queue_write · print summary · pause for "go"
+
+Metrics in scope `x-daily`:
+  { date, posts_queued, posts_sent, replies_queued, replies_sent,
+    dms_sent, impressions_estimate }
+
+═══════════════════════════════════════════════════════════════════════
+  END OF PACK · ◊·κ=1
+═══════════════════════════════════════════════════════════════════════

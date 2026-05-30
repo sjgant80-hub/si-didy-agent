@@ -1,0 +1,604 @@
+═══════════════════════════════════════════════════════════════════════
+  UPWORK ELITE REPOSITIONING PACK · ◊·κ=1
+  Simon Gant · ai-nativesolutions · Top Rated UK
+  built via si-didy persona engine + fallpost tone stack
+═══════════════════════════════════════════════════════════════════════
+
+HOW TO USE THIS DOC:
+
+  Open Upwork → Profile settings.
+  Work through Section A → B → C → D in order.
+  Each box marked ▼ COPY ▼ is paste-verbatim.
+  Each box marked ▼ SCREENSHOT ▼ tells you exactly what to snip.
+  Total time to redo the profile: ~25 minutes.
+  Total time to start sending elite proposals: ~5 minutes more.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION A · HEADLINE · RATE · AVAILABILITY
+═══════════════════════════════════════════════════════════════════════
+
+A1. HEADLINE (Profile settings → Title)
+
+▼ COPY ▼
+Sovereign AI Tools You Own Forever · 60+ Live Builds · No SaaS Rent · Single-File · Audit-Chained
+▲ END ▲
+
+Why: identity hook ("you own"), proof anchor ("60+"), differentiator
+("no rent"), credibility ("audit-chained"). Buyers reading job-board
+results see the first 60-70 chars · this front-loads them.
+
+────────────────────────────────────────────────────
+
+A2. HOURLY RATE — bump $50 → $95
+
+Upwork algorithm boosts Top Rated profiles already · the next 20-30%
+lift comes from rate-as-signal. $50/hr reads as "junior AI hacker".
+$95/hr reads as "I'm closing the budget threshold for Top Rated Plus
+without grinding hours".
+
+Set hourly to: $95
+(stretch goal once 2 contracts close at this rate: $125)
+
+────────────────────────────────────────────────────
+
+A3. AVAILABILITY BADGE — turn ON
+
+The badge gives a +15% visibility bump and is free. Set to:
+"More than 30 hrs/week" if you want big builds
+"As needed - open to offers" if you want consulting + builds mix
+
+Recommended: "As needed - open to offers" (matches the bespoke model)
+
+────────────────────────────────────────────────────
+
+A4. BOOST YOUR PROFILE — leave OFF
+
+Don't pay-to-play visibility · your portfolio IS the proof. Reinvest
+those connects/dollars into Boosted Proposals on $5k+ jobs only.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION B · THE OVERVIEW (the bio · the whole game)
+═══════════════════════════════════════════════════════════════════════
+
+Upwork shows the first 200 characters before "more". Those 200 chars
+are everything. Below is the full overview · first 200 chars are
+the hook · the rest unlocks when they click.
+
+▼ COPY ▼ (paste the whole block, line breaks preserved)
+
+I build AI tools your business owns outright. 60+ live in production · single HTML · no backend · no per-seat fees · no SaaS lock-in. Your data stays in your browser. Your tool stays your asset.
+
+────────
+
+WHAT YOU GET (every build)
+→ Single sovereign HTML file · works from a USB stick · no servers to maintain
+→ Your data lives in YOUR IndexedDB or Postgres · never on my infrastructure
+→ BYOK cascade · use Claude, GPT, Gemini, or local Ollama · you choose, you pay providers direct
+→ Audit chain baked in · every action prevHash-linked + cryptographically signed
+→ MIT licensed · fork it, resell it, white-label it · your call
+→ Zero per-user, per-message, or per-feature fees · forever
+
+THREE TIERS · pricing is bespoke to scope
+LITE · branded fork of an existing tool · your colours, your domain · 24h turnaround
+PRO · custom agents, compliance rules, staff training · 5-day turnaround
+ENTERPRISE · multi-user, sync endpoint, white-label, ongoing support
+
+I quote real numbers after a 10-minute scope call · no hourly pyramid schemes.
+
+THE PORTFOLIO IS THE PROOF
+ai-nativesolutions.com lists every tool I've shipped · 60+ live, source code public on GitHub. No Notion case studies. No PDFs. The product is the proof.
+
+WHO I BUILD FOR
+→ Founders tired of paying $300/month before their first sale
+→ Operators burned by ChatGPT-as-strategy LinkedIn posts
+→ Agencies that need a real AI product to resell, not a wrapper
+→ Compliance-sensitive teams (legal, accounting, healthcare) where data sovereignty isn't optional
+→ Anyone who looks at a Stripe + Webflow + Calendly + Typeform + Notion stack and thinks "this is the wrong covenant"
+
+START FREE — NO CALL NEEDED
+Drop the URL of any workflow you currently pay a SaaS for. I'll send back a one-page breakdown of what owning it outright would cost. No pitch attached. Just the number.
+
+Top Rated · UK based · GMT availability · ◊
+
+▲ END ▲
+
+────────────────────────────────────────────────────
+
+NOTE on the closing ◊ — it's the seal. After 5 contracts, buyers
+on Upwork will recognise it. Keep it. It's free distinctness.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION C · SKILLS (Upwork lets you pick 20 · use all 20)
+═══════════════════════════════════════════════════════════════════════
+
+Type each into Skills field, hit Enter, repeat. Upwork autocompletes.
+
+▼ COPY (one at a time) ▼
+
+  1. AI Development
+  2. AI Consulting
+  3. AI Agent Development
+  4. AI App Development
+  5. AI Integration
+  6. AI Automation
+  7. Anthropic Claude
+  8. OpenAI API
+  9. ChatGPT API Integration
+ 10. LLM Prompt Engineering
+ 11. Custom AI Agent
+ 12. AI Chatbot Development
+ 13. JavaScript
+ 14. HTML5
+ 15. Node.js
+ 16. Vanilla JavaScript
+ 17. Single-Page Application
+ 18. RAG (Retrieval-Augmented Generation)
+ 19. SaaS Development
+ 20. UK Business Compliance
+
+▲ END ▲
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION D · PORTFOLIO (6 elite entries · the trust engine)
+═══════════════════════════════════════════════════════════════════════
+
+For each portfolio slot, you'll do:
+   1. Take the screenshot listed (use Snipping Tool · Win+Shift+S)
+   2. Save as PNG to a "Upwork-Portfolio" folder
+   3. Upload to Upwork portfolio slot
+   4. Paste the Title + Description below
+   5. Paste the live URL into the "Project link" field
+
+─────────────────────────────────────────────────
+PORTFOLIO ENTRY 1 — AI Native Solutions Hub
+─────────────────────────────────────────────────
+
+▼ TITLE ▼
+AI Native Solutions · Sovereign Tool Marketplace (60+ live)
+▲ END ▲
+
+▼ DESCRIPTION ▼
+The hub. Luxury brutalist marketplace listing every sovereign tool I've shipped under sjgant80-hub on GitHub — 60+ live builds across apps, APIs, SDKs, research, and infrastructure. Each card carries its own GitHub source link and payment route. Updates auto-sync within 24 hours of any new repo push. Built as a single HTML file (~80KB) that reads from a live JSON registry · no backend · no CMS · no Webflow rent.
+
+Tech: Vanilla JavaScript · GitHub Pages · live JSON registry · BroadcastChannel mesh · PWA manifest baked via data URL
+
+Outcome: Replaces $300+/month SaaS marketing stack (Webflow + Notion + Mailchimp + Calendly + Typeform) with one HTML file on free hosting.
+▲ END ▲
+
+▼ PROJECT LINK ▼
+https://www.ai-nativesolutions.com
+▲ END ▲
+
+▼ SCREENSHOT ▼
+URL to capture: https://www.ai-nativesolutions.com
+Snip: full visible viewport showing the hero ("Sovereign AI tools you own forever" + black/gold brutalist styling) + first row of the browse grid below. Crop to 1600x900 if possible.
+Save as: Upwork-Portfolio/01-hub.png
+▲ END ▲
+
+─────────────────────────────────────────────────
+PORTFOLIO ENTRY 2 — fallpost · The LinkedIn Engine
+─────────────────────────────────────────────────
+
+▼ TITLE ▼
+Sovereign LinkedIn Post Engine · Jung + Freud + Sales 101 baked in
+▲ END ▲
+
+▼ DESCRIPTION ▼
+A single-HTML tool that generates LinkedIn posts using a three-layer tone stack — Jungian archetype (6 voices), Freudian shadow naming (3 intensities), Sales 101 hook structure (5 patterns). Includes a tone analyzer that scores any draft on all three layers. BYOK cascade — Claude, GPT-4o, Gemini, or OpenRouter. Drafts live in browser localStorage. Zero backend. Zero analytics. Zero training-data harvesting.
+
+Tech: Vanilla JavaScript · BYOK API cascade · localStorage persistence · BroadcastChannel mesh integration
+
+Obsoletes: Taplio (£39/mo), AuthoredUp (£15/mo), Postwise ($30/mo) · all of which see your drafts before you do
+▲ END ▲
+
+▼ PROJECT LINK ▼
+https://sjgant80-hub.github.io/fallpost/
+▲ END ▲
+
+▼ SCREENSHOT ▼
+URL to capture: https://sjgant80-hub.github.io/fallpost/
+Snip: the Compose tab showing the gold dials lit up + the Input textarea + at least the start of the Output panel. Best if you generate one variant first so the right side has content.
+Save as: Upwork-Portfolio/02-fallpost.png
+▲ END ▲
+
+─────────────────────────────────────────────────
+PORTFOLIO ENTRY 3 — fallmap · THE LEAD MAGNET ⭐
+─────────────────────────────────────────────────
+
+▼ TITLE ▼
+fallmap · Workflow-to-Consulting-Cost Exposer
+▲ END ▲
+
+▼ DESCRIPTION ▼
+Paste any business workflow in plain English. Get back the consulting cost most agencies would quote (£20k discovery + £2k/month retainer for arrows on a flowchart) AND a side-by-side breakdown of what owning the same outcome outright costs to build. The result is a single page with a big green "savings" number — easy to forward, screenshot, or take to leadership.
+
+Tech: Vanilla JavaScript · client-side analysis · printable report
+
+Use case: Run your current workflow through this before you sign any consulting contract. Use it as the conversation starter when scoping any AI build.
+▲ END ▲
+
+▼ PROJECT LINK ▼
+https://sjgant80-hub.github.io/fallmap/
+▲ END ▲
+
+▼ SCREENSHOT ▼
+URL to capture: https://sjgant80-hub.github.io/fallmap/
+Snip: capture an example output showing the side-by-side comparison + the big green savings number. If the live tool is empty, run one sample workflow first ("sales lead intake + qualification + CRM update") then snip the result page.
+Save as: Upwork-Portfolio/03-fallmap.png
+▲ END ▲
+
+─────────────────────────────────────────────────
+PORTFOLIO ENTRY 4 — fallaccount Trades
+─────────────────────────────────────────────────
+
+▼ TITLE ▼
+fallaccount Trades · Sovereign Bookkeeping for UK Builders & Trades
+▲ END ▲
+
+▼ DESCRIPTION ▼
+Real sovereign accounting for UK sole traders — CIS tax calculation, MTD-ready, receipt-photo scan with vision-LLM extraction, and a natural-language "Ask the Books" query interface ("how much VAT do I owe this quarter?"). Built for a real builder client. Every transaction prevHash-linked into an audit chain. Single HTML file. Data in IndexedDB. Optional cloud sync if the user wants it.
+
+Tech: Vanilla JavaScript · IndexedDB · Anthropic Claude vision API for receipts · BYOK · Ed25519 audit chain · PWA installable
+
+Obsoletes: Xero (£36/mo · per-feature gating), QuickBooks (£17/mo), FreeAgent. Trader pays £0/mo after build delivered.
+▲ END ▲
+
+▼ PROJECT LINK ▼
+https://sjgant80-hub.github.io/fallaccount-trades/
+▲ END ▲
+
+▼ SCREENSHOT ▼
+URL to capture: https://sjgant80-hub.github.io/fallaccount-trades/
+Snip: the dashboard view showing the transaction list + the "Ask the Books" input box (with an example query typed in if possible). Bonus: open the receipt-scan modal for a second screenshot showing the vision parse in action.
+Save as: Upwork-Portfolio/04-fallaccount.png
+▲ END ▲
+
+─────────────────────────────────────────────────
+PORTFOLIO ENTRY 5 — fallforce · Sovereign CRM
+─────────────────────────────────────────────────
+
+▼ TITLE ▼
+fallforce · Sovereign CRM · Stress-Tested for Procurement
+▲ END ▲
+
+▼ DESCRIPTION ▼
+A single-HTML CRM built for a procurement-heavy operation. Pipeline, contacts, RFQ aggregator, 48-hour ageing rule enforced event-driven (not by cron polling), full audit chain with prevHash + reasoning + docHash + configVersion on every state change. Multi-device sync via JSON export/import + optional sync endpoint. Konomi licence shim for tier gating. Hardened through 6-point client-data review (Mansoor's protocol).
+
+Tech: Vanilla JavaScript · IndexedDB · event-driven business rules · Ed25519 audit chain · multi-device JSON sync
+
+Obsoletes: Salesforce (£25–£300/user/month), HubSpot CRM, Pipedrive. Replaces a 12-seat Salesforce contract with a single file the client owns.
+▲ END ▲
+
+▼ PROJECT LINK ▼
+https://sjgant80-hub.github.io/fallforce/
+▲ END ▲
+
+▼ SCREENSHOT ▼
+URL to capture: https://sjgant80-hub.github.io/fallforce/
+Snip: the pipeline view OR the RFQ aggregator with at least one row showing the audit chain icon/badge visible. Aim for the screen that most clearly says "this is a real CRM, not a demo".
+Save as: Upwork-Portfolio/05-fallforce.png
+▲ END ▲
+
+─────────────────────────────────────────────────
+PORTFOLIO ENTRY 6 — trilogy-forge · The Meta-Tool
+─────────────────────────────────────────────────
+
+▼ TITLE ▼
+trilogy-forge · Psychological Build Engine · Jung + Freud + Sales triple-layer
+▲ END ▲
+
+▼ DESCRIPTION ▼
+The tool I use to design every other tool. Paste a client brief in plain English. Get back an archetype-tuned configuration: which Jungian archetype the end-user fits, what Freudian shadow the tool needs to surface, which Sales 101 hook structure the onboarding should use. Output is a JSON spec that drops directly into the sovereign-tool master template. This is the build standard that produces every entry above.
+
+Tech: Vanilla JavaScript · BYOK cascade (Claude / GPT-4o / Gemini) · localStorage persistence · exports to fall-registry
+
+Use case: Show clients you're not winging it. Every build I deliver is psychologically architected, not just functionally built.
+▲ END ▲
+
+▼ PROJECT LINK ▼
+https://sjgant80-hub.github.io/trilogy-forge/
+▲ END ▲
+
+▼ SCREENSHOT ▼
+URL to capture: https://sjgant80-hub.github.io/trilogy-forge/
+Snip: the forge interface with the input panel + the archetype/shadow/hook output showing. If you can run one sample brief through it before snipping, do that.
+Save as: Upwork-Portfolio/06-trilogy.png
+▲ END ▲
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION E · THE FALLMAP-AS-BAIT PLAY (the actual lead engine)
+═══════════════════════════════════════════════════════════════════════
+
+This is the asymmetric move. Every proposal you send includes a free
+FallMap one-pager built for THEIR workflow. They get value before
+they hire. Most freelancers send a CV-style cover letter. You send a
+custom $20k-equivalent audit.
+
+THE LOOP:
+
+  1. Read the job post · identify the workflow they're trying to solve
+  2. Open https://sjgant80-hub.github.io/fallmap/
+  3. Type their workflow into FallMap (30 seconds)
+  4. Screenshot the result OR copy the share link
+  5. Paste the FallMap link as the FIRST thing in your proposal
+  6. Open with: "Before you read the rest — here's what your workflow
+     would cost as a sovereign build vs the consultant quote. [link].
+     If the number surprises you, the rest is worth reading."
+
+WHY IT WORKS (the si-didy lens):
+  → Triggers the founder's repressed shadow ("I'm paying too much")
+  → Demonstrates the meta-skill (you understand their problem deep enough
+    to model it before the call)
+  → Plants the sovereign covenant in their head before competitors
+  → Most importantly: it's NOT a CV · it's a deliverable
+
+CONVERSION TEMPLATES FOR THE FOLLOW-UP MESSAGE:
+
+If they click the link but don't reply (Upwork tells you):
+  ▼ COPY ▼
+  Saw you opened the FallMap. The number stand out either way?
+  Happy to walk through what the build path would actually look like
+  on a 15-min call. No pitch — if owning isn't right for your case
+  I'll say so.
+  ▲ END ▲
+
+If they invite you to interview:
+  Open a Loom (loom.com · free). 2 minutes max. Show:
+   1. Their FallMap result page
+   2. ai-nativesolutions.com hub
+   3. ONE relevant portfolio piece (the closest match to their need)
+  Send Loom link in the chat. Conversion roughly doubles when buyers
+  see and hear you · it's the Upwork open secret.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION F · 3 PROPOSAL TEMPLATES (paste-ready)
+═══════════════════════════════════════════════════════════════════════
+
+Upwork shows the FIRST 2 LINES in the proposal preview. Those two
+lines decide whether the buyer expands or scrolls. Templates below
+put the hook FIRST · proof second · pricing posture third.
+
+─────────────────────────────────────────────────
+TEMPLATE 1 · CUSTOM AI BUILD ($5k+)
+Use when the job says: "custom app", "build me", "MVP", "from scratch"
+─────────────────────────────────────────────────
+
+▼ COPY (fill in the [bracketed] bits before sending) ▼
+
+[ONE-LINE OPENER REFERENCING THEIR SPECIFIC TECH OR FEATURE]
+I've shipped 6 tools doing exactly this — all live, all source-public, all MIT. Closest match to what you're describing: [pick one portfolio URL]
+
+Before reading further — your workflow modelled as a sovereign build vs a typical consulting quote: [paste FallMap link with their workflow prefilled]
+
+What you'd get from me (different from the standard Upwork AI pitch):
+→ Single sovereign HTML file you own outright · not me, not a SaaS, not even GitHub
+→ Your data in your IndexedDB or your Postgres · never my infrastructure
+→ BYOK Claude/OpenAI/Gemini · you pay providers direct · no markup, no rate-limiting at my whim
+→ Audit chain baked in · prevHash + Ed25519 signature on every state change · compliance teams have signed off
+→ MIT licensed · you can fork it, resell it, white-label it · your call after delivery
+
+Pricing: bespoke to scope. I quote real numbers after a 10-min scope call · no hourly pyramid schemes.
+
+UK based · GMT availability · Top Rated.
+
+— Simon
+ai-nativesolutions.com
+
+▲ END ▲
+
+─────────────────────────────────────────────────
+TEMPLATE 2 · AI AGENT / AUTOMATION ($2-5k)
+Use when the job says: "automation", "AI agent", "n8n", "Zapier", "workflow"
+─────────────────────────────────────────────────
+
+▼ COPY ▼
+
+You mentioned [their specific pain point — quote it]. I've built that exact pattern for a UK trades business · receipts → CIS calc → bookkeeping, all sovereign, all single-file. Live demo with throwaway data: https://sjgant80-hub.github.io/fallaccount-trades/
+
+The typical Upwork pitch for AI automation is "I'll connect ChatGPT to your X via Zapier". That's a wrapper that breaks when the SaaS changes its API.
+
+What I do differently:
+→ Single HTML file you fork and own (MIT)
+→ BYOK so you control the LLM bill direct (no per-API-call markup from me)
+→ Audit chain so compliance teams sign off without a separate review
+→ Works offline · your data never touches my server
+
+Free first step: drop your current workflow URL into this tool · it'll print what owning the same outcome outright would cost: https://sjgant80-hub.github.io/fallmap/
+
+Quote and timeline after a 10-min scope call. Folkestone-based, GMT.
+
+— Simon
+
+▲ END ▲
+
+─────────────────────────────────────────────────
+TEMPLATE 3 · DISCOVERY / AUDIT / CONSULTATION (entry-tier)
+Use when the job says: "consultation", "audit", "advice", "discovery", "review"
+─────────────────────────────────────────────────
+
+▼ COPY ▼
+
+You're paying [SaaS X they mentioned] $[their rough monthly cost]/month. I built a tool that exposes the real cost of every SaaS workflow alongside the ownership alternative — run yours through it for free first: https://sjgant80-hub.github.io/fallmap/
+
+Whatever it tells you, happy to talk it through on a 20-min call. No pitch attached. If owning makes sense for your case, I'll quote a build. If not, you saved the consulting fee.
+
+I work on a sovereign-build model · single HTML file, your data, MIT licensed, BYOK LLM cascade. 60+ live tools at ai-nativesolutions.com if you want to see the pattern before the call.
+
+UK based, Top Rated.
+
+— Simon
+
+▲ END ▲
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION G · DAILY OPS LOOP (the discipline that wins TR+)
+═══════════════════════════════════════════════════════════════════════
+
+MORNING (15 min · 8:00 GMT)
+□ Check Upwork notifications · reply to any conversation < 1 hour SLA
+□ Browse "Most recent" in: AI Development, AI Agent Development,
+  Custom Software Development, JavaScript
+□ Save 5-8 candidate jobs to "My Jobs" for proposal pass
+
+APPLICATION WINDOW (45 min · 8:30 GMT)
+□ For each saved job:
+   1. Identify which of the 3 templates fits
+   2. Personalise lines 1-2 (the hook · everything else stays)
+   3. Generate a FallMap link for their workflow · paste in
+   4. Send · log connect spend
+□ Cap: 5-8 sends/day · QUALITY OVER QUANTITY
+□ Boost only on jobs with stated budget $5k+
+
+FOLLOW-UP (15 min · 16:00 GMT)
+□ Day 2 after sending: if invited, send Loom video (see Section E)
+□ Day 5 after sending: if no response, ONE polite follow-up with a
+  new angle (a different portfolio piece, or a specific detail you
+  noticed on a second read of their spec)
+
+EVENING WRAP (5 min · 22:00 GMT)
+□ Log: applied · replied · interview · hired · ghosted
+□ Note which template the replies came from
+
+WEEKLY (Sundays · 20 min)
+□ Compute: response rate · interview-to-hire rate · template win rate
+□ Trim the lowest-performing template line · A/B test next week
+□ JSS forecast: project to keep >90% over 16 weeks (TR threshold)
+
+MONTHLY:
+□ Add 1 new portfolio entry from whichever build you shipped that month
+□ Bump hourly rate $10 if at least 2 contracts closed at current rate
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION H · SI-DIDY × AIN BUYER ARCHETYPES (strategic backbone)
+═══════════════════════════════════════════════════════════════════════
+
+This section isn't for paste — it's the lens you use to MATCH each
+job post to the right template + the right personalised hook.
+
+The si-didy Twin engine profiles personas by Jung archetype + Freud
+shadow. Run this against any Upwork buyer in 30 seconds before you
+write the proposal.
+
+────────────────────────────────────────────────
+ARCHETYPE 1 · THE BURNED FOUNDER
+────────────────────────────────────────────────
+Signal in their job post: mentions specific SaaS names, mentions price
+hikes, mentions "we tried X and it didn't work", short timeline.
+
+Shadow: dependency shame. "I built my business on top of someone
+else's roadmap and now I'm trapped."
+
+What lands in your hook:
+"You own this outright. No price hike. No 'we're sunsetting that
+feature'. No middleman seeing your customer data before you do."
+
+Use Template 1 or 2. Lead with the FallMap link.
+
+────────────────────────────────────────────────
+ARCHETYPE 2 · THE COMPLIANCE-NERVOUS DIRECTOR
+────────────────────────────────────────────────
+Signal: legal / finance / healthcare / public sector / GDPR mention /
+"data sovereignty" / "on-prem" / "single tenant" in the post.
+
+Shadow: regulatory anxiety. "The board will fire me if customer data
+ends up somewhere it shouldn't."
+
+What lands:
+"Audit chain on every action. Single file. Data never leaves your
+environment. I'll co-sign the compliance review."
+
+Use Template 1 (premium build). Lead with fallforce + fallaccount as
+proof points · those are audit-chained.
+
+────────────────────────────────────────────────
+ARCHETYPE 3 · THE AGENCY RESELLER
+────────────────────────────────────────────────
+Signal: "white-label", "for our clients", "we're a [type] agency", or
+the job is posted from an agency-style company.
+
+Shadow: middleman replacement fear. "AI is eating my margin and my
+clients are going direct."
+
+What lands:
+"MIT licensed. Fork it. Sell it as yours. I'll teach you the build
+pattern so your team owns the capability — I become the senior
+architect on tap, not the dependency."
+
+Use Template 1. Pitch the Forge as the productisation path.
+
+────────────────────────────────────────────────
+ARCHETYPE 4 · THE BOOTSTRAPPER
+────────────────────────────────────────────────
+Signal: solo founder, small team mentioned, "we don't have a big
+budget but...", weekend-coder energy in the post.
+
+Shadow: runway anxiety. "Every dollar burns 3 days of runway."
+
+What lands:
+"One-off cost. No subscription. Lasts as long as your business does.
+I'll quote a build small enough to fit one runway month."
+
+Use Template 2 or 3. Always include the FallMap link · the "savings"
+number is your closer.
+
+────────────────────────────────────────────────
+ARCHETYPE 5 · THE ENTERPRISE TIRE-KICKER
+────────────────────────────────────────────────
+Signal: vague brief, "looking to learn more", "exploratory", listed
+budget unrealistic for stated scope.
+
+Shadow: indecision · committee paralysis · politics.
+
+What lands: NOTHING short of a discovery call. Use Template 3.
+Don't send a full proposal until you've talked to a human · save
+the connects.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION I · QUICK-START · what to do in the next 60 minutes
+═══════════════════════════════════════════════════════════════════════
+
+  [ 0:00 - 0:05 ]  Open Profile settings → paste new Headline (A1)
+  [ 0:05 - 0:08 ]  Set rate to $95/hr (A2) · turn Availability ON (A3)
+  [ 0:08 - 0:18 ]  Paste new Overview (Section B) · save
+  [ 0:18 - 0:22 ]  Add the 20 Skills (Section C)
+  [ 0:22 - 0:45 ]  Take 6 Snipping Tool screenshots (Section D guide)
+                    · save to Upwork-Portfolio folder on Desktop
+  [ 0:45 - 0:60 ]  Add the 6 portfolio entries · upload screenshots ·
+                    paste title + description + URL for each
+
+That gets you a fully repositioned profile inside an hour.
+
+THEN:
+  Tomorrow morning · run the Daily Ops Loop (Section G)
+  Use Template 2 or 3 first · they have the lowest friction
+  Track which template gets the first reply · double down on it
+
+═══════════════════════════════════════════════════════════════════════
+  END OF PACK · ◊·κ=1
+═══════════════════════════════════════════════════════════════════════
+
+Notes for Simon, off the record:
+
+→ The headline + overview pair you have now reads "I do AI" · which
+  is what 90% of Upwork AI profiles read like. The rewrite above
+  reads "I do AI DIFFERENTLY" · which is the only thing that wins
+  high-budget jobs against agencies.
+
+→ The FallMap-as-bait move is the single biggest leverage point.
+  No other freelancer on Upwork is sending custom value-first audits
+  with their proposals. You'll be the only one in their inbox doing it.
+
+→ $95/hr → $125/hr ladder is achievable in 3-4 closed contracts.
+  Don't grind hours. Each contract should clear $3k+ minimum.
+
+→ The si-didy archetype matching takes 20 seconds per job post once
+  you've internalised the 5 patterns. After 2 weeks, you'll do it
+  unconsciously.
+
+→ ai-nativesolutions.com + the portfolio entries DO the selling for you.
+  Your proposal job is to make them click through. The site closes.
+
+→ Top Rated Plus threshold is $10k earned · you'll cross it inside
+  60 days at $95/hr if you close 1-2 builds + steady consultations.
+
+— ◊

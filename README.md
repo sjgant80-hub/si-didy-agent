@@ -1,12 +1,61 @@
-# ◊ si-didy-agent · v2
+# ◊ si-didy-agent · v2.1
 
-**Sovereign 4-tier agent · Claude Agent SDK · CLI + HTTP + MCP + Browser · ◊·κ=1**
+**Sovereign chat-driven autonomous agent · Claude Agent SDK · 4-tier · ◊·κ=1**
 
-You write a brief in plain English. Claude reads it. The agent picks the **cheapest execution tier** that finishes the job — CLI when possible, HTTP when there's an API, MCP when a server is registered, browser only as last resort. **No API charges.** Your Claude subscription pays.
+Two modes:
+- **Chat mode** — `node agent.mjs` opens a persistent terminal. You type directives like "promote ShadowCompass on FB" or "upwork morning run" and si-didy decomposes, plans tiers, executes, and queues drafts for your review.
+- **Brief mode** — `node agent.mjs ./examples/<brief>.txt` runs a one-shot autonomous mission from a `.txt` plan.
+
+Picks the **cheapest execution tier** for every step — CLI when possible, HTTP when there's an API, MCP when a server is registered, browser only as last resort. **No API charges.** Your Claude subscription pays.
 
 Prime **379** · MIT · part of the [ai-nativesolutions.com](https://www.ai-nativesolutions.com) estate.
 
 Landing: [sjgant80-hub.github.io/si-didy-agent](https://sjgant80-hub.github.io/si-didy-agent/)
+
+---
+
+## What's new in v2.1 · chat mode + platform packs
+
+You can now run si-didy as a **persistent chat-driven autonomous agent**:
+
+```bash
+node agent.mjs           # opens REPL · type directives
+```
+
+```
+◊ chat mode · type a directive · "exit" to quit
+◊ packs available: UPWORK-PACK.txt, FACEBOOK-PACK.txt, LINKEDIN-PACK.txt, INSTAGRAM-PACK.txt, X-PACK.txt
+
+you ◊  promote ShadowCompass on my FB page · drop it in 3 AI groups
+◊·  pack_load FACEBOOK-PACK.txt
+◊·  memory_recall fb-posts limit=20
+T3  · browser_navigate facebook.com/...
+... drafts 1 page post + 3 group posts to ./queues/fb-post/
+◊·  mission_finish · 4 drafts queued · review at ./queues/fb-post/2026-05-30/
+
+you ◊  upwork morning run
+◊·  pack_load UPWORK-PACK.txt
+T3  · browser_navigate upwork.com/nx/search/jobs ...
+... 6 jobs triaged in · 6 proposals drafted
+◊·  mission_finish · queue at ./queues/upwork-queue/2026-05-30/
+```
+
+Each platform has a **verbatim copy pack** in `./packs/`:
+
+| Pack | Triggers | Notes |
+|---|---|---|
+| `UPWORK-PACK.txt` | "upwork run" | Headline + bio + 20 skills + 6 portfolio + proposal loop |
+| `FACEBOOK-PACK.txt` | "fb run" | Page + Groups + DMs + ShadowCompass UGC seeding |
+| `LINKEDIN-PACK.txt` | "li run" | Posts + comment funnel + connection-request DMs |
+| `INSTAGRAM-PACK.txt` | "ig run" | Reels + carousels + Stories + hashtag listening |
+| `X-PACK.txt` | "x run" | One-liners + reply funnel + mutual-only DMs |
+
+Each pack has verbatim `▼ COPY ▼ ... ▲ END ▲` blocks si-didy must quote
+exactly. Memory scopes (`./memory/<scope>.jsonl`) prevent duplicate
+posts, comments, DMs, or applications across runs.
+
+**Drafts always queue first.** Nothing posts/sends without your explicit
+`yes`. See `./queues/<channel>/YYYY-MM-DD/*.md`.
 
 ---
 

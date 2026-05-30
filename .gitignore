@@ -11,3 +11,9 @@ upwork-log/
 upwork-portfolio/
 upwork-state.json
 upwork-skiplist.json
+
+# Chat-mode runtime state (memory, drafts, mission log)
+memory/
+missions/
+queues/
+content/
