@@ -906,6 +906,16 @@ if (SERVER_MODE) {
       return;
     }
 
+    // GET estate (list synced tools)
+    if (url.pathname === '/estate') {
+      const names = [];
+      for (const s of ['forges','core_tools','infrastructure','agents']) {
+        for (const n of Object.keys(ESTATE[s] || {})) names.push({ name: n, section: s });
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ count: names.length, tools: names, synced_at: ESTATE.synced_at || null }));
+    }
+
     // GET queues (list drafts)
     if (url.pathname === '/queues') {
       const list = [];

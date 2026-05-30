@@ -208,16 +208,25 @@ const missions = [];
 const estateLit = new Set();
 let totalTurns = 0, totalCost = 0;
 
-const ESTATE_TOOLS = [
-  'fallcore','fallcore-factory','forge-lab','fallpost','fallmap','fallaccount-trades','fallforce',
-  'shadowcompass','falllearn','copygate','fallslot','fallform','falllist','fallguild',
-  'fall-registry','fall-palette','fallmesh','onlybrains','oracle-3','cassie-torus','ai-nativesolutions-hub'
-];
+let ESTATE_TOOLS = [];
+async function loadEstate(){
+  try {
+    const r = await fetch('/estate');
+    const j = await r.json();
+    ESTATE_TOOLS = j.tools.map(t => t.name);
+    const head = document.querySelector('#estate-map');
+    head.insertAdjacentHTML('beforebegin', '');
+    renderEstate();
+    document.querySelector('.panel h2 + #estate-map').previousElementSibling.innerHTML =
+      `Estate map · <span style="color:var(--cream)">${j.count}</span> tools synced`;
+  } catch (e) { renderEstate(); }
+}
 function renderEstate(){
   const root = $('#estate-map');
+  if (!ESTATE_TOOLS.length) { root.innerHTML = '<div class="empty">estate loading…</div>'; return; }
   root.innerHTML = ESTATE_TOOLS.map(t => `<span class="estate-tool${estateLit.has(t)?' lit':''}">${t}</span>`).join('');
 }
-renderEstate();
+loadEstate();
 
 function clearTranscript(){ tr.innerHTML = ''; }
 $('#clear').onclick = clearTranscript;

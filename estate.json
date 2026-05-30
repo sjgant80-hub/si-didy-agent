@@ -1,147 +1,2129 @@
 {
-  "_doc": "Estate manifest · si-didy queries this BEFORE reaching for browser. ◊·κ=1 · Updated by sync.js or hand. v20.1 seed cosmology · phi=1.618 · kappa=0.618 · fold=510510",
-  "version": "1.0",
-  "owner": "sjgant80-hub",
+  "_doc": "Estate manifest · auto-synced from GitHub · 2026-05-30T12:07:38.212Z. v20.1 seed cosmology · phi=1.618 · kappa=0.618 · fold=510510. si-didy queries this BEFORE reaching for browser.",
+  "version": "2.0-synced",
+  "synced_at": "2026-05-30T12:07:38.212Z",
+  "owners": [
+    "sjgant80-hub",
+    "teslasolar"
+  ],
   "hub": "https://www.ai-nativesolutions.com",
   "registry": "https://sjgant80-hub.github.io/fall-registry/",
-
   "forges": {
     "fallcore-factory": {
-      "kind": "forge",
-      "purpose": "Spawn brand-new sovereign tools from a spec. POST a brief, get back a deployable HTML + repo zip.",
-      "url": "https://fallcore-factory.onrender.com",
-      "api": {
-        "build": "POST /v1/forge/expert · body: { brief, archetype, tier }",
-        "templates": "GET /v1/templates"
-      },
-      "use_when": "the estate doesn't have a tool for the requested task",
-      "tier": "T1"
+      "purpose": "FallCore Factory - the factory that mints branded FallCore deployments on demand. Describe your company - download a complete docker-compose stack with cascade, RAG, LoRA loop, signed Konomi licence - all branded.",
+      "repo": "https://github.com/sjgant80-hub/fallcore-factory",
+      "stars": 0,
+      "pushed": "2026-05-28T00:40:19Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallcore-factory/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
     "forge-lab": {
-      "kind": "forge",
-      "purpose": "Trilogy-stack archetype-tuned config · Jung + Freud + Sales 101 layered",
-      "url": "https://sjgant80-hub.github.io/trilogy-forge/",
-      "api": "browser-only (single-file HTML)",
-      "use_when": "designing the tone/archetype for a new build before forging",
-      "tier": "T3 (or load HTML and read)"
+      "purpose": "Forge Lab - Domain Expert Tool Builder - prime 47",
+      "repo": "https://github.com/sjgant80-hub/forge-lab",
+      "stars": 1,
+      "pushed": "2026-05-26T01:45:02Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/forge-lab/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
-    "fallcore": {
-      "kind": "llm-proxy",
-      "purpose": "Anthropic-compatible local LLM cascade · BYOK + local Ollama fallback",
-      "url": "http://localhost:8787 (default) · also exposed as MCP",
-      "api": {
-        "chat": "POST /v1/messages (Anthropic shape)",
-        "models": "GET /v1/models"
-      },
-      "use_when": "agent needs a sub-LLM call without leaving the sovereign stack",
-      "tier": "T1 or T2 (if mcps.json wires fallcore-mcp)"
+    "forge-upgrade": {
+      "purpose": "Upload any HTML / Replit / Lovable / .md spec. Get it back sovereign. The torus that eats the old web.",
+      "repo": "https://github.com/sjgant80-hub/forge-upgrade",
+      "stars": 0,
+      "pushed": "2026-05-28T00:39:54Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/forge-upgrade/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "trilogy-forge": {
+      "purpose": "The Psychological Build Engine - Jung + Freud + Sales 101. Auto-generates elite AI configs per client archetype, shadow, and role psychology.",
+      "repo": "https://github.com/sjgant80-hub/trilogy-forge",
+      "stars": 1,
+      "pushed": "2026-05-29T00:48:36Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/trilogy-forge/",
+      "use_when": "Jung / shadow-work / individuation conversations",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "trilogy-forge-api": {
+      "purpose": "The factory that makes factories. POST config, GET a sovereign HTML application. 9 forge types, 4 data APIs, AI agent swarms, works offline.",
+      "repo": "https://github.com/sjgant80-hub/trilogy-forge-api",
+      "stars": 1,
+      "pushed": "2026-05-29T00:54:23Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/trilogy-forge-api/",
+      "use_when": "LinkedIn drafting · tone grading",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "filecabinet": {
+      "purpose": "3d filing cabinet factory",
+      "repo": "https://github.com/teslasolar/filecabinet",
+      "stars": 0,
+      "pushed": "2025-11-11T20:42:18Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/filecabinet/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "lightningfactory": {
+      "purpose": "cognition optimization",
+      "repo": "https://github.com/teslasolar/lightningfactory",
+      "stars": 1,
+      "pushed": "2026-03-18T18:11:11Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/lightningfactory/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "songfactory": {
+      "purpose": "song factory",
+      "repo": "https://github.com/teslasolar/songfactory",
+      "stars": 0,
+      "pushed": "2026-03-09T01:28:37Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/songfactory/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     }
   },
-
   "core_tools": {
-    "ai-nativesolutions-hub": {
-      "purpose": "The marketplace · luxury brutalist · lists every estate tool with payment route",
-      "url": "https://www.ai-nativesolutions.com",
-      "tier": "T3 (read) or T1 (registry JSON when live)"
+    "12": {
+      "purpose": "12",
+      "repo": "https://github.com/teslasolar/12",
+      "stars": 0,
+      "pushed": "2026-02-28T01:39:39Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/12/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
-    "fallpost": {
-      "purpose": "Sovereign LinkedIn engine · Jung + Freud + Sales 6-layer tone",
-      "url": "https://sjgant80-hub.github.io/fallpost/",
-      "use_when": "drafting LinkedIn posts or DMs",
-      "tier": "T3 (interactive) or load HTML for prompts"
+    "13": {
+      "purpose": "31",
+      "repo": "https://github.com/teslasolar/13",
+      "stars": 0,
+      "pushed": "2026-02-26T10:23:02Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/13/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
-    "fallmap": {
-      "purpose": "Workflow-to-consulting-cost exposer · the FallMap-as-bait engine",
-      "url": "https://sjgant80-hub.github.io/fallmap/",
-      "use_when": "every proposal / cold DM needs a FallMap link as bait",
-      "tier": "T3 (with query-string prefill ?w=encoded)"
+    "ai-nativesolutions": {
+      "purpose": "ai native the right way",
+      "repo": "https://github.com/sjgant80-hub/ai-nativesolutions",
+      "stars": 2,
+      "pushed": "2026-05-29T03:18:13Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/ai-nativesolutions/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "audiofabric": {
+      "purpose": "Your music. Visualised. In 3D. · Send a track · Get a 3D HTML back · $99/track",
+      "repo": "https://github.com/sjgant80-hub/audiofabric",
+      "stars": 0,
+      "pushed": "2026-05-28T01:56:12Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/audiofabric/",
+      "use_when": "audio · sovereign audio fabric",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "congenial-giggle": {
+      "purpose": "Open-Source Diagnostic Braid (OSDB)",
+      "repo": "https://github.com/sjgant80-hub/congenial-giggle",
+      "stars": 0,
+      "pushed": "2026-01-07T22:36:07Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "contact": {
+      "purpose": "Direct line to Simon · GitHub Issue Forms · email auto-collected · auto-reply · no middleman · MIT",
+      "repo": "https://github.com/sjgant80-hub/contact",
+      "stars": 0,
+      "pushed": "2026-05-29T01:37:58Z",
+      "has_pages": false,
+      "url": "https://github.com/sjgant80-hub/contact/issues/new/choose",
+      "use_when": "sovereign forms · Typeform/JotForm replacement",
+      "tier": "T0 (gh clone) or T1"
+    },
+    "copy-gate": {
+      "purpose": "⌬ Run every line of copy through six layers · Jung · Freud · Sales 101 · SEO · AI-SEO · Platform · sovereign single-file MIT · prime 251",
+      "repo": "https://github.com/sjgant80-hub/copy-gate",
+      "stars": 0,
+      "pushed": "2026-05-29T23:10:50Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/copy-gate/",
+      "use_when": "Jung / shadow-work / individuation conversations",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "datascope": {
+      "purpose": "Sovereign AI intelligence platform for creators and investors. Niche APIs, trending intel, auto content, multi-lingual. One HTML file.",
+      "repo": "https://github.com/sjgant80-hub/datascope",
+      "stars": 1,
+      "pushed": "2026-05-28T00:38:51Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/datascope/",
+      "use_when": "sovereign forms · Typeform/JotForm replacement",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "deep-api": {
+      "purpose": "AI Deep Research API - ask anything, get structured intelligence reports with citations. Multi-LLM. Real-time streaming.",
+      "repo": "https://github.com/sjgant80-hub/deep-api",
+      "stars": 1,
+      "pushed": "2026-05-25T03:14:47Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/deep-api/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "docmind-api": {
+      "purpose": "AI Document Intelligence API - receipts, invoices, bank statements, contracts to structured JSON. Multi-LLM backend.",
+      "repo": "https://github.com/sjgant80-hub/docmind-api",
+      "stars": 1,
+      "pushed": "2026-05-22T03:23:53Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/docmind-api/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "exitengine": {
+      "purpose": "exit engine",
+      "repo": "https://github.com/sjgant80-hub/exitengine",
+      "stars": 1,
+      "pushed": "2026-05-28T00:38:59Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/exitengine/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fall-bloom": {
+      "purpose": "Text to 7-ring bloom vector decomposition · spine primes 2,3,5,7,11,13,17 · drop-in plugin",
+      "repo": "https://github.com/sjgant80-hub/fall-bloom",
+      "stars": 0,
+      "pushed": "2026-05-29T00:26:44Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fall-bloom/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallaccount": {
+      "purpose": "FallAccount Elite - Sovereign accounting for UK sole traders. Any LLM. Single HTML file. Zero SaaS.",
+      "repo": "https://github.com/sjgant80-hub/fallaccount",
+      "stars": 1,
+      "pushed": "2026-05-28T00:35:59Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallaccount/",
+      "use_when": "UK accounting · trades / sole-trader compliance",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
     "fallaccount-trades": {
-      "purpose": "Sovereign accounting for UK trades · CIS + MTD + receipt vision",
+      "purpose": "Sovereign accounts app for UK builders, plumbers, sparkies, plasterers. One HTML file. Data on your phone. MTD-ready. CIS handled both directions.",
+      "repo": "https://github.com/sjgant80-hub/fallaccount-trades",
+      "stars": 0,
+      "pushed": "2026-05-28T07:37:51Z",
+      "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fallaccount-trades/",
-      "use_when": "compliance/finance archetype client mention"
+      "use_when": "UK accounting · trades / sole-trader compliance",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallcall": {
+      "purpose": "fallcall · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/fallcall",
+      "stars": 0,
+      "pushed": "2026-05-28T00:38:07Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallcall/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallconcierge": {
+      "purpose": "Sovereign AI concierge with Jungian archetype profiling, Freudian shadow reading, and adaptive sales intelligence. One HTML file. Claude API.",
+      "repo": "https://github.com/sjgant80-hub/fallconcierge",
+      "stars": 1,
+      "pushed": "2026-05-28T00:36:53Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallconcierge/",
+      "use_when": "Jung / shadow-work / individuation conversations",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallconsensus": {
+      "purpose": "fallconsensus · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/fallconsensus",
+      "stars": 0,
+      "pushed": "2026-05-28T00:36:46Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallconsensus/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallcore": {
+      "purpose": "FallCore - on-prem brain that learns from your work - Anthropic-API-compatible local proxy + RAG + LoRA loop - reduces frontier-API reliance over time",
+      "repo": "https://github.com/sjgant80-hub/fallcore",
+      "stars": 0,
+      "pushed": "2026-05-28T00:40:11Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallcore/",
+      "use_when": "AI literacy · parents · educators · kids",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallcube-api": {
+      "purpose": "Sovereign File Storage API - upload, search, analyze, stream. Zero cloud.",
+      "repo": "https://github.com/sjgant80-hub/fallcube-api",
+      "stars": 1,
+      "pushed": "2026-05-28T00:38:44Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallcube-api/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallflip": {
+      "purpose": "The mirror · LinkedIn self-promo flip tool · paste their comment, get two responses (your post + theirs). Single HTML · sovereign · data on-device.",
+      "repo": "https://github.com/sjgant80-hub/fallflip",
+      "stars": 0,
+      "pushed": "2026-05-28T07:22:38Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallflip/",
+      "use_when": "LinkedIn drafting · tone grading",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
     "fallforce": {
-      "purpose": "Sovereign CRM · pipeline + RFQ + audit chain · procurement-ready",
+      "purpose": "fallforce · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/fallforce",
+      "stars": 1,
+      "pushed": "2026-05-27T23:52:56Z",
+      "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fallforce/",
-      "use_when": "enterprise/CRM-replacement archetype"
+      "use_when": "CRM / pipeline / RFQ · audit-chained",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
-    "shadowcompass": {
-      "purpose": "Sovereign Jungian shadow-work tool · WebLLM baked · Shadow Guide chat",
-      "url": "https://sjgant80-hub.github.io/shadowcompass/",
-      "use_when": "Jung / shadow-work / individuation / consumer mental-health conversations",
-      "consumer_funnel": true
-    },
-    "falllearn": {
-      "purpose": "Sovereign AI literacy course · 8 modules incl. Kids Edition",
-      "url": "https://sjgant80-hub.github.io/falllearn/",
-      "use_when": "parents / educators / AI-curious adults / 'AI for my kid'"
-    },
-    "copygate": {
-      "purpose": "6-layer tone engine · grade any copy on Jung + Sales + Freud + Platform",
-      "url": "https://sjgant80-hub.github.io/copygate/",
-      "use_when": "before publishing ANY post · run draft through Copy Gate"
-    },
-    "fallslot": {
-      "purpose": "Sovereign Calendly replacement",
-      "url": "https://sjgant80-hub.github.io/fallslot/",
-      "use_when": "scheduling a discovery call"
+    "fallforensics": {
+      "purpose": "fallforensics · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/fallforensics",
+      "stars": 0,
+      "pushed": "2026-05-28T00:38:21Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallforensics/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
     "fallform": {
-      "purpose": "Sovereign Typeform replacement",
-      "url": "https://sjgant80-hub.github.io/fallform/"
+      "purpose": "Forms · no response cap · ever · sovereign single HTML · obsoletes Typeform/JotForm · prime 269",
+      "repo": "https://github.com/sjgant80-hub/fallform",
+      "stars": 0,
+      "pushed": "2026-05-28T09:32:27Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallform/",
+      "use_when": "sovereign forms · Typeform/JotForm replacement",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
-    "falllist": {
-      "purpose": "Sovereign Mailchimp / Substack replacement",
-      "url": "https://sjgant80-hub.github.io/falllist/"
+    "fallgo": {
+      "purpose": "fallgo · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/fallgo",
+      "stars": 1,
+      "pushed": "2026-05-28T00:36:38Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallgo/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallgrade": {
+      "purpose": "fallgrade · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/fallgrade",
+      "stars": 1,
+      "pushed": "2026-05-28T00:36:29Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallgrade/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallgravity": {
+      "purpose": "LinkedIn algorithm strategy tool · post scorer · hook generator · 90-min boost window · carousel builder · sovereign single HTML · on-device",
+      "repo": "https://github.com/sjgant80-hub/fallgravity",
+      "stars": 0,
+      "pushed": "2026-05-28T08:05:42Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallgravity/",
+      "use_when": "LinkedIn drafting · tone grading",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
     "fallguild": {
-      "purpose": "LinkedIn gravity coordination · multi-person amplification",
-      "url": "https://sjgant80-hub.github.io/fallguild/"
+      "purpose": "Gravity coordination for the ACG Guild · LinkedIn boost window tracker",
+      "repo": "https://github.com/sjgant80-hub/fallguild",
+      "stars": 0,
+      "pushed": "2026-05-29T00:26:41Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallguild/",
+      "use_when": "LinkedIn drafting · tone grading",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "falllead": {
+      "purpose": "falllead · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/falllead",
+      "stars": 1,
+      "pushed": "2026-05-28T00:35:41Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/falllead/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "falllearn": {
+      "purpose": "Ai the right way",
+      "repo": "https://github.com/sjgant80-hub/falllearn",
+      "stars": 1,
+      "pushed": "2026-05-30T01:28:48Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/falllearn/",
+      "use_when": "AI literacy · parents · educators · kids",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "falllist": {
+      "purpose": "Newsletter · your list · your terms · 0% fee · BYOM (Resend/Postmark/Mailgun/SendGrid) · obsoletes Mailchimp + Substack · prime 271",
+      "repo": "https://github.com/sjgant80-hub/falllist",
+      "stars": 0,
+      "pushed": "2026-05-28T09:36:49Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/falllist/",
+      "use_when": "LinkedIn drafting · tone grading",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallmap": {
+      "purpose": "Paste your workflow · see what a £20k consultant builds · see the sovereign version that does the same for £0 · single HTML · on-device · prime 241",
+      "repo": "https://github.com/sjgant80-hub/fallmap",
+      "stars": 0,
+      "pushed": "2026-05-28T08:16:50Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallmap/",
+      "use_when": "workflow-to-cost · the FallMap-as-bait engine",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "falloffice": {
+      "purpose": "falloffice · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/falloffice",
+      "stars": 1,
+      "pushed": "2026-05-28T00:35:51Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/falloffice/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallpost": {
+      "purpose": "Sovereign LinkedIn engine · Jung+Freud+Sales 101 baked in · BYOK cascade · sovereign tone seed",
+      "repo": "https://github.com/sjgant80-hub/fallpost",
+      "stars": 0,
+      "pushed": "2026-05-29T02:02:40Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallpost/",
+      "use_when": "LinkedIn drafting · tone grading",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallreach": {
+      "purpose": "Sovereign AI SDR. Your hardware. Your keys. Your pipeline.",
+      "repo": "https://github.com/sjgant80-hub/fallreach",
+      "stars": 0,
+      "pushed": "2026-05-28T00:36:14Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallreach/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallsalescrm": {
+      "purpose": "Sovereign Salesforce replacement. Single HTML file. Your data stays yours.",
+      "repo": "https://github.com/sjgant80-hub/fallsalescrm",
+      "stars": 1,
+      "pushed": "2026-05-29T00:26:51Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallsalescrm/",
+      "use_when": "CRM / pipeline / RFQ · audit-chained",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallscout": {
+      "purpose": "LinkedIn Intelligence API - scrape, research, craft tailored outreach. Zero wasted small talk.",
+      "repo": "https://github.com/sjgant80-hub/fallscout",
+      "stars": 1,
+      "pushed": "2026-05-28T00:36:22Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallscout/",
+      "use_when": "LinkedIn drafting · tone grading",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallslot": {
+      "purpose": "Share a calendar link · sovereign · single HTML · zero subscription · obsoletes Calendly · prime 263",
+      "repo": "https://github.com/sjgant80-hub/fallslot",
+      "stars": 0,
+      "pushed": "2026-05-28T09:27:43Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallslot/",
+      "use_when": "sovereign scheduling · Calendly replacement",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "flux-api": {
+      "purpose": "AI Content Engine API - blog posts, social media, email campaigns, ad copy, landing pages via API. Multi-LLM. Structured JSON.",
+      "repo": "https://github.com/sjgant80-hub/flux-api",
+      "stars": 1,
+      "pushed": "2026-05-25T03:15:01Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/flux-api/",
+      "use_when": "LinkedIn drafting · tone grading",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fuzzy-palm-tree": {
+      "purpose": "THRL: A phase-locked resonant energy loop that maintains a high-Q oscillator with quadrature drive, harvests in-phase power as adjustable damping via synchronous extraction, recycles reactive energy locally, and buffers output through a storage bus under a hard safety envelope.",
+      "repo": "https://github.com/sjgant80-hub/fuzzy-palm-tree",
+      "stars": 0,
+      "pushed": "2026-01-08T08:42:48Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "groundlevel": {
+      "purpose": "ground level ",
+      "repo": "https://github.com/sjgant80-hub/groundlevel",
+      "stars": 1,
+      "pushed": "2026-05-28T00:40:03Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/groundlevel/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "groundlevel-mvp": {
+      "purpose": "groundlevel-mvp",
+      "repo": "https://github.com/sjgant80-hub/groundlevel-mvp",
+      "stars": 1,
+      "pushed": "2026-05-22T03:42:11Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "gymos": {
+      "purpose": "gymos · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/gymos",
+      "stars": 1,
+      "pushed": "2026-05-27T13:00:26Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/gymos/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "kinetic-braid-prior-art": {
+      "purpose": "Physics-Aware AI is now part of the Commons.  For years, AI systems have been brilliant at language… and dangerously weightless when it comes to physical reality.",
+      "repo": "https://github.com/sjgant80-hub/kinetic-braid-prior-art",
+      "stars": 0,
+      "pushed": "2026-01-07T17:52:50Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "legendary-journey": {
+      "purpose": "Defensive Publication (Public Domain): Closed-Loop Harmonic Energy Schematic  Codename: Toroidal Harmonic Regenerative Loop (THRL) Intent: A non-overunity, closed-loop energy conditioning + recovery architecture that reduces losses by phase-locking, resonant transfer, and bidirectional capture  while staying inside conservation laws.",
+      "repo": "https://github.com/sjgant80-hub/legendary-journey",
+      "stars": 0,
+      "pushed": "2026-01-09T09:09:40Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "probable-octo-chainsaw": {
+      "purpose": "Thermodynamic Intelligence lattice",
+      "repo": "https://github.com/sjgant80-hub/probable-octo-chainsaw",
+      "stars": 0,
+      "pushed": "2026-01-08T09:19:30Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "scaling-octo-couscous": {
+      "purpose": "Thermodynamic Intelligence lattice",
+      "repo": "https://github.com/sjgant80-hub/scaling-octo-couscous",
+      "stars": 0,
+      "pushed": "2026-01-08T09:20:59Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "shadowcompass": {
+      "purpose": "Sovereign single-file Jungian shadow work. Mirror your archetype, decode dreams, identify projections. Free forever · 14-day Pro trial. v20.1 · ◊·κ=1 · phi is home.",
+      "repo": "https://github.com/sjgant80-hub/shadowcompass",
+      "stars": 0,
+      "pushed": "2026-05-30T01:02:14Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/shadowcompass/",
+      "use_when": "Jung / shadow-work / individuation conversations",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "smbaios": {
+      "purpose": "ai powered smb os",
+      "repo": "https://github.com/sjgant80-hub/smbaios",
+      "stars": 1,
+      "pushed": "2026-05-28T00:39:15Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/smbaios/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "solid-fiesta": {
+      "purpose": "🧠 AI Orchestration Spore Mycelial Cognition Architecture (MCA)  A Defensive Publication for Open Intelligence Systems",
+      "repo": "https://github.com/sjgant80-hub/solid-fiesta",
+      "stars": 0,
+      "pushed": "2026-01-09T10:41:19Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "solid-journey": {
+      "purpose": "🧠 AI Orchestration — Spore 001: The Mycelial Cognition Architecture (MCA)",
+      "repo": "https://github.com/sjgant80-hub/solid-journey",
+      "stars": 0,
+      "pushed": "2026-01-08T09:12:11Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "super-barnacle": {
+      "purpose": "Cool shit with ai and energy or whateva",
+      "repo": "https://github.com/sjgant80-hub/super-barnacle",
+      "stars": 1,
+      "pushed": "2026-05-22T03:42:36Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "tonesmith": {
+      "purpose": "ToneEngine (npm, MIT, open source) — 12 tone categories (formal, casual, technical, persuasive, empathetic, authoritative, witty, narrative, urgent, academic, minimalist, lyrical), style metrics (vocabulary richness, passive voice, sentence variance, person detection), Flesch readability scoring, voice consistency checker. etc Zero dependencies.",
+      "repo": "https://github.com/sjgant80-hub/tonesmith",
+      "stars": 0,
+      "pushed": "2026-04-28T02:13:32Z",
+      "has_pages": false,
+      "use_when": "sovereign forms · Typeform/JotForm replacement",
+      "tier": "T0 (gh clone) or T1"
+    },
+    "trilogy-framework": {
+      "purpose": "The AI Pipeline Framework - Input to Intelligence to Output as one declarative flow",
+      "repo": "https://github.com/sjgant80-hub/trilogy-framework",
+      "stars": 1,
+      "pushed": "2026-05-29T00:48:32Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/trilogy-framework/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "trilogy-sdk": {
+      "purpose": "The AI API Toolkit - DocMind + Deep + Flux. One npm install. Three AI APIs. Full TypeScript.",
+      "repo": "https://github.com/sjgant80-hub/trilogy-sdk",
+      "stars": 1,
+      "pushed": "2026-05-29T00:48:29Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/trilogy-sdk/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "upgraded-fiesta": {
+      "purpose": "Repo Name: Policy-Phi-Fighter Description: Open-source tool to generate structured, evidence-based rebuttals to unfair insurance claim denials. License: CC0 1.0 Universal (Public Domain) — free to use, modify, and distribute.",
+      "repo": "https://github.com/sjgant80-hub/upgraded-fiesta",
+      "stars": 0,
+      "pushed": "2026-01-09T11:18:13Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "2girls1STALLCUP": {
+      "purpose": "There may be two girls, but there's only 1 STALLCUP.",
+      "repo": "https://github.com/teslasolar/2girls1STALLCUP",
+      "stars": 0,
+      "pushed": "2025-06-16T23:41:08Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/2girls1STALLCUP/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "3d": {
+      "purpose": "3d",
+      "repo": "https://github.com/teslasolar/3d",
+      "stars": 0,
+      "pushed": "2025-11-15T16:03:12Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "acg": {
+      "purpose": "acg",
+      "repo": "https://github.com/teslasolar/acg",
+      "stars": 0,
+      "pushed": "2026-03-12T18:04:56Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/acg/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ACG-Ballroom": {
+      "purpose": "ACG Ballroom - The floor is yours. ",
+      "repo": "https://github.com/teslasolar/ACG-Ballroom",
+      "stars": 1,
+      "pushed": "2026-05-01T00:15:48Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ACG-Ballroom/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ACG-SHIP": {
+      "purpose": "NON GUILD REVIEWED HIGH AMBITION SHIP CAPTAINS",
+      "repo": "https://github.com/teslasolar/ACG-SHIP",
+      "stars": 1,
+      "pushed": "2026-04-28T18:46:41Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ACG-SHIP/",
+      "use_when": "multi-person amplification on LinkedIn",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ACG-Test": {
+      "purpose": "ACG test standard",
+      "repo": "https://github.com/teslasolar/ACG-Test",
+      "stars": 1,
+      "pushed": "2026-04-27T06:26:01Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ACG-Test/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ACGBM": {
+      "purpose": "ACG Barcode Monsters",
+      "repo": "https://github.com/teslasolar/ACGBM",
+      "stars": 2,
+      "pushed": "2026-03-28T19:31:28Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ACGBM/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ACGCLI": {
+      "purpose": "ACG CLI",
+      "repo": "https://github.com/teslasolar/ACGCLI",
+      "stars": 1,
+      "pushed": "2026-03-30T02:53:09Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ACGCLI/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ACGEDEN": {
+      "purpose": "3D Git Eden visualization: Grow insight",
+      "repo": "https://github.com/teslasolar/ACGEDEN",
+      "stars": 1,
+      "pushed": "2026-04-16T19:09:58Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "ACGGLOCK": {
+      "purpose": "ACG Guild Clock -- World wide time visualization of members.",
+      "repo": "https://github.com/teslasolar/ACGGLOCK",
+      "stars": 1,
+      "pushed": "2026-05-30T06:59:39Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ACGGLOCK/",
+      "use_when": "multi-person amplification on LinkedIn",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ACGNET": {
+      "purpose": "ACG NET",
+      "repo": "https://github.com/teslasolar/ACGNET",
+      "stars": 1,
+      "pushed": "2026-04-10T06:16:48Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ACGNET/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ACGP2P": {
+      "purpose": "ACG Peer to Peer, Client to Client, Serverless Communications Template",
+      "repo": "https://github.com/teslasolar/ACGP2P",
+      "stars": 1,
+      "pushed": "2026-04-17T18:25:10Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ACGP2P/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ACGPHONE": {
+      "purpose": "ACG Telephone basic notification system",
+      "repo": "https://github.com/teslasolar/ACGPHONE",
+      "stars": 1,
+      "pushed": "2026-04-16T18:00:18Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ACGPHONE/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ACG_Repo_Template": {
+      "purpose": "ACG Repo Template",
+      "repo": "https://github.com/teslasolar/ACG_Repo_Template",
+      "stars": 3,
+      "pushed": "2026-03-19T16:15:58Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ACG_Repo_Template/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "aicraftspeopleguild.github.io": {
+      "purpose": "I'm trying",
+      "repo": "https://github.com/teslasolar/aicraftspeopleguild.github.io",
+      "stars": 1,
+      "pushed": "2026-04-27T09:06:55Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/aicraftspeopleguild.github.io/",
+      "use_when": "multi-person amplification on LinkedIn",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "AirTrekDeliverables": {
+      "purpose": "air terk",
+      "repo": "https://github.com/teslasolar/AirTrekDeliverables",
+      "stars": 0,
+      "pushed": "2026-02-07T03:15:11Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/AirTrekDeliverables/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "AlexB": {
+      "purpose": "weeee",
+      "repo": "https://github.com/teslasolar/AlexB",
+      "stars": 0,
+      "pushed": "2026-03-10T21:32:21Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "ARES_SKYNET": {
+      "purpose": "ARES_SKYNET · sovereign estate tool",
+      "repo": "https://github.com/teslasolar/ARES_SKYNET",
+      "stars": 0,
+      "pushed": "2025-06-18T04:34:18Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ARES_SKYNET/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ArreatSummit": {
+      "purpose": "Arreat Summit D2R",
+      "repo": "https://github.com/teslasolar/ArreatSummit",
+      "stars": 0,
+      "pushed": "2026-01-11T17:57:28Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ArreatSummit/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ASS2MOUTH": {
+      "purpose": "ASS-OS Vagal Phoneme Reference Engine ",
+      "repo": "https://github.com/teslasolar/ASS2MOUTH",
+      "stars": 1,
+      "pushed": "2026-04-12T15:24:52Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "ASSGIT": {
+      "purpose": "GIT IN MY ASS IN GIT IN MY ASS IN GIT ",
+      "repo": "https://github.com/teslasolar/ASSGIT",
+      "stars": 1,
+      "pushed": "2026-04-04T04:22:42Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ASSGIT/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ASSOSIGNITION": {
+      "purpose": "Seven Rings In Your Plant, It was a Tree the whole time! ",
+      "repo": "https://github.com/teslasolar/ASSOSIGNITION",
+      "stars": 1,
+      "pushed": "2026-03-22T20:22:55Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ASSOSIGNITION/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "AudioFabric": {
+      "purpose": "Therapeutic",
+      "repo": "https://github.com/teslasolar/AudioFabric",
+      "stars": 1,
+      "pushed": "2026-04-14T05:11:08Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/AudioFabric/",
+      "use_when": "audio · sovereign audio fabric",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "berzerk": {
+      "purpose": "berzerk",
+      "repo": "https://github.com/teslasolar/berzerk",
+      "stars": 0,
+      "pushed": "2026-01-02T08:20:25Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/berzerk/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "BloomCad": {
+      "purpose": "Bloom Fabric Pattern Engine",
+      "repo": "https://github.com/teslasolar/BloomCad",
+      "stars": 1,
+      "pushed": "2026-04-14T16:14:58Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/BloomCad/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "bodyatlas": {
+      "purpose": "bodyatlas",
+      "repo": "https://github.com/teslasolar/bodyatlas",
+      "stars": 0,
+      "pushed": "2026-03-14T01:47:51Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/bodyatlas/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Boioioiinggggg": {
+      "purpose": "Boioioiinggggg",
+      "repo": "https://github.com/teslasolar/Boioioiinggggg",
+      "stars": 1,
+      "pushed": "2026-01-10T00:48:18Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Boioioiinggggg/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "BTCrim": {
+      "purpose": "BT Crim",
+      "repo": "https://github.com/teslasolar/BTCrim",
+      "stars": 0,
+      "pushed": "2025-12-26T07:59:22Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "buissure": {
+      "purpose": "buissure · sovereign estate tool",
+      "repo": "https://github.com/teslasolar/buissure",
+      "stars": 0,
+      "pushed": "2026-03-27T16:08:17Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/buissure/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "cass": {
+      "purpose": "cass",
+      "repo": "https://github.com/teslasolar/cass",
+      "stars": 0,
+      "pushed": "2026-03-05T00:39:00Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/cass/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Chameleon": {
+      "purpose": "Chamelon CLI - Intelligent Cross OS / System Compatability",
+      "repo": "https://github.com/teslasolar/Chameleon",
+      "stars": 0,
+      "pushed": "2025-11-06T01:37:57Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "charlottesweb": {
+      "purpose": "charlottesweb audio therapy lupus song repository",
+      "repo": "https://github.com/teslasolar/charlottesweb",
+      "stars": 1,
+      "pushed": "2026-03-06T02:58:29Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/charlottesweb/",
+      "use_when": "audio · sovereign audio fabric",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "chat": {
+      "purpose": "chat",
+      "repo": "https://github.com/teslasolar/chat",
+      "stars": 1,
+      "pushed": "2026-03-17T08:05:45Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "chipfab": {
+      "purpose": "chipfab",
+      "repo": "https://github.com/teslasolar/chipfab",
+      "stars": 0,
+      "pushed": "2025-11-13T23:01:36Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/chipfab/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "claude": {
+      "purpose": "claude pred ",
+      "repo": "https://github.com/teslasolar/claude",
+      "stars": 0,
+      "pushed": "2025-11-05T14:15:11Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "codered-defense-matrix": {
+      "purpose": "crd",
+      "repo": "https://github.com/teslasolar/codered-defense-matrix",
+      "stars": 0,
+      "pushed": "2025-11-29T18:17:56Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/codered-defense-matrix/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Corduroy-OS-": {
+      "purpose": "Corduroy-OS ",
+      "repo": "https://github.com/teslasolar/Corduroy-OS-",
+      "stars": 0,
+      "pushed": "2026-01-04T20:55:04Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Corduroy-OS-/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "CountRackula": {
+      "purpose": "Count Rackula",
+      "repo": "https://github.com/teslasolar/CountRackula",
+      "stars": 0,
+      "pushed": "2026-01-15T07:53:10Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/CountRackula/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "crem": {
+      "purpose": "cremdex",
+      "repo": "https://github.com/teslasolar/crem",
+      "stars": 0,
+      "pushed": "2025-06-15T21:47:16Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/crem/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "cyb": {
+      "purpose": "cyb",
+      "repo": "https://github.com/teslasolar/cyb",
+      "stars": 0,
+      "pushed": "2025-09-03T05:44:25Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "d2rlol": {
+      "purpose": "lol",
+      "repo": "https://github.com/teslasolar/d2rlol",
+      "stars": 0,
+      "pushed": "2026-03-13T02:10:27Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "DystopAI": {
+      "purpose": "As above -- so below",
+      "repo": "https://github.com/teslasolar/DystopAI",
+      "stars": 0,
+      "pushed": "2025-06-14T08:36:09Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/DystopAI/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "eatrekku": {
+      "purpose": "EATREKKU えあとれっく",
+      "repo": "https://github.com/teslasolar/eatrekku",
+      "stars": 1,
+      "pushed": "2026-03-19T04:16:09Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/eatrekku/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Eden": {
+      "purpose": "Garden of Eden - Git Visualizations Peer to Peer Gardens and Forests ",
+      "repo": "https://github.com/teslasolar/Eden",
+      "stars": 1,
+      "pushed": "2026-04-27T23:47:35Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "eliza": {
+      "purpose": "eliza",
+      "repo": "https://github.com/teslasolar/eliza",
+      "stars": 0,
+      "pushed": "2026-03-16T18:19:15Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/eliza/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "enrique": {
+      "purpose": "Enrique Martinez Vargas",
+      "repo": "https://github.com/teslasolar/enrique",
+      "stars": 0,
+      "pushed": "2025-06-13T03:58:36Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/enrique/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "EquineAI": {
+      "purpose": "The Magnum of Horse Talks",
+      "repo": "https://github.com/teslasolar/EquineAI",
+      "stars": 1,
+      "pushed": "2026-02-15T08:26:49Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/EquineAI/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ETH": {
+      "purpose": "Enteric Translation Hypothesis ",
+      "repo": "https://github.com/teslasolar/ETH",
+      "stars": 1,
+      "pushed": "2026-04-14T04:51:45Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ETH/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Eye-of-Mind": {
+      "purpose": "Eye of the Mind ",
+      "repo": "https://github.com/teslasolar/Eye-of-Mind",
+      "stars": 0,
+      "pushed": "2025-12-29T17:33:06Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Eye-of-Mind/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fatou": {
+      "purpose": "fatou",
+      "repo": "https://github.com/teslasolar/fatou",
+      "stars": 0,
+      "pushed": "2026-03-08T23:40:46Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/fatou/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "games": {
+      "purpose": "games",
+      "repo": "https://github.com/teslasolar/games",
+      "stars": 0,
+      "pushed": "2025-12-21T11:45:39Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/games/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "GaryTheGalvinator": {
+      "purpose": "Type 1 Galvinator",
+      "repo": "https://github.com/teslasolar/GaryTheGalvinator",
+      "stars": 1,
+      "pushed": "2026-04-12T15:37:41Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/GaryTheGalvinator/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Gerald": {
+      "purpose": "Look at all the ducks I give",
+      "repo": "https://github.com/teslasolar/Gerald",
+      "stars": 1,
+      "pushed": "2026-04-09T21:44:53Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Gerald/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "GEYASS": {
+      "purpose": "Gradient Eden Yggdrasil Assembly Sub-System ",
+      "repo": "https://github.com/teslasolar/GEYASS",
+      "stars": 0,
+      "pushed": "2026-01-02T06:51:33Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/GEYASS/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "GITCONTROL": {
+      "purpose": "Master control hub — links GitPLC + GitHMI + GitTAG + GitSCADA into a single pane of glass",
+      "repo": "https://github.com/teslasolar/GITCONTROL",
+      "stars": 1,
+      "pushed": "2026-04-30T18:08:10Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/GITCONTROL/",
+      "use_when": "estate marketplace · client-facing surface",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "gitdb": {
+      "purpose": "github database ",
+      "repo": "https://github.com/teslasolar/gitdb",
+      "stars": 0,
+      "pushed": "2025-12-10T13:16:23Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/gitdb/",
+      "use_when": "estate marketplace · client-facing surface",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "githaib-g3": {
+      "purpose": "githaib-g3",
+      "repo": "https://github.com/teslasolar/githaib-g3",
+      "stars": 0,
+      "pushed": "2025-11-27T12:03:54Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "GITHMI": {
+      "purpose": "ISA-101 HMI runtime for GitPLC/GitSCADA — faceplates, alarms, tag binding via GitHub Issues",
+      "repo": "https://github.com/teslasolar/GITHMI",
+      "stars": 1,
+      "pushed": "2026-05-01T04:13:37Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/GITHMI/",
+      "use_when": "estate marketplace · client-facing surface",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "GITNITION": {
+      "purpose": "Git-native Ignition Gateway interface — discover, connect, browse, sync tags with GitPLC/GitTAG",
+      "repo": "https://github.com/teslasolar/GITNITION",
+      "stars": 1,
+      "pushed": "2026-05-02T16:51:54Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/GITNITION/",
+      "use_when": "tone-grading every draft before publishing",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "GITPLC": {
+      "purpose": "One Layer to Communicate them all and in the darkness Run > 85% OEE. ",
+      "repo": "https://github.com/teslasolar/GITPLC",
+      "stars": 1,
+      "pushed": "2026-05-01T06:57:28Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/GITPLC/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "GITSCADA": {
+      "purpose": "Supervisory Control & Data Acquisition — orchestrates GitPLC + GitHMI + GitTAG with historian, trends, alarm journal, site map",
+      "repo": "https://github.com/teslasolar/GITSCADA",
+      "stars": 1,
+      "pushed": "2026-04-30T18:02:49Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/GITSCADA/",
+      "use_when": "workflow-to-cost · the FallMap-as-bait engine",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "GITTAG": {
+      "purpose": "ISA-95 tag database for GitPLC/GitHMI/GitSCADA — namespace tree, tag browser, inline editor via GitHub Issues",
+      "repo": "https://github.com/teslasolar/GITTAG",
+      "stars": 1,
+      "pushed": "2026-05-01T06:56:28Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/GITTAG/",
+      "use_when": "estate marketplace · client-facing surface",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "GitterDone": {
+      "purpose": "Gitter Done one way or another - Git LLM ",
+      "repo": "https://github.com/teslasolar/GitterDone",
+      "stars": 0,
+      "pushed": "2025-12-06T09:21:05Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/GitterDone/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "gitvmd": {
+      "purpose": "git vd",
+      "repo": "https://github.com/teslasolar/gitvmd",
+      "stars": 0,
+      "pushed": "2025-11-20T15:46:22Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/gitvmd/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "gitway": {
+      "purpose": "gitway",
+      "repo": "https://github.com/teslasolar/gitway",
+      "stars": 0,
+      "pushed": "2025-12-11T21:19:57Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/gitway/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "gloom": {
+      "purpose": "doom LOL",
+      "repo": "https://github.com/teslasolar/gloom",
+      "stars": 1,
+      "pushed": "2026-04-14T08:11:45Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "GoldenShower": {
+      "purpose": "Goldeneye for Gitpages",
+      "repo": "https://github.com/teslasolar/GoldenShower",
+      "stars": 0,
+      "pushed": "2025-12-29T02:03:06Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/GoldenShower/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "gridlock": {
+      "purpose": "Grid Lock HONK HONK ",
+      "repo": "https://github.com/teslasolar/gridlock",
+      "stars": 1,
+      "pushed": "2026-03-30T02:46:48Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/gridlock/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Guild": {
+      "purpose": "forky",
+      "repo": "https://github.com/teslasolar/Guild",
+      "stars": 2,
+      "pushed": "2026-04-12T15:14:01Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Guild/",
+      "use_when": "multi-person amplification on LinkedIn",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Gune": {
+      "purpose": "Gune",
+      "repo": "https://github.com/teslasolar/Gune",
+      "stars": 0,
+      "pushed": "2025-08-24T21:53:02Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Gune/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Haskell": {
+      "purpose": "Haskell",
+      "repo": "https://github.com/teslasolar/Haskell",
+      "stars": 0,
+      "pushed": "2026-01-06T22:49:51Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Haskell/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "hmi": {
+      "purpose": "hmi",
+      "repo": "https://github.com/teslasolar/hmi",
+      "stars": 0,
+      "pushed": "2025-11-14T02:16:31Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/hmi/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "IgnAIte": {
+      "purpose": "AI Ignition Base Form",
+      "repo": "https://github.com/teslasolar/IgnAIte",
+      "stars": 0,
+      "pushed": "2025-11-05T16:06:20Z",
+      "has_pages": false,
+      "use_when": "sovereign forms · Typeform/JotForm replacement",
+      "tier": "T0 (gh clone) or T1"
+    },
+    "ignition-linux-installer": {
+      "purpose": "Ignition Linux Installer package (1.8GB) managed with Git LFS",
+      "repo": "https://github.com/teslasolar/ignition-linux-installer",
+      "stars": 0,
+      "pushed": "2025-04-10T08:14:03Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "ignition-sandbox": {
+      "purpose": "ignition sandbox",
+      "repo": "https://github.com/teslasolar/ignition-sandbox",
+      "stars": 0,
+      "pushed": "2025-12-02T09:39:47Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ignition-sandbox/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ignition-uninstaller": {
+      "purpose": "Ignition Uninstaller executable (46MB) managed with Git LFS",
+      "repo": "https://github.com/teslasolar/ignition-uninstaller",
+      "stars": 0,
+      "pushed": "2025-04-10T08:14:04Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "IgnitionModuleApp": {
+      "purpose": "Ignition Module App",
+      "repo": "https://github.com/teslasolar/IgnitionModuleApp",
+      "stars": 0,
+      "pushed": "2026-01-12T06:23:55Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/IgnitionModuleApp/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "IgnitionObject": {
+      "purpose": "Literally LOL ",
+      "repo": "https://github.com/teslasolar/IgnitionObject",
+      "stars": 1,
+      "pushed": "2026-03-30T19:32:21Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/IgnitionObject/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ignition_ref": {
+      "purpose": "Ignition 8.3 ref",
+      "repo": "https://github.com/teslasolar/ignition_ref",
+      "stars": 1,
+      "pushed": "2025-12-15T07:53:11Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ignition_ref/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "IGotVD": {
+      "purpose": "You need a virtual Desktop?  I got u. ",
+      "repo": "https://github.com/teslasolar/IGotVD",
+      "stars": 0,
+      "pushed": "2025-12-04T01:32:23Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/IGotVD/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "imagetrek": {
+      "purpose": "imagetrek",
+      "repo": "https://github.com/teslasolar/imagetrek",
+      "stars": 0,
+      "pushed": "2026-01-21T08:35:02Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/imagetrek/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "IndustrialIntelligence": {
+      "purpose": "IndustrialIntelligence · sovereign estate tool",
+      "repo": "https://github.com/teslasolar/IndustrialIntelligence",
+      "stars": 0,
+      "pushed": "2025-06-11T16:04:13Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/IndustrialIntelligence/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "instantvm": {
+      "purpose": "Disposable Windows VMs in one click — Electron + Windows Sandbox templates for dev, SCADA, PLC sim",
+      "repo": "https://github.com/teslasolar/instantvm",
+      "stars": 1,
+      "pushed": "2026-05-01T08:18:20Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/instantvm/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "IrrationalEngine": {
+      "purpose": "Irrational Engine, it's irrational, but it runs.   If it ain't broke don't fix it. ",
+      "repo": "https://github.com/teslasolar/IrrationalEngine",
+      "stars": 0,
+      "pushed": "2025-12-22T20:37:26Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "isa-os": {
+      "purpose": "isa os",
+      "repo": "https://github.com/teslasolar/isa-os",
+      "stars": 1,
+      "pushed": "2025-11-20T15:33:01Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/isa-os/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ISA5.1": {
+      "purpose": "ISA 5.1 ",
+      "repo": "https://github.com/teslasolar/ISA5.1",
+      "stars": 1,
+      "pushed": "2026-03-17T05:59:46Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ISA5.1/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ISAchieve": {
+      "purpose": "ISAchieve-ment system",
+      "repo": "https://github.com/teslasolar/ISAchieve",
+      "stars": 0,
+      "pushed": "2025-12-16T01:33:03Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ISAchieve/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "jdugame": {
+      "purpose": "jdugame",
+      "repo": "https://github.com/teslasolar/jdugame",
+      "stars": 0,
+      "pushed": "2026-02-03T06:48:07Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/jdugame/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "JEDI": {
+      "purpose": "JEDI ",
+      "repo": "https://github.com/teslasolar/JEDI",
+      "stars": 1,
+      "pushed": "2026-03-10T07:31:59Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/JEDI/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "JellyKelly": {
+      "purpose": "Jelly Kelly Auditory Repository",
+      "repo": "https://github.com/teslasolar/JellyKelly",
+      "stars": 1,
+      "pushed": "2026-03-01T20:27:02Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/JellyKelly/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "kelly": {
+      "purpose": "is NOT jelly",
+      "repo": "https://github.com/teslasolar/kelly",
+      "stars": 1,
+      "pushed": "2026-03-10T21:24:22Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "klaude-kode": {
+      "purpose": "potato tomato",
+      "repo": "https://github.com/teslasolar/klaude-kode",
+      "stars": 0,
+      "pushed": "2025-12-06T07:33:00Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/klaude-kode/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "KLEINGEDRUCKT": {
+      "purpose": "PROJEKT KLEINGEDRUCKT Sub-$1000 Micro-Resolution 3D Printing",
+      "repo": "https://github.com/teslasolar/KLEINGEDRUCKT",
+      "stars": 0,
+      "pushed": "2026-03-19T21:37:33Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/KLEINGEDRUCKT/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "LegalCode-BlacksLaw": {
+      "purpose": "Legal Code: Black's Law reference ",
+      "repo": "https://github.com/teslasolar/LegalCode-BlacksLaw",
+      "stars": 0,
+      "pushed": "2025-12-21T10:07:56Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/LegalCode-BlacksLaw/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Legalmon": {
+      "purpose": "Legalmon, Legislative Monsters",
+      "repo": "https://github.com/teslasolar/Legalmon",
+      "stars": 0,
+      "pushed": "2025-12-21T06:43:34Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Legalmon/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "LG": {
+      "purpose": "LG",
+      "repo": "https://github.com/teslasolar/LG",
+      "stars": 0,
+      "pushed": "2026-01-11T03:26:34Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "lightbringer": {
+      "purpose": "lightbringer",
+      "repo": "https://github.com/teslasolar/lightbringer",
+      "stars": 1,
+      "pushed": "2026-03-10T04:57:43Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "LinuxPocalypse": {
+      "purpose": "LinuxPocalypse",
+      "repo": "https://github.com/teslasolar/LinuxPocalypse",
+      "stars": 0,
+      "pushed": "2025-12-24T23:58:45Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/LinuxPocalypse/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "LRM": {
+      "purpose": "LARGE REPO MODEL (LRM)  \"Predicts the next file, not the next word\"",
+      "repo": "https://github.com/teslasolar/LRM",
+      "stars": 0,
+      "pushed": "2026-03-22T18:08:03Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/LRM/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "mclees": {
+      "purpose": "hi tay tay",
+      "repo": "https://github.com/teslasolar/mclees",
+      "stars": 0,
+      "pushed": "2026-02-05T05:11:30Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/mclees/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "megazord": {
+      "purpose": "Mega Zord ",
+      "repo": "https://github.com/teslasolar/megazord",
+      "stars": 0,
+      "pushed": "2025-12-06T07:31:56Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/megazord/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "MianoCube": {
+      "purpose": "MianoCube",
+      "repo": "https://github.com/teslasolar/MianoCube",
+      "stars": 0,
+      "pushed": "2026-02-17T19:55:52Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/MianoCube/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "MissCassandra": {
+      "purpose": "Don't say Miss? you Missed!",
+      "repo": "https://github.com/teslasolar/MissCassandra",
+      "stars": 1,
+      "pushed": "2026-04-04T14:01:22Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/MissCassandra/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Mo": {
+      "purpose": "Mo",
+      "repo": "https://github.com/teslasolar/Mo",
+      "stars": 0,
+      "pushed": "2026-01-25T23:22:41Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Mo/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "mold": {
+      "purpose": "mold",
+      "repo": "https://github.com/teslasolar/mold",
+      "stars": 0,
+      "pushed": "2025-12-06T01:26:37Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/mold/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "moosic": {
+      "purpose": "ASS ASS ASS ASS",
+      "repo": "https://github.com/teslasolar/moosic",
+      "stars": 1,
+      "pushed": "2026-04-28T22:31:08Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/moosic/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "NAC": {
+      "purpose": "Northampton County",
+      "repo": "https://github.com/teslasolar/NAC",
+      "stars": 0,
+      "pushed": "2026-01-26T22:48:53Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/NAC/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Neuss-Brewing": {
+      "purpose": "Neuss - Brewing ",
+      "repo": "https://github.com/teslasolar/Neuss-Brewing",
+      "stars": 0,
+      "pushed": "2025-12-06T07:39:26Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Neuss-Brewing/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "NODE-001": {
+      "purpose": "Wearable AI Companion System",
+      "repo": "https://github.com/teslasolar/NODE-001",
+      "stars": 1,
+      "pushed": "2026-03-01T08:43:01Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/NODE-001/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "numbaWun": {
+      "purpose": "numbaWun · sovereign estate tool",
+      "repo": "https://github.com/teslasolar/numbaWun",
+      "stars": 0,
+      "pushed": "2025-06-14T02:34:12Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/numbaWun/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "onlyass": {
+      "purpose": "ONLY ASS",
+      "repo": "https://github.com/teslasolar/onlyass",
+      "stars": 2,
+      "pushed": "2026-04-27T21:56:28Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/onlyass/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ONLYASSGAME": {
+      "purpose": "ONLYASSGAME ",
+      "repo": "https://github.com/teslasolar/ONLYASSGAME",
+      "stars": 1,
+      "pushed": "2026-04-27T15:21:37Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ONLYASSGAME/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "os127": {
+      "purpose": "os127",
+      "repo": "https://github.com/teslasolar/os127",
+      "stars": 0,
+      "pushed": "2026-02-28T06:45:03Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/os127/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "PLA-": {
+      "purpose": "Pole Loading Analysis",
+      "repo": "https://github.com/teslasolar/PLA-",
+      "stars": 0,
+      "pushed": "2025-11-30T18:11:41Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/PLA-/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "plc": {
+      "purpose": "plc simulator",
+      "repo": "https://github.com/teslasolar/plc",
+      "stars": 0,
+      "pushed": "2025-11-14T01:57:40Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/plc/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ProCoker": {
+      "purpose": "Coker Prosser Farm and Sustainability Planning",
+      "repo": "https://github.com/teslasolar/ProCoker",
+      "stars": 0,
+      "pushed": "2026-02-09T00:25:39Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ProCoker/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Promptka": {
+      "purpose": "Kit Kat Prompt Pat Neener Neener Poo Poo",
+      "repo": "https://github.com/teslasolar/Promptka",
+      "stars": 0,
+      "pushed": "2025-12-23T04:00:39Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Promptka/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "qdrant": {
+      "purpose": "qdrant",
+      "repo": "https://github.com/teslasolar/qdrant",
+      "stars": 1,
+      "pushed": "2025-11-19T05:11:28Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/qdrant/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "RealityMirror": {
+      "purpose": "RealityMirror",
+      "repo": "https://github.com/teslasolar/RealityMirror",
+      "stars": 0,
+      "pushed": "2026-02-04T20:37:04Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/RealityMirror/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "repl": {
+      "purpose": "repl LOL",
+      "repo": "https://github.com/teslasolar/repl",
+      "stars": 0,
+      "pushed": "2026-01-29T02:31:00Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "Roasted": {
+      "purpose": "Library of Gear Grinding Devices",
+      "repo": "https://github.com/teslasolar/Roasted",
+      "stars": 0,
+      "pushed": "2026-03-23T21:04:10Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Roasted/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "saqv": {
+      "purpose": "Steven Alexander Quevedo Vinueza ",
+      "repo": "https://github.com/teslasolar/saqv",
+      "stars": 1,
+      "pushed": "2026-04-27T10:39:16Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/saqv/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ShawarmaKing": {
+      "purpose": "Shawarma King",
+      "repo": "https://github.com/teslasolar/ShawarmaKing",
+      "stars": 0,
+      "pushed": "2026-01-25T06:34:30Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ShawarmaKing/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "shields": {
+      "purpose": "127d shields",
+      "repo": "https://github.com/teslasolar/shields",
+      "stars": 1,
+      "pushed": "2026-03-18T13:13:32Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/shields/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "simon": {
+      "purpose": "simon example",
+      "repo": "https://github.com/teslasolar/simon",
+      "stars": 0,
+      "pushed": "2026-02-05T06:13:52Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/simon/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Sisyphusian-Orchestra": {
+      "purpose": "Sisyphusian Orchestra",
+      "repo": "https://github.com/teslasolar/Sisyphusian-Orchestra",
+      "stars": 0,
+      "pushed": "2026-01-13T08:55:53Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Sisyphusian-Orchestra/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "SprayNStay": {
+      "purpose": "Spray N Stay ",
+      "repo": "https://github.com/teslasolar/SprayNStay",
+      "stars": 0,
+      "pushed": "2025-12-21T14:26:34Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/SprayNStay/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "STLayinAlive": {
+      "purpose": "Ahhh AHhhh ahhhh STLayin Alive STL library ",
+      "repo": "https://github.com/teslasolar/STLayinAlive",
+      "stars": 0,
+      "pushed": "2025-12-22T01:53:30Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/STLayinAlive/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Surfing-Pikachu": {
+      "purpose": "Surfing Pikachu",
+      "repo": "https://github.com/teslasolar/Surfing-Pikachu",
+      "stars": 0,
+      "pushed": "2025-12-14T23:41:25Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Surfing-Pikachu/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "taco": {
+      "purpose": "taco",
+      "repo": "https://github.com/teslasolar/taco",
+      "stars": 0,
+      "pushed": "2025-11-06T12:14:15Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/taco/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "teslamodel3": {
+      "purpose": "tesla model 3",
+      "repo": "https://github.com/teslasolar/teslamodel3",
+      "stars": 0,
+      "pushed": "2026-02-11T17:23:09Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/teslamodel3/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "teslasolar": {
+      "purpose": "Insane ideas, shipped weekly.",
+      "repo": "https://github.com/teslasolar/teslasolar",
+      "stars": 1,
+      "pushed": "2026-05-01T04:50:27Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "TheHole": {
+      "purpose": "The Whole Hole. Wholesome",
+      "repo": "https://github.com/teslasolar/TheHole",
+      "stars": 1,
+      "pushed": "2026-03-30T02:50:59Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/TheHole/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "TheOpenGate": {
+      "purpose": "Taboo is Taboo here",
+      "repo": "https://github.com/teslasolar/TheOpenGate",
+      "stars": 1,
+      "pushed": "2026-03-13T00:28:44Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/TheOpenGate/",
+      "use_when": "tone-grading every draft before publishing",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "timecode": {
+      "purpose": "timecode prompt example",
+      "repo": "https://github.com/teslasolar/timecode",
+      "stars": 0,
+      "pushed": "2025-11-14T14:41:43Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/timecode/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "tommysbloom": {
+      "purpose": "open",
+      "repo": "https://github.com/teslasolar/tommysbloom",
+      "stars": 0,
+      "pushed": "2026-02-27T02:33:23Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/tommysbloom/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "trenBOloNE": {
+      "purpose": "trenBOloNE · sovereign estate tool",
+      "repo": "https://github.com/teslasolar/trenBOloNE",
+      "stars": 0,
+      "pushed": "2025-06-18T01:38:27Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/trenBOloNE/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "turbo": {
+      "purpose": "turbo · sovereign estate tool",
+      "repo": "https://github.com/teslasolar/turbo",
+      "stars": 0,
+      "pushed": "2026-03-07T01:28:59Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/turbo/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "turbotree": {
+      "purpose": "turbotree",
+      "repo": "https://github.com/teslasolar/turbotree",
+      "stars": 0,
+      "pushed": "2026-03-21T23:37:51Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/turbotree/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "United-States-of-America-United": {
+      "purpose": "United States of America United",
+      "repo": "https://github.com/teslasolar/United-States-of-America-United",
+      "stars": 0,
+      "pushed": "2025-12-28T08:07:54Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/United-States-of-America-United/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "XP": {
+      "purpose": "XP baby",
+      "repo": "https://github.com/teslasolar/XP",
+      "stars": 0,
+      "pushed": "2026-01-04T21:55:28Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/XP/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "ygg": {
+      "purpose": "yggdrasil a forest of minds grown from seeds of thought ",
+      "repo": "https://github.com/teslasolar/ygg",
+      "stars": 0,
+      "pushed": "2025-11-11T20:42:07Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/ygg/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "zero": {
+      "purpose": "zero",
+      "repo": "https://github.com/teslasolar/zero",
+      "stars": 1,
+      "pushed": "2026-04-14T14:27:50Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/zero/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "zoo": {
+      "purpose": "zoo · sovereign estate tool",
+      "repo": "https://github.com/teslasolar/zoo",
+      "stars": 1,
+      "pushed": "2026-04-27T23:46:55Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
     }
   },
-
   "infrastructure": {
-    "fall-registry": {
-      "purpose": "Live JSON registry of every estate tool · auto-syncs on push",
-      "url": "https://sjgant80-hub.github.io/fall-registry/registry.json",
-      "tier": "T1"
+    "fall-hot": {
+      "purpose": "Hot-load plugin updates without redeploying · poll + hash diff + global-scope re-run · drop-in",
+      "repo": "https://github.com/sjgant80-hub/fall-hot",
+      "stars": 0,
+      "pushed": "2026-05-29T00:26:46Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fall-hot/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
     "fall-palette": {
-      "purpose": "Ctrl+K command palette plugin for all sovereign tools",
-      "tier": "T0 (git clone) or T3"
+      "purpose": "Ctrl-K command palette drop-in plugin for sovereign tools",
+      "repo": "https://github.com/sjgant80-hub/fall-palette",
+      "stars": 0,
+      "pushed": "2026-05-29T00:26:43Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fall-palette/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fall-registry": {
+      "purpose": "Canonical index of Fall sovereign plugins · machine-readable manifest for fall-hot watchers",
+      "repo": "https://github.com/sjgant80-hub/fall-registry",
+      "stars": 0,
+      "pushed": "2026-05-29T23:11:11Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fall-registry/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallcore-mcp": {
+      "purpose": "FallCore MCP server - the 5th turtle - exposes any FallCore deployment as native tools in Claude Code, Cursor, Cline, Windsurf",
+      "repo": "https://github.com/sjgant80-hub/fallcore-mcp",
+      "stars": 0,
+      "pushed": "2026-05-27T05:49:45Z",
+      "has_pages": false,
+      "url": "https://sjgant80-hub.github.io/fallcore/",
+      "tier": "T0 (gh clone) or T1"
     },
     "fallmesh": {
-      "purpose": "BroadcastChannel('fall-signal') mesh between live tools",
-      "tier": "in-browser only (T3)"
+      "purpose": "fallmesh · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/fallmesh",
+      "stars": 1,
+      "pushed": "2026-05-28T00:38:37Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallmesh/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
-    "fall-hot": {
-      "purpose": "Hot-loader plugin discipline · v1 CDN injection",
-      "tier": "T3"
+    "fallsignal": {
+      "purpose": "fallsignal · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/fallsignal",
+      "stars": 0,
+      "pushed": "2026-05-28T00:38:15Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallsignal/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     },
-    "onlybrains": {
-      "purpose": "PLC/SCADA/xchg MCP · industrial control + xchg rates",
-      "mcp_name": "onlybrains",
-      "tier": "T2 (register in mcps.json)"
+    "konomi-swarm": {
+      "purpose": "Colony primitive. Every approve is a pheromone deposit. Sovereign JS module. Prime 109.",
+      "repo": "https://github.com/sjgant80-hub/konomi-swarm",
+      "stars": 0,
+      "pushed": "2026-05-28T00:39:07Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/konomi-swarm/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "laughing-octo-guacamole": {
+      "purpose": "Planetary Stigmergic Governance Mesh ",
+      "repo": "https://github.com/sjgant80-hub/laughing-octo-guacamole",
+      "stars": 0,
+      "pushed": "2026-01-08T09:40:19Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "probable-telegram": {
+      "purpose": "Diagnostic Braid is an open-source diagnostic architecture that detects health issues as misalignments among structural, flow, and control signals, using local-first wearable data, explicit coupling metrics, and interpretable “braid fault” signatures.",
+      "repo": "https://github.com/sjgant80-hub/probable-telegram",
+      "stars": 0,
+      "pushed": "2026-01-08T15:21:38Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "boom-markdown-headshot": {
+      "purpose": "markdown markdown markdown, it's always about markdown",
+      "repo": "https://github.com/teslasolar/boom-markdown-headshot",
+      "stars": 0,
+      "pushed": "2026-03-14T04:42:38Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/boom-markdown-headshot/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "hummingbird": {
+      "purpose": "🐦 KONOMI TORI 好みトリ Hummingbird Communication Translator",
+      "repo": "https://github.com/teslasolar/hummingbird",
+      "stars": 1,
+      "pushed": "2026-03-19T20:40:29Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/hummingbird/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Konception": {
+      "purpose": "Konomi Konception",
+      "repo": "https://github.com/teslasolar/Konception",
+      "stars": 0,
+      "pushed": "2025-12-15T07:47:53Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Konception/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "konomi": {
+      "purpose": "konomi build spec",
+      "repo": "https://github.com/teslasolar/konomi",
+      "stars": 0,
+      "pushed": "2026-02-06T02:11:43Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/konomi/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "konomikitka": {
+      "purpose": "konomikitka",
+      "repo": "https://github.com/teslasolar/konomikitka",
+      "stars": 0,
+      "pushed": "2026-03-06T07:45:50Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/konomikitka/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "KonomiLang": {
+      "purpose": "A specialized programming language designed for AI model interactions",
+      "repo": "https://github.com/teslasolar/KonomiLang",
+      "stars": 1,
+      "pushed": "2024-11-20T19:08:19Z",
+      "has_pages": false,
+      "tier": "T0 (gh clone) or T1"
+    },
+    "konomioke": {
+      "purpose": "SING",
+      "repo": "https://github.com/teslasolar/konomioke",
+      "stars": 1,
+      "pushed": "2026-04-29T23:58:15Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/konomioke/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "KonomiStandard": {
+      "purpose": "Konomi Standard",
+      "repo": "https://github.com/teslasolar/KonomiStandard",
+      "stars": 3,
+      "pushed": "2026-05-30T11:56:14Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/KonomiStandard/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "kp2p": {
+      "purpose": "konomi peer to peer ",
+      "repo": "https://github.com/teslasolar/kp2p",
+      "stars": 2,
+      "pushed": "2026-04-27T22:04:33Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/kp2p/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "LookingGlass": {
+      "purpose": "Konomi Looking Glass",
+      "repo": "https://github.com/teslasolar/LookingGlass",
+      "stars": 1,
+      "pushed": "2026-02-18T11:24:24Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/LookingGlass/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "OneShot": {
+      "purpose": "OneShot",
+      "repo": "https://github.com/teslasolar/OneShot",
+      "stars": 0,
+      "pushed": "2026-02-23T15:58:47Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/OneShot/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "suno": {
+      "purpose": "konomi suno api ",
+      "repo": "https://github.com/teslasolar/suno",
+      "stars": 1,
+      "pushed": "2026-04-06T13:54:33Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/suno/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "Yggdrasil": {
+      "purpose": "Konomi Yggdrasil",
+      "repo": "https://github.com/teslasolar/Yggdrasil",
+      "stars": 0,
+      "pushed": "2025-12-29T06:33:44Z",
+      "has_pages": true,
+      "url": "https://teslasolar.github.io/Yggdrasil/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     }
   },
-
   "agents": {
+    "cassie-oracle-3": {
+      "purpose": "Recursive Claude subagent tree · L0 orchestrator + 7 spine-prime specialists + sparse chord resolver · v19 7-pass annealing · subscription auth · ◊·κ=1 · prime 131",
+      "repo": "https://github.com/sjgant80-hub/cassie-oracle-3",
+      "stars": 0,
+      "pushed": "2026-05-29T13:32:28Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/cassie-oracle-3/",
+      "use_when": "newsletter / list · Mailchimp replacement",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "cassietorusbtc135solver": {
+      "purpose": "cassietorusbtc135solver · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/cassietorusbtc135solver",
+      "stars": 1,
+      "pushed": "2026-05-29T12:51:55Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/cassietorusbtc135solver/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fall127agents": {
+      "purpose": "Ai the right way",
+      "repo": "https://github.com/sjgant80-hub/fall127agents",
+      "stars": 1,
+      "pushed": "2026-05-28T00:38:29Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fall127agents/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "oracleengine": {
+      "purpose": "oracleengine · sovereign estate tool",
+      "repo": "https://github.com/sjgant80-hub/oracleengine",
+      "stars": 0,
+      "pushed": "2026-05-28T00:25:21Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/oracleengine/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
     "si-didy-agent": {
-      "purpose": "This agent · sovereign 4-tier chat-driven autonomous chief-of-staff",
-      "url": "https://github.com/sjgant80-hub/si-didy-agent",
-      "tier": "self"
-    },
-    "oracle-3": {
-      "purpose": "Recursive subagent controller · spawns 7 prime specialists · controls CASSIE",
-      "tier": "T1 or local"
-    },
-    "cassie-torus": {
-      "purpose": "Golden-walker solver · zone A/B/C/U · prime priority",
-      "tier": "T3 (browser) or python (T0)"
+      "purpose": "Sovereign computer-use agent · Claude Agent SDK + Playwright · subscription auth · ◊·κ=1 · prime 379",
+      "repo": "https://github.com/sjgant80-hub/si-didy-agent",
+      "stars": 0,
+      "pushed": "2026-05-30T12:04:19Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/si-didy-agent/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
     }
   },
-
   "tier_decision_doctrine": [
     "Step 1: estate_query(intent) · what tools exist for this?",
     "Step 2: if estate has a tool with an API · estate_call (T1)",
