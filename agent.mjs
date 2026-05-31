@@ -706,6 +706,213 @@ SAFETY: NEVER skip step 7. Posting is irreversible.` }] };
     ),
 
     // ═══════════════════════════════════════════════════════════════
+    // ◊ LINKEDIN AUTOPILOT · v1.0 · always-on draft engine
+    // Doctrine: NEVER auto-send · ALWAYS queue + ask_user before fire
+    // ═══════════════════════════════════════════════════════════════
+    tool('linkedin_open', '◊·κ=1 · Open LinkedIn in the persistent Chromium profile. First call may prompt for one-time login; session is saved to ./si-didy-profile. Returns screenshot + logged-in status. Call ONCE per session before any LinkedIn autopilot/scan/drop.',
+      { url: z.string().default('https://www.linkedin.com/feed/').describe('Where to land · default = home feed') },
+      async ({ url }) => {
+        console.log(`  ◊· linkedin_open ${url}`);
+        try {
+          const { chromium } = await import('playwright');
+          if (!_ctx) {
+            console.log('◊ T3 · Chromium opening (persistent profile · ./si-didy-profile)');
+            _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled'] });
+            _page = _ctx.pages()[0] || await _ctx.newPage();
+            await _page.setViewportSize(VIEWPORT);
+          }
+          if (!_page) _page = await _ctx.newPage();
+          await _page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+          await _page.waitForTimeout(2500);
+          const pageUrl = _page.url();
+          const loggedIn = !/login|sign-?in/i.test(pageUrl);
+          const buf = await _page.screenshot({ type: 'png' });
+          try {
+            if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'linkedin_opened', payload: { url: pageUrl, loggedIn }, ts: new Date().toISOString() });
+          } catch (_) {}
+          return { content: [
+            { type: 'text', text: `◊ linkedin_open · landed at ${pageUrl} · logged_in=${loggedIn}${loggedIn ? '' : '\n  ↳ login screen detected · log in manually · session will persist'}` },
+            { type: 'image', data: buf.toString('base64'), mimeType: 'image/png' }
+          ] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'linkedin_open error: ' + e.message }] };
+        }
+      }
+    ),
+    tool('linkedin_autopilot', '◊·κ=φ⁷ · ALWAYS-ON LINKEDIN ENGINE · Runs ONE cycle: scans home feed · scans Simon\'s recent posts for new comments · drafts helpful comments / replies / connection requests · QUEUES EVERYTHING for human approval (./queues/li-*). NEVER auto-sends. Strict rate-limit-aware. Use mode:"scan" for the default pass; "reply" to focus on Simon\'s post comment-threads; "engage" for proactive feed commenting.',
+      { mode: z.enum(['scan','reply','engage']).default('scan').describe('scan=triage feed+notifs · reply=Simon-post replies · engage=proactive comments'),
+        cap: z.number().min(1).max(10).default(5).describe('Max drafts to produce this cycle (rate-safe default 5)'),
+        archetype: z.string().optional().describe('Optional · target archetype filter for engage mode (e.g. "compliance-nervous director")') },
+      async ({ mode, cap, archetype }) => {
+        console.log(`  ◊· linkedin_autopilot mode=${mode} cap=${cap}${archetype ? ' archetype="' + archetype + '"' : ''}`);
+        const today = new Date().toISOString().slice(0,10);
+
+        // Rate-limit check from pack: 5 comments/day · 5 DMs/day · 10 connects/day
+        const limits = { engage: 5, reply: 5, scan: 10 };
+        try {
+          const fp = path.join(MEMORY_DIR, 'li-actions.jsonl');
+          if (fs.existsSync(fp)) {
+            const lines = fs.readFileSync(fp, 'utf8').trim().split('\n').filter(Boolean)
+              .map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean)
+              .filter(l => (l.ts || '').slice(0,10) === today && l.mode === mode);
+            if (lines.length >= limits[mode]) {
+              return { content: [{ type: 'text', text: `✗ daily cap reached for mode=${mode} (${lines.length}/${limits[mode]}) · skipping · come back tomorrow` }] };
+            }
+            cap = Math.min(cap, limits[mode] - lines.length);
+          }
+        } catch (_) {}
+
+        // emit start broadcast
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'autopilot_cycle_started', payload: { mode, cap, archetype: archetype || null }, ts: new Date().toISOString() });
+        } catch (_) {}
+
+        // Spawn a child Claude session that scans the feed and drafts cap N items
+        const autopilotPrompt = SYSTEM_DOCTRINE + `\n\nYOU ARE THE LINKEDIN AUTOPILOT for Simon · MODE=${mode} · CAP=${cap}${archetype ? ' · ARCHETYPE FILTER="' + archetype + '"' : ''}
+
+PRE-FLIGHT (always):
+  1. pack_load('LINKEDIN-PACK.txt') · voice spec
+  2. memory_recall('li-targets-seen', limit:50) · do not re-engage the same profile
+  3. memory_recall('li-actions', limit:30) · do not duplicate today's actions
+  4. browser_screenshot · confirm logged in as Simon
+
+MODE: ${mode}
+
+${mode === 'scan' ? `SCAN MODE (the default · safe to run repeatedly):
+  · browser_navigate https://www.linkedin.com/feed/ · wait 3s
+  · Read the top 20 visible posts (browser_screenshot + interpret)
+  · For each: score 0-100 for { engagement-opportunity, value-fit, audience-match }
+  · Pick the top ${cap}
+  · For each: DRAFT a helpful comment (60-180 chars) that:
+       - Adds a genuine insight (no platitudes)
+       - Mentions free info if applicable ("FYI fall-X handles this for free, MIT")
+       - Soft DM-encourage at the end ONLY if the post is clearly seeking help
+       - ABSOLUTELY NO external links in the comment (LinkedIn dings reach)
+       - Voice = Simon (per fallpost six-layer)
+  · Queue ALL drafts to ./queues/li-comment/${today}-<n>.md
+  · queue_write each one as a markdown file
+  · DO NOT navigate to the comment box · DO NOT type · DO NOT click Submit
+  · The human reviews + approves later
+` : mode === 'reply' ? `REPLY MODE (focus on Simon's posts):
+  · browser_navigate https://www.linkedin.com/in/${process.env.SIDIDY_LINKEDIN_HANDLE || 'simon-gant'}/recent-activity/all/
+  · Find Simon's last 3 posts · for each, expand the comments section
+  · For each comment that's NEW since the last autopilot run (memory_recall 'li-replied-comments'):
+       - If it's a substantive question → DRAFT a helpful 1-2 sentence reply
+       - If it's a "tell me more" / "DM me" → DRAFT a polite "let's take it to DMs" reply
+       - If it's noise / lol-emoji → skip · don't reply
+  · Cap at ${cap} replies total this cycle
+  · Queue to ./queues/li-reply/${today}-<n>.md
+  · memory_note each as 'li-replied-comments' so we don't re-draft next cycle
+  · DO NOT click "Reply" or submit · DRAFTS ONLY
+` : `ENGAGE MODE (proactive · use sparingly):
+  · ${archetype ? 'Search LinkedIn for "' + archetype + '"' : 'Use pack Section E · pick the day archetype on rotation'}
+  · browser_navigate the search results
+  · For each profile in top ${cap}:
+       - browser_screenshot
+       - Visit their profile (browser_navigate)
+       - Read their last post or "About" section
+       - DRAFT a connection-request note (≤220 chars · pack D2 format)
+       - DRAFT a follow-up DM (only fires when they accept · pack D3 format)
+  · Queue connection drafts to ./queues/li-connect/${today}-<n>.md
+  · Queue follow-up DMs to ./queues/li-dm/${today}-<n>.md (marked status:pending-accept)
+  · memory_note each profile to 'li-targets-seen'
+  · DO NOT click "Connect" or send · DRAFTS ONLY
+`}
+END OF CYCLE:
+  · memory_note { scope:'li-actions', ts, mode:'${mode}', drafts_queued: N }
+  · learn_log scope:'linkedin-autopilot' { what_worked, what_failed, next_time }
+  · fall_signal broadcast: autopilot_cycle_complete with counts
+  · Return a tight summary: N drafts queued · paths · top engagement-score · next-cycle suggestion
+
+SAFETY:
+  · NEVER click any Submit/Send/Connect/Comment button
+  · NEVER auto-accept InMails
+  · NEVER post · NEVER DM · NEVER comment without human approval
+  · Pause 30-90s between profile views (LinkedIn rate-flags fast scrolling)
+  · If you see a "We've restricted your account" notice · STOP immediately and ask_user`;
+
+        let final = '';
+        try {
+          const child = query({ prompt: autopilotPrompt, options: queryOpts });
+          for await (const m of child) {
+            if (m.type === 'assistant') {
+              const t = (m.message?.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+              if (t) final = t;
+            }
+          }
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'autopilot error: ' + e.message }] };
+        }
+        try { fs.appendFileSync(path.join(MEMORY_DIR, 'li-actions.jsonl'), JSON.stringify({ ts: new Date().toISOString(), mode, cap, archetype: archetype || null, summary: final.slice(0, 2000) }) + '\n'); } catch (_) {}
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'autopilot_cycle_complete', payload: { mode, cap }, ts: new Date().toISOString() });
+        } catch (_) {}
+        return { content: [{ type: 'text', text: `◊ autopilot cycle complete · mode=${mode}\n\n${final}` }] };
+      }
+    ),
+    tool('find_client', '◊·κ=φ⁸ · "FIND ME A CLIENT" · Research the target archetype\'s real pain via research() · score N candidate profiles on LinkedIn · queue personalised connection-request drafts · all paused for human approval. The intent-to-DM funnel.',
+      { archetype: z.string().describe('Plain-English target · e.g. "UK accountant in late-payment chaos", "biochem founder hiring sloppy", "trades sole-trader on Xero"'),
+        n: z.number().min(1).max(10).default(5).describe('Number of candidate profiles to surface · cap 10') },
+      async ({ archetype, n }) => {
+        console.log(`  ◊· find_client "${archetype}" · n=${n}`);
+        const today = new Date().toISOString().slice(0,10);
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'find_client_started', payload: { archetype, n }, ts: new Date().toISOString() });
+        } catch (_) {}
+
+        const findPrompt = SYSTEM_DOCTRINE + `\n\nMISSION: FIND A CLIENT · archetype="${archetype}" · n=${n}
+
+PHASE 1 · RESEARCH THE PAIN
+  Call research(question:"What is the most acute, currently-budgeted, DM-conversion-ready pain for ${archetype} in 2026?", angles:4, votes:3).
+  From the cited findings: identify the ONE pain that survives adversarial verification AND maps to an estate tool.
+
+PHASE 2 · TOOL MATCH
+  estate_query the pain → find the best-fit estate tool.
+  If no good fit → consider substrate_build (ASK SIMON FIRST).
+
+PHASE 3 · CANDIDATE SCAN
+  pack_load('LINKEDIN-PACK.txt')
+  Open LinkedIn (linkedin_open if needed)
+  Search for ${n*3} candidates matching the archetype (browser_navigate the search)
+  For each: profile-screen + score on { archetype-match, recent-activity, mutual-connections, role-seniority } → pick top ${n}
+
+PHASE 4 · DRAFT THE OUTREACH (queue · don't send)
+  For each of the top ${n}:
+    · DRAFT a connection request note (≤220 chars · references the verified pain)
+    · DRAFT a follow-up DM (fires after accept · references the matched tool · INCLUDES a "comment 'X' for the free tool" CTA)
+    · Queue both to ./queues/li-connect/${today}-find-${archetype.replace(/[^a-z0-9]/gi,'-').slice(0,20)}-<n>.md
+  memory_note 'li-targets-seen' so we don't re-engage
+
+PHASE 5 · REPORT
+  Return tight summary:
+    · The verified pain
+    · The matched tool
+    · The ${n} candidates (name, role, why they fit, what the connection-request says)
+    · Total drafts queued
+    · Suggested next cycle
+
+SAFETY: NEVER auto-send · ALL drafts await Simon's approval`;
+        let final = '';
+        try {
+          const child = query({ prompt: findPrompt, options: queryOpts });
+          for await (const m of child) {
+            if (m.type === 'assistant') {
+              const t = (m.message?.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+              if (t) final = t;
+            }
+          }
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'find_client error: ' + e.message }] };
+        }
+        try { fs.appendFileSync(path.join(MEMORY_DIR, 'li-actions.jsonl'), JSON.stringify({ ts: new Date().toISOString(), mode: 'find_client', archetype, n, summary: final.slice(0, 2000) }) + '\n'); } catch (_) {}
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'find_client_complete', payload: { archetype, n }, ts: new Date().toISOString() });
+        } catch (_) {}
+        return { content: [{ type: 'text', text: `◊ find_client · ${n} drafts queued · archetype="${archetype}"\n\n${final}` }] };
+      }
+    ),
+
+    // ═══════════════════════════════════════════════════════════════
     // ◊ COGNITIVE SUBSTRATE · v1.0 · the agentic-corp verbs
     // ═══════════════════════════════════════════════════════════════
     tool('research', '◊·κ=φ⁵ · RESEARCH-AS-A-SERVICE · Run adversarially-verified deep research on any question. Spawns N angle-specialists in parallel via Claude Agent SDK, fetches sources via WebSearch/WebFetch, runs an M-vote refute panel on each claim, returns cited synthesis. Use BEFORE drafting strategy or shipping a tool — research grounds the spec.',
@@ -961,6 +1168,14 @@ COGNITIVE SUBSTRATE v1.0 — the agentic-corp verbs:
 - substrate_build(request)    → fall-substrate · research → spec → generate → verify → ship → audit (pauses for confirmation)
 The substrate is the destination. When a task is "what should I build" — research first. Build second.
 
+LINKEDIN AUTOPILOT (always-on draft engine · NEVER auto-sends):
+- linkedin_open                → open Chromium in persistent profile · one-time login · session saved to ./si-didy-profile
+- linkedin_autopilot(mode,cap) → one cycle: scan/reply/engage · drafts to ./queues/li-* · rate-aware (5/day per mode)
+- find_client(archetype, n)    → research-the-pain → match a tool → queue n connection-request drafts
+- Cron mode: SIDIDY_AUTOPILOT=1 fires linkedin_autopilot every ~90 min while cockpit is open and it's 07-21h UK
+- ALL ACTIONS QUEUE FOR HUMAN APPROVAL · si-didy NEVER clicks Submit/Send/Connect/Post without ask_user
+- "find me a client" / "scan linkedin" / "any new comments?" route to these verbs
+
 LINKEDIN ORCHESTRATION (when user says "linkedin post" / "li drop" / "post B5.1" / similar):
 - ALWAYS pack_load('LINKEDIN-PACK.txt') FIRST · the pack is the immutable copy spec
 - ALWAYS memory_recall('li-posts') with today's date filter · dedup before drafting
@@ -1102,6 +1317,8 @@ const allowedTools = [
   'mcp__estate__research', 'mcp__estate__verify', 'mcp__estate__substrate_build',
   // ◊ LinkedIn orchestrator · pack-driven · pause-before-Post
   'mcp__estate__linkedin_drop',
+  // ◊ LinkedIn AUTOPILOT · always-on draft engine (NEVER auto-sends)
+  'mcp__estate__linkedin_open', 'mcp__estate__linkedin_autopilot', 'mcp__estate__find_client',
 ];
 
 console.log('\n◊ tiers loaded:');
@@ -1402,13 +1619,56 @@ Execute the n=4-7 doctrine. Estate-first. Log mission. Stream tier calls. Pause 
     }
   }
 
+  // ═════════════════════════════════════════════════════════════════
+  //  ◊ LINKEDIN AUTOPILOT CRON · always-on while cockpit is alive
+  //  Env: SIDIDY_AUTOPILOT=1 to enable · SIDIDY_AUTOPILOT_MINUTES=90 default
+  //  Waking-hour gate: only fires 07:00-21:00 UK local time
+  //  Never fires unless at least one SSE client is connected (proves laptop open)
+  // ═════════════════════════════════════════════════════════════════
+  const AUTOPILOT_ON = process.env.SIDIDY_AUTOPILOT === '1';
+  const AUTOPILOT_INTERVAL_MIN = Math.max(30, parseInt(process.env.SIDIDY_AUTOPILOT_MINUTES || '90', 10));
+  let autopilotTickCount = 0;
+  if (AUTOPILOT_ON) {
+    const modes = ['scan', 'reply', 'engage']; // rotate
+    const tick = async () => {
+      try {
+        const now = new Date();
+        const hour = now.getHours();
+        if (hour < 7 || hour >= 21) {
+          console.log(`◊ autopilot · skipped (outside waking hours · ${hour}h)`);
+          return;
+        }
+        if (sseClients.length === 0) {
+          console.log(`◊ autopilot · skipped (no cockpit clients · laptop assumed closed)`);
+          return;
+        }
+        const mode = modes[autopilotTickCount % modes.length];
+        autopilotTickCount++;
+        const directive = `linkedin_autopilot · mode:"${mode}" · cap:5 · queue all drafts · NEVER send`;
+        console.log(`◊ autopilot tick #${autopilotTickCount} · mode=${mode}`);
+        broadcast({ type: 'fall_signal', source: 'autopilot', kind: 'autopilot_tick', payload: { mode, count: autopilotTickCount, hour }, ts: new Date().toISOString() });
+        runDirective(directive).catch(e => broadcast({ type: 'error', message: 'autopilot tick error: ' + e.message }));
+      } catch (e) {
+        console.log('◊ autopilot tick err:', e.message);
+      }
+    };
+    // First tick after 2 min (let cockpit/login settle), then every N minutes
+    setTimeout(() => { tick(); setInterval(tick, AUTOPILOT_INTERVAL_MIN * 60 * 1000); }, 2 * 60 * 1000);
+  }
+
   // boot
   server.listen(SERVER_PORT, () => {
     console.log(`\n◊ cockpit live · http://localhost:${SERVER_PORT}`);
     console.log(`◊ open  http://localhost:${SERVER_PORT}/  in your browser`);
     console.log(`◊ SSE events at /events · POST directives at /directive`);
     console.log(`◊ substrate verbs at POST /substrate · {verb:"research"|"verify"|"substrate_build", args:{...}}`);
-    console.log(`◊ fall-signal mesh bridge at POST /signal · GET /signal?n=50 to replay\n`);
+    console.log(`◊ fall-signal mesh bridge at POST /signal · GET /signal?n=50 to replay`);
+    if (AUTOPILOT_ON) {
+      console.log(`◊ autopilot ARMED · every ${AUTOPILOT_INTERVAL_MIN}min · 07-21h · drafts only · NEVER auto-sends`);
+    } else {
+      console.log(`◊ autopilot OFF · set SIDIDY_AUTOPILOT=1 to enable (rotates scan/reply/engage)`);
+    }
+    console.log('');
   });
 } else if (CHAT_MODE) {
   // ──────── persistent chat REPL ────────
