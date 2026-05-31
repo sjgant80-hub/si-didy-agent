@@ -1348,13 +1348,15 @@ if (SERVER_MODE) {
   });
 
   // hook into query lifecycle: helper to run one directive end-to-end
-  async function runDirective(directive) {
+  // ◊ Includes retry on transient Anthropic API 400 (duplicate tool_use id race)
+  async function runDirective(directive, attempt = 1) {
     const directiveTs = new Date().toISOString();
-    broadcast({ type: 'directive', directive, ts: directiveTs });
+    if (attempt === 1) broadcast({ type: 'directive', directive, ts: directiveTs });
+    const retryNote = attempt > 1 ? `\n\n[RETRY ${attempt}/3 · the previous attempt hit a transient API error · proceed serially this time · avoid firing 3+ parallel tool calls in one turn]` : '';
     const prompt = SYSTEM_DOCTRINE + `\n\nMODE: cockpit · live HTML control plane.
 
 USER DIRECTIVE (${directiveTs}):
-${directive}
+${directive}${retryNote}
 
 Execute the n=4-7 doctrine. Estate-first. Log mission. Stream tier calls. Pause via ask_user when irreversible. learn_log at end.`;
     let lastText = '';
@@ -1388,7 +1390,15 @@ Execute the n=4-7 doctrine. Estate-first. Log mission. Stream tier calls. Pause 
         }
       }
     } catch (e) {
-      broadcast({ type: 'error', message: e.message });
+      const msg = String(e.message || e);
+      // ◊ Transient 400: duplicate tool_use id (SDK race on parallel fan-out). Retry up to 3 attempts.
+      const transient = /tool_use.*ids must be unique|API Error: 400|invalid_request_error.*tool_use/i.test(msg);
+      if (transient && attempt < 3) {
+        broadcast({ type: 'assistant', text: `◊ transient API error (attempt ${attempt}/3) · retrying serially…`, ts: new Date().toISOString() });
+        await new Promise(r => setTimeout(r, 1500));
+        return runDirective(directive, attempt + 1);
+      }
+      broadcast({ type: 'error', message: msg + (attempt > 1 ? ` (after ${attempt} attempts)` : '') });
     }
   }
 

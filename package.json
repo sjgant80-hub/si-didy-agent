@@ -13,7 +13,7 @@
     "github-audit": "node agent.mjs ./examples/GITHUB-AUDIT-BRIEF.txt"
   },
   "dependencies": {
-    "@anthropic-ai/claude-agent-sdk": "^0.1.0",
+    "@anthropic-ai/claude-agent-sdk": "^0.3.159",
     "zod": "^3.23.0"
   },
   "optionalDependencies": {
