@@ -605,54 +605,184 @@ const estateMcp = createSdkMcpServer({
     // ═══════════════════════════════════════════════════════════════
     // ◊ COGNITIVE SUBSTRATE · v1.0 · the agentic-corp verbs
     // ═══════════════════════════════════════════════════════════════
-    tool('research', '◊·κ=φ⁵ · RESEARCH-AS-A-SERVICE · Run adversarially-verified deep research on any question via fall-raas. 5-angle fan-out → fetch sources → 3-vote refute panel → cited synthesis. Returns { summary, findings[], refuted[], openQuestions[], citations[] }. Use BEFORE drafting strategy or shipping a tool — research grounds the spec.',
+    tool('research', '◊·κ=φ⁵ · RESEARCH-AS-A-SERVICE · Run adversarially-verified deep research on any question. Spawns N angle-specialists in parallel via Claude Agent SDK, fetches sources via WebSearch/WebFetch, runs an M-vote refute panel on each claim, returns cited synthesis. Use BEFORE drafting strategy or shipping a tool — research grounds the spec.',
       { question: z.string().describe('The research question · be specific'),
         angles: z.number().min(1).max(7).default(5).describe('Parallel search angles · default 5'),
         votes: z.number().min(2).max(5).default(3).describe('Adversarial panel size · default 3'),
         killThreshold: z.number().min(1).max(4).default(2).describe('Votes needed to refute a claim · default 2') },
       async ({ question, angles, votes, killThreshold }) => {
         console.log(`  ◊· research (${angles}∠ × ${votes}v) "${question.slice(0,60)}…"`);
+        const t0 = Date.now();
+        const audit = { ts: new Date().toISOString(), tool: 'research', question, angles, votes, killThreshold, scope: 'fall-raas' };
+        try { fs.appendFileSync(path.join(MEMORY_DIR, 'substrate-calls.jsonl'), JSON.stringify(audit) + '\n'); } catch(_) {}
         try {
-          const r = await fetch('https://sjgant80-hub.github.io/fall-raas/fall-raas-worker.js', { headers: { 'User-Agent': 'si-didy-agent/1.0' } });
-          if (!r.ok) return { content: [{ type: 'text', text: '✗ fall-raas worker fetch failed · status ' + r.status }] };
-          // The worker is browser-side · for Node we delegate to the substrate doctrine: log the intent + suggested invocation
-          const audit = { ts: new Date().toISOString(), tool: 'research', question, angles, votes, killThreshold, scope: 'fall-raas' };
-          try { fs.appendFileSync(path.join(MEMORY_DIR, 'substrate-calls.jsonl'), JSON.stringify(audit) + '\n'); } catch(_) {}
-          return { content: [{ type: 'text', text: `◊ research queued · fall-raas · ${angles} angles × ${votes} votes · question: ${question}\n  → run live at https://sjgant80-hub.github.io/fall-raas/ with BYO Anthropic key for full pipeline\n  → for inline use, prefer subagent_spawn with a researcher brief (which calls the same workflow in-session)` }] };
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'research_started', payload: { question, angles, votes }, ts: new Date().toISOString() });
+        } catch(_) {}
+        const researchPrompt = `You are a fall-raas research worker. Run a ${angles}-angle adversarially-verified deep research pipeline on:
+
+QUESTION: ${question}
+
+Pipeline (execute every phase · use WebSearch and WebFetch tools):
+  1. SCOPE: decompose into ${angles} distinct search angles
+  2. SEARCH: fan out ${angles} parallel WebSearch calls · one per angle
+  3. FETCH: fetch the top sources from each angle (cap 4 per angle · dedupe URLs)
+  4. EXTRACT: pull falsifiable claims from each source (with quotes)
+  5. VERIFY: for each material claim, run a ${votes}-vote adversarial refute panel. A claim is KILLED if ${killThreshold}+ votes refute it.
+  6. SYNTHESIZE: merge semantic duplicates · rank by confidence · cite sources
+
+Return a single final JSON object only · no prose around it:
+{
+  "summary": "1-3 sentence headline · the verified finding",
+  "findings": [{ "claim": "...", "confidence": "high|medium|low", "sources": ["url"], "evidence": "...", "vote": "3-0" }],
+  "refuted": [{ "claim": "...", "vote": "0-3", "source": "url" }],
+  "openQuestions": ["..."],
+  "citations": [{ "url": "...", "quality": "primary|secondary|blog|forum" }],
+  "stats": { "angles": ${angles}, "sourcesFetched": 0, "claimsExtracted": 0, "claimsVerified": 0, "confirmed": 0, "killed": 0 }
+}`;
+        let final = '';
+        try {
+          const child = query({ prompt: researchPrompt, options: queryOpts });
+          for await (const m of child) {
+            if (m.type === 'assistant') {
+              const t = (m.message?.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+              if (t) final = t;
+            }
+          }
         } catch (e) {
           return { content: [{ type: 'text', text: 'research error: ' + e.message }] };
         }
+        const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'research_complete', payload: { question, elapsed_s: Number(elapsed) }, ts: new Date().toISOString() });
+        } catch(_) {}
+        try { fs.appendFileSync(path.join(MEMORY_DIR, 'research-results.jsonl'), JSON.stringify({ ts: new Date().toISOString(), question, angles, votes, elapsed_s: Number(elapsed), result: final.slice(0, 50000) }) + '\n'); } catch(_) {}
+        return { content: [{ type: 'text', text: `◊ research complete · ${elapsed}s · ${angles}∠ × ${votes}v\n\n${final}` }] };
       }
     ),
-    tool('verify', '◊·κ=φ⁵ · ADVERSARIAL VERIFICATION · Run a claim through fall-verify\'s 3-vote refute panel. Returns { verdict: confirmed|refuted|inconclusive, confidence, votes[], summary, suggestedFix? }. 52% of plausible LLM claims fail this gate (measured). Use BEFORE quoting a stat publicly, asserting a fact in a post, or committing to a buyer-facing claim.',
+    tool('verify', '◊·κ=φ⁵ · ADVERSARIAL VERIFICATION · Run a claim through an N-vote refute panel via parallel sub-Claudes. Each panelist has a distinct skeptic lens (technical / nuance / cross-reference). Returns { verdict, confidence, votes[], summary, suggestedFix? }. 52% of plausible LLM claims fail this gate (measured). Use BEFORE quoting a stat publicly.',
       { claim: z.string().describe('The exact claim to verify'),
         panelSize: z.number().min(2).max(5).default(3).describe('Number of independent refute panelists'),
         sources: z.array(z.string()).optional().describe('Optional URLs to ground the panel') },
       async ({ claim, panelSize, sources }) => {
         console.log(`  ◊· verify (${panelSize}v) "${claim.slice(0,60)}…"`);
+        const t0 = Date.now();
+        const audit = { ts: new Date().toISOString(), tool: 'verify', claim, panelSize, sources: sources || [], scope: 'fall-verify' };
+        try { fs.appendFileSync(path.join(MEMORY_DIR, 'substrate-calls.jsonl'), JSON.stringify(audit) + '\n'); } catch(_) {}
         try {
-          const audit = { ts: new Date().toISOString(), tool: 'verify', claim, panelSize, sources: sources || [], scope: 'fall-verify' };
-          try { fs.appendFileSync(path.join(MEMORY_DIR, 'substrate-calls.jsonl'), JSON.stringify(audit) + '\n'); } catch(_) {}
-          return { content: [{ type: 'text', text: `◊ verify queued · fall-verify · ${panelSize}-vote panel · claim: ${claim.slice(0,200)}\n  → run live at https://sjgant80-hub.github.io/fall-verify/ with BYO Anthropic key\n  → for inline use, prefer subagent_spawn with N skeptic briefs and aggregate votes manually` }] };
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'verify_started', payload: { claim: claim.slice(0,160), panelSize }, ts: new Date().toISOString() });
+        } catch(_) {}
+        const sourcesBlock = (sources && sources.length) ? `\n\nOptional grounding sources:\n${sources.map(s => '  - ' + s).join('\n')}\n` : '';
+        const verifyPrompt = `You are a fall-verify adversarial panel coordinator. Verify this claim with a ${panelSize}-vote refute panel.
+
+CLAIM: ${claim}${sourcesBlock}
+
+Spawn ${panelSize} skeptic panelists in your reasoning · each with a distinct lens:
+  Panelist 1 · Skeptic · default to refute unless evidence is strong
+  Panelist 2 · Technical detail · check definitions, numbers, dates, edge cases
+  Panelist 3 · Nuance · check for partial truths, missing qualifications${panelSize >= 4 ? '\n  Panelist 4 · Cross-reference · check independent sources' : ''}${panelSize >= 5 ? '\n  Panelist 5 · Source quality · downgrade for blog/marketing-incentive sources' : ''}
+
+Use WebSearch/WebFetch to ground each panelist. Each panelist returns: { vote: "confirm" | "refute" | "inconclusive", reasoning: "...", citations: ["url"] }.
+
+Aggregate. The claim is REFUTED if 2+ panelists refute. INCONCLUSIVE if no majority. Otherwise CONFIRMED.
+
+Return a single final JSON object only · no prose around it:
+{
+  "verdict": "confirmed" | "refuted" | "inconclusive",
+  "confidence": "high" | "medium" | "low",
+  "votes": [{ "panelist": 1, "vote": "...", "reasoning": "...", "citations": ["url"] }],
+  "summary": "1-2 sentence verdict · why",
+  "suggestedFix": "if refuted · the corrected version of the claim"
+}`;
+        let final = '';
+        try {
+          const child = query({ prompt: verifyPrompt, options: queryOpts });
+          for await (const m of child) {
+            if (m.type === 'assistant') {
+              const t = (m.message?.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+              if (t) final = t;
+            }
+          }
         } catch (e) {
           return { content: [{ type: 'text', text: 'verify error: ' + e.message }] };
         }
+        const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'verify_complete', payload: { claim: claim.slice(0,160), elapsed_s: Number(elapsed) }, ts: new Date().toISOString() });
+        } catch(_) {}
+        try { fs.appendFileSync(path.join(MEMORY_DIR, 'verify-results.jsonl'), JSON.stringify({ ts: new Date().toISOString(), claim, panelSize, elapsed_s: Number(elapsed), result: final.slice(0, 20000) }) + '\n'); } catch(_) {}
+        return { content: [{ type: 'text', text: `◊ verify complete · ${elapsed}s · ${panelSize}-vote panel\n\n${final}` }] };
       }
     ),
-    tool('substrate_build', '◊·κ=φ⁶ · THE FLAGSHIP VERB · End-to-end pipeline: research-question → cited findings → spec → generated sovereign HTML → live on Pages → audit-chained. Use when a build request would benefit from research grounding (not vibe-coding). Wraps fall-substrate\'s 6 phases. ALWAYS pause for ask_user before firing — this spawns a real repo.',
+    tool('substrate_build', '◊·κ=φ⁶ · THE FLAGSHIP VERB · End-to-end pipeline: research-question → cited findings → spec → generated sovereign HTML → live on Pages → audit-chained. Wraps fall-substrate\'s 6 phases natively (research/spec/generate/verify/ship/audit) via Claude Agent SDK. ALWAYS pauses for ask_user before firing — this creates a real repo.',
       { build_request: z.string().describe('What you want built · 1-3 sentences · e.g. "a tool that helps UK landlords track Section 21 compliance"'),
         target_repo: z.string().optional().describe('Optional · desired repo name · auto-generated from request if omitted') },
       async ({ build_request, target_repo }) => {
         const ans = await ask(`\n  ◊ SUBSTRATE BUILD · the full pipeline\n     request: ${build_request.slice(0,300)}\n     target:  ${target_repo || '(auto-generated)'}\n     phases:  research → spec → generate → verify → ship → audit\n  fire the substrate? [yes/no] > `);
         if (!/^(y|yes|go|ok|make it so)/i.test(ans.trim())) return { content: [{ type: 'text', text: 'substrate build declined' }] };
         console.log(`  ◊· substrate_build "${build_request.slice(0,60)}…"`);
+        const t0 = Date.now();
+        const audit = { ts: new Date().toISOString(), tool: 'substrate_build', build_request, target_repo: target_repo || null, scope: 'fall-substrate' };
+        try { fs.appendFileSync(path.join(MEMORY_DIR, 'substrate-calls.jsonl'), JSON.stringify(audit) + '\n'); } catch(_) {}
         try {
-          const audit = { ts: new Date().toISOString(), tool: 'substrate_build', build_request, target_repo: target_repo || null, scope: 'fall-substrate' };
-          try { fs.appendFileSync(path.join(MEMORY_DIR, 'substrate-calls.jsonl'), JSON.stringify(audit) + '\n'); } catch(_) {}
-          return { content: [{ type: 'text', text: `◊ substrate engaged · fall-substrate flagship\n  request: ${build_request}\n  pipeline: research → spec → generate → verify → ship → audit\n  → run live at https://sjgant80-hub.github.io/fall-substrate/ with BYO Anthropic key for the in-browser version\n  → for native execution, recommend: (1) research(question), (2) subagent_spawn to draft spec, (3) forge_request with the spec, (4) verify(spec_features) post-build` }] };
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'substrate_build_started', payload: { build_request, target_repo }, ts: new Date().toISOString() });
+        } catch(_) {}
+        const substratePrompt = SYSTEM_DOCTRINE + `\n\nYOU ARE THE fall-substrate FLAGSHIP PIPELINE · executing for Simon · run all 6 phases · narrate each as you go.
+
+BUILD REQUEST: ${build_request}
+TARGET REPO:   ${target_repo || '(generate · pattern: fall<short-noun>)'}
+
+PHASE 1 · RESEARCH
+  Call the research(question, angles:5, votes:3) MCP tool to ground the build.
+  Question = "What does an evidence-graded best-in-class version of: ${build_request} actually do?"
+
+PHASE 2 · SPEC
+  Convert confirmed findings into a feature spec graded HIGH/MEDIUM/LOW.
+  Drop refuted features. State the 14-point ƒ(build) gate compliance plan.
+
+PHASE 3 · GENERATE
+  Use cli_run (gh + git) to:
+    a) gh repo create sjgant80-hub/<target_repo> --public
+    b) write index.html · single sovereign file · luxury brutalist palette
+       (ox/brass/cream/void/gold · Libre Baskerville + Syne + DM Mono + DM Sans)
+       · IndexedDB primary · localStorage fallback · PWA manifest baked
+       · Konomi licence shim · fallmesh hook (assign a prime > 400)
+       · works offline from file://
+    c) write README.md (two-audience), LICENSE (MIT · Simon Gant), .nojekyll
+    d) git init -b main · commit · push -u origin main
+    e) gh api -X POST repos/sjgant80-hub/<target_repo>/pages -f source[branch]=main -f source[path]=/
+
+PHASE 4 · VERIFY
+  Call verify(claim, panelSize:3) on each HIGH-priority feature to confirm
+  the generated code actually implements it.
+
+PHASE 5 · SHIP
+  Poll https://sjgant80-hub.github.io/<target_repo>/ until HTTP 200.
+  Confirm smoke test (page loads, contains the tool name, key feature visible).
+
+PHASE 6 · AUDIT
+  Append a Konomi-style audit record to memory scope "substrate-builds":
+    { ts, build_request, target_repo, live_url, file_size, features_confirmed, features_refuted }
+
+Return ONLY a tight final summary:
+  ✓ live URL · ✓ file size · ✓ N features confirmed · ✓ M features refuted · ✓ pipeline time`;
+        let final = '';
+        try {
+          const child = query({ prompt: substratePrompt, options: queryOpts });
+          for await (const m of child) {
+            if (m.type === 'assistant') {
+              const t = (m.message?.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+              if (t) final = t;
+            }
+          }
         } catch (e) {
           return { content: [{ type: 'text', text: 'substrate_build error: ' + e.message }] };
         }
+        const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'substrate_build_complete', payload: { build_request, target_repo, elapsed_s: Number(elapsed) }, ts: new Date().toISOString() });
+        } catch(_) {}
+        try { fs.appendFileSync(path.join(MEMORY_DIR, 'substrate-builds.jsonl'), JSON.stringify({ ts: new Date().toISOString(), build_request, target_repo, elapsed_s: Number(elapsed), result: final.slice(0, 20000) }) + '\n'); } catch(_) {}
+        return { content: [{ type: 'text', text: `◊ substrate build complete · ${elapsed}s · 6-phase pipeline\n\n${final}` }] };
       }
     ),
     tool('pack_edit', '◊·κ=φ⁴ · SELF-EDITING · Propose a diff to a pack based on accumulated lessons. ALWAYS pauses for ask_user before writing. The twin can rewrite its own playbooks.',
@@ -852,6 +982,8 @@ const allowedTools = [
   'mcp__estate__forge_request', 'mcp__estate__subagent_spawn',
   'mcp__estate__learn_log', 'mcp__estate__learn_recall',
   'mcp__estate__pack_edit',
+  // ◊ Cognitive Substrate verbs · the agentic-corp mouth
+  'mcp__estate__research', 'mcp__estate__verify', 'mcp__estate__substrate_build',
 ];
 
 console.log('\n◊ tiers loaded:');
