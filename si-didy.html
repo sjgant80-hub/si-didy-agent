@@ -279,6 +279,38 @@ function renderMissions(){
   $('#m-count').textContent = missions.length;
 }
 
+function appendMesh(ev){
+  // ◊·κ=1 · fall-signal mesh event surfaced in cockpit
+  const last = tr.querySelector('.turn.sididy:last-of-type');
+  const host = last ? last.querySelector('.body') : (()=>{ const d = document.createElement('div'); d.className='turn sididy'; d.innerHTML='<div class="role">mesh ⌬</div><div class="body"></div>'; tr.appendChild(d); return d.querySelector('.body'); })();
+  const chip = document.createElement('div');
+  chip.className = 'tool mesh';
+  chip.style.cssText = 'border-left: 2px solid var(--gold, #d4a853); padding-left: 8px; opacity: 0.85; font-size: 11px;';
+  const src = ev.source || 'unknown';
+  const kind = ev.kind || 'event';
+  let payloadPreview = '';
+  try { payloadPreview = JSON.stringify(ev.payload || {}).slice(0, 120); } catch(_) { payloadPreview = '(unserialisable)'; }
+  chip.innerHTML = `<span class="tier" style="background:#d4a853;color:#0b0a0f;padding:1px 4px;font-size:9px">⌬</span> <span class="name">${escapeHtml(src)} · ${escapeHtml(kind)}</span> <span class="inp" style="opacity:0.7">${escapeHtml(payloadPreview)}</span>`;
+  host.appendChild(chip);
+  host.appendChild(document.createElement('br'));
+  tr.scrollTop = tr.scrollHeight;
+}
+
+// ◊·κ=1 · BroadcastChannel('fall-signal') bridge · relay browser-side mesh events to Node
+try {
+  const bc = new BroadcastChannel('fall-signal');
+  bc.onmessage = async (e) => {
+    try {
+      await fetch('/signal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ source: (e.data && e.data.source) || 'broadcast', kind: (e.data && (e.data.kind || e.data.type)) || 'event', payload: e.data })
+      });
+    } catch(_) {}
+  };
+  console.log('[si-didy] fall-signal bridge active · BroadcastChannel → /signal');
+} catch (e) { console.warn('[si-didy] BroadcastChannel unavailable', e); }
+
 function appendAsk(id, question){
   const card = document.createElement('div');
   card.className = 'ask';
@@ -322,6 +354,7 @@ es.onmessage = e => {
   if (ev.type === 'tool_call') { appendTool(ev); return; }
   if (ev.type === 'ask_user') { appendAsk(ev.id, ev.question); return; }
   if (ev.type === 'ask_resolved') { return; }
+  if (ev.type === 'fall_signal') { appendMesh(ev); return; }
   if (ev.type === 'mission_complete') {
     totalTurns += (ev.turns || 0);
     totalCost  += (ev.cost  || 0);

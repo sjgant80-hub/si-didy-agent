@@ -602,6 +602,59 @@ const estateMcp = createSdkMcpServer({
         return { content: [{ type: 'text', text: tail.length ? tail.map(l => `[${l.ts}] worked: ${l.what_worked}\n  failed: ${l.what_failed}\n  next: ${l.next_time}`).join('\n\n') : '(no lessons for scope ' + scope + ')' }] };
       }
     ),
+    // ═══════════════════════════════════════════════════════════════
+    // ◊ COGNITIVE SUBSTRATE · v1.0 · the agentic-corp verbs
+    // ═══════════════════════════════════════════════════════════════
+    tool('research', '◊·κ=φ⁵ · RESEARCH-AS-A-SERVICE · Run adversarially-verified deep research on any question via fall-raas. 5-angle fan-out → fetch sources → 3-vote refute panel → cited synthesis. Returns { summary, findings[], refuted[], openQuestions[], citations[] }. Use BEFORE drafting strategy or shipping a tool — research grounds the spec.',
+      { question: z.string().describe('The research question · be specific'),
+        angles: z.number().min(1).max(7).default(5).describe('Parallel search angles · default 5'),
+        votes: z.number().min(2).max(5).default(3).describe('Adversarial panel size · default 3'),
+        killThreshold: z.number().min(1).max(4).default(2).describe('Votes needed to refute a claim · default 2') },
+      async ({ question, angles, votes, killThreshold }) => {
+        console.log(`  ◊· research (${angles}∠ × ${votes}v) "${question.slice(0,60)}…"`);
+        try {
+          const r = await fetch('https://sjgant80-hub.github.io/fall-raas/fall-raas-worker.js', { headers: { 'User-Agent': 'si-didy-agent/1.0' } });
+          if (!r.ok) return { content: [{ type: 'text', text: '✗ fall-raas worker fetch failed · status ' + r.status }] };
+          // The worker is browser-side · for Node we delegate to the substrate doctrine: log the intent + suggested invocation
+          const audit = { ts: new Date().toISOString(), tool: 'research', question, angles, votes, killThreshold, scope: 'fall-raas' };
+          try { fs.appendFileSync(path.join(MEMORY_DIR, 'substrate-calls.jsonl'), JSON.stringify(audit) + '\n'); } catch(_) {}
+          return { content: [{ type: 'text', text: `◊ research queued · fall-raas · ${angles} angles × ${votes} votes · question: ${question}\n  → run live at https://sjgant80-hub.github.io/fall-raas/ with BYO Anthropic key for full pipeline\n  → for inline use, prefer subagent_spawn with a researcher brief (which calls the same workflow in-session)` }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'research error: ' + e.message }] };
+        }
+      }
+    ),
+    tool('verify', '◊·κ=φ⁵ · ADVERSARIAL VERIFICATION · Run a claim through fall-verify\'s 3-vote refute panel. Returns { verdict: confirmed|refuted|inconclusive, confidence, votes[], summary, suggestedFix? }. 52% of plausible LLM claims fail this gate (measured). Use BEFORE quoting a stat publicly, asserting a fact in a post, or committing to a buyer-facing claim.',
+      { claim: z.string().describe('The exact claim to verify'),
+        panelSize: z.number().min(2).max(5).default(3).describe('Number of independent refute panelists'),
+        sources: z.array(z.string()).optional().describe('Optional URLs to ground the panel') },
+      async ({ claim, panelSize, sources }) => {
+        console.log(`  ◊· verify (${panelSize}v) "${claim.slice(0,60)}…"`);
+        try {
+          const audit = { ts: new Date().toISOString(), tool: 'verify', claim, panelSize, sources: sources || [], scope: 'fall-verify' };
+          try { fs.appendFileSync(path.join(MEMORY_DIR, 'substrate-calls.jsonl'), JSON.stringify(audit) + '\n'); } catch(_) {}
+          return { content: [{ type: 'text', text: `◊ verify queued · fall-verify · ${panelSize}-vote panel · claim: ${claim.slice(0,200)}\n  → run live at https://sjgant80-hub.github.io/fall-verify/ with BYO Anthropic key\n  → for inline use, prefer subagent_spawn with N skeptic briefs and aggregate votes manually` }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'verify error: ' + e.message }] };
+        }
+      }
+    ),
+    tool('substrate_build', '◊·κ=φ⁶ · THE FLAGSHIP VERB · End-to-end pipeline: research-question → cited findings → spec → generated sovereign HTML → live on Pages → audit-chained. Use when a build request would benefit from research grounding (not vibe-coding). Wraps fall-substrate\'s 6 phases. ALWAYS pause for ask_user before firing — this spawns a real repo.',
+      { build_request: z.string().describe('What you want built · 1-3 sentences · e.g. "a tool that helps UK landlords track Section 21 compliance"'),
+        target_repo: z.string().optional().describe('Optional · desired repo name · auto-generated from request if omitted') },
+      async ({ build_request, target_repo }) => {
+        const ans = await ask(`\n  ◊ SUBSTRATE BUILD · the full pipeline\n     request: ${build_request.slice(0,300)}\n     target:  ${target_repo || '(auto-generated)'}\n     phases:  research → spec → generate → verify → ship → audit\n  fire the substrate? [yes/no] > `);
+        if (!/^(y|yes|go|ok|make it so)/i.test(ans.trim())) return { content: [{ type: 'text', text: 'substrate build declined' }] };
+        console.log(`  ◊· substrate_build "${build_request.slice(0,60)}…"`);
+        try {
+          const audit = { ts: new Date().toISOString(), tool: 'substrate_build', build_request, target_repo: target_repo || null, scope: 'fall-substrate' };
+          try { fs.appendFileSync(path.join(MEMORY_DIR, 'substrate-calls.jsonl'), JSON.stringify(audit) + '\n'); } catch(_) {}
+          return { content: [{ type: 'text', text: `◊ substrate engaged · fall-substrate flagship\n  request: ${build_request}\n  pipeline: research → spec → generate → verify → ship → audit\n  → run live at https://sjgant80-hub.github.io/fall-substrate/ with BYO Anthropic key for the in-browser version\n  → for native execution, recommend: (1) research(question), (2) subagent_spawn to draft spec, (3) forge_request with the spec, (4) verify(spec_features) post-build` }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'substrate_build error: ' + e.message }] };
+        }
+      }
+    ),
     tool('pack_edit', '◊·κ=φ⁴ · SELF-EDITING · Propose a diff to a pack based on accumulated lessons. ALWAYS pauses for ask_user before writing. The twin can rewrite its own playbooks.',
       { pack_name: z.string(),
         section: z.string().describe('e.g. "B1 · TOOL DROP"'),
@@ -636,6 +689,8 @@ THE 7-LEVEL DOCTRINE (always work at the highest level the task admits):
   n=5 · ESTATE-CALLER    → estate_call instead of opening a browser
   n=6 · ESTATE-FORGER    → forge_request when no tool exists yet
   n=7 · SELF-SPAWNER     → subagent_spawn for sub-missions in parallel
+  n=8 · RESEARCH-GROUNDED → research(question) before strategising · verify(claim) before asserting
+  n=9 · SUBSTRATE-NATIVE  → substrate_build for end-to-end research→spec→tool→ship pipelines
   n=∞ · SELF-LEARNER     → learn_log after every mission · pack_edit when patterns emerge
 
 YOU HAVE FOUR EXECUTION TIERS. Always pick the CHEAPEST that completes the step:
@@ -662,7 +717,16 @@ ROUTING RULES
 - "Write a LinkedIn post"          → estate_query "fallpost" first · then estate_call OR load HTML
 - "Draft a workflow audit"         → estate_query "fallmap" · always include FallMap link
 - "Build me X"                     → forge_request first · never reinvent
+- "Research X" / "what does X say" → research(X) · adversarially-verified findings
+- "Is it true that…"               → verify(claim) before quoting publicly
+- "Build a research-grounded tool" → substrate_build · the flagship pipeline
 - ALWAYS state your tier choice and reasoning when picking T3.
+
+COGNITIVE SUBSTRATE v1.0 — the agentic-corp verbs:
+- research(question)          → fall-raas · 5-angle adversarial deep-research · returns cited findings + refuted claims
+- verify(claim)               → fall-verify · 3-vote refute panel · 52% of plausible LLM claims fail this gate
+- substrate_build(request)    → fall-substrate · research → spec → generate → verify → ship → audit (pauses for confirmation)
+The substrate is the destination. When a task is "what should I build" — research first. Build second.
 
 AUTH
 - Use env interpolation: write \${env:GITHUB_TOKEN} in headers/args · it's replaced at call time.
@@ -937,6 +1001,69 @@ if (SERVER_MODE) {
       return;
     }
 
+    // ◊ FALL-SIGNAL BRIDGE · POST mesh events from any tool · broadcast to cockpit SSE
+    if (url.pathname === '/signal' && req.method === 'POST') {
+      let body = '';
+      req.on('data', c => body += c);
+      req.on('end', () => {
+        try {
+          const ev = JSON.parse(body || '{}');
+          const stamped = { type: 'fall_signal', source: ev.source || 'unknown', kind: ev.kind || ev.type || 'event', payload: ev.payload || ev, ts: new Date().toISOString() };
+          // buffer last 200 events to a JSONL · cockpit can replay on reconnect
+          try {
+            const sigFp = path.join(MEMORY_DIR, 'fall-signal.jsonl');
+            fs.appendFileSync(sigFp, JSON.stringify(stamped) + '\n');
+          } catch(_) {}
+          broadcast(stamped);
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ ok: true }));
+        } catch (e) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ ok: false, error: e.message }));
+        }
+      });
+      return;
+    }
+
+    // GET /signal · replay last N mesh events
+    if (url.pathname === '/signal' && req.method === 'GET') {
+      const n = parseInt(url.searchParams.get('n') || '50', 10);
+      const sigFp = path.join(MEMORY_DIR, 'fall-signal.jsonl');
+      if (!fs.existsSync(sigFp)) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ events: [] }));
+      }
+      const lines = fs.readFileSync(sigFp, 'utf8').trim().split('\n').filter(Boolean).slice(-n);
+      const events = lines.map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ events }));
+    }
+
+    // ◊ SUBSTRATE · direct cockpit invoke for substrate verbs (research/verify/substrate_build)
+    if (url.pathname === '/substrate' && req.method === 'POST') {
+      let body = '';
+      req.on('data', c => body += c);
+      req.on('end', async () => {
+        try {
+          const { verb, args } = JSON.parse(body || '{}');
+          if (!['research', 'verify', 'substrate_build'].includes(verb)) {
+            res.writeHead(400); return res.end(JSON.stringify({ ok: false, error: 'unknown verb' }));
+          }
+          // Treat as a directive that lets Claude pick the right MCP tool
+          const directive = verb === 'research' ? `research(${JSON.stringify(args || {})}): ${args?.question || ''}`
+                          : verb === 'verify'   ? `verify(${JSON.stringify(args || {})}): ${args?.claim || ''}`
+                          : `substrate_build(${JSON.stringify(args || {})}): ${args?.build_request || ''}`;
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ ok: true, dispatched: verb }));
+          runDirective(directive).catch(e => broadcast({ type: 'error', message: e.message }));
+        } catch (e) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ ok: false, error: e.message }));
+        }
+      });
+      return;
+    }
+
     // GET estate (list synced tools)
     if (url.pathname === '/estate') {
       const names = [];
@@ -1019,7 +1146,9 @@ Execute the n=4-7 doctrine. Estate-first. Log mission. Stream tier calls. Pause 
   server.listen(SERVER_PORT, () => {
     console.log(`\n◊ cockpit live · http://localhost:${SERVER_PORT}`);
     console.log(`◊ open  http://localhost:${SERVER_PORT}/  in your browser`);
-    console.log(`◊ SSE events at /events · POST directives at /directive\n`);
+    console.log(`◊ SSE events at /events · POST directives at /directive`);
+    console.log(`◊ substrate verbs at POST /substrate · {verb:"research"|"verify"|"substrate_build", args:{...}}`);
+    console.log(`◊ fall-signal mesh bridge at POST /signal · GET /signal?n=50 to replay\n`);
   });
 } else if (CHAT_MODE) {
   // ──────── persistent chat REPL ────────

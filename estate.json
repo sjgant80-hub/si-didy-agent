@@ -1,7 +1,7 @@
 {
-  "_doc": "Estate manifest · auto-synced from GitHub · 2026-05-30T14:55:19.248Z. v20.1 seed cosmology · phi=1.618 · kappa=0.618 · fold=510510. si-didy queries this BEFORE reaching for browser.",
+  "_doc": "Estate manifest · auto-synced from GitHub · 2026-05-31T13:15:27.751Z. v20.1 seed cosmology · phi=1.618 · kappa=0.618 · fold=510510. si-didy queries this BEFORE reaching for browser.",
   "version": "2.0-synced",
-  "synced_at": "2026-05-30T14:55:19.248Z",
+  "synced_at": "2026-05-31T13:15:27.751Z",
   "owners": [
     "sjgant80-hub",
     "teslasolar"
@@ -36,11 +36,20 @@
       "url": "https://sjgant80-hub.github.io/forge-upgrade/",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
+    "konomi-signer": {
+      "purpose": "Sovereign Ed25519 trial signer · imported by every estate product's forge.html · key stays on laptop · MIT · ◊·κ=1",
+      "repo": "https://github.com/sjgant80-hub/konomi-signer",
+      "stars": 0,
+      "pushed": "2026-05-31T01:39:58Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/konomi-signer/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
     "trilogy-forge": {
       "purpose": "The Psychological Build Engine - Jung + Freud + Sales 101. Auto-generates elite AI configs per client archetype, shadow, and role psychology.",
       "repo": "https://github.com/sjgant80-hub/trilogy-forge",
       "stars": 1,
-      "pushed": "2026-05-29T00:48:36Z",
+      "pushed": "2026-05-30T15:15:39Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/trilogy-forge/",
       "use_when": "Jung / shadow-work / individuation conversations",
@@ -107,7 +116,7 @@
       "purpose": "ai native the right way",
       "repo": "https://github.com/sjgant80-hub/ai-nativesolutions",
       "stars": 2,
-      "pushed": "2026-05-29T03:18:13Z",
+      "pushed": "2026-05-31T13:08:24Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/ai-nativesolutions/",
       "tier": "T3 (load HTML) or T1 if API exposed"
@@ -134,7 +143,7 @@
       "purpose": "Direct line to Simon · GitHub Issue Forms · email auto-collected · auto-reply · no middleman · MIT",
       "repo": "https://github.com/sjgant80-hub/contact",
       "stars": 0,
-      "pushed": "2026-05-29T01:37:58Z",
+      "pushed": "2026-05-31T11:14:06Z",
       "has_pages": false,
       "url": "https://github.com/sjgant80-hub/contact/issues/new/choose",
       "use_when": "sovereign forms · Typeform/JotForm replacement",
@@ -196,6 +205,43 @@
       "url": "https://sjgant80-hub.github.io/fall-bloom/",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
+    "fall-raas": {
+      "purpose": "fall-raas · Research-as-a-Service · 5-angle fan-out · 3-vote adversarial · cited synthesis · prime 397",
+      "repo": "https://github.com/sjgant80-hub/fall-raas",
+      "stars": 0,
+      "pushed": "2026-05-31T13:00:31Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fall-raas/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fall-substrate": {
+      "purpose": "◊ fall-substrate · the cognitive substrate · research → spec → tool → ship · flagship · prime 389",
+      "repo": "https://github.com/sjgant80-hub/fall-substrate",
+      "stars": 0,
+      "pushed": "2026-05-31T12:59:27Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fall-substrate/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fall-verify": {
+      "purpose": "◊ fall-verify · adversarial verification · 3-vote refute panel · did Claude hallucinate? · prime 401",
+      "repo": "https://github.com/sjgant80-hub/fall-verify",
+      "stars": 0,
+      "pushed": "2026-05-31T13:01:53Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fall-verify/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fall-vetter": {
+      "purpose": "◊ fall-vetter · drop-in guild signup gate · R2 ┃ validate · prime 347",
+      "repo": "https://github.com/sjgant80-hub/fall-vetter",
+      "stars": 0,
+      "pushed": "2026-05-31T11:13:26Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fall-vetter/",
+      "use_when": "multi-person amplification on LinkedIn",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
     "fallaccount": {
       "purpose": "FallAccount Elite - Sovereign accounting for UK sole traders. Any LLM. Single HTML file. Zero SaaS.",
       "repo": "https://github.com/sjgant80-hub/fallaccount",
@@ -210,10 +256,28 @@
       "purpose": "Sovereign accounts app for UK builders, plumbers, sparkies, plasterers. One HTML file. Data on your phone. MTD-ready. CIS handled both directions.",
       "repo": "https://github.com/sjgant80-hub/fallaccount-trades",
       "stars": 0,
-      "pushed": "2026-05-28T07:37:51Z",
+      "pushed": "2026-05-30T15:15:58Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fallaccount-trades/",
       "use_when": "UK accounting · trades / sole-trader compliance",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallanno": {
+      "purpose": "Sovereign data annotation · workers own attribution · multi-rail pay · the DataAnnotation alternative · ◊·κ=1 · prime 331",
+      "repo": "https://github.com/sjgant80-hub/fallanno",
+      "stars": 0,
+      "pushed": "2026-05-30T15:52:44Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallanno/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallap": {
+      "purpose": "◊ fallap · sovereign invoice rewriter · PYMNTS hierarchy of convenience · one-click pay · prime 383",
+      "repo": "https://github.com/sjgant80-hub/fallap",
+      "stars": 0,
+      "pushed": "2026-05-31T12:55:12Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallap/",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
     "fallcall": {
@@ -223,6 +287,34 @@
       "pushed": "2026-05-28T00:38:07Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fallcall/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallcarousel": {
+      "purpose": "◊ fallcarousel · sovereign LinkedIn carousel builder · 1.39x reach format · prime 367",
+      "repo": "https://github.com/sjgant80-hub/fallcarousel",
+      "stars": 0,
+      "pushed": "2026-05-31T12:55:02Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallcarousel/",
+      "use_when": "LinkedIn drafting · tone grading",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallcdn": {
+      "purpose": "Sovereign self-hosted Pages alternative · Tailscale/Cloudflare/Caddy · MIT · ◊·κ=1 · prime 311",
+      "repo": "https://github.com/sjgant80-hub/fallcdn",
+      "stars": 0,
+      "pushed": "2026-05-30T15:45:17Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallcdn/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallcompass": {
+      "purpose": "Sovereign LLM cascade · 8 providers · auto-failover · drop-in shim · MIT · ◊·κ=1",
+      "repo": "https://github.com/sjgant80-hub/fallcompass",
+      "stars": 0,
+      "pushed": "2026-05-30T15:13:37Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallcompass/",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
     "fallconcierge": {
@@ -254,6 +346,16 @@
       "use_when": "AI literacy · parents · educators · kids",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
+    "fallcrm": {
+      "purpose": "◊ fallcrm · sovereign single-file CRM · the delete-HubSpot wedge · prime 373",
+      "repo": "https://github.com/sjgant80-hub/fallcrm",
+      "stars": 0,
+      "pushed": "2026-05-31T12:49:31Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallcrm/",
+      "use_when": "CRM / pipeline / RFQ · audit-chained",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
     "fallcube-api": {
       "purpose": "Sovereign File Storage API - upload, search, analyze, stream. Zero cloud.",
       "repo": "https://github.com/sjgant80-hub/fallcube-api",
@@ -261,6 +363,15 @@
       "pushed": "2026-05-28T00:38:44Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fallcube-api/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallescape": {
+      "purpose": "Sovereign emergency egress kit · if everything dies, rebuild in 20 min · MIT · ◊·κ=1 · prime 293",
+      "repo": "https://github.com/sjgant80-hub/fallescape",
+      "stars": 0,
+      "pushed": "2026-05-30T15:32:41Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallescape/",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
     "fallflip": {
@@ -273,11 +384,20 @@
       "use_when": "LinkedIn drafting · tone grading",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
+    "fallflow": {
+      "purpose": "◊ fallflow · 14-day cash-runway early-warning · Friday-by-Friday red/green wall · prime 353",
+      "repo": "https://github.com/sjgant80-hub/fallflow",
+      "stars": 0,
+      "pushed": "2026-05-31T12:55:02Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallflow/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
     "fallforce": {
       "purpose": "fallforce · sovereign estate tool",
       "repo": "https://github.com/sjgant80-hub/fallforce",
       "stars": 1,
-      "pushed": "2026-05-27T23:52:56Z",
+      "pushed": "2026-05-31T01:44:06Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fallforce/",
       "use_when": "CRM / pipeline / RFQ · audit-chained",
@@ -340,6 +460,24 @@
       "use_when": "LinkedIn drafting · tone grading",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
+    "fallhire": {
+      "purpose": "◊ fallhire · sovereign hiring pipeline + interview scorecard · single HTML · prime 359",
+      "repo": "https://github.com/sjgant80-hub/fallhire",
+      "stars": 0,
+      "pushed": "2026-05-31T12:56:14Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallhire/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallinvoice": {
+      "purpose": "◊ fallinvoice · sovereign single-file invoice + one-click-pay + reminders · prime 349",
+      "repo": "https://github.com/sjgant80-hub/fallinvoice",
+      "stars": 0,
+      "pushed": "2026-05-31T12:55:27Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallinvoice/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
     "falllead": {
       "purpose": "falllead · sovereign estate tool",
       "repo": "https://github.com/sjgant80-hub/falllead",
@@ -353,7 +491,7 @@
       "purpose": "Ai the right way",
       "repo": "https://github.com/sjgant80-hub/falllearn",
       "stars": 1,
-      "pushed": "2026-05-30T01:28:48Z",
+      "pushed": "2026-05-30T15:15:53Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/falllearn/",
       "use_when": "AI literacy · parents · educators · kids",
@@ -373,10 +511,20 @@
       "purpose": "Paste your workflow · see what a £20k consultant builds · see the sovereign version that does the same for £0 · single HTML · on-device · prime 241",
       "repo": "https://github.com/sjgant80-hub/fallmap",
       "stars": 0,
-      "pushed": "2026-05-28T08:16:50Z",
+      "pushed": "2026-05-30T15:16:03Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fallmap/",
       "use_when": "workflow-to-cost · the FallMap-as-bait engine",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallmirror": {
+      "purpose": "Sovereign multi-host repo mirroring · GitHub + Codeberg + GitLab + IPFS + USB · MIT · ◊·κ=1",
+      "repo": "https://github.com/sjgant80-hub/fallmirror",
+      "stars": 0,
+      "pushed": "2026-05-30T15:27:56Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallmirror/",
+      "use_when": "estate marketplace · client-facing surface",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
     "falloffice": {
@@ -388,11 +536,29 @@
       "url": "https://sjgant80-hub.github.io/falloffice/",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
+    "fallonion": {
+      "purpose": "Sovereign Tor hidden service mirror · for censored jurisdictions · MIT · ◊·κ=1 · prime 317",
+      "repo": "https://github.com/sjgant80-hub/fallonion",
+      "stars": 0,
+      "pushed": "2026-05-30T15:45:17Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallonion/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallpay": {
+      "purpose": "Sovereign multi-rail payment receipt · Stripe+PayPal+crypto+invoice · MIT · ◊·κ=1 · prime 307",
+      "repo": "https://github.com/sjgant80-hub/fallpay",
+      "stars": 0,
+      "pushed": "2026-05-30T15:32:49Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallpay/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
     "fallpost": {
       "purpose": "Sovereign LinkedIn engine · Jung+Freud+Sales 101 baked in · BYOK cascade · sovereign tone seed",
       "repo": "https://github.com/sjgant80-hub/fallpost",
       "stars": 0,
-      "pushed": "2026-05-29T02:02:40Z",
+      "pushed": "2026-05-30T15:15:49Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fallpost/",
       "use_when": "LinkedIn drafting · tone grading",
@@ -427,6 +593,24 @@
       "use_when": "LinkedIn drafting · tone grading",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
+    "fallshield": {
+      "purpose": "Sovereign Ed25519 identity · prove it's really you · WebCrypto · MIT · ◊·κ=1 · prime 283",
+      "repo": "https://github.com/sjgant80-hub/fallshield",
+      "stars": 0,
+      "pushed": "2026-05-30T15:32:34Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallshield/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallskin": {
+      "purpose": "Premium upgrades for sovereign tools · desktop·mobile·SSO·integrations·white-label · sovereignty preserved · ◊·κ=1 · prime 337",
+      "repo": "https://github.com/sjgant80-hub/fallskin",
+      "stars": 0,
+      "pushed": "2026-05-30T15:52:44Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallskin/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
     "fallslot": {
       "purpose": "Share a calendar link · sovereign · single HTML · zero subscription · obsoletes Calendly · prime 263",
       "repo": "https://github.com/sjgant80-hub/fallslot",
@@ -441,7 +625,7 @@
       "purpose": "Sovereign emergency backup · one HTML file · AES-256-GCM in your browser · MIT · ◊·κ=1",
       "repo": "https://github.com/sjgant80-hub/fallvault",
       "stars": 0,
-      "pushed": "2026-05-30T14:48:20Z",
+      "pushed": "2026-05-30T15:07:56Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fallvault/",
       "tier": "T3 (load HTML) or T1 if API exposed"
@@ -485,7 +669,7 @@
       "purpose": "gymos · sovereign estate tool",
       "repo": "https://github.com/sjgant80-hub/gymos",
       "stars": 1,
-      "pushed": "2026-05-27T13:00:26Z",
+      "pushed": "2026-05-31T06:05:46Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/gymos/",
       "tier": "T3 (load HTML) or T1 if API exposed"
@@ -526,7 +710,7 @@
       "purpose": "Sovereign single-file Jungian shadow work. Mirror your archetype, decode dreams, identify projections. Free forever · 14-day Pro trial. v20.1 · ◊·κ=1 · phi is home.",
       "repo": "https://github.com/sjgant80-hub/shadowcompass",
       "stars": 0,
-      "pushed": "2026-05-30T01:02:14Z",
+      "pushed": "2026-05-30T15:15:44Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/shadowcompass/",
       "use_when": "Jung / shadow-work / individuation conversations",
@@ -684,7 +868,7 @@
       "purpose": "ACG Guild Clock -- World wide time visualization of members.",
       "repo": "https://github.com/teslasolar/ACGGLOCK",
       "stars": 1,
-      "pushed": "2026-05-30T06:59:39Z",
+      "pushed": "2026-05-31T07:17:36Z",
       "has_pages": true,
       "url": "https://teslasolar.github.io/ACGGLOCK/",
       "use_when": "multi-person amplification on LinkedIn",
@@ -1911,7 +2095,7 @@
       "purpose": "Canonical index of Fall sovereign plugins · machine-readable manifest for fall-hot watchers",
       "repo": "https://github.com/sjgant80-hub/fall-registry",
       "stars": 0,
-      "pushed": "2026-05-30T14:55:03Z",
+      "pushed": "2026-05-31T13:06:53Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fall-registry/",
       "tier": "T3 (load HTML) or T1 if API exposed"
@@ -1932,6 +2116,15 @@
       "pushed": "2026-05-28T00:38:37Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/fallmesh/",
+      "tier": "T3 (load HTML) or T1 if API exposed"
+    },
+    "fallnet": {
+      "purpose": "Sovereign peer-to-peer mesh · WebRTC · browser-to-browser · MIT · ◊·κ=1 · prime 313",
+      "repo": "https://github.com/sjgant80-hub/fallnet",
+      "stars": 0,
+      "pushed": "2026-05-30T15:45:17Z",
+      "has_pages": true,
+      "url": "https://sjgant80-hub.github.io/fallnet/",
       "tier": "T3 (load HTML) or T1 if API exposed"
     },
     "fallsignal": {
@@ -2034,7 +2227,7 @@
       "purpose": "Konomi Standard",
       "repo": "https://github.com/teslasolar/KonomiStandard",
       "stars": 3,
-      "pushed": "2026-05-30T14:34:30Z",
+      "pushed": "2026-05-31T12:33:27Z",
       "has_pages": true,
       "url": "https://teslasolar.github.io/KonomiStandard/",
       "tier": "T3 (load HTML) or T1 if API exposed"
@@ -2100,7 +2293,7 @@
       "purpose": "cassietorusbtc135solver · sovereign estate tool",
       "repo": "https://github.com/sjgant80-hub/cassietorusbtc135solver",
       "stars": 1,
-      "pushed": "2026-05-29T12:51:55Z",
+      "pushed": "2026-05-31T10:46:34Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/cassietorusbtc135solver/",
       "tier": "T3 (load HTML) or T1 if API exposed"
@@ -2127,7 +2320,7 @@
       "purpose": "Sovereign computer-use agent · Claude Agent SDK + Playwright · subscription auth · ◊·κ=1 · prime 379",
       "repo": "https://github.com/sjgant80-hub/si-didy-agent",
       "stars": 0,
-      "pushed": "2026-05-30T14:41:21Z",
+      "pushed": "2026-05-31T01:39:06Z",
       "has_pages": true,
       "url": "https://sjgant80-hub.github.io/si-didy-agent/",
       "tier": "T3 (load HTML) or T1 if API exposed"
