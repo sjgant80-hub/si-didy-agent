@@ -295,5 +295,199 @@ Metrics tracked in memory scope `li-daily`:
     connects_sent, connects_accepted, dms_sent, dms_replied }
 
 ═══════════════════════════════════════════════════════════════════════
+  SECTION I · VERIFIED 2026 HOOK DISCIPLINE  (added post-deep-research)
+═══════════════════════════════════════════════════════════════════════
+
+  Findings from deep-research workflow run · 2026-05-31 · 23 sources
+  fetched · 25 claims verified · 12 confirmed / 13 refuted (52%) · used
+  to lock the format below.
+
+WHAT ACTUALLY WORKS (verified 3-0 adversarial)
+  · Document/carousel posts: 1.39× reach · <5% of creators use them
+    → Default to carousel for substantive posts. Always.
+  · Dwell time overtook comments as the dominant 2026 ranking signal
+    → A 9-slide carousel that holds attention 30s+ beats 50 likes
+  · Results-first hooks with a HARD specific number: 2.3-2.5× lift
+    → "I shipped 9 tools in 18 hours" > "AI is the future"
+  · Contrarian-take hooks ("Stop building features…"): 3.07% median
+  · Topic gravity: LinkedIn Content Creation 1.61× · HR 1.54× ·
+    General Business 0.81×
+    → Frame inside meta-LinkedIn or hiring/operator topics
+
+WHAT DOES NOT WORK (refuted in adversarial verify)
+  ✗ "Document posts get 6.60% engagement" — no independent corroboration
+  ✗ "External links drop reach 60%" — modern A/B shows ~10-15% at most
+  ✗ "Solopreneurs save $500/mo deleting SaaS" — no primary data
+  ✗ Cap-removal-as-monetisation template — REFUTED 0-3 · DM-conversion
+    proxies are wrong. Convert based on persistent-state/branded need,
+    not arbitrary caps.
+
+DOCTRINE ANCHORS (always)
+  · Hard number in the hook · personal, not aggregated
+  · Carousel attached · don't link out from feed
+  · Pinned comment is the funnel · the post earns the dwell,
+    the comment captures the DM
+  · One post tells ONE thing · split themes across days
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION J · B5 · COGNITIVE SUBSTRATE DROPS  (3-post sequence)
+═══════════════════════════════════════════════════════════════════════
+
+WHEN TO USE
+  · When promoting the substrate (fall-substrate / fall-raas / fall-verify)
+  · When showing the workflow-as-product positioning
+  · Wed → Thu → Fri cadence for max compounding
+
+────────────────────────────────────────────
+B5.1 · THE WORKFLOW POST  (deep-research is the hero)
+────────────────────────────────────────────
+▼ COPY ▼
+A workflow ran in 12 minutes.
+
+It fact-checked itself.
+
+52% of the plausible claims it pulled were wrong.
+
+Here are the 13 it killed ↓
+
+I'm building a sovereign software estate (80+ tools, all single HTML files).
+
+Yesterday I needed to know: what actually works on LinkedIn right now?
+
+So I ran the deep-research workflow inside Claude Code. Not a chatbot.
+A scripted pipeline: 5 search angles · fetch 23 sources · extract 108
+claims · run a 3-vote refute panel on each material claim · synthesize.
+
+12 minutes. 12 confirmed findings. 13 refuted claims.
+
+Carousel below shows the kills — most are things "everyone" says that aren't true.
+
+The workflow itself is the product. Comments for the slash command ↓
+
+◊·κ=1
+▲ END COPY ▲
+
+CAROUSEL: 9 slides · use fallcarousel · "results-first" template ·
+oxblood theme · prime 397
+PINNED COMMENT:
+  The workflow lives at fall-raas (sovereign single-file landing) and is
+  the productised version of the same Claude Code deep-research skill
+  that ran today.
+  → https://sjgant80-hub.github.io/fall-raas/
+  DM "verify" if you want the 3-vote refute panel as a standalone tool.
+
+────────────────────────────────────────────
+B5.2 · THE TOOL SHIP POST  (fall-substrate flagship)
+────────────────────────────────────────────
+▼ COPY ▼
+I shipped 9 sovereign tools in 18 hours.
+
+One of them ships sovereign tools.
+
+The unit of value isn't the seat anymore.
+It's the corporation.
+
+The play behind every SaaS pivot story right now: per-seat collapse.
+Bessemer says pure per-seat dropped from 21% to 15% of SaaS cos in a year.
+Monday.com just cut a 100-person SDR team.
+$285B of SaaS market cap evaporated in Q1.
+
+So I stopped building features and started building a substrate.
+
+9 tools shipped yesterday:
+6 client-acquisition (invoice / cashflow / hiring / CRM / carousel / AP)
+3 cognitive (research-as-a-service / adversarial verify / the apex pipeline)
+
+The 9th one — fall-substrate — does this:
+research a question → cite the findings → spec the tool → generate
+the HTML → verify the spec is met → push to GitHub → enable Pages →
+sign the audit chain.
+
+One chat input. Real repo. ~5 minutes.
+
+Carousel ↓
+
+◊·κ=1
+▲ END COPY ▲
+
+CAROUSEL: 7 slides · use fallcarousel · "contrarian-take" template ·
+oxblood theme · prime 389
+PINNED COMMENT:
+  Architecture doc (12-page · 7-product roadmap · honest caveats):
+  → sjgant80-hub.github.io/fall-substrate/SOVEREIGN-COGNITIVE-SUBSTRATE.md
+
+────────────────────────────────────────────
+B5.3 · THE CONTRARIAN POST  (fall-verify standalone)
+────────────────────────────────────────────
+▼ COPY ▼
+"GPT-4 was trained on 13 trillion tokens."
+
+3 panelists ran it through a refute panel.
+
+2 of 3 killed it.
+
+Most LLM outputs would fail this gate.
+
+A claim sounds true. The LLM that generated it doesn't know it's wrong.
+The user quotes it in a deck. The investor cites it on a podcast.
+The number becomes "consensus."
+
+This is how the LLM-era version of bad data spreads.
+
+fall-verify is the gate. Drop in a claim · 3 independent skeptic panelists
+each try to refute it · majority rules · returns a confidence + the
+corrected version if it loses.
+
+In yesterday's session, 13 of 25 plausible-sounding claims were killed (52%).
+
+The fix isn't a smarter model. It's structurally requiring REFUTES.
+
+Carousel shows 5 viral claims and what survived the panel ↓
+
+◊·κ=1
+▲ END COPY ▲
+
+CAROUSEL: 6 slides · use fallcarousel · "contrarian-take" template ·
+oxblood theme · prime 401
+PINNED COMMENT (DM-farming · responds to claim drops):
+  Drop your most-quoted business stat below.
+  I'll run fall-verify's 3-vote panel and reply with the verdict + sources.
+  Bonus: if the panel kills a stat you've been quoting, you get the
+  suggested correction for free.
+
+────────────────────────────────────────────
+SEQUENCING
+────────────────────────────────────────────
+Wed/Thu  → B5.1  workflow → drives DMs for the slash command
+Thu late → B5.2  tool ship → drives traffic to fall-substrate landing
+Fri      → B5.3  contrarian → drives a public comment thread (free verifies)
+
+After all 3 fire · rotate back to B1-B4 for 7-10 days · then re-run B5
+sequence with a new research run as the lead. The workflow IS the
+pre-content engine.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION K · SUBSTRATE-VERB INTEGRATION
+═══════════════════════════════════════════════════════════════════════
+
+si-didy can now call the substrate verbs directly inside a LinkedIn run:
+
+BEFORE drafting a post that quotes a stat:
+  → verify(claim, panelSize:3) · if refuted, use the suggestedFix instead
+
+BEFORE drafting a research-heavy post:
+  → research(question, angles:5, votes:3) · use confirmed findings only
+
+BEFORE shipping a tool to promote on LinkedIn:
+  → substrate_build(build_request, target_repo) · auto-creates repo +
+    Pages + audit chain · then post about it with the receipt
+
+LinkedIn-post-CTAs that drive DMs (use these verbatim):
+  "Comment 'research' and I'll DM you the command"
+  "DM 'corp' for the architecture doc"
+  "Drop your most-quoted stat below · I'll run the panel"
+  "DM 'forge' for a build request slot"  (gates substrate_build access)
+
+═══════════════════════════════════════════════════════════════════════
   END OF PACK · ◊·κ=1
 ═══════════════════════════════════════════════════════════════════════

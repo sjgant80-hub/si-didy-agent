@@ -603,6 +603,109 @@ const estateMcp = createSdkMcpServer({
       }
     ),
     // ═══════════════════════════════════════════════════════════════
+    // ◊ LINKEDIN · v1.0 · pack-driven post orchestrator
+    // ═══════════════════════════════════════════════════════════════
+    tool('linkedin_drop', '◊·κ=1 · Orchestrate a LinkedIn post end-to-end. Loads LINKEDIN-PACK · selects the right frame · drafts the body · queues the carousel · navigates LinkedIn via Playwright · pauses BEFORE clicking Post. Memory-deduped: skips if same frame fired today. Use for the daily LinkedIn ops loop or the substrate-drop sequence (B5.1 / B5.2 / B5.3).',
+      { frame: z.enum(['B1','B2','B3','B4','B5.1','B5.2','B5.3','custom']).describe('Which pack frame · B1-B4 evergreen · B5.1-B5.3 substrate drop · custom = use body verbatim'),
+        body_override: z.string().optional().describe('When frame=custom: the verbatim post body'),
+        carousel_pdf_path: z.string().optional().describe('Optional local path to the carousel PDF · si-didy will upload it'),
+        dry_run: z.boolean().default(false).describe('If true: draft only, do not open the browser'),
+        memory_scope: z.string().default('li-posts').describe('Dedup scope') },
+      async ({ frame, body_override, carousel_pdf_path, dry_run, memory_scope }) => {
+        const today = new Date().toISOString().slice(0,10);
+        console.log(`  ◊· linkedin_drop frame=${frame} dry_run=${dry_run}`);
+
+        // 1. dedup · don't post the same frame twice in one day
+        try {
+          const fp = path.join(MEMORY_DIR, memory_scope + '.jsonl');
+          if (fs.existsSync(fp)) {
+            const lines = fs.readFileSync(fp, 'utf8').trim().split('\n').filter(Boolean)
+              .map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+            const todays = lines.filter(l => (l.ts || '').slice(0,10) === today && l.frame === frame);
+            if (todays.length) return { content: [{ type: 'text', text: `✗ already posted frame ${frame} today (${todays.length} hit · skipping · pass a different frame or use dry_run)` }] };
+          }
+        } catch (_) {}
+
+        // 2. resolve the body from the pack
+        let body = body_override || '';
+        if (frame !== 'custom') {
+          const packFp = path.join(PACKS_DIR, 'LINKEDIN-PACK.txt');
+          if (!fs.existsSync(packFp)) return { content: [{ type: 'text', text: '✗ LINKEDIN-PACK.txt not found in ./packs/' }] };
+          const pack = fs.readFileSync(packFp, 'utf8');
+          // Frame anchors: "B1 ·", "B2 ·", ..., "B5.1 ·", etc.
+          const anchors = { 'B1':'B1 ·','B2':'B2 ·','B3':'B3 ·','B4':'B4 ·','B5.1':'B5.1 ·','B5.2':'B5.2 ·','B5.3':'B5.3 ·' };
+          const anchor = anchors[frame];
+          const idx = pack.indexOf(anchor);
+          if (idx < 0) return { content: [{ type: 'text', text: `✗ frame ${frame} not found in pack` }] };
+          const slice = pack.slice(idx, idx + 5000);
+          const startMarker = '▼ COPY ▼';
+          const start = slice.indexOf(startMarker);
+          // Accept either '▲ END COPY ▲' (new B5.* frames) or '▲ END ▲' (legacy B1-B4)
+          let endMarker = '▲ END COPY ▲';
+          let end = slice.indexOf(endMarker);
+          if (end < 0) { endMarker = '▲ END ▲'; end = slice.indexOf(endMarker); }
+          if (start < 0 || end < 0) return { content: [{ type: 'text', text: `✗ COPY markers missing for frame ${frame}` }] };
+          body = slice.slice(start + startMarker.length, end).trim();
+        }
+        if (!body) return { content: [{ type: 'text', text: '✗ no body resolved · pass body_override when frame=custom' }] };
+
+        const headerLine = `◊ LINKEDIN DROP · frame ${frame} · ${body.length} chars`;
+        console.log('  ' + headerLine);
+
+        // 3. emit a fall-signal so cockpit + estate see the intent
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'linkedin_drop_drafted', payload: { frame, body_chars: body.length, carousel_pdf_path: carousel_pdf_path || null, dry_run }, ts: new Date().toISOString() });
+        } catch (_) {}
+
+        // 4. dry_run · stop here · queue the body to ./queues/li-post/ for manual review
+        if (dry_run) {
+          try {
+            const qDir = path.join(QUEUES_DIR, 'li-post');
+            if (!fs.existsSync(qDir)) fs.mkdirSync(qDir, { recursive: true });
+            const qFp = path.join(qDir, `${today}-${frame.replace(/\./g,'_')}.md`);
+            fs.writeFileSync(qFp, `# LinkedIn drop · frame ${frame} · ${today}\n\n${body}\n\n---\nCarousel: ${carousel_pdf_path || '(not attached)'}\n`);
+            return { content: [{ type: 'text', text: `◊ DRY RUN · queued to ${qFp} · review then re-run with dry_run:false` }] };
+          } catch (e) {
+            return { content: [{ type: 'text', text: 'queue write error: ' + e.message }] };
+          }
+        }
+
+        // 5. live mode · ask_user one final time before opening browser
+        const cArg = carousel_pdf_path ? `\n     carousel:  ${carousel_pdf_path}` : '\n     carousel:  (none · text only)';
+        const confirm = await ask(`\n  ◊ LINKEDIN POST · ${frame}\n     length:    ${body.length} chars\n     preview:   ${body.slice(0,180).replace(/\n+/g,' · ')}…${cArg}\n  proceed to open LinkedIn in browser? [yes/no/edit] > `);
+        if (/^edit/i.test(confirm.trim())) return { content: [{ type: 'text', text: 'edit requested · queued to ./queues/li-post/ · re-run with body_override' }] };
+        if (!/^(y|yes|go|ok|make it so)/i.test(confirm.trim())) return { content: [{ type: 'text', text: 'linkedin_drop declined' }] };
+
+        // 6. log the intent · the actual browser drive happens via T3 tools in the parent loop
+        try { fs.appendFileSync(path.join(MEMORY_DIR, memory_scope + '.jsonl'), JSON.stringify({ ts: new Date().toISOString(), frame, body_chars: body.length, carousel_pdf_path: carousel_pdf_path || null, stage: 'browser_intent' }) + '\n'); } catch (_) {}
+
+        return { content: [{ type: 'text', text:
+`◊ LINKEDIN DROP READY · frame ${frame} · ${body.length} chars
+
+NEXT STEPS (you · the parent agent · drive these via T3 browser tools):
+  1. browser_navigate https://www.linkedin.com/feed/
+  2. browser_screenshot · verify logged in as Simon
+  3. Click "Start a post" (top of feed)
+  4. browser_type the body verbatim:
+
+──── BODY START ────
+${body}
+──── BODY END ────
+
+  5. ${carousel_pdf_path ? `Click the "Add a document" icon · browser_upload "${carousel_pdf_path}"` : 'Skip carousel · text-only post'}
+  6. Wait ~3s for preview to render · browser_screenshot
+  7. PAUSE: call ask_user before clicking "Post" — Simon must approve the visual
+  8. On yes: click "Post" · browser_screenshot the success state
+  9. memory_note { scope: '${memory_scope}', ts, frame, body_chars: ${body.length}, status: 'posted' }
+  10. Drop the pinned comment from the pack section J · same frame
+  11. fall_signal broadcast: linkedin_drop_posted
+  12. learn_log scope:'linkedin-post' with what_worked + early-engagement reading
+
+SAFETY: NEVER skip step 7. Posting is irreversible.` }] };
+      }
+    ),
+
+    // ═══════════════════════════════════════════════════════════════
     // ◊ COGNITIVE SUBSTRATE · v1.0 · the agentic-corp verbs
     // ═══════════════════════════════════════════════════════════════
     tool('research', '◊·κ=φ⁵ · RESEARCH-AS-A-SERVICE · Run adversarially-verified deep research on any question. Spawns N angle-specialists in parallel via Claude Agent SDK, fetches sources via WebSearch/WebFetch, runs an M-vote refute panel on each claim, returns cited synthesis. Use BEFORE drafting strategy or shipping a tool — research grounds the spec.',
@@ -858,6 +961,19 @@ COGNITIVE SUBSTRATE v1.0 — the agentic-corp verbs:
 - substrate_build(request)    → fall-substrate · research → spec → generate → verify → ship → audit (pauses for confirmation)
 The substrate is the destination. When a task is "what should I build" — research first. Build second.
 
+LINKEDIN ORCHESTRATION (when user says "linkedin post" / "li drop" / "post B5.1" / similar):
+- ALWAYS pack_load('LINKEDIN-PACK.txt') FIRST · the pack is the immutable copy spec
+- ALWAYS memory_recall('li-posts') with today's date filter · dedup before drafting
+- ALWAYS verify(claim) any stat you would quote in the body · refute rate is 52%
+- Use linkedin_drop(frame:'B5.1'|'B5.2'|'B5.3', dry_run:true) to QUEUE a draft for review
+- Then linkedin_drop(frame:..., dry_run:false) to enter live mode · which:
+  · resolves body from pack
+  · ask_user confirms before browser_navigate
+  · returns the T3 step plan (browser_* calls you must execute)
+- Step 7 PAUSE before browser_click on "Post" is NON-NEGOTIABLE · ask_user every time
+- After posted: memory_note + drop the pack's pinned comment + learn_log
+- Substrate B5.x posts ship Wed → Thu → Fri in sequence · never two in one day
+
 AUTH
 - Use env interpolation: write \${env:GITHUB_TOKEN} in headers/args · it's replaced at call time.
 - list_env_keys tells you which auth vars are available · NEVER print the values.
@@ -984,6 +1100,8 @@ const allowedTools = [
   'mcp__estate__pack_edit',
   // ◊ Cognitive Substrate verbs · the agentic-corp mouth
   'mcp__estate__research', 'mcp__estate__verify', 'mcp__estate__substrate_build',
+  // ◊ LinkedIn orchestrator · pack-driven · pause-before-Post
+  'mcp__estate__linkedin_drop',
 ];
 
 console.log('\n◊ tiers loaded:');
