@@ -603,6 +603,141 @@ const estateMcp = createSdkMcpServer({
       }
     ),
     // ═══════════════════════════════════════════════════════════════
+    // ◊ KONOMI v2.0 · ECONOMIC SUBSTRATE · mint + meter
+    // ═══════════════════════════════════════════════════════════════
+    tool('konomi_mint',
+      '◊·κ=φ⁴ · KONOMI MINT · Anchor an authored artefact via SHA-256 + signed certificate. ' +
+      'v1.0: writes cert to memory/konomi-mints.jsonl + broadcasts on fall-signal. ' +
+      'v1.1 (todo): also posts the hash to onlybrains for BSV OP_RETURN anchoring. ' +
+      'Use for the 8-deep mint queue in KONOMI-ECONOMIC-MODEL.md (v20.1 seed, substrate doc, ' +
+      'cassie-anthropic, CASSIE stripe search, Konomi Dot Protocol, deep-research workflow, ' +
+      'linkedin_drop pattern, this tool spec itself).',
+      {
+        artefact_path: z.string().describe('Local path to the canonical text file · e.g. "C:/.../SOVEREIGN-COGNITIVE-SUBSTRATE.md"'),
+        name: z.string().optional().describe('Human-readable artefact name · defaults to basename'),
+        parents: z.array(z.string()).optional().describe('Cert IDs of parent artefacts · e.g. ["cert-v20.1-seed"]'),
+        note: z.string().optional().describe('Why-mint-now annotation'),
+      },
+      async ({ artefact_path, name, parents, note }) => {
+        try {
+          if (!fs.existsSync(artefact_path)) {
+            return { content: [{ type: 'text', text: '✗ artefact_path not found: ' + artefact_path }] };
+          }
+          const body = fs.readFileSync(artefact_path);
+          const crypto = await import('node:crypto');
+          const sha256 = crypto.createHash('sha256').update(body).digest('hex');
+          const size_bytes = body.length;
+          const basename = path.basename(artefact_path);
+          const ts = new Date().toISOString();
+          const cert_id = 'cert-' + sha256.slice(0, 12);
+          const cert = {
+            cert_id,
+            kind: 'konomi-mint/v1.0',
+            artefact: {
+              name: name || basename,
+              path: artefact_path,
+              basename,
+              size_bytes,
+              sha256,
+            },
+            parents: parents || [],
+            note: note || '',
+            issuer: 'sjgant80',
+            ts,
+            bsv_txid: null, // v1.1: anchor via onlybrains
+            bsv_anchored: false,
+            konomi_unit: 'KCC/1',
+          };
+          // append to ledger
+          const fp = path.join(MEMORY_DIR, 'konomi-mints.jsonl');
+          fs.appendFileSync(fp, JSON.stringify(cert) + '\n');
+          // broadcast on fall-signal
+          try {
+            if (typeof broadcast === 'function') {
+              broadcast({
+                type: 'fall_signal',
+                source: 'si-didy',
+                kind: 'konomi_minted',
+                payload: { cert_id, name: cert.artefact.name, sha256: sha256.slice(0,16), parents: cert.parents },
+                ts,
+              });
+            }
+          } catch (_) {}
+          return { content: [{ type: 'text', text:
+'◊ KONOMI MINTED · cert_id: ' + cert_id + '\n' +
+'  artefact: ' + cert.artefact.name + '\n' +
+'  sha256:   ' + sha256 + '\n' +
+'  size:     ' + size_bytes + ' bytes\n' +
+'  parents:  ' + (cert.parents.length ? cert.parents.join(', ') : '(none · genesis cert)') + '\n' +
+'  note:     ' + (note || '(none)') + '\n' +
+'  ledger:   ' + fp + '\n' +
+'  bsv:      not-yet-anchored (v1.1) · run again with --anchor when onlybrains hook ships' }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'konomi_mint error: ' + e.message }] };
+        }
+      }
+    ),
+    tool('konomi_meter',
+      '◊·κ=φ⁵ · KONOMI METER · Estimate recent Claude subscription token usage from local transcripts. ' +
+      '±15% drift (Max-tier rate-limit accounting is not fully client-observable). Use to decide if you ' +
+      'can fire a large fan-out without hitting the rate-limit. Returns: hours_scanned, sessions_count, ' +
+      'approx_tokens, burn_rate_per_hour, safety_margin_pct.',
+      {
+        hours: z.number().min(1).max(168).default(24).describe('Hours to scan back · default 24h'),
+        transcripts_root: z.string().optional().describe('Override path · default ~/.claude/projects'),
+      },
+      async ({ hours, transcripts_root }) => {
+        try {
+          const home = process.env.USERPROFILE || process.env.HOME || '';
+          const root = transcripts_root || path.join(home, '.claude', 'projects');
+          if (!fs.existsSync(root)) {
+            return { content: [{ type: 'text', text: '✗ transcripts root not found: ' + root + ' · pass transcripts_root to override' }] };
+          }
+          const cutoff = Date.now() - hours * 60 * 60 * 1000;
+          let totalChars = 0;
+          let sessions = new Set();
+          let files_scanned = 0;
+          const walk = (dir) => {
+            for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+              const fp = path.join(dir, e.name);
+              if (e.isDirectory()) walk(fp);
+              else if (e.name.endsWith('.jsonl')) {
+                const stat = fs.statSync(fp);
+                if (stat.mtimeMs < cutoff) continue;
+                files_scanned++;
+                try {
+                  const body = fs.readFileSync(fp, 'utf8');
+                  totalChars += body.length;
+                  sessions.add(path.basename(fp, '.jsonl'));
+                } catch (_) {}
+              }
+            }
+          };
+          walk(root);
+          // rough token estimate: 1 token ≈ 4 chars (English-ish · undercounts code-heavy sessions ~10%)
+          const approx_tokens = Math.round(totalChars / 4);
+          const burn_rate_per_hour = Math.round(approx_tokens / Math.max(1, hours));
+          const MAX_PLAN_MONTHLY_TOKENS = 2_400_000; // rough · $200 tier · check current Anthropic policy
+          const HOURS_IN_MONTH = 720;
+          const monthly_budget = MAX_PLAN_MONTHLY_TOKENS;
+          const monthly_burn_projected = burn_rate_per_hour * HOURS_IN_MONTH;
+          const safety_margin_pct = Math.max(0, Math.round(100 * (1 - monthly_burn_projected / monthly_budget)));
+          return { content: [{ type: 'text', text:
+'◊ KONOMI METER · ' + hours + 'h scan · ' + files_scanned + ' transcripts · ' + sessions.size + ' sessions\n' +
+'  approx_tokens_used:       ' + approx_tokens.toLocaleString() + '\n' +
+'  burn_rate_per_hour:       ' + burn_rate_per_hour.toLocaleString() + ' tok/h\n' +
+'  projected_monthly_burn:   ' + monthly_burn_projected.toLocaleString() + ' tok\n' +
+'  Max plan rough budget:    ' + monthly_budget.toLocaleString() + ' tok\n' +
+'  safety_margin_pct:        ' + safety_margin_pct + '%\n' +
+'\n' +
+'  ⚠ drift ±15% · Max-tier accounting not fully client-observable · use as signal, not ceiling.\n' +
+'  if safety_margin_pct < 25% · throttle recursive fan-outs · prefer WebLLM fallbacks.' }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'konomi_meter error: ' + e.message }] };
+        }
+      }
+    ),
+    // ═══════════════════════════════════════════════════════════════
     // ◊ LINKEDIN · v1.0 · pack-driven post orchestrator
     // ═══════════════════════════════════════════════════════════════
     tool('linkedin_drop', '◊·κ=1 · Orchestrate a LinkedIn post end-to-end. Loads LINKEDIN-PACK · selects frame · drafts body · queues carousel · drives Playwright · pauses BEFORE Post. Memory-deduped. Use screenshot_dir if you have a folder of PNGs from capture_estate_screenshots — they upload as a multi-image LinkedIn post (works better than PDF for receipt-style "I just shipped this" carousels).',
@@ -1295,6 +1430,8 @@ COGNITIVE SUBSTRATE v1.0 — the agentic-corp verbs:
 - research(question)          → fall-raas · 5-angle adversarial deep-research · returns cited findings + refuted claims
 - verify(claim)               → fall-verify · 3-vote refute panel · 52% of plausible LLM claims fail this gate
 - substrate_build(request)    → fall-substrate · research → spec → generate → verify → ship → audit (pauses for confirmation)
+- konomi_mint(artefact_path) → SHA-256 anchor an authored artefact · cert to memory/konomi-mints.jsonl · v20.1 seed first
+- konomi_meter() → token reserve estimate from local transcripts · use BEFORE firing a recursive fan-out
 The substrate is the destination. When a task is "what should I build" — research first. Build second.
 
 LINKEDIN AUTOPILOT (always-on draft engine · NEVER auto-sends):
@@ -1444,6 +1581,7 @@ const allowedTools = [
   'mcp__estate__pack_edit',
   // ◊ Cognitive Substrate verbs · the agentic-corp mouth
   'mcp__estate__research', 'mcp__estate__verify', 'mcp__estate__substrate_build',
+  'mcp__estate__konomi_mint', 'mcp__estate__konomi_meter',
   // ◊ LinkedIn orchestrator · pack-driven · pause-before-Post
   'mcp__estate__linkedin_drop',
   // ◊ LinkedIn AUTOPILOT · always-on draft engine (NEVER auto-sends)
