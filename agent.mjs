@@ -738,6 +738,102 @@ const estateMcp = createSdkMcpServer({
       }
     ),
     // ═══════════════════════════════════════════════════════════════
+    // ◊ CASSANDRA · vetter_digest · fall-vetter v2.0 daily summary
+    // ═══════════════════════════════════════════════════════════════
+    tool('vetter_digest',
+      '◊·κ=φ⁵ · CASSANDRA DIGEST · Daily summary of all fall-vetter results received in the last N hours. ' +
+      'Reads memory/fall-vetter-audit.jsonl (broadcast by the live vetter via fall-signal). ' +
+      'Returns top 5 by score, bottom 5 by score, archetype distribution, sales101 stance counts, ' +
+      'any tier3 hits (auto-blocks for human review), and recommended actions queue for human approval. ' +
+      'Use as daily standup for Alex · "what came in overnight, what do I do with it".',
+      {
+        hours: z.number().min(1).max(168).default(24).describe('Hours to look back · default 24h'),
+        digest_scope: z.string().default('li-vetter-digest').describe('Memory scope to append the digest to'),
+      },
+      async ({ hours, digest_scope }) => {
+        try {
+          const auditFp = path.join(MEMORY_DIR, 'fall-vetter-audit.jsonl');
+          if (!fs.existsSync(auditFp)) {
+            return { content: [{ type: 'text', text: '◊ CASSANDRA DIGEST · no audit ledger yet at ' + auditFp + '\n   (the live vetter posts to /signal · fall_vetter_result events route into this file)' }] };
+          }
+          const cutoff = Date.now() - hours * 60 * 60 * 1000;
+          const lines = fs.readFileSync(auditFp, 'utf8').trim().split('\n').filter(Boolean);
+          const events = [];
+          for (const l of lines) {
+            try {
+              const ev = JSON.parse(l);
+              const ts = ev.ts ? new Date(ev.ts).getTime() : 0;
+              if (ts >= cutoff) events.push(ev);
+            } catch (_) {}
+          }
+          if (!events.length) {
+            return { content: [{ type: 'text', text: '◊ CASSANDRA DIGEST · ' + hours + 'h window · 0 events\n   (no signups vetted in this window · estate is quiet)' }] };
+          }
+
+          // Aggregate
+          const archDist = {};
+          const stanceDist = {};
+          const decisionDist = { allow: 0, review: 0, block: 0 };
+          const tier3Hits = [];
+          const freudDominant = {};
+          const actionQueue = []; // recommended_next != 'archive'
+          const byScore = [];
+
+          for (const ev of events) {
+            const p = ev.payload || {};
+            const arch = p.archetype || 'Seeker';
+            const stance = p.sales_stance || 'UNREAD';
+            const dec = p.decision || 'review';
+            const next = p.recommended_next || 'reply';
+            const score = (typeof p.score === 'number') ? p.score : 0;
+            archDist[arch] = (archDist[arch] || 0) + 1;
+            stanceDist[stance] = (stanceDist[stance] || 0) + 1;
+            if (decisionDist[dec] != null) decisionDist[dec]++;
+            if (p.freud_dominant) freudDominant[p.freud_dominant] = (freudDominant[p.freud_dominant] || 0) + 1;
+            if (p.tier3_hits && p.tier3_hits > 0) tier3Hits.push({ ts: ev.ts, archetype: arch, stance, summary: (p.reading && p.reading.summary) || '' });
+            if (next !== 'archive') actionQueue.push({ ts: ev.ts, archetype: arch, stance, score, next, summary: (p.reading && p.reading.summary) || '' });
+            byScore.push({ ts: ev.ts, archetype: arch, stance, score, decision: dec, next, summary: (p.reading && p.reading.summary) || '' });
+          }
+          byScore.sort((a,b)=>b.score-a.score);
+          const top5 = byScore.slice(0,5);
+          const bot5 = byScore.slice(-5).reverse();
+
+          // Format
+          const fmt = (e) => `   ${e.score.toString().padStart(3)} · ${e.archetype.padEnd(10)} · ${e.stance.padEnd(14)} · ${e.next.padEnd(13)} · ${e.summary.slice(0,70)}`;
+          const distLine = (d) => Object.entries(d).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${k}=${v}`).join(' · ');
+
+          const md =
+'# ◊ CASSANDRA DIGEST · ' + new Date().toISOString().slice(0,10) + ' · ' + hours + 'h window\n\n' +
+'**' + events.length + ' signups vetted** · decisions: ' + distLine(decisionDist) + '\n\n' +
+'## Archetype distribution\n' + distLine(archDist) + '\n\n' +
+'## Sales-101 stance distribution\n' + distLine(stanceDist) + '\n\n' +
+(Object.keys(freudDominant).length ? '## Freud defenses (dominant)\n' + distLine(freudDominant) + '\n\n' : '') +
+(tier3Hits.length ? '## ⚠ TIER-3 hits · auto-blocked · human review\n' + tier3Hits.map(t => '- ' + t.ts + ' · ' + t.archetype + ' · ' + t.summary).join('\n') + '\n\n' : '') +
+'## Top 5 by score\n' + top5.map(fmt).join('\n') + '\n\n' +
+'## Bottom 5 by score\n' + bot5.map(fmt).join('\n') + '\n\n' +
+'## Recommended actions queue (' + actionQueue.length + ')\n' +
+(actionQueue.length ? actionQueue.slice(0,15).map(a => '- [' + a.next + '] ' + a.archetype + ' · ' + a.stance + ' · score ' + a.score + ' · ' + a.summary).join('\n') : '   (empty · everything archive-bound)') + '\n';
+
+          // Append to digest scope
+          try {
+            const fp = path.join(MEMORY_DIR, digest_scope + '.jsonl');
+            fs.appendFileSync(fp, JSON.stringify({ ts: new Date().toISOString(), hours, events: events.length, archetypes: archDist, stances: stanceDist, decisions: decisionDist, tier3: tier3Hits.length, actions_queued: actionQueue.length, md }) + '\n');
+          } catch (_) {}
+
+          // broadcast
+          try {
+            if (typeof broadcast === 'function') {
+              broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'vetter_digest', payload: { hours, events: events.length, tier3: tier3Hits.length, actions: actionQueue.length, top_archetype: Object.entries(archDist).sort((a,b)=>b[1]-a[1])[0]?.[0] }, ts: new Date().toISOString() });
+            }
+          } catch (_) {}
+
+          return { content: [{ type: 'text', text: md }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'vetter_digest error: ' + e.message }] };
+        }
+      }
+    ),
+    // ═══════════════════════════════════════════════════════════════
     // ◊ LINKEDIN · v1.0 · pack-driven post orchestrator
     // ═══════════════════════════════════════════════════════════════
     tool('linkedin_drop', '◊·κ=1 · Orchestrate a LinkedIn post end-to-end. Loads LINKEDIN-PACK · selects frame · drafts body · queues carousel · drives Playwright · pauses BEFORE Post. Memory-deduped. Use screenshot_dir if you have a folder of PNGs from capture_estate_screenshots — they upload as a multi-image LinkedIn post (works better than PDF for receipt-style "I just shipped this" carousels).',
@@ -1432,6 +1528,7 @@ COGNITIVE SUBSTRATE v1.0 — the agentic-corp verbs:
 - substrate_build(request)    → fall-substrate · research → spec → generate → verify → ship → audit (pauses for confirmation)
 - konomi_mint(artefact_path) → SHA-256 anchor an authored artefact · cert to memory/konomi-mints.jsonl · v20.1 seed first
 - konomi_meter() → token reserve estimate from local transcripts · use BEFORE firing a recursive fan-out
+- vetter_digest(hours=24)    → fall-vetter v2.0 Cassandra · daily digest of signup readings · archetype distribution · sales stance counts · tier-3 auto-blocks for human review · use as Alex's morning standup ("what came in overnight, what do I do")
 The substrate is the destination. When a task is "what should I build" — research first. Build second.
 
 LINKEDIN AUTOPILOT (always-on draft engine · NEVER auto-sends):
@@ -1582,6 +1679,8 @@ const allowedTools = [
   // ◊ Cognitive Substrate verbs · the agentic-corp mouth
   'mcp__estate__research', 'mcp__estate__verify', 'mcp__estate__substrate_build',
   'mcp__estate__konomi_mint', 'mcp__estate__konomi_meter',
+  // ◊ Cassandra · fall-vetter v2.0 daily digest
+  'mcp__estate__vetter_digest',
   // ◊ LinkedIn orchestrator · pack-driven · pause-before-Post
   'mcp__estate__linkedin_drop',
   // ◊ LinkedIn AUTOPILOT · always-on draft engine (NEVER auto-sends)
@@ -1750,6 +1849,14 @@ if (SERVER_MODE) {
             const sigFp = path.join(MEMORY_DIR, 'fall-signal.jsonl');
             fs.appendFileSync(sigFp, JSON.stringify(stamped) + '\n');
           } catch(_) {}
+          // ◊ Cassandra audit route: fall_vetter_result also lands in its own ledger
+          // so vetter_digest can aggregate without re-parsing the general feed.
+          if (stamped.kind === 'fall_vetter_result' || stamped.kind === 'vetter_result') {
+            try {
+              const vetFp = path.join(MEMORY_DIR, 'fall-vetter-audit.jsonl');
+              fs.appendFileSync(vetFp, JSON.stringify(stamped) + '\n');
+            } catch(_) {}
+          }
           broadcast(stamped);
           res.writeHead(200, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({ ok: true }));
