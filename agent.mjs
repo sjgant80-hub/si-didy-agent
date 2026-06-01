@@ -605,13 +605,14 @@ const estateMcp = createSdkMcpServer({
     // ═══════════════════════════════════════════════════════════════
     // ◊ LINKEDIN · v1.0 · pack-driven post orchestrator
     // ═══════════════════════════════════════════════════════════════
-    tool('linkedin_drop', '◊·κ=1 · Orchestrate a LinkedIn post end-to-end. Loads LINKEDIN-PACK · selects the right frame · drafts the body · queues the carousel · navigates LinkedIn via Playwright · pauses BEFORE clicking Post. Memory-deduped: skips if same frame fired today. Use for the daily LinkedIn ops loop or the substrate-drop sequence (B5.1 / B5.2 / B5.3).',
-      { frame: z.enum(['B1','B2','B3','B4','B5.1','B5.2','B5.3','custom']).describe('Which pack frame · B1-B4 evergreen · B5.1-B5.3 substrate drop · custom = use body verbatim'),
-        body_override: z.string().optional().describe('When frame=custom: the verbatim post body'),
-        carousel_pdf_path: z.string().optional().describe('Optional local path to the carousel PDF · si-didy will upload it'),
+    tool('linkedin_drop', '◊·κ=1 · Orchestrate a LinkedIn post end-to-end. Loads LINKEDIN-PACK · selects frame · drafts body · queues carousel · drives Playwright · pauses BEFORE Post. Memory-deduped. Use screenshot_dir if you have a folder of PNGs from capture_estate_screenshots — they upload as a multi-image LinkedIn post (works better than PDF for receipt-style "I just shipped this" carousels).',
+      { frame: z.enum(['B1','B2','B3','B4','B5.1','B5.2','B5.3','custom']).describe('Which pack frame'),
+        body_override: z.string().optional().describe('When frame=custom: verbatim body'),
+        carousel_pdf_path: z.string().optional().describe('Path to a carousel PDF · OR use screenshot_dir for multi-image'),
+        screenshot_dir: z.string().optional().describe('Directory of PNG screenshots · uploaded as LinkedIn multi-image post (preferred for B5.* substrate drops)'),
         dry_run: z.boolean().default(false).describe('If true: draft only, do not open the browser'),
         memory_scope: z.string().default('li-posts').describe('Dedup scope') },
-      async ({ frame, body_override, carousel_pdf_path, dry_run, memory_scope }) => {
+      async ({ frame, body_override, carousel_pdf_path, screenshot_dir, dry_run, memory_scope }) => {
         const today = new Date().toISOString().slice(0,10);
         console.log(`  ◊· linkedin_drop frame=${frame} dry_run=${dry_run}`);
 
@@ -671,7 +672,21 @@ const estateMcp = createSdkMcpServer({
         }
 
         // 5. live mode · ask_user one final time before opening browser
-        const cArg = carousel_pdf_path ? `\n     carousel:  ${carousel_pdf_path}` : '\n     carousel:  (none · text only)';
+        // Enumerate carousel images if a screenshot_dir was provided
+        let carouselImages = [];
+        if (screenshot_dir && fs.existsSync(screenshot_dir)) {
+          try {
+            carouselImages = fs.readdirSync(screenshot_dir)
+              .filter(f => /\.(png|jpe?g|webp)$/i.test(f))
+              .sort()
+              .map(f => path.join(screenshot_dir, f));
+          } catch(_) {}
+        }
+        const cArg = carouselImages.length > 0
+          ? `\n     carousel:  ${carouselImages.length} screenshots from ${screenshot_dir}\n                ${carouselImages.map(p => '· ' + path.basename(p)).join('\n                ')}`
+          : carousel_pdf_path
+            ? `\n     carousel:  ${carousel_pdf_path}`
+            : '\n     carousel:  (none · text only)';
         const confirm = await ask(`\n  ◊ LINKEDIN POST · ${frame}\n     length:    ${body.length} chars\n     preview:   ${body.slice(0,180).replace(/\n+/g,' · ')}…${cArg}\n  proceed to open LinkedIn in browser? [yes/no/edit] > `);
         if (/^edit/i.test(confirm.trim())) return { content: [{ type: 'text', text: 'edit requested · queued to ./queues/li-post/ · re-run with body_override' }] };
         if (!/^(y|yes|go|ok|make it so)/i.test(confirm.trim())) return { content: [{ type: 'text', text: 'linkedin_drop declined' }] };
@@ -692,7 +707,13 @@ NEXT STEPS (you · the parent agent · drive these via T3 browser tools):
 ${body}
 ──── BODY END ────
 
-  5. ${carousel_pdf_path ? `Click the "Add a document" icon · browser_upload "${carousel_pdf_path}"` : 'Skip carousel · text-only post'}
+  5. ${carouselImages.length > 0
+        ? `Click the "Add a photo" icon (NOT document) · multi-select upload all ${carouselImages.length}:
+       ${carouselImages.map(p => '       · ' + p).join('\n       ')}
+     LinkedIn will arrange them as a swipeable multi-image post.`
+        : carousel_pdf_path
+          ? `Click the "Add a document" icon · browser_upload "${carousel_pdf_path}"`
+          : 'Skip carousel · text-only post'}
   6. Wait ~3s for preview to render · browser_screenshot
   7. PAUSE: call ask_user before clicking "Post" — Simon must approve the visual
   8. On yes: click "Post" · browser_screenshot the success state
@@ -709,6 +730,114 @@ SAFETY: NEVER skip step 7. Posting is irreversible.` }] };
     // ◊ LINKEDIN AUTOPILOT · v1.0 · always-on draft engine
     // Doctrine: NEVER auto-send · ALWAYS queue + ask_user before fire
     // ═══════════════════════════════════════════════════════════════
+    tool('capture_estate_screenshots', '◊·κ=φ⁴ · CAROUSEL ENGINE · Screenshot a curated list of live estate pages, save to ./queues/li-carousel-<scope>/, return paths. Each scope has a pre-mapped URL set (B5.1=workflow / B5.2=tool-ship / B5.3=contrarian-verify). Browser chrome is NOT captured (Playwright viewport-only). Use crop_top_px to also trim in-page nav. These become the LinkedIn carousel images.',
+      { scope: z.enum(['B5.1','B5.2','B5.3','custom']).describe('Pre-mapped URL set · custom uses urls arg'),
+        urls: z.array(z.string()).optional().describe('When scope=custom · explicit URL list'),
+        crop_top_px: z.number().min(0).max(400).default(0).describe('Trim N px from the top of each shot (in-page nav)'),
+        viewport_w: z.number().default(1080).describe('Viewport width · 1080 matches LinkedIn carousel ratio'),
+        viewport_h: z.number().default(1350).describe('Viewport height · 1080x1350 = LinkedIn doc post ratio') },
+      async ({ scope, urls, crop_top_px, viewport_w, viewport_h }) => {
+        console.log(`  ◊· capture_estate_screenshots scope=${scope} crop=${crop_top_px}px viewport=${viewport_w}x${viewport_h}`);
+        // Pre-mapped URL sets per post scope · 7-9 shots each for a substantive carousel
+        const SCOPES = {
+          'B5.1': [
+            { name: '01-cover-fall-substrate',    url: 'https://sjgant80-hub.github.io/fall-substrate/' },
+            { name: '02-fall-raas-landing',       url: 'https://sjgant80-hub.github.io/fall-raas/' },
+            { name: '03-fall-verify-landing',     url: 'https://sjgant80-hub.github.io/fall-verify/' },
+            { name: '04-substrate-arch-doc',      url: 'https://sjgant80-hub.github.io/fall-substrate/SOVEREIGN-COGNITIVE-SUBSTRATE.md' },
+            { name: '05-ain-marketplace',         url: 'https://www.ai-nativesolutions.com/#marketplace' },
+            { name: '06-ain-substrate-pin',       url: 'https://www.ai-nativesolutions.com/' },
+            { name: '07-cassie-cosmology',        url: 'https://sjgant80-hub.github.io/cassietorusbtc135solver/cassie-torus-v2.html' },
+            { name: '08-fall-registry-raw',       url: 'https://raw.githubusercontent.com/sjgant80-hub/fall-registry/main/index.json' },
+          ],
+          'B5.2': [
+            { name: '01-cover-fall-substrate',    url: 'https://sjgant80-hub.github.io/fall-substrate/' },
+            { name: '02-fallinvoice',             url: 'https://sjgant80-hub.github.io/fallinvoice/' },
+            { name: '03-fallflow',                url: 'https://sjgant80-hub.github.io/fallflow/' },
+            { name: '04-fallhire',                url: 'https://sjgant80-hub.github.io/fallhire/' },
+            { name: '05-fallcrm',                 url: 'https://sjgant80-hub.github.io/fallcrm/' },
+            { name: '06-fallap',                  url: 'https://sjgant80-hub.github.io/fallap/' },
+            { name: '07-fallcarousel',            url: 'https://sjgant80-hub.github.io/fallcarousel/' },
+            { name: '08-ain-marketplace',         url: 'https://www.ai-nativesolutions.com/#marketplace' },
+          ],
+          'B5.3': [
+            { name: '01-cover-fall-verify',       url: 'https://sjgant80-hub.github.io/fall-verify/' },
+            { name: '02-fall-raas',               url: 'https://sjgant80-hub.github.io/fall-raas/' },
+            { name: '03-fall-substrate',          url: 'https://sjgant80-hub.github.io/fall-substrate/' },
+            { name: '04-substrate-arch-doc',      url: 'https://sjgant80-hub.github.io/fall-substrate/SOVEREIGN-COGNITIVE-SUBSTRATE.md' },
+            { name: '05-ain-cognitive-pin',       url: 'https://www.ai-nativesolutions.com/' },
+          ],
+          'custom': (urls || []).map((u, i) => ({ name: String(i+1).padStart(2,'0') + '-custom', url: u })),
+        };
+        const targets = SCOPES[scope] || [];
+        if (targets.length === 0) return { content: [{ type: 'text', text: '✗ no URLs · scope=custom requires urls arg' }] };
+
+        const outDir = path.join(QUEUES_DIR, `li-carousel-${scope.replace(/\./g,'_')}`);
+        if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+
+        try {
+          const { chromium } = await import('playwright');
+          // Use a SEPARATE browser context so the LinkedIn profile session isn't disturbed
+          const captureCtx = await chromium.launch({ headless: true });
+          const page = await captureCtx.newPage({ viewport: { width: viewport_w, height: viewport_h } });
+          await page.setViewportSize({ width: viewport_w, height: viewport_h });
+
+          const results = [];
+          for (const t of targets) {
+            try {
+              console.log(`    · capturing ${t.name} ← ${t.url}`);
+              await page.goto(t.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+              await page.waitForTimeout(2500); // let fonts + animations settle
+              const filePath = path.join(outDir, `${t.name}.png`);
+              let opts = { path: filePath, type: 'png', fullPage: false };
+              if (crop_top_px > 0) {
+                opts.clip = { x: 0, y: crop_top_px, width: viewport_w, height: viewport_h - crop_top_px };
+              }
+              await page.screenshot(opts);
+              const stat = fs.statSync(filePath);
+              results.push({ name: t.name, url: t.url, path: filePath, size_kb: Math.round(stat.size / 1024) });
+            } catch (e) {
+              results.push({ name: t.name, url: t.url, error: e.message });
+            }
+          }
+          await captureCtx.close();
+          try {
+            if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'screenshots_captured', payload: { scope, count: results.length, dir: outDir }, ts: new Date().toISOString() });
+          } catch(_) {}
+          const ok = results.filter(r => !r.error);
+          const errs = results.filter(r => r.error);
+          return { content: [{ type: 'text', text:
+`◊ captured ${ok.length}/${targets.length} screenshots for ${scope}
+  output_dir: ${outDir}
+${ok.map(r => `  ✓ ${r.name}.png · ${r.size_kb}KB · ${r.url}`).join('\n')}
+${errs.length ? '\n' + errs.map(r => `  ✗ ${r.name} · ${r.error}`).join('\n') : ''}
+
+NEXT: hand outputs to linkedin_drop(frame:'${scope}', screenshot_dir:'${outDir}')` }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'capture error: ' + e.message }] };
+        }
+      }
+    ),
+    tool('linkedin_schedule', '◊·κ=φ⁵ · Schedule a LinkedIn post for a future time. Stored to memory/li-schedule.jsonl · server cron checks every minute · fires linkedin_drop at the scheduled hour. Auto-runs the carousel capture too. NEVER auto-clicks Post · still pauses for ask_user when the time comes.',
+      { frame: z.enum(['B5.1','B5.2','B5.3','B1','B2','B3','B4','custom']).describe('Pack frame'),
+        when_iso: z.string().describe('ISO timestamp · e.g. 2026-06-02T07:30:00+01:00 (UK morning)'),
+        auto_capture: z.boolean().default(true).describe('Auto-run capture_estate_screenshots before drop'),
+        notes: z.string().optional().describe('Reminder notes for future-you') },
+      async ({ frame, when_iso, auto_capture, notes }) => {
+        const when = new Date(when_iso);
+        if (isNaN(when.getTime())) return { content: [{ type: 'text', text: `✗ unparseable when_iso "${when_iso}" · use ISO format` }] };
+        const id = `${when.toISOString().slice(0,16).replace(/[-T:]/g,'')}-${frame.replace(/\./g,'_')}`;
+        const entry = { id, frame, when_iso: when.toISOString(), auto_capture, notes: notes || '', status: 'scheduled', created_at: new Date().toISOString() };
+        try {
+          fs.appendFileSync(path.join(MEMORY_DIR, 'li-schedule.jsonl'), JSON.stringify(entry) + '\n');
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'linkedin_scheduled', payload: entry, ts: new Date().toISOString() });
+          const dt = when.toLocaleString('en-GB', { timeZone: 'Europe/London' });
+          return { content: [{ type: 'text', text: `◊ scheduled · frame ${frame} · ${dt} UK · id ${id}\n  auto_capture: ${auto_capture}\n  notes: ${notes || '(none)'}\n  → server cron will fire linkedin_drop at the hour · pauses for ask_user before Post` }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'schedule error: ' + e.message }] };
+        }
+      }
+    ),
     tool('linkedin_open', '◊·κ=1 · Open LinkedIn in the persistent Chromium profile. First call may prompt for one-time login; session is saved to ./si-didy-profile. Returns screenshot + logged-in status. Call ONCE per session before any LinkedIn autopilot/scan/drop.',
       { url: z.string().default('https://www.linkedin.com/feed/').describe('Where to land · default = home feed') },
       async ({ url }) => {
@@ -1319,6 +1448,8 @@ const allowedTools = [
   'mcp__estate__linkedin_drop',
   // ◊ LinkedIn AUTOPILOT · always-on draft engine (NEVER auto-sends)
   'mcp__estate__linkedin_open', 'mcp__estate__linkedin_autopilot', 'mcp__estate__find_client',
+  // ◊ Carousel engine + scheduler
+  'mcp__estate__capture_estate_screenshots', 'mcp__estate__linkedin_schedule',
 ];
 
 console.log('\n◊ tiers loaded:');
@@ -1655,6 +1786,41 @@ Execute the n=4-7 doctrine. Estate-first. Log mission. Stream tier calls. Pause 
     // First tick after 2 min (let cockpit/login settle), then every N minutes
     setTimeout(() => { tick(); setInterval(tick, AUTOPILOT_INTERVAL_MIN * 60 * 1000); }, 2 * 60 * 1000);
   }
+
+  // ═════════════════════════════════════════════════════════════════
+  //  ◊ LINKEDIN SCHEDULE CRON · checks every 60s for due posts
+  //  Fires linkedin_drop(frame, screenshot_dir) at the scheduled hour
+  //  Auto-captures screenshots first if scheduled with auto_capture:true
+  //  Still pauses for ask_user before Post (the non-negotiable gate)
+  // ═════════════════════════════════════════════════════════════════
+  const scheduleFp = path.join(MEMORY_DIR, 'li-schedule.jsonl');
+  setInterval(() => {
+    try {
+      if (!fs.existsSync(scheduleFp)) return;
+      if (sseClients.length === 0) return; // need an active cockpit to receive the ask_user
+      const raw = fs.readFileSync(scheduleFp, 'utf8').trim().split('\n').filter(Boolean);
+      const entries = raw.map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+      const now = Date.now();
+      let mutated = false;
+      const updated = entries.map(e => {
+        if (e.status !== 'scheduled') return e;
+        const due = new Date(e.when_iso).getTime();
+        if (due > now) return e;
+        // FIRE
+        console.log(`◊ schedule · firing ${e.frame} · scheduled ${e.when_iso}`);
+        broadcast({ type: 'fall_signal', source: 'schedule', kind: 'schedule_fired', payload: e, ts: new Date().toISOString() });
+        const directive = e.auto_capture
+          ? `Run capture_estate_screenshots(scope:"${e.frame}", crop_top_px:0) THEN run linkedin_drop(frame:"${e.frame}", carousel_pdf_path:null, dry_run:false) using the captured directory as the carousel source. Pause for ask_user before Post.`
+          : `Run linkedin_drop(frame:"${e.frame}", dry_run:false). Pause for ask_user before Post.`;
+        runDirective(directive).catch(err => broadcast({ type: 'error', message: 'schedule fire err: ' + err.message }));
+        mutated = true;
+        return { ...e, status: 'fired', fired_at: new Date().toISOString() };
+      });
+      if (mutated) fs.writeFileSync(scheduleFp, updated.map(e => JSON.stringify(e)).join('\n') + '\n');
+    } catch (e) {
+      console.log('◊ schedule tick err:', e.message);
+    }
+  }, 60 * 1000);
 
   // boot
   server.listen(SERVER_PORT, () => {
