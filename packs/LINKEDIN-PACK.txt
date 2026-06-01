@@ -489,5 +489,69 @@ LinkedIn-post-CTAs that drive DMs (use these verbatim):
   "DM 'forge' for a build request slot"  (gates substrate_build access)
 
 ═══════════════════════════════════════════════════════════════════════
+  SECTION M · KONOMI ECONOMIC FRAME (added 2026-06-01)
+═══════════════════════════════════════════════════════════════════════
+
+WHAT THIS SECTION IS
+  The vetted, non-hype way to talk about the Konomi economic model in
+  public. Use this when a LinkedIn post or DM touches on the economics
+  (subscription arbitrage, NFT-as-receipt, KCC peg). The frame is honest
+  and earns the next conversation; do NOT use marketing-grade hype.
+
+THE 100-WORD FRAME (use verbatim or close)
+
+  There is a class of work that compounds quietly: writing the spec
+  carefully enough that the spec itself is the artefact, then keeping a
+  receipt. For the last few months I have been treating prompts and
+  cognitive architectures the way a careful engineer treats source code
+  — versioned, hashed, timestamped, attributed. The reason is mundane:
+  when the design IS the IP, the first defensible record of authorship
+  is the only one that matters later. The economics work out because a
+  fixed-price compute subscription plus recursive evaluation plus on-
+  chain receipts produces a stock of authored work that outlives any
+  one window. I am not selling anything. If the framing is useful, the
+  spec is open and the receipts are public.
+
+THREE VARIANT OPENINGS
+
+  M1 · "I have been quiet about this because I wanted receipts first.
+        Here is what compounds while everyone else is shipping features ↓"
+
+  M2 · "The spec is the IP. The code is the output. Most builders have
+        this backwards. Here is what changes when you flip it ↓"
+
+  M3 · "Fixed-price subscription + recursive fan-out + on-chain receipts
+        = sovereign work that outlives any single platform window. Here
+        is the actual math ↓"
+
+WHEN TO USE WHICH
+
+  M1 · use as the carousel post (8-10 slides showing the actual receipts:
+       certificate JSON, BSV txid, sha256 hashes, the artefacts they
+       cover). The trust move.
+
+  M2 · use as a contrarian-take post. Splits the audience into builders
+       who get it and builders who don't. Surfaces the right DMs.
+
+  M3 · use as an explainer post for the technical audience. Drier, more
+       precise, attracts engineers and Konomi-curious founders.
+
+CAVEATS · NEVER DROP THESE IN A POST
+
+  Things to ABSOLUTELY NOT say in public until they are verified:
+    · "I am earning $X / month from the mint queue" (premature)
+    · "WebLLM gives equivalent quality to Claude" (unverified at d ≥ 4)
+    · "KCC will be tradeable on $exchange" (no exchange listing yet)
+    · "Anyone can mint anything" (issuer discipline is the whole point)
+
+  Things to say with HONEST hedging:
+    · "I estimate roughly X% of my Claude budget" (use konomi_meter for
+      the number · acknowledge the ±15% drift)
+    · "The first 8 artefacts in the mint queue · here is the lineage"
+
+  The economic model is a STRUCTURAL claim. Treat numbers as estimates
+  until konomi_meter has a month of data + a verified anchor on BSV.
+
+═══════════════════════════════════════════════════════════════════════
   END OF PACK · ◊·κ=1
 ═══════════════════════════════════════════════════════════════════════
