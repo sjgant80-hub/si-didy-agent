@@ -130,7 +130,38 @@ if (!CHAT_MODE && !SERVER_MODE && !TOOL_MODE) {
 
 // ───────────── readline ─────────────
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-let ask = q => new Promise(r => rl.question(q, r));   // re-assignable so --server can override
+const _askTTY = q => new Promise(r => rl.question(q, r));
+// ask() is TTY-safe: auto-confirm via env, file-drop in non-TTY (brief/tool modes), readline in TTY
+let ask = async (q) => {
+  if (process.env.SIDIDY_AUTO_CONFIRM === '1') {
+    console.log(q + '[auto-confirm via SIDIDY_AUTO_CONFIRM=1] → yes');
+    return 'yes';
+  }
+  if (!process.stdin.isTTY) {
+    const respFp = './queues/ask-response.txt';
+    const readOnce = () => {
+      try {
+        if (fs.existsSync(respFp)) {
+          const v = fs.readFileSync(respFp, 'utf8').trim();
+          try { fs.unlinkSync(respFp); } catch (_) {}
+          return v;
+        }
+      } catch (_) {}
+      return null;
+    };
+    const first = readOnce();
+    if (first !== null) { console.log(q + '[file-drop] → ' + first); return first; }
+    process.stdout.write(q + '[waiting for ./queues/ask-response.txt to land · 5min timeout]\n');
+    const start = Date.now();
+    while (Date.now() - start < 5 * 60 * 1000) {
+      await new Promise(r => setTimeout(r, 1000));
+      const v = readOnce();
+      if (v !== null) { console.log('  → file-drop received: ' + v); return v; }
+    }
+    return '';
+  }
+  return _askTTY(q);
+};
 
 // ───────────── env interpolation ─────────────
 // Replaces ${env:VAR_NAME} with process.env.VAR_NAME · never logs the value
@@ -927,8 +958,7 @@ const estateMcp = createSdkMcpServer({
           }
         }
 
-        // 5. live mode · ask_user one final time before opening browser
-        // Enumerate carousel images if a screenshot_dir was provided
+        // 5. live mode · enumerate carousel images
         let carouselImages = [];
         if (screenshot_dir && fs.existsSync(screenshot_dir)) {
           try {
@@ -938,47 +968,137 @@ const estateMcp = createSdkMcpServer({
               .map(f => path.join(screenshot_dir, f));
           } catch(_) {}
         }
-        const cArg = carouselImages.length > 0
-          ? `\n     carousel:  ${carouselImages.length} screenshots from ${screenshot_dir}\n                ${carouselImages.map(p => '· ' + path.basename(p)).join('\n                ')}`
-          : carousel_pdf_path
-            ? `\n     carousel:  ${carousel_pdf_path}`
-            : '\n     carousel:  (none · text only)';
-        const confirm = await ask(`\n  ◊ LINKEDIN POST · ${frame}\n     length:    ${body.length} chars\n     preview:   ${body.slice(0,180).replace(/\n+/g,' · ')}…${cArg}\n  proceed to open LinkedIn in browser? [yes/no/edit] > `);
-        if (/^edit/i.test(confirm.trim())) return { content: [{ type: 'text', text: 'edit requested · queued to ./queues/li-post/ · re-run with body_override' }] };
-        if (!/^(y|yes|go|ok|make it so)/i.test(confirm.trim())) return { content: [{ type: 'text', text: 'linkedin_drop declined' }] };
 
-        // 6. log the intent · the actual browser drive happens via T3 tools in the parent loop
-        try { fs.appendFileSync(path.join(MEMORY_DIR, memory_scope + '.jsonl'), JSON.stringify({ ts: new Date().toISOString(), frame, body_chars: body.length, carousel_pdf_path: carousel_pdf_path || null, stage: 'browser_intent' }) + '\n'); } catch (_) {}
+        // 6. drive Playwright directly · matches upwork_open pattern
+        const ts = new Date().toISOString().replace(/[:.]/g, '-');
+        try {
+          const { chromium } = await import('playwright');
+          if (!_ctx) {
+            console.log('◊ T3 · Chromium opening (persistent profile · ' + USER_DATA + ')');
+            resetProfileExitType();
+            _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check'] });
+            _page = _ctx.pages()[0] || await _ctx.newPage();
+            await _page.setViewportSize(VIEWPORT);
+          }
+          if (!_page) _page = await _ctx.newPage();
 
-        return { content: [{ type: 'text', text:
-`◊ LINKEDIN DROP READY · frame ${frame} · ${body.length} chars
+          await _page.goto('https://www.linkedin.com/feed/', { waitUntil: 'domcontentloaded', timeout: 30000 });
+          await _page.waitForLoadState('domcontentloaded');
+          await _page.waitForTimeout(2500);
 
-NEXT STEPS (you · the parent agent · drive these via T3 browser tools):
-  1. browser_navigate https://www.linkedin.com/feed/
-  2. browser_screenshot · verify logged in as Simon
-  3. Click "Start a post" (top of feed)
-  4. browser_type the body verbatim:
+          // Click "Start a post"
+          try {
+            await _page.getByRole('button', { name: /start a post/i }).first().click({ timeout: 8000 });
+          } catch (_) {
+            await _page.locator('text=/start a post/i').first().click({ timeout: 8000 });
+          }
+          await _page.waitForTimeout(1500);
 
-──── BODY START ────
-${body}
-──── BODY END ────
+          // Click the editable area · try multiple selectors
+          let editor = null;
+          for (const sel of ['div.ql-editor[contenteditable="true"]', '[contenteditable="true"][role="textbox"]', '[contenteditable="true"]', '.ql-editor']) {
+            const loc = _page.locator(sel).first();
+            try { if (await loc.count() > 0) { await loc.click({ timeout: 3000 }); editor = loc; break; } } catch (_) {}
+          }
+          if (!editor) {
+            try { editor = _page.getByRole('textbox').first(); await editor.click({ timeout: 3000 }); } catch (_) {}
+          }
+          await _page.waitForTimeout(500);
 
-  5. ${carouselImages.length > 0
-        ? `Click the "Add a photo" icon (NOT document) · multi-select upload all ${carouselImages.length}:
-       ${carouselImages.map(p => '       · ' + p).join('\n       ')}
-     LinkedIn will arrange them as a swipeable multi-image post.`
-        : carousel_pdf_path
-          ? `Click the "Add a document" icon · browser_upload "${carousel_pdf_path}"`
-          : 'Skip carousel · text-only post'}
-  6. Wait ~3s for preview to render · browser_screenshot
-  7. PAUSE: call ask_user before clicking "Post" — Simon must approve the visual
-  8. On yes: click "Post" · browser_screenshot the success state
-  9. memory_note { scope: '${memory_scope}', ts, frame, body_chars: ${body.length}, status: 'posted' }
-  10. Drop the pinned comment from the pack section J · same frame
-  11. fall_signal broadcast: linkedin_drop_posted
-  12. learn_log scope:'linkedin-post' with what_worked + early-engagement reading
+          // Type the body char-by-char to defeat anti-paste detection
+          await _page.keyboard.type(body, { delay: 5 });
+          await _page.waitForTimeout(800);
 
-SAFETY: NEVER skip step 7. Posting is irreversible.` }] };
+          // Attach media
+          if (carouselImages.length > 0) {
+            // Image button (camera icon) · NOT document
+            const imgChooserSel = ['button[aria-label*="photo" i]', 'button[aria-label*="image" i]', 'button[aria-label*="media" i]'];
+            let clickedImgBtn = false;
+            for (const sel of imgChooserSel) {
+              try {
+                const b = _page.locator(sel).first();
+                if (await b.count() > 0) { await b.click({ timeout: 4000 }); clickedImgBtn = true; break; }
+              } catch (_) {}
+            }
+            if (!clickedImgBtn) {
+              try { await _page.getByLabel(/add a photo|image|media/i).first().click({ timeout: 4000 }); clickedImgBtn = true; } catch (_) {}
+            }
+            await _page.waitForTimeout(1200);
+            // setInputFiles · multi-select all PNG paths
+            try {
+              const fileInput = _page.locator('input[type="file"]').first();
+              await fileInput.setInputFiles(carouselImages);
+            } catch (e) {
+              console.log('  ⚠ image setInputFiles failed: ' + e.message);
+            }
+            await _page.waitForTimeout(2000);
+            // LinkedIn often shows a "Done" / "Next" button after media attach
+            try { await _page.getByRole('button', { name: /^(done|next)$/i }).first().click({ timeout: 4000 }); } catch (_) {}
+          } else if (carousel_pdf_path && fs.existsSync(carousel_pdf_path)) {
+            const docChooserSel = ['button[aria-label*="document" i]'];
+            let clickedDocBtn = false;
+            for (const sel of docChooserSel) {
+              try {
+                const b = _page.locator(sel).first();
+                if (await b.count() > 0) { await b.click({ timeout: 4000 }); clickedDocBtn = true; break; }
+              } catch (_) {}
+            }
+            if (!clickedDocBtn) {
+              try { await _page.getByLabel(/document/i).first().click({ timeout: 4000 }); clickedDocBtn = true; } catch (_) {}
+            }
+            await _page.waitForTimeout(1200);
+            try {
+              const fileInput = _page.locator('input[type="file"]').first();
+              await fileInput.setInputFiles([carousel_pdf_path]);
+            } catch (e) {
+              console.log('  ⚠ document setInputFiles failed: ' + e.message);
+            }
+            await _page.waitForTimeout(2500);
+            try { await _page.getByRole('button', { name: /^(done|next)$/i }).first().click({ timeout: 4000 }); } catch (_) {}
+          }
+
+          // Wait for preview to render
+          await _page.waitForTimeout(3000);
+          const previewBuf = await _page.screenshot({ type: 'png' });
+
+          // Pause-before-Post gate · TTY-safe
+          const approve = await ask('\n  ◊ ready to Post · approve? [yes/no] > ');
+          if (!/^(y|yes|go|ok)/i.test((approve || '').trim())) {
+            try { fs.appendFileSync(path.join(MEMORY_DIR, 'li-actions.jsonl'), JSON.stringify({ ts: new Date().toISOString(), verb: 'linkedin_drop', frame, body_chars: body.length, status: 'declined' }) + '\n'); } catch (_) {}
+            return { content: [
+              { type: 'text', text: 'declined · draft left in composer' },
+              { type: 'image', data: previewBuf.toString('base64'), mimeType: 'image/png' }
+            ] };
+          }
+
+          // Click "Post"
+          try {
+            await _page.getByRole('button', { name: /^post$/i }).first().click({ timeout: 8000 });
+          } catch (_) {
+            await _page.locator('button:has-text("Post")').first().click({ timeout: 8000 });
+          }
+          await _page.waitForTimeout(2000);
+          const postBuf = await _page.screenshot({ type: 'png' });
+
+          // Memory · jsonl append
+          try { fs.appendFileSync(path.join(MEMORY_DIR, memory_scope + '.jsonl'), JSON.stringify({ ts: new Date().toISOString(), frame, body_chars: body.length, carousel_pdf_path: carousel_pdf_path || null, screenshot_count: carouselImages.length, status: 'posted' }) + '\n'); } catch (_) {}
+          try { fs.appendFileSync(path.join(MEMORY_DIR, 'li-actions.jsonl'), JSON.stringify({ ts: new Date().toISOString(), verb: 'linkedin_drop', frame, body_chars: body.length, status: 'posted' }) + '\n'); } catch (_) {}
+
+          // Broadcast success
+          try {
+            if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'linkedin_drop_posted', payload: { frame, body_chars: body.length, screenshot_count: carouselImages.length, carousel_pdf_path: carousel_pdf_path || null }, ts: new Date().toISOString() });
+          } catch (_) {}
+
+          return { content: [
+            { type: 'text', text: `◊ LINKEDIN DROP · POSTED · frame ${frame} · ${body.length} chars${carouselImages.length ? ' · ' + carouselImages.length + ' images' : carousel_pdf_path ? ' · doc attached' : ' · text-only'}` },
+            { type: 'image', data: postBuf.toString('base64'), mimeType: 'image/png' }
+          ] };
+        } catch (e) {
+          const failPath = `C:\\Users\\sjgan\\Downloads\\li-drop-failure-${frame.replace(/\./g, '_')}-${ts}.png`;
+          try { if (_page) { const buf = await _page.screenshot({ type: 'png' }); fs.writeFileSync(failPath, buf); } } catch (_) {}
+          try { fs.appendFileSync(path.join(MEMORY_DIR, 'li-actions.jsonl'), JSON.stringify({ ts: new Date().toISOString(), verb: 'linkedin_drop', frame, body_chars: body.length, status: 'error', error: e.message, screenshot: failPath }) + '\n'); } catch (_) {}
+          return { content: [{ type: 'text', text: `linkedin_drop error: ${e.message} · failure screenshot: ${failPath}` }] };
+        }
       }
     ),
 
