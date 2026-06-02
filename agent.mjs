@@ -45,6 +45,20 @@ const PACK_PATH    = (CHAT_MODE || SERVER_MODE || TOOL_MODE) ? null : ARGS.find(
 const SERVER_PORT  = parseInt(process.env.SIDIDY_PORT || '1618', 10); // φ port · phi is home
 const USER_DATA    = './si-didy-profile';
 const VIEWPORT     = { width: 1280, height: 800 };
+
+// ◊ pre-launch self-heal · reset exit_type so Chromium doesn't show the
+// "restore pages" yellow bar (which intercepts focus + blocks DOM ops)
+// after a prior force-kill. Call before every launchPersistentContext.
+function resetProfileExitType() {
+  try {
+    const prefPath = path.join(USER_DATA, 'Default', 'Preferences');
+    if (!fs.existsSync(prefPath)) return;
+    let pref = fs.readFileSync(prefPath, 'utf8');
+    pref = pref.replace(/"exit_type":"Crashed"/g, '"exit_type":"Normal"')
+               .replace(/"exited_cleanly":false/g, '"exited_cleanly":true');
+    fs.writeFileSync(prefPath, pref);
+  } catch (_) { /* swallow · best-effort */ }
+}
 const MAX_TURNS    = 200;
 const MCPS_CONFIG  = './mcps.json';
 const MEMORY_DIR   = './memory';
@@ -265,7 +279,7 @@ async function ensureBrowser() {
   console.log('◊ T3 · loading Playwright (lazy) · this may take a sec…');
   const { chromium } = await import('playwright');
   _playwright = chromium;
-  _ctx = await chromium.launchPersistentContext(USER_DATA, {
+  resetProfileExitType(); _ctx = await chromium.launchPersistentContext(USER_DATA, {
     headless: false,
     viewport: VIEWPORT,
     args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check']
@@ -1088,7 +1102,7 @@ NEXT: hand outputs to linkedin_drop(frame:'${scope}', screenshot_dir:'${outDir}'
           const { chromium } = await import('playwright');
           if (!_ctx) {
             console.log('◊ T3 · Chromium opening (persistent profile · ./si-didy-profile)');
-            _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check'] });
+            resetProfileExitType(); _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check'] });
             _page = _ctx.pages()[0] || await _ctx.newPage();
             await _page.setViewportSize(VIEWPORT);
           }
@@ -1296,7 +1310,7 @@ SAFETY: NEVER auto-send · ALL drafts await Simon's approval`;
           const { chromium } = await import('playwright');
           if (!_ctx) {
             console.log('◊ T3 · Chromium opening (persistent profile · ./si-didy-profile)');
-            _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check'] });
+            resetProfileExitType(); _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check'] });
             _page = _ctx.pages()[0] || await _ctx.newPage();
             await _page.setViewportSize(VIEWPORT);
           }
@@ -1399,7 +1413,7 @@ SAFETY: NEVER auto-send · ALL drafts await Simon's approval`;
           if (!_ctx) {
             const { chromium } = await import('playwright');
             console.log('◊ T3 · Chromium opening (persistent profile · ./si-didy-profile)');
-            _ctx = await chromium.launchPersistentContext(USER_DATA, {
+            resetProfileExitType(); _ctx = await chromium.launchPersistentContext(USER_DATA, {
               headless: false, viewport: VIEWPORT,
               args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check']
             });
