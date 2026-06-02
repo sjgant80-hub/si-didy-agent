@@ -729,15 +729,20 @@ const estateMcp = createSdkMcpServer({
           const monthly_burn_projected = burn_rate_per_hour * HOURS_IN_MONTH;
           const safety_margin_pct = Math.max(0, Math.round(100 * (1 - monthly_burn_projected / monthly_budget)));
           return { content: [{ type: 'text', text:
-'◊ KONOMI METER · ' + hours + 'h scan · ' + files_scanned + ' transcripts · ' + sessions.size + ' sessions\n' +
+'◊ KONOMI METER · ROLLING ' + hours + 'h READ · NOT a real-time spike monitor\n' +
+'  ⚠ this is a ' + hours + 'h rolling SUM · a single bad mission can dominate the window\n' +
+'  ⚠ throttle threshold: safety_margin_pct < 25% · then prefer WebLLM / pause fan-outs\n' +
+'  ⚠ drift ±15% · Max-tier accounting not fully client-observable\n' +
+'\n' +
+'  scan_window:              ' + hours + 'h · ' + files_scanned + ' transcripts · ' + sessions.size + ' sessions\n' +
 '  approx_tokens_used:       ' + approx_tokens.toLocaleString() + '\n' +
 '  burn_rate_per_hour:       ' + burn_rate_per_hour.toLocaleString() + ' tok/h\n' +
 '  projected_monthly_burn:   ' + monthly_burn_projected.toLocaleString() + ' tok\n' +
 '  Max plan rough budget:    ' + monthly_budget.toLocaleString() + ' tok\n' +
 '  safety_margin_pct:        ' + safety_margin_pct + '%\n' +
 '\n' +
-'  ⚠ drift ±15% · Max-tier accounting not fully client-observable · use as signal, not ceiling.\n' +
-'  if safety_margin_pct < 25% · throttle recursive fan-outs · prefer WebLLM fallbacks.' }] };
+'  context: a single failed T3 escalation can spike this read · check missions/<today>.jsonl\n' +
+'  for "abandoned · selector failure" entries before treating the spike as a steady state.' }] };
         } catch (e) {
           return { content: [{ type: 'text', text: 'konomi_meter error: ' + e.message }] };
         }
@@ -1726,415 +1731,15 @@ SAFETY:
     ),
 
     // ═══════════════════════════════════════════════════════════════
-    // ◊ UPWORK PROFILE SETUP · v1.0 · autonomous profile-fill engine
-    // Simon's directive (verbatim · 2026-06-02):
-    //   "why hasnt it redone my profile like i asked, i dont want to do
-    //    any manual clicks i just want this done"
-    //   "just get it done....reread the feild seed recurs phid-12d 7
-    //    times get in the .618 zone. sididy is meant to know this stuff"
-    // → AUTO-SAVE PER SIMON DIRECTIVE · pause-before-save rail OVERRIDDEN
-    //   per explicit user instruction · every Save click logged for audit
-    // → 7-section recursion · A1/A2/A3 → B → C → D → E → F · independent
-    //   try/catch per section · one failure does NOT abort the rest
+    // ◊ UPWORK PROFILE SETUP · REMOVED · v2.1 konomi-clean pass (2026-06-02)
+    // 2026-06-02 audit: verb fired once · 15/15 sections failed · DOM
+    // selectors stale against current Upwork · T3 escalation burned 22M
+    // tok/h · 28× plan ceiling. Removed entire verb. The profile fill is
+    // now a documented Simon-paste workflow using UPWORK-PACK.txt. The
+    // other Upwork verbs (open / find_jobs / propose / reply / autopilot)
+    // stay — they work. See commit "si-didy v2.1 · konomi-clean pass".
     // ═══════════════════════════════════════════════════════════════
-    tool('upwork_profile_setup', '◊·κ=φ⁷ · UPWORK PROFILE AUTO-FILL · Drives Simon\'s Upwork profile autonomously via Playwright. Reads UPWORK-PACK.txt sections A1/A2/A3 (headline/rate/availability) + B (overview) + C (20 skills) + D (7 portfolio entries with screenshots) + E (specialized profiles) + F (saved response). NO manual clicks · NO ask_user pauses · auto-saves each section per Simon\'s explicit directive. Per-section try/catch · one failure does NOT abort the rest. Returns { sections:[{id,status,detail}], final_screenshot, log }.',
-      { pack_path: z.string().default('./packs/UPWORK-PACK.txt').describe('Field-seed paste pack · default ./packs/UPWORK-PACK.txt'),
-        portfolio_dir: z.string().default('C:\\Users\\sjgan\\Downloads\\upwork-portfolio').describe('Directory of portfolio screenshot PNGs · default C:\\Users\\sjgan\\Downloads\\upwork-portfolio'),
-        dry_run: z.boolean().default(false).describe('true = parse pack + log plan but skip Save clicks · false = AUTO-SAVE per Simon directive') },
-      async ({ pack_path, portfolio_dir, dry_run }) => {
-        // defaults (also defended at the handler level so CLI passthrough · which skips Zod · still works)
-        pack_path     = pack_path     ?? './packs/UPWORK-PACK.txt';
-        portfolio_dir = portfolio_dir ?? 'C:\\Users\\sjgan\\Downloads\\upwork-portfolio';
-        dry_run       = dry_run       ?? false;
-        console.log(`  ◊· upwork_profile_setup pack=${pack_path} portfolio=${portfolio_dir} dry_run=${dry_run}`);
-        const log = [];
-        const sections = [];
-        const pushLog = (line) => { log.push(`[${new Date().toISOString()}] ${line}`); console.log(`  ◊·  ${line}`); };
-
-        // ── parse pack ────────────────────────────────────────────────
-        let pack = '';
-        try {
-          pack = fs.readFileSync(pack_path, 'utf8');
-          pushLog(`pack loaded · ${pack.length} chars`);
-        } catch (e) {
-          return { content: [{ type: 'text', text: `upwork_profile_setup error · cannot read pack: ${e.message}` }] };
-        }
-
-        // Helper · extract the first ▼ COPY ▼ … ▲ END ▲ block AFTER a section header
-        function extractCopy(headerRegex) {
-          const headerMatch = pack.match(headerRegex);
-          if (!headerMatch) return null;
-          const rest = pack.slice(headerMatch.index + headerMatch[0].length);
-          const m = rest.match(/▼\s*COPY\s*▼[^\n]*\n([\s\S]*?)\n▲\s*END\s*▲/);
-          return m ? m[1].trim() : null;
-        }
-        // Helper · extract content between two ▼ LABEL ▼ … ▲ END ▲ markers
-        function extractLabelled(block, label) {
-          const re = new RegExp(`▼\\s*${label}\\s*▼\\s*\\n([\\s\\S]*?)\\n▲\\s*END\\s*▲`);
-          const m = block.match(re);
-          return m ? m[1].trim() : null;
-        }
-
-        // Section A1 · headline
-        const headline = extractCopy(/SECTION\s+A[\s\S]*?A1\.[^\n]*HEADLINE[^\n]*\n/i)
-                      || extractCopy(/HEADLINE[\s\S]*?Profile\s+settings[\s\S]*?\n/i);
-        // Section A2 · rate (hardcoded per pack · $95)
-        const hourlyRate = 95;
-        // Section A3 · availability
-        const availability = 'As needed - open to offers';
-        // Section B · overview
-        const overview = extractCopy(/SECTION\s+B[\s\S]*?THE\s+OVERVIEW[^\n]*\n/i);
-        // Section C · skills
-        const skillsBlock = extractCopy(/SECTION\s+C[\s\S]*?SKILLS[^\n]*\n/i);
-        const skills = skillsBlock ? skillsBlock.split('\n').map(l => l.replace(/^\s*\d+\.\s*/, '').trim()).filter(Boolean).slice(0, 20) : [];
-
-        pushLog(`parsed · headline=${headline ? `"${headline.slice(0,60)}…"` : 'MISSING'} · rate=$${hourlyRate} · skills=${skills.length}/20 · overview=${overview ? overview.length+' chars' : 'MISSING'}`);
-
-        // Section D · portfolio entries (PROFILE-FINISH.md is the v2 source · maps to actual PNGs in portfolio_dir)
-        // Each entry · title · description · project_link · screenshots[]
-        const portfolio = [
-          {
-            id: 'P1',
-            title: 'fall-substrate · Research → Spec → Tool → Ship · the Cognitive Substrate',
-            description: 'The flagship of the AI Native Solutions estate. One endpoint goes from a research question to a live, cited, sovereign HTML tool — end-to-end, in ~5 minutes:\n\n  Phase 1 · RESEARCH      5-angle fan-out + 3-vote adversarial verification\n  Phase 2 · SPEC          Evidence-graded features from confirmed findings\n  Phase 3 · GENERATE      Sovereign HTML built with estate patterns\n  Phase 4 · VERIFY        Adversarial check: does the tool match the research?\n  Phase 5 · SHIP          GitHub repo + Pages live + HTTP 200 verified\n  Phase 6 · AUDIT         Konomi Ed25519 audit chain · provenance from question → published tool\n\nThe architecture doc (12 pages, also linked) is the receipt for technical buyers. The empirical proof: 13 of 25 plausible LLM claims (52%) were killed by the adversarial verify panel in production runs.\n\nLive: https://sjgant80-hub.github.io/fall-substrate/',
-            project_link: 'https://sjgant80-hub.github.io/fall-substrate/',
-            screenshots: ['01-flagship-substrate-landing.png', '02-flagship-substrate-arch-doc.png']
-          },
-          {
-            id: 'P2',
-            title: 'AI Native Solutions · 89 Sovereign Tools · Receipt-Marketplace',
-            description: 'ai-nativesolutions.com — the central directory and storefront for every sovereign tool I\'ve shipped. 89 entries live as of today: 49 apps, 12 APIs, 3 SDKs, 11 research publications, 4 plugins, 4 infrastructure components.\n\nEvery tool listed is:\n  · sovereign single-file HTML or open-source API\n  · runs in the browser or self-hosted\n  · BYOK LLM cascade (Claude, GPT, Gemini, or local Ollama)\n  · IndexedDB storage + JSON portable export\n  · Konomi Ed25519 audit chain baked in\n  · MIT licensed · fork it, brand it, resell it\n\nThe Cognitive Substrate v1.0 (top of marketplace) is the meta-product: it ships tools like the ones in the catalogue, on demand.\n\nLive: https://www.ai-nativesolutions.com/',
-            project_link: 'https://www.ai-nativesolutions.com/',
-            screenshots: ['03-ain-marketplace-hero.png', '04-ain-marketplace-grid.png']
-          },
-          {
-            id: 'P3',
-            title: 'FallMap · Drop Any Workflow URL · Get a One-Page Sovereign Replacement Plan',
-            description: 'The free tool I use to qualify every client conversation.\n\nPaste any URL (your Notion stack, your Calendly, your HubSpot setup, your Stripe + Webflow + Typeform combo). FallMap returns a one-page breakdown that names:\n\n  · What you\'re currently paying for it (monthly + lifetime cost)\n  · The sovereign-build replacement (single HTML, your data, MIT)\n  · The estimated build cost and turnaround\n  · The annual savings projection\n  · The lock-in score you\'re escaping\n\nNo call attached. No follow-up sequence. Just the map.\n\nLive: https://sjgant80-hub.github.io/fallmap/',
-            project_link: 'https://sjgant80-hub.github.io/fallmap/',
-            screenshots: ['05-fallmap.png']
-          },
-          {
-            id: 'P4',
-            title: 'fallcrm · Sovereign CRM · Replaces HubSpot at $0/seat',
-            description: 'A real, working CRM in a single HTML file.\n\nHubSpot Pro is $450/month per seat. Salesforce Essentials is $300+. fallcrm is free, MIT licensed, runs from a USB stick, stores all data in your browser, and ships with:\n\n  · Contacts table · search + tag filter + activity log per contact\n  · 7-stage pipeline · drag-and-drop kanban with native HTML5\n  · Weighted forecast · stage conversion funnel\n  · 4 email templates (intro / followup / proposal / loss-reason)\n  · CSV + vCard + JSON import/export\n  · Konomi licence shim (sovereign tier free · paid tier unlocks team sync)\n  · fallmesh broadcast hook · talks to every other tool in the estate\n\nLive: https://sjgant80-hub.github.io/fallcrm/',
-            project_link: 'https://sjgant80-hub.github.io/fallcrm/',
-            screenshots: ['06-fallcrm-pipeline.png']
-          },
-          {
-            id: 'P5',
-            title: 'fall-verify · 3-Vote Refute Panel · 52% of LLM Claims Fail This Gate',
-            description: 'The most underrated frontier in AI applications: catching plausible hallucinations before they ship.\n\nEvery LLM application generates confident-sounding nonsense. fall-verify is a drop-in JS SDK that runs a 3-vote adversarial refute panel against any claim, returning a verdict + confidence + suggested correction.\n\nEmpirical baseline: in my production deep-research runs, 13 of 25 plausible-sounding claims (52%) were actively refuted by the panel.\n\nUse cases:\n  · RAG fact-checking before content publishes\n  · Content moderation for LLM-generated material\n  · Code review for hallucinated APIs\n  · Audit trail signing (refuted claims removed pre-mint)\n\nLive: https://sjgant80-hub.github.io/fall-verify/',
-            project_link: 'https://sjgant80-hub.github.io/fall-verify/',
-            screenshots: ['08-fall-verify.png']
-          },
-          {
-            id: 'P6',
-            title: 'GymOps · Sovereign Gym Software · Built in 24h · Live for a Real Client',
-            description: 'Case study: Michel runs a gym. He needed a CRM + member tracker + class scheduler + payment-receipt issuer + onboarding flow. Most vendors quoted $300-600/month with multi-month integration.\n\nI forged him GymOps in 24h:\n\n  · Single HTML file · loads from his domain\n  · Members table · class schedule · CRM pipeline · onboarding wizard\n  · 14-day Ed25519-signed trial license · zero-friction "try free, buy if useful"\n  · His branding · his colours · his domain · my engine\n  · MIT licensed · he owns the source, can resell it to other gyms\n  · $0/month forever · BYOK if he wants AI features\n\nClient URL: https://mic1ga.github.io/GymOPS/',
-            project_link: 'https://mic1ga.github.io/GymOPS/',
-            screenshots: ['12-gymops-case-study.png', '06-fallcrm-pipeline.png']
-          },
-          {
-            id: 'P7',
-            title: 'CASSIE v20.2-nD · 15,700× Empirical ESS Collapse · High-Dim Search Engine',
-            description: 'For technical/research buyers: this is the high-end signal.\n\nCASSIE is a sovereign substrate for high-dimensional search problems — applied originally to the Bitcoin Puzzle 135 problem (2^134 keyspace) but generalisable to any prime-spine recursive search (drug discovery, optimisation, hyperparameter tuning, route planning).\n\nThe v20.2-nD master patch achieved a verified 15,700× ESS (effective search space) collapse vs flat 1D scanning, empirically measured on synthetic targets. Honest finding: a 127-face lattice extension showed 1× in the same metric (needs consensus-based ESS · queued for refinement).\n\nLive: https://sjgant80-hub.github.io/cassietorusbtc135solver/cassie-torus-v2.html',
-            project_link: 'https://sjgant80-hub.github.io/cassietorusbtc135solver/cassie-torus-v2.html',
-            screenshots: ['10-cassie-cosmology.png']
-          }
-        ];
-
-        // Section E · specialized profiles
-        const specialized = [
-          {
-            id: 'E1',
-            title: 'AI Agent Engineer · Sovereign Pipelines · No Per-Seat Fees',
-            overview: 'I build AI agents that run on your hardware, use your keys, and store data in your browser. No vendor lock-in. No per-message fees. 89 sovereign tools in production. Source on GitHub.'
-          },
-          {
-            id: 'E2',
-            title: 'Sovereign Web Apps · Single-File HTML · Your Data Stays Yours',
-            overview: 'Web applications that work offline, store data in IndexedDB, and never phone home. Drop your workflow URL — I\'ll quote a sovereign replacement at fixed price, no hourly. 24h delivery on LITE tier.'
-          }
-        ];
-
-        // Section F · saved response (FallMap bait template)
-        const savedResponse = `Hi [NAME],
-
-Two things before anything else:
-
-1. Drop your current workflow URL (or stack list — Notion + Stripe + Calendly etc). I'll send you a free FallMap one-page breakdown showing what owning it outright would cost. No call attached.
-
-2. If FallMap shows ROI you like, we book a 10-min scope call. I quote a real number after that call, not before.
-
-I've shipped 89 sovereign tools — your portfolio link is the receipts. The one most relevant to your job is [PICK ONE FROM YOUR PORTFOLIO BY KEYWORD MATCH].
-
-Top Rated · UK based · ◊
-
-Simon`;
-
-        // ── DRY-RUN early-exit ────────────────────────────────────────
-        if (dry_run) {
-          pushLog('DRY-RUN · no browser launch · returning parsed plan only');
-          return { content: [{ type: 'text', text: JSON.stringify({
-            mode: 'dry_run',
-            parsed: {
-              headline_chars: headline ? headline.length : 0,
-              hourlyRate, availability,
-              overview_chars: overview ? overview.length : 0,
-              skills_count: skills.length,
-              portfolio_count: portfolio.length,
-              specialized_count: specialized.length,
-              saved_response_chars: savedResponse.length
-            },
-            log
-          }, null, 2) }] };
-        }
-
-        // ── browser bootstrap (mirror existing upwork_open pattern) ──
-        try {
-          const { chromium } = await import('playwright');
-          if (!_ctx) {
-            pushLog('T3 · Chromium opening (persistent profile · ./si-didy-profile)');
-            _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled'] });
-            _page = _ctx.pages()[0] || await _ctx.newPage();
-            await _page.setViewportSize(VIEWPORT);
-          }
-          if (!_page) _page = await _ctx.newPage();
-        } catch (e) {
-          return { content: [{ type: 'text', text: `upwork_profile_setup · playwright bootstrap failed: ${e.message}` }] };
-        }
-
-        // ── shared section runner · captures failures · keeps going ──
-        async function runSection(id, label, fn) {
-          pushLog(`▶ section ${id} · ${label}`);
-          try {
-            const detail = await fn();
-            sections.push({ id, status: 'saved', detail: detail || label });
-            pushLog(`  ✓ section ${id} SAVED · ${detail || label}`);
-          } catch (e) {
-            const shotPath = `C:\\Users\\sjgan\\Downloads\\upwork-failure-${id}.png`;
-            try { await _page.screenshot({ path: shotPath, fullPage: true }); } catch (_) {}
-            sections.push({ id, status: 'failed', detail: e.message, failure_screenshot: shotPath });
-            pushLog(`  ✗ section ${id} FAILED · ${e.message} · shot=${shotPath}`);
-          }
-        }
-
-        // ── auto-save click helper · LOGS Simon's override every time ─
-        async function clickSave(buttonNameRegex = /^(Save|Save changes|Save and close)$/i) {
-          pushLog('AUTO-SAVE PER SIMON DIRECTIVE · pause-before-save rail OVERRIDDEN by explicit user instruction (2026-06-02): "i dont want to do any manual clicks i just want this done"');
-          const btn = _page.getByRole('button', { name: buttonNameRegex }).first();
-          await btn.click({ timeout: 10000 });
-          await _page.waitForTimeout(2000);
-        }
-
-        // ── SECTION A1 · HEADLINE ─────────────────────────────────────
-        await runSection('A1_headline', 'profile title', async () => {
-          if (!headline) throw new Error('headline missing from pack');
-          await _page.goto('https://www.upwork.com/nx/profile-settings/profile-title', { waitUntil: 'domcontentloaded', timeout: 30000 });
-          await _page.waitForTimeout(2500);
-          // try direct field first · fallback to pencil edit
-          let titleField = _page.getByLabel(/Title|Headline/i).first();
-          if (!(await titleField.isVisible().catch(() => false))) {
-            // fallback · click pencil on main profile page
-            await _page.goto('https://www.upwork.com/freelancers/settings/profile', { waitUntil: 'domcontentloaded', timeout: 30000 });
-            await _page.waitForTimeout(2000);
-            const pencil = _page.locator('[data-test*="title"] button[aria-label*="edit" i], button[aria-label*="Edit title" i]').first();
-            await pencil.click({ timeout: 10000 });
-            await _page.waitForTimeout(1500);
-            titleField = _page.getByLabel(/Title|Headline/i).first();
-          }
-          await titleField.fill(headline);
-          await clickSave();
-          return `headline=${headline.slice(0, 80)}…`;
-        });
-
-        // ── SECTION A2 · HOURLY RATE ($95) ────────────────────────────
-        await runSection('A2_rate', `hourly rate $${hourlyRate}`, async () => {
-          await _page.goto('https://www.upwork.com/nx/profile-settings/rate', { waitUntil: 'domcontentloaded', timeout: 30000 });
-          await _page.waitForTimeout(2500);
-          let rateField = _page.getByLabel(/hourly rate|rate/i).first();
-          if (!(await rateField.isVisible().catch(() => false))) {
-            await _page.goto('https://www.upwork.com/freelancers/settings/profile', { waitUntil: 'domcontentloaded', timeout: 30000 });
-            await _page.waitForTimeout(2000);
-            const pencil = _page.locator('[data-test*="rate"] button[aria-label*="edit" i]').first();
-            await pencil.click({ timeout: 10000 });
-            await _page.waitForTimeout(1500);
-            rateField = _page.getByLabel(/hourly rate|rate/i).first();
-          }
-          await rateField.fill(String(hourlyRate));
-          await clickSave();
-          return `hourly=$${hourlyRate} USD`;
-        });
-
-        // ── SECTION A3 · AVAILABILITY ─────────────────────────────────
-        await runSection('A3_availability', `availability "${availability}"`, async () => {
-          await _page.goto('https://www.upwork.com/freelancers/settings/profile', { waitUntil: 'domcontentloaded', timeout: 30000 });
-          await _page.waitForTimeout(2500);
-          // availability is typically a pencil + radio · try a few selectors
-          const pencil = _page.locator('[data-test*="availability"] button[aria-label*="edit" i], button[aria-label*="Edit availability" i]').first();
-          await pencil.click({ timeout: 10000 });
-          await _page.waitForTimeout(1500);
-          // radio option · "As needed - open to offers"
-          const option = _page.getByRole('radio', { name: /as needed.*open to offers/i }).first();
-          await option.check({ timeout: 8000 });
-          await clickSave();
-          return `availability=${availability}`;
-        });
-
-        // ── SECTION B · OVERVIEW ──────────────────────────────────────
-        await runSection('B_overview', 'profile overview', async () => {
-          if (!overview) throw new Error('overview missing from pack');
-          await _page.goto('https://www.upwork.com/nx/profile-settings/profile-overview', { waitUntil: 'domcontentloaded', timeout: 30000 });
-          await _page.waitForTimeout(2500);
-          let ovField = _page.getByLabel(/Overview|Description/i).first();
-          if (!(await ovField.isVisible().catch(() => false))) {
-            // fallback · profile page pencil
-            await _page.goto('https://www.upwork.com/freelancers/settings/profile', { waitUntil: 'domcontentloaded', timeout: 30000 });
-            await _page.waitForTimeout(2000);
-            const pencil = _page.locator('[data-test*="overview"] button[aria-label*="edit" i], button[aria-label*="Edit overview" i]').first();
-            await pencil.click({ timeout: 10000 });
-            await _page.waitForTimeout(1500);
-            ovField = _page.locator('textarea').first();
-          }
-          await ovField.fill(overview);
-          await clickSave();
-          return `overview=${overview.length} chars`;
-        });
-
-        // ── SECTION C · 20 SKILLS ─────────────────────────────────────
-        await runSection('C_skills', `${skills.length} skills`, async () => {
-          if (skills.length === 0) throw new Error('no skills parsed from pack');
-          await _page.goto('https://www.upwork.com/nx/profile-settings/skills', { waitUntil: 'domcontentloaded', timeout: 30000 });
-          await _page.waitForTimeout(2500);
-          // skills input · type → wait → Enter
-          const input = _page.locator('input[type="search"], input[placeholder*="skill" i], input[aria-label*="skill" i]').first();
-          for (const skill of skills) {
-            try {
-              await input.click({ timeout: 5000 });
-              await input.fill(skill);
-              await _page.waitForTimeout(900); // autocomplete settle
-              // press Enter · Upwork either accepts the typed value or picks first dropdown item
-              await _page.keyboard.press('Enter');
-              await _page.waitForTimeout(400);
-              pushLog(`  + skill "${skill}"`);
-            } catch (e) {
-              pushLog(`  ~ skill "${skill}" skipped · ${e.message}`);
-            }
-          }
-          await clickSave();
-          return `added ${skills.length} skills`;
-        });
-
-        // ── SECTION D · 7 PORTFOLIO ENTRIES ───────────────────────────
-        for (const entry of portfolio) {
-          await runSection(`D_${entry.id}`, `portfolio ${entry.id} · ${entry.title.slice(0,50)}…`, async () => {
-            await _page.goto('https://www.upwork.com/nx/profile-settings/portfolio', { waitUntil: 'domcontentloaded', timeout: 30000 });
-            await _page.waitForTimeout(2500);
-            // click "Add" / "+" / "Add work" button
-            const addBtn = _page.getByRole('button', { name: /^(Add|Add work|\+\s*Add|Add project)/i }).first();
-            await addBtn.click({ timeout: 10000 });
-            await _page.waitForTimeout(2000);
-
-            // title (255 char limit)
-            const titleField = _page.getByLabel(/Project title|Title/i).first();
-            await titleField.fill(entry.title.slice(0, 255));
-
-            // description (Upwork is ~600-2000 chars depending on field · we trim defensively)
-            const descField = _page.locator('textarea, [contenteditable="true"]').filter({ hasNot: _page.locator('input') }).first();
-            await descField.fill(entry.description.slice(0, 2000));
-
-            // project URL
-            try {
-              const urlField = _page.getByLabel(/Project URL|Project link|URL/i).first();
-              await urlField.fill(entry.project_link);
-            } catch (_) { pushLog(`  ~ ${entry.id} project URL field not found · skipping URL`); }
-
-            // screenshots via hidden file input
-            const shots = entry.screenshots
-              .map(name => path.join(portfolio_dir, name))
-              .filter(p => fs.existsSync(p));
-            if (shots.length === 0) {
-              pushLog(`  ~ ${entry.id} NO screenshots found in ${portfolio_dir}`);
-            } else {
-              try {
-                const fileInput = _page.locator('input[type="file"]').first();
-                await fileInput.setInputFiles(shots);
-                await _page.waitForTimeout(3000); // image upload settle
-                pushLog(`  + ${entry.id} uploaded ${shots.length} screenshot(s)`);
-              } catch (e) {
-                pushLog(`  ~ ${entry.id} screenshot upload failed · ${e.message}`);
-              }
-            }
-
-            await clickSave();
-            return `${entry.id} title=${entry.title.slice(0,40)}… shots=${shots.length}`;
-          });
-          // Upwork rate-limit guard between portfolio adds
-          await _page.waitForTimeout(2500);
-        }
-
-        // ── SECTION E · SPECIALIZED PROFILES ──────────────────────────
-        for (const sp of specialized) {
-          await runSection(`E_${sp.id}`, `specialized profile ${sp.id}`, async () => {
-            // navigate to specialized profile area · Upwork puts these under /freelancers/settings/profile
-            await _page.goto('https://www.upwork.com/freelancers/settings/profile', { waitUntil: 'domcontentloaded', timeout: 30000 });
-            await _page.waitForTimeout(2500);
-            // look for "Specialized profiles" section · click create/edit
-            const specBtn = _page.getByRole('button', { name: /Specialized profile|Add specialized|Edit specialized/i }).first();
-            if (!(await specBtn.isVisible().catch(() => false))) {
-              throw new Error('specialized-profile entry-point not visible · may need manual seed');
-            }
-            await specBtn.click({ timeout: 10000 });
-            await _page.waitForTimeout(2000);
-            const titleField = _page.getByLabel(/Title|Headline/i).first();
-            await titleField.fill(sp.title);
-            const ovField = _page.locator('textarea').first();
-            await ovField.fill(sp.overview);
-            await clickSave();
-            return `${sp.id} title=${sp.title}`;
-          });
-        }
-
-        // ── SECTION F · SAVED RESPONSE TEMPLATE ───────────────────────
-        await runSection('F_saved_response', 'saved response template (FallMap bait)', async () => {
-          // saved responses live under message settings
-          await _page.goto('https://www.upwork.com/ab/messages/settings/quick-replies', { waitUntil: 'domcontentloaded', timeout: 30000 });
-          await _page.waitForTimeout(2500);
-          const addBtn = _page.getByRole('button', { name: /^(Add|New|Create|New reply)/i }).first();
-          await addBtn.click({ timeout: 10000 });
-          await _page.waitForTimeout(1500);
-          const titleField = _page.getByLabel(/Title|Name/i).first();
-          await titleField.fill('FallMap Bait · default proposal opener');
-          const bodyField = _page.locator('textarea').first();
-          await bodyField.fill(savedResponse);
-          await clickSave();
-          return 'saved-response · FallMap Bait · created';
-        });
-
-        // ── final screenshot ──────────────────────────────────────────
-        const finalShot = 'C:\\Users\\sjgan\\Downloads\\upwork-profile-final.png';
-        try {
-          await _page.goto('https://www.upwork.com/freelancers/settings/profile', { waitUntil: 'domcontentloaded', timeout: 30000 });
-          await _page.waitForTimeout(3000);
-          await _page.screenshot({ path: finalShot, fullPage: true });
-          pushLog(`final screenshot saved · ${finalShot}`);
-        } catch (e) {
-          pushLog(`final screenshot failed · ${e.message}`);
-        }
-
-        // ── audit + broadcast ─────────────────────────────────────────
-        const saved = sections.filter(s => s.status === 'saved').length;
-        const failed = sections.filter(s => s.status === 'failed').length;
-        try { fs.appendFileSync(path.join(MEMORY_DIR, 'up-actions.jsonl'), JSON.stringify({ ts: new Date().toISOString(), mode: 'profile_setup', saved, failed, sections, final_screenshot: finalShot }) + '\n'); } catch (_) {}
-        try {
-          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'upwork_profile_setup_complete', payload: { saved, failed, final_screenshot: finalShot }, ts: new Date().toISOString() });
-        } catch (_) {}
-
-        const report = { sections, final_screenshot: finalShot, log };
-        return { content: [{ type: 'text', text: `◊ upwork_profile_setup complete · ${saved} saved · ${failed} failed\n\n${JSON.stringify(report, null, 2)}` }] };
-      }
-    ),
+    // (upwork_profile_setup verb body deleted · ~390 lines · see comment block above)
 
     // ═══════════════════════════════════════════════════════════════
     // ◊ COGNITIVE SUBSTRATE · v1.0 · the agentic-corp verbs
@@ -2409,7 +2014,7 @@ UPWORK AUTOPILOT (always-on client-hunt engine · NEVER auto-sends):
 - upwork_propose(jobOrUrl)     → pack-aligned cover letter · FallMap CTA · ask_user before Submit
 - upwork_reply(threadUrl)      → reply draft routed by client intent · ask_user before Send
 - upwork_autopilot(mode,cap)   → cron-ticked scan/propose/reply rotation
-- upwork_profile_setup({pack_path,portfolio_dir,dry_run}) → AUTONOMOUS profile fill · A1/A2/A3/B/C/D/E/F · NO manual clicks · AUTO-SAVES per Simon directive (2026-06-02) · pause-before-save rail overridden in code
+- upwork_profile_setup · REMOVED 2026-06-02 (v2.1 konomi-clean) · stale DOM selectors burned tokens · profile fill is now a Simon-paste workflow per UPWORK-PACK.txt
 - SIDIDY_UP_AUTOPILOT=1 enables · 120 min default · waking hours only
 - ALL submits/sends gated by ask_user · daily caps respected (propose ≤5/day · reply ≤10/day)
 - FallMap URL in every proposal · TOS-compliant (free portfolio tool, not payment funnel)
@@ -2567,8 +2172,7 @@ const allowedTools = [
   'mcp__estate__upwork_open', 'mcp__estate__upwork_find_jobs',
   'mcp__estate__upwork_propose', 'mcp__estate__upwork_reply',
   'mcp__estate__upwork_autopilot',
-  // ◊ Upwork PROFILE-FILL · autonomous · auto-saves per Simon directive
-  'mcp__estate__upwork_profile_setup',
+  // ◊ Upwork PROFILE-FILL · REMOVED 2026-06-02 (v2.1 konomi-clean · stale selectors)
 ];
 
 console.log('\n◊ tiers loaded:');
