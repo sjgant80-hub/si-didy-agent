@@ -268,7 +268,7 @@ async function ensureBrowser() {
   _ctx = await chromium.launchPersistentContext(USER_DATA, {
     headless: false,
     viewport: VIEWPORT,
-    args: ['--disable-blink-features=AutomationControlled']
+    args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check']
   });
   _page = _ctx.pages()[0] || await _ctx.newPage();
   await _page.setViewportSize(VIEWPORT);
@@ -1088,7 +1088,7 @@ NEXT: hand outputs to linkedin_drop(frame:'${scope}', screenshot_dir:'${outDir}'
           const { chromium } = await import('playwright');
           if (!_ctx) {
             console.log('◊ T3 · Chromium opening (persistent profile · ./si-didy-profile)');
-            _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled'] });
+            _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check'] });
             _page = _ctx.pages()[0] || await _ctx.newPage();
             await _page.setViewportSize(VIEWPORT);
           }
@@ -1296,7 +1296,7 @@ SAFETY: NEVER auto-send · ALL drafts await Simon's approval`;
           const { chromium } = await import('playwright');
           if (!_ctx) {
             console.log('◊ T3 · Chromium opening (persistent profile · ./si-didy-profile)');
-            _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled'] });
+            _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check'] });
             _page = _ctx.pages()[0] || await _ctx.newPage();
             await _page.setViewportSize(VIEWPORT);
           }
@@ -1401,7 +1401,7 @@ SAFETY: NEVER auto-send · ALL drafts await Simon's approval`;
             console.log('◊ T3 · Chromium opening (persistent profile · ./si-didy-profile)');
             _ctx = await chromium.launchPersistentContext(USER_DATA, {
               headless: false, viewport: VIEWPORT,
-              args: ['--disable-blink-features=AutomationControlled']
+              args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check']
             });
             _page = _ctx.pages()[0] || await _ctx.newPage();
             await _page.setViewportSize(VIEWPORT);
