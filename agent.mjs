@@ -1333,19 +1333,20 @@ SAFETY: NEVER auto-send · ALL drafts await Simon's approval`;
         catch (e) { return { content: [{ type: 'text', text: `pack read failed: ${e.message}` }] }; }
         const grab = (re) => { const m = pack.match(re); return m ? m[1].trim() : ''; };
         const allBlocks = [
-          { id: 'P0', label: 'CLEAR DECK · delete old placeholders', target: 'Profile page',
+          { id: 'P0', label: 'WIPE · nothing in old profile is keeping', target: 'Profile page',
             url: 'https://www.upwork.com/freelancers/settings/profile',
             clipboard: '',
-            hint: `CLEAR THESE BEFORE PASTING:
-     1. DELETE old portfolio entries (the yellow webflow placeholders):
-        · Scroll to Portfolio section
-        · Click ⋯ menu on "AI Business Development Agent" → Delete
-        · Click ⋯ menu on "Intelligent Systems, AI Agents..." → Delete
-        · Confirm any deletes
-     2. CHECK profile photo · if it's an old AIN/Webflow placeholder, replace via
-        pencil icon on photo → upload your real headshot or AI Native ◊ glyph
-     3. CHECK existing Skills · delete any irrelevant ones (we'll add 20 new in C)
-     When deck is clear · type "next"` },
+            hint: `WIPE EVERYTHING · nothing here is staying:
+     · PORTFOLIO  → ⋯ menu → Delete on EVERY card · confirm all
+     · SKILLS     → pencil → remove EVERY existing skill · Save empty
+     · OVERVIEW   → pencil → select-all → Delete · (we paste fresh in B)
+     · PHOTO      → pencil → upload your headshot or AI Native ◊ glyph
+                    (skip only if your current photo is already correct)
+     · TITLE      → leave the existing one · A1 replaces it next step
+     · EMPLOYMENT/EDUCATION/LANGUAGES → leave alone (not in scope)
+
+     The old yellow webflow placeholders ALL go. Take 2 min.
+     Type "next" when the canvas is clean.` },
           { id: 'A1', label: 'Headline', target: 'Profile Title field',
             url: 'https://www.upwork.com/freelancers/settings/profile',
             clipboard: grab(/A1\.\s*HEADLINE[\s\S]*?▼ COPY ▼\s*\n([\s\S]*?)\n▲ END ▲/),
