@@ -36,10 +36,15 @@ MEMORY SCOPES (si-didy must use)
   SECTION B · PAGE POSTS · the AI Native Solutions FB Page
 ═══════════════════════════════════════════════════════════════════════
 
-CADENCE
-  · 1 post / day max on the Page (FB algo penalises overposting)
-  · Best windows (UK time): 07:00-09:00 · 12:00-14:00 · 19:00-21:00
+CADENCE  (refreshed per 2026 research · Reels-first cold start)
+  · 3-5 posts / WEEK total · NOT daily (research: daily splits algo signal)
+  · Mix: ~70% Reels (9:16 vertical · the ONLY non-follower-reach lever) ·
+    ~20% single image (1080×1080 square) · ~10% link share (link in 1st comment)
+  · Universal "best time" listicles are dead in 2026 (feed fully personalised) ·
+    track YOUR Page's reach by hour after week 2 · post when YOUR audience reacts
   · Always check memory_recall("fb-posts", 20) before drafting
+  · Caption ≤ 80 chars above the fold · NEVER put link in body · drop link in 1st comment
+  · Reply to every comment within ~60 min during first 6h (MSI signal)
 
 POST TEMPLATES (verbatim copy blocks)
 
@@ -186,7 +191,7 @@ Happy to walk through your specific case in DMs if helpful.
 ▲ END ▲
 
 ▼ FOUNDER GROUP POST (occasional · only after 5+ helpful comments in a group) ▼
-60+ sovereign AI tools live now at ai-nativesolutions.com.
+89+ sovereign AI tools live now at ai-nativesolutions.com.
 
 If you've been quoted £20k+ for an AI build that's really just a
 ChatGPT wrapper with a Notion frontend — I'd love to show you the
@@ -327,7 +332,7 @@ ARCHETYPE 4 · THE COMPLIANCE-NERVOUS DIRECTOR
 
 ARCHETYPE 5 · THE BUILD-IN-PUBLIC BUILDER
   Signal: posts their own work, hashtags #buildinpublic
-  Hook:   "60+ sovereign builds at ai-nativesolutions.com · MIT"
+  Hook:   "89+ sovereign builds at ai-nativesolutions.com · MIT"
   Tool:   ai-nativesolutions hub
 
 ═══════════════════════════════════════════════════════════════════════
@@ -356,9 +361,10 @@ RATE LIMITS  (FB will soft-ban you for going over)
   · Comments: ≤ 8/day
   · DMs: ≤ 5/day
   · Group posts: ≤ 3/day
-  · Page posts: ≤ 1/day
+  · Page posts: 3-5/WEEK (Reels-weighted · NOT 1/day)
   · Friend requests: ≤ 5/day
   · Group joins: ≤ 5/day
+  · Invite-to-follow: ≤ 100/day · throttle 1 per 2.1s (research-verified)
 
 ═══════════════════════════════════════════════════════════════════════
   SECTION I · TIER NOTE
@@ -376,25 +382,357 @@ si-didy logs at start of every run:
   "◊ tier T3 selected for FB · no usable personal-account API"
 
 ═══════════════════════════════════════════════════════════════════════
-  SECTION J · DAILY OPS LOOP
+  SECTION J · 2026 VERIFIED PLAYS  (added post-deep-research · 48% refute rate)
 ═══════════════════════════════════════════════════════════════════════
 
-When user says "fb morning run" or "do fb stuff":
+Source: FB-PLAYBOOK-2026.md · 23 claims verified · 12 confirmed · 11 refuted
+Numbers rounded to nearest 5% per the panel's noise floor.
 
-  1. memory_recall fb-posts (24h window) · skip recent groups
-  2. browser_navigate facebook.com · screenshot · verify logged in
-  3. Scan notifications · queue any replies needed
-  4. Visit each joined group · find 1 hot thread per group · draft
-     1 help-first comment per thread (max 8 comments)
-  5. Decide if today's Page post is due · if yes, draft using B1-B4
-  6. Decide if a group post is due (per-group 14d gate) · draft if so
-  7. queue_write everything to ./queues/fb-comment/, fb-post/, fb-dm/
-  8. Print summary · pause for user "go"
+THE HEADLINE WIN
+  Treat the FB Page as a CREDIBILITY SURFACE + a REELS DISTRIBUTION ENDPOINT,
+  not a feed-engagement engine. New Pages get ~1-2% organic reach to followers
+  and effectively ZERO to non-followers from static posts. Reels (9:16) bypass
+  the follower graph and are the only reliable free distribution for a 0-follower
+  Page in 2026.
 
-Metrics tracked in memory scope `fb-daily`:
-  { date, comments_queued, comments_sent, posts_queued, posts_sent,
-    dms_queued, dms_sent, new_groups_joined, reach_estimate }
+  Operational translation for si-didy:
+    · Ship one ~30-60s vertical Reel daily-ish showing the AI doing something real
+    · Invite every post-engager to follow within 24h (Meta-native button)
+    · 3-5 posts/week total · NOT daily-everywhere · Reels-weighted (~70/20/10)
+    · Caption ≤ 80 chars · link in 1st comment · NEVER in body
+
+CONFIRMED PLAYS (use these · ≥2/3 panel votes)
+  1. Reels-first · every video distributes as a Reel in 2026 · 9:16 vertical only
+  2. Invite post-engagers to follow within 24h · throttle 1 per 2.1s · cap 100/day
+  3. Post 3-5x/week · NOT daily · peak engagement Pages cluster at the low end
+  4. Reply to every comment within ~60 min during first 6h (MSI signal)
+  5. Run a paired FB Group alongside the Page · Page = storefront · Group = build-in-public
+  6. Use an INTERACTIVE free tool (FallMap-style) as primary lead magnet · NOT a PDF
+     · gate the SAVE/EXPORT not the USE
+  7. Messenger as structured intake (name, use-case, link) · NOT a bot persona
+  8. If running ads: lean conversion-objective at $10-15/day · NOT Boost Post
+     · only Boost a post that ALREADY over-indexed organically
+  9. Show the build · 20-30s "AI doing one specific thing" Reels beat abstract tips
+ 10. Cross-post from LinkedIn/X with a 24h DELAY · NOT simultaneous
+ 11. Caption ≤ 80 chars above the fold · link in 1st comment · NEVER body
+ 12. 90-day horizon · empirical 100-1000 followers in weeks 4-16 at zero spend
+
+REFUTED COMMON WISDOM (do NOT do · ≥2/3 panel votes refute)
+  ✗ "Reels get 22% more engagement · video reaches 135% more users" · recycled 2022-24
+    vendor decks · directionally true but precision is theatre
+  ✗ "Click-to-Messenger ads convert 3-5x better than landing pages" · all citations
+    trace back to bot-vendor marketing pages · no independent replication
+  ✗ "70% of B2B buyers research on Facebook" · conflates "has account" with "researches B2B"
+  ✗ "B2B leads from LinkedIn 277% more effective" · originates from a 2012 HubSpot post
+  ✗ "AI checklists convert 11.4% vs PDFs 4.7%" · suspicious precision · single vendor
+  ✗ "$300-500/mo ad budget produces results" · geo+vertical-specific · doesn't generalise
+  ✗ "Wednesday 9am is the best time to post" · residual SEO bait · feed is personalised
+  ✗ "Posting >1/day tanks engagement" · confounds rate with volume · misleading
+  ✗ "New Pages need a 7-day warm-up or get spam-flagged" · no Meta doc supports literal gate
+  ✗ "FB Groups deliver 30-60% reach to active members" · band depends on size + recency
+  ✗ "Organic reach is dead so don't bother" · Reels ARE the only free distribution that works
+  ✗ Engagement-bait phrases ("tag a friend", "like if", "comment YES", "share to win")
+    actively penalised · block-publish regex these
+  ✗ Stock-shutterstock hero shots · heavy text-on-image (>20% area) · AI-art smooth-skin faces
+    · reused images appearing on multiple Pages · mismatched caption-image pairs
+
+NUMBER FLOOR (round to 5%)
+  Posts per week: 3-5 (~70% Reels / 20% image / 10% link share)
+  Reach per static post (0-follower Page): ~0 to followers · ~5-50 explore-graph impressions
+  Reach per Reel (cold start): ~50-500 typical · outliers 5k+ if first-hour watch-time lands
+  Posts to first 100 followers: ~20-40 Reels + diligent invite-to-follow over 4-8 weeks
+  Posts to first qualified lead: 30-80 mixed-format · arrives via DM or tool signup
+  Ad budget: $0 viable for 90 days at Reels cadence · if paid: $10-15/day single creative
+    · single audience · 14-day minimum before optimise · NEVER Boost
+  Time to first 100 followers: 4-8 weeks at Reels-daily + invite-discipline
+
+VISUAL SPEC (verified across ≥2 sources · ALL brand-kit assets follow this)
+  Cover photo:     upload 1640×856 · displays 820×312 desktop / 640×360 mobile
+                   safe-zone center 640×312 · profile pic overlaps bottom-left ~170px
+  Profile picture: upload 360×360 (180 min) · displays 170×170 circle desktop · avoid corners
+  Link preview:    1200×630 · 1.91:1 (Open Graph)
+  Square post:     1080×1080 · 1:1
+  Portrait post:   1080×1350 · 4:5 (generally outperforms square in feed)
+  Story / Reel:    1080×1920 · 9:16 · safe-zone center 1080×1420 (top/bottom 250px = UI)
+
+HONEST CAVEATS
+  · All numbers carry ±5% noise minimum · vendor analytics vary wildly by sample
+  · B2C vs B2B asymmetry is large · FB strong for SMB/prosumer · LinkedIn dominates $50k+ ACV
+  · Reels economics shift quarterly · re-test any reach-multiplier tactic every 60 days
+  · Group dynamics ≠ Page dynamics · Group recommendations apply only to a Group you OWN
+  · Messenger numbers from vendors are inflated 2-5x · treat it as fast intake form
+  · The "warm-up" thing is half-real · Meta down-weights new Pages but no fixed 7-day gate
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION K · BRAND KIT INVENTORY  (assets at C:\Users\sjgan\Downloads\fb-brand-kit\)
+═══════════════════════════════════════════════════════════════════════
+
+20 assets shipped · all under 500KB · all paste-ready for Page upload.
+
+COVER PHOTOS
+  cover-1640x856-marketplace.png   AIN marketplace hero · primary cover
+  cover-1640x856-substrate.png     fall-substrate landing · alt cover · rotate bi-weekly
+  cover-fallback-1200x675.png      smaller link-preview-compatible cover for old mobile
+
+PROFILE PICTURE
+  profile-170.png   170×170 · oxblood field + brass ◊ glyph · BRAND MARK · upload first
+  profile-400.png   400×400 high-DPI fallback for retina displays
+
+POST IMAGES (1200×630 link-preview + 1080×1080 square feed)
+  post-fallsubstrate-1200x630.png + post-fallsubstrate-1080x1080.png   flagship
+  post-fallfind-1200x630.png      + post-fallfind-1080x1080.png        searchable portfolio
+  post-fallcrm-1200x630.png       + post-fallcrm-1080x1080.png         fallforce CRM
+  post-fallinvoice-1200x630.png   + post-fallinvoice-1080x1080.png     cash-flow tool
+  post-ain-1200x630.png           + post-ain-1080x1080.png             AIN hub
+  post-cassie-1200x630.png        + post-cassie-1080x1080.png          cassie cosmology
+
+STORY / REEL COVERS (1080×1920 portrait · safe-zone center 1080×1420)
+  story-substrate.png   AIN substrate pin highlight · use as Reel cover for substrate posts
+  story-fallfind.png    fallfind hero · use as Reel cover for portfolio-search posts
+  story-cassie.png      cassie cosmology · use as Reel cover for build-in-public Cassie work
+
+ASSET-TO-FRAME MATCHER (si-didy uses this when picking image for Frame B1-B5)
+  Frame B1 (Tool Drop · new ship)        → post-<toolname>-1200x630 + 1080×1080 square
+  Frame B2 (Burn-the-SaaS · educational) → post-fallcrm or post-fallinvoice (numbers pop)
+  Frame B3 (Shadow / Jung · ShadowCompass)→ post-cassie (closest cosmological energy)
+  Frame B4 (Build-in-public)             → post-fallsubstrate or post-fallfind
+  Reel cover (any 9:16)                  → story-substrate / story-fallfind / story-cassie
+  Page cover                             → cover-1640x856-marketplace (default)
+                                          rotate to cover-1640x856-substrate every 2 weeks
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION L · COLD-START 90-DAY PLAYBOOK  (week-by-week from research)
+═══════════════════════════════════════════════════════════════════════
+
+This is the 0 → 100+ followers loop. Zero paid spend track. 90-day horizon.
+
+WEEK 0 · LAUNCH DAY
+  □ Upload profile-170.png · cover-1640x856-marketplace.png
+  □ Paste Section A.about-blurb · A.services · A.story
+  □ Set Page Action Button → fallmap URL (the free interactive tool · primary lead magnet)
+  □ Create paired FB Group "AI Native · Sovereign Software" · invite Simon's network
+  □ Ship Pinned Post: Frame B1 introducing AI Native Solutions · image: cover-substrate
+  □ NO mass-tagging · NO "follow my new page" spam · the algo flags it
+
+WEEK 1 · REELS RHYTHM (the only thing that matters)
+  □ Ship 1 Reel/day · 30-60s · 9:16 · "AI doing one specific thing"
+    examples:
+      Mon · "20 seconds with fall-substrate: pasted a question, watched it cite"
+      Tue · "fallfind: typed 'losing time on HubSpot', got 3 sovereign tools"
+      Wed · "fallforce CRM: clicked an audit-chain entry to show the prevHash"
+      Thu · "fallinvoice: late payer flagged at 47 days, auto-chase queued"
+      Fri · "cassie cosmology: archetype matched to a sample brief"
+  □ Caption ≤ 80 chars · link in 1st comment · NEVER body
+  □ Invite-to-follow every reactor within 24h · throttle 1 per 2.1s · cap 100/day
+  □ Reply to every comment within 60 min during first 6h
+  □ Cross-post 1 of these as a LinkedIn Reel 24h later (NOT simultaneous)
+
+WEEK 2-4 · CADENCE LOCK
+  □ Drop to 3-5 posts/week (research: daily splits algo signal · low end wins)
+  □ Mix: ~70% Reels · 20% single image (1080×1080) · 10% link share (link in comment)
+  □ Continue invite-to-follow discipline · this does more work than the content
+  □ Share each Page Reel into the paired FB Group with 1-line context note
+  □ Expected: ~10-30 followers per week · 50-500 reach per Reel
+  □ Reply velocity stays at 60-min SLA during first 6h of every post
+
+WEEK 5-8 · COMMUNITY LOOP
+  □ Surface a "build-in-public" question Reel every Friday · ask audience real decision
+  □ Run weekly Group AMA · Tuesday 19:00 GMT · 30 min · build pattern
+  □ Continue Reel-daily-ish (4/week minimum)
+  □ If any post hits >2x median reach in first hour: $10/day Boost for 3 days
+    (conversion-objective only · NEVER Boost Post button · always Ads Manager Sales/Lead)
+  □ Expected milestone: cross 100 followers in this window (typical week 6-7)
+  □ Expected: first 1-3 qualified DMs (someone says "I want this for my business")
+
+WEEK 9-12 · MONETISATION GATE
+  □ Page Action Button A/B test: fallmap vs Messenger intake · ship the winner
+  □ Launch one $10-15/day Lead-objective ad · single creative · single audience ·
+    14-day minimum before optimise
+  □ Continue Reel rhythm · no acceleration · the gradient stays even
+  □ Expected: 200-500 followers · 5-15 leads in pipeline · first contract closed or close
+
+VALIDATION CHECKPOINTS
+  Day 14:  ≥30 followers · ≥1 Reel >500 reach · ≥3 DMs in inbox
+  Day 30:  ≥80 followers · 1+ qualified lead · Group ≥20 members
+  Day 60:  ≥200 followers · 1+ closed contract or active scope call
+  Day 90:  ≥400 followers · positive ROI on any paid spend · cadence is autonomic
+
+KILL CRITERIA (when to pivot)
+  · Median Reel watch-through <30% by week 4 → swap creative template
+  · Zero DMs by week 6 → Page Action Button is wrong · A/B different target
+  · Negative ROAS on paid by week 12 → pause paid · go back to organic-only
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION M · SI-DIDY DAILY OPS LOOP  (cron-tick-aligned · replaces old §J)
+═══════════════════════════════════════════════════════════════════════
+
+When SIDIDY_FB_AUTOPILOT=1 the cron drives the daily loop below.
+EVERY action queues a draft to ./queues/ · NOTHING auto-publishes.
+
+═════ PER TICK (~every 120 min · 07-21h UK) ═════
+
+  07:00 GMT · METRICS PULL
+    1. fetch yesterday's Reel insights via Graph API (if app registered) OR
+       Playwright-scrape Page Insights
+    2. log watch-through · saves · shares · invite-clicks to memory scope `fb-metrics`
+    3. broadcast `fb_metrics_pulled` with delta-from-7d-median
+
+  07:30 GMT · INVITE SWEEP
+    1. browser_navigate Page notifications · find all post-engagers in last 24h
+    2. queue invite list to ./queues/fb-invite/<date>.json
+    3. ask_user "approve invite sweep? N reactors found"
+    4. on yes: si-didy clicks Invite for each · throttle 1 per 2.1s · cap 100
+    5. memory_note { scope: "fb-invites", target, ts } per click
+
+  08:00 GMT · DAILY REEL POST  (the primary loop)
+    1. memory_recall("fb-posts", 14) · skip Frame B used in last 7d
+    2. read next-queued asset from ./queues/fb-post/<date>-reel.json
+    3. Caption: ≤ 80 chars · drawn from Frame B1-B5 matcher · NEVER engagement-bait
+    4. ask_user "ready to publish today's Reel?"
+    5. on yes: si-didy navigates to Reel composer · uploads · types caption ·
+       PAUSES at Publish button · Simon clicks
+    6. 08:05: si-didy posts link in 1st comment (the SAME link · separate comment)
+    7. memory_note + broadcast `fb_reel_posted`
+
+  09:00 GMT · COMMENT-REPLY SWEEP 1
+    1. scan all posts <6h old · find unanswered comments
+    2. for each: spawn child Claude with reply brief (archetype matcher §G)
+    3. queue drafts to ./queues/fb-comment-reply/
+    4. ask_user "approve N comment-replies?"
+    5. on yes: si-didy fires each with 30-60s pause between
+
+  12:00 GMT · MESSENGER INTAKE
+    1. browser_navigate Page Messages
+    2. for each NEW thread: auto-template the structured intake (name, use-case, link)
+    3. NEVER use bot persona · NEVER auto-send · ALL drafts queue to ./queues/fb-dm/
+    4. flag qualifying messages for 4h human SLA · broadcast `fb_dm_qualified`
+    5. memory_note per thread { scope: "fb-dms" }
+
+  14:00 GMT Tue/Thu · SINGLE-IMAGE POST
+    1. Frame B1 or B2 · 1080×1080 from fb-brand-kit/
+    2. queue + ask_user same flow as Reel
+    3. link in 1st comment after publish
+
+  16:00 GMT · COMMENT-REPLY SWEEP 2
+    same as 09:00 · catches afternoon comments before 6h window closes
+
+  18:00 GMT · AI-SLOP SELF-CHECK
+    1. read tomorrow's queued asset
+    2. score: text-on-image % · hashtag count · caption-image semantic match ·
+       reuse-elsewhere check (reverse image search if uncertain)
+    3. if score <0.7 → reject + flag operator · DO NOT publish
+    4. log to `fb-slop-checks`
+
+═════ WEEKLY ═════
+
+  Mon 09:00 GMT · ROUNDUP LINK POST (link in 1st comment)
+  Wed 10:00 GMT · CROSS-POST LinkedIn carousel as FB carousel (24h-staggered)
+  Fri 11:00 GMT · "ASK" REEL · a question to the audience about a real decision
+  Sun 20:00 GMT · refresh Page Action Button if A/B test concluded
+  Sun 21:00 GMT · prune flagged fake-engagement comments
+
+═════ BI-WEEKLY ═════
+
+  Refresh cover photo from fb-brand-kit/cover-1640x856-*.png · verify mobile safe zone
+
+═════ MONTHLY ═════
+
+  Pull follower delta · posts-to-follower ratio · posts-to-lead ratio
+  If Reel watch-through median <30% → swap creative template
+  Add 1 new asset to fb-brand-kit/ from whichever tool shipped that month
+
+═════ EVENT-DRIVEN ═════
+
+  · Post hits >2x median reach in first hour → trigger $10/day Boost via Ads API
+    for 3 days · conversion-objective only · NEVER from Boost Post button
+  · Post flagged for engagement-bait regex ("tag a friend"|"like if"|"comment YES"|
+    "share to win") → BLOCK publish · surface to operator
+  · Qualified-lead DM arrives → pipe to email + CRM · human SLA 4 business hours ·
+    NEVER reply with bot persona
+
+═════ MEMORY SCOPES (additions for the refresh) ═════
+
+  fb-metrics       Reel insights · watch-through · saves · shares
+  fb-invites       every invite-to-follow click (target, ts)
+  fb-slop-checks   AI-slop scores per queued asset (block-publish reason if <0.7)
+  fb-daily         the existing daily summary (keep)
+
+═════ DAILY DIGEST (08:00 every morning · cockpit chat) ═════
+
+  · summarise: Reels published · invites sent · comments replied · DMs qualified ·
+    leads in pipeline · best-performing Reel of last 7d
+  · output as cockpit cards · NOT a wall of text
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION N · THE ONE-SHOT DIRECTIVE  (paste verbatim into si-didy)
+═══════════════════════════════════════════════════════════════════════
+
+▼ COPY ▼
+
+fb cold start launch · run all steps end-to-end:
+
+(1) pack_load 'FACEBOOK-PACK.txt'
+(2) facebook_open the page settings · confirm logged in as Simon's page admin
+(3) drive the page setup via browser_* tools:
+    - Page Identity → upload profile-170.png + cover-1640x856-marketplace.png
+    - About → paste Section A.about-blurb verbatim
+    - Services → paste Section A.services list
+    - Story (long-form) → paste Section A.story (the receipts paragraph)
+    - Page Action Button → set to https://sjgant80-hub.github.io/fallmap/
+      (the free interactive lead-magnet · gate save/export NOT use · per §J research)
+    - Pinned post → use Frame B1 (the intro "what is AI Native Solutions")
+      with cover-1640x856-substrate.png attached
+    - Pause for ask_user before each Save
+(4) once page is verified live:
+    - Create paired FB Group "AI Native · Sovereign Software" (per §L Week 0)
+      · admin = Simon's personal · audience = builders + sovereignty-curious
+    - Queue 7 days of Reels-first posts from Frame B1-B5 rotation in ./queues/fb-post/
+      · ~70% Reels (9:16 vertical) · 20% single image (1080×1080) · 10% link share
+      · Each post: body text ≤ 80 chars + image from fb-brand-kit/ + link in 1st comment
+      · NEVER put link in body · NEVER use engagement-bait phrases
+    - Schedule via FB's NATIVE scheduler (Meta restricts off-platform schedulers
+      for new Pages in 2026 per the research · confirmed)
+(5) ask_user "approve queued posts for the week?"
+    on yes: si-didy drives FB scheduler with pause-before-Schedule on each
+(6) memory_note + learn_log + fall_signal broadcast every step
+(7) report summary
+
+NEVER click Publish/Send/Submit/Schedule without ask_user.
+NEVER skip pause-before-Schedule.
+NEVER use Boost Post button · ALL paid spend goes through Ads Manager (per §J).
+NEVER reply to DMs with a bot persona · structured intake template only (per §J).
+Brand kit assets live at C:\Users\sjgan\Downloads\fb-brand-kit\.
+Page handle: [ask user during step 2 if not in pack].
+Lead magnet URL: https://sjgant80-hub.github.io/fallmap/
+Paired Group name: "AI Native · Sovereign Software"
+Cadence: 3-5 posts/week · ~70% Reels · NOT daily (daily splits algo signal · per §J).
+
+▲ END ▲
 
 ═══════════════════════════════════════════════════════════════════════
   END OF PACK · ◊·κ=1
 ═══════════════════════════════════════════════════════════════════════
+
+Notes for Simon, off the record:
+
+→ The single biggest pivot from v1: stop thinking "1 post/day Page". The 2026
+  research is unambiguous · Reels-first · 3-5/week · the invite-to-follow click
+  does more work than any one piece of copy. The Page itself is a credibility
+  surface · the Reels are the distribution.
+
+→ The paired Group is the second-biggest lever you're not using yet. Page =
+  storefront. Group = build-in-public + community + warm DMs. Most cold-start
+  Pages skip the Group · don't.
+
+→ The fallmap URL as Page Action Button is the FREE-tool-as-lead-magnet move ·
+  per the research, interactive tools out-convert PDFs by a wide margin in 2026.
+  Gate the save/export · let people USE the tool without signup.
+
+→ NEVER Boost Post. Every "$10/day on a Sales objective" Reel that over-indexed
+  beats every "$50 Boost on a random post" by a wide margin. The Boost button
+  exists to extract money from people who don't know better.
+
+→ The brand kit is 20 assets, all under 500KB, all paste-ready. Don't recapture
+  · use what shipped. Refresh quarterly when the estate adds new flagship tools.
+
+— ◊
