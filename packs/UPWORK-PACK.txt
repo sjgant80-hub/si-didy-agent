@@ -20,10 +20,10 @@ HOW TO USE THIS DOC:
 A1. HEADLINE (Profile settings → Title)
 
 ▼ COPY ▼
-Sovereign AI Tools You Own Forever · 60+ Live Builds · No SaaS Rent · Single-File · Audit-Chained
+Sovereign AI Tools You Own Forever · 89+ Live Builds · No SaaS Rent · Single-File · Audit-Chained
 ▲ END ▲
 
-Why: identity hook ("you own"), proof anchor ("60+"), differentiator
+Why: identity hook ("you own"), proof anchor ("89+"), differentiator
 ("no rent"), credibility ("audit-chained"). Buyers reading job-board
 results see the first 60-70 chars · this front-loads them.
 
@@ -66,7 +66,7 @@ the hook · the rest unlocks when they click.
 
 ▼ COPY ▼ (paste the whole block, line breaks preserved)
 
-I build AI tools your business owns outright. 60+ live in production · single HTML · no backend · no per-seat fees · no SaaS lock-in. Your data stays in your browser. Your tool stays your asset.
+I build AI tools your business owns outright. 89+ live in production · single HTML · no backend · no per-seat fees · no SaaS lock-in. Your data stays in your browser. Your tool stays your asset.
 
 ────────
 
@@ -86,7 +86,7 @@ ENTERPRISE · multi-user, sync endpoint, white-label, ongoing support
 I quote real numbers after a 10-minute scope call · no hourly pyramid schemes.
 
 THE PORTFOLIO IS THE PROOF
-ai-nativesolutions.com lists every tool I've shipped · 60+ live, source code public on GitHub. No Notion case studies. No PDFs. The product is the proof.
+ai-nativesolutions.com lists every tool I've shipped · 89+ live, source code public on GitHub. No Notion case studies. No PDFs. The product is the proof.
 
 WHO I BUILD FOR
 → Founders tired of paying $300/month before their first sale
@@ -94,6 +94,9 @@ WHO I BUILD FOR
 → Agencies that need a real AI product to resell, not a wrapper
 → Compliance-sensitive teams (legal, accounting, healthcare) where data sovereignty isn't optional
 → Anyone who looks at a Stripe + Webflow + Calendly + Typeform + Notion stack and thinks "this is the wrong covenant"
+
+WHY I CAN PROMISE THIS · the receipts
+89 sovereign tools shipped, source on GitHub, each one MIT licensed and live in production today. The flagship fall-substrate (research-question → cited sovereign tool → live URL · in one pipeline) is the meta-product behind every build. The Cognitive Substrate v1.0 architecture is published openly at sjgant80-hub.github.io/fall-substrate. No Notion case studies. The code is the case study.
 
 START FREE — NO CALL NEEDED
 Drop the URL of any workflow you currently pay a SaaS for. I'll send back a one-page breakdown of what owning it outright would cost. No pitch attached. Just the number.
@@ -139,7 +142,7 @@ Type each into Skills field, hit Enter, repeat. Upwork autocompletes.
 ▲ END ▲
 
 ═══════════════════════════════════════════════════════════════════════
-  SECTION D · PORTFOLIO (6 elite entries · the trust engine)
+  SECTION D · PORTFOLIO (7 elite entries · the trust engine)
 ═══════════════════════════════════════════════════════════════════════
 
 For each portfolio slot, you'll do:
@@ -150,29 +153,29 @@ For each portfolio slot, you'll do:
    5. Paste the live URL into the "Project link" field
 
 ─────────────────────────────────────────────────
-PORTFOLIO ENTRY 1 — AI Native Solutions Hub
+PORTFOLIO ENTRY 1 — fall-substrate · THE FLAGSHIP ⭐
 ─────────────────────────────────────────────────
 
 ▼ TITLE ▼
-AI Native Solutions · Sovereign Tool Marketplace (60+ live)
+fall-substrate · Research-Question → Cited Sovereign Tool → Live URL · in one pipeline
 ▲ END ▲
 
 ▼ DESCRIPTION ▼
-The hub. Luxury brutalist marketplace listing every sovereign tool I've shipped under sjgant80-hub on GitHub — 60+ live builds across apps, APIs, SDKs, research, and infrastructure. Each card carries its own GitHub source link and payment route. Updates auto-sync within 24 hours of any new repo push. Built as a single HTML file (~80KB) that reads from a live JSON registry · no backend · no CMS · no Webflow rent.
+The meta-product behind every build in this portfolio. A single sovereign pipeline that takes a research question, fans it out across 5 adversarial verification angles, fact-checks the panel-confirmed claims, and emits a cited Cognitive Substrate v1.0 spec that drops directly into a working sovereign tool. The result: every other tool in this list was architected by fall-substrate before it was built. The architecture is published openly — read it, fork it, run it.
 
-Tech: Vanilla JavaScript · GitHub Pages · live JSON registry · BroadcastChannel mesh · PWA manifest baked via data URL
+Tech: Vanilla JavaScript · adversarial 5-angle verification panel · BYOK Claude/GPT/Gemini cascade · Cognitive Substrate v1.0 schema · MIT licensed · single-file HTML
 
-Outcome: Replaces $300+/month SaaS marketing stack (Webflow + Notion + Mailchimp + Calendly + Typeform) with one HTML file on free hosting.
+Outcome: Compresses the discovery → spec → build cycle from a 3-week consulting engagement (~£20k) into one paste. Every claim in the output is verified against ≥2 sources or marked refuted.
 ▲ END ▲
 
 ▼ PROJECT LINK ▼
-https://www.ai-nativesolutions.com
+https://sjgant80-hub.github.io/fall-substrate/
 ▲ END ▲
 
 ▼ SCREENSHOT ▼
-URL to capture: https://www.ai-nativesolutions.com
-Snip: full visible viewport showing the hero ("Sovereign AI tools you own forever" + black/gold brutalist styling) + first row of the browse grid below. Crop to 1600x900 if possible.
-Save as: Upwork-Portfolio/01-hub.png
+URL to capture: https://sjgant80-hub.github.io/fall-substrate/
+Snip: capture the pipeline running a sample question with the verification panel visible (confirmed vs refuted claims side-by-side). If empty, run one sample question first ("how do top freelancers win on Upwork in 2026") then snip mid-verification.
+Save as: Upwork-Portfolio/01-fall-substrate.png
 ▲ END ▲
 
 ─────────────────────────────────────────────────
@@ -307,6 +310,33 @@ Snip: the forge interface with the input panel + the archetype/shadow/hook outpu
 Save as: Upwork-Portfolio/06-trilogy.png
 ▲ END ▲
 
+─────────────────────────────────────────────────
+PORTFOLIO ENTRY 7 — fallfind · The Live Searchable Portfolio · prime 433
+─────────────────────────────────────────────────
+
+▼ TITLE ▼
+fallfind · 89+ Sovereign Tools · Search · Documented · Live
+▲ END ▲
+
+▼ DESCRIPTION ▼
+A single-file sovereign tool that IS my portfolio. Paste your current pain ("losing time on HubSpot + Calendly + Notion") and it returns the 3 best-fit sovereign tools that end it. No marketing pages between you and the product. Every entry shows the live URL and source.
+
+The portfolio is the proof. The code is the receipt.
+
+Live: https://sjgant80-hub.github.io/fallfind/
+Tags: Web Application · Software Architecture · Knowledge Management · Custom GPT
+▲ END ▲
+
+▼ PROJECT LINK ▼
+https://sjgant80-hub.github.io/fallfind/
+▲ END ▲
+
+▼ SCREENSHOT ▼
+URL to capture: https://sjgant80-hub.github.io/fallfind/
+Snip: capture the search input mid-query with the 3 best-fit cards rendered below. Use the example pain "losing time on HubSpot + Calendly + Notion" so the cards visibly map pain → sovereign-tool.
+Save as: Upwork-Portfolio/07-fallfind.png
+▲ END ▲
+
 ═══════════════════════════════════════════════════════════════════════
   SECTION E · THE FALLMAP-AS-BAIT PLAY (the actual lead engine)
 ═══════════════════════════════════════════════════════════════════════
@@ -424,7 +454,7 @@ You're paying [SaaS X they mentioned] $[their rough monthly cost]/month. I built
 
 Whatever it tells you, happy to talk it through on a 20-min call. No pitch attached. If owning makes sense for your case, I'll quote a build. If not, you saved the consulting fee.
 
-I work on a sovereign-build model · single HTML file, your data, MIT licensed, BYOK LLM cascade. 60+ live tools at ai-nativesolutions.com if you want to see the pattern before the call.
+I work on a sovereign-build model · single HTML file, your data, MIT licensed, BYOK LLM cascade. 89+ live tools at ai-nativesolutions.com if you want to see the pattern before the call.
 
 UK based, Top Rated.
 
@@ -563,9 +593,9 @@ the connects.
   [ 0:05 - 0:08 ]  Set rate to $95/hr (A2) · turn Availability ON (A3)
   [ 0:08 - 0:18 ]  Paste new Overview (Section B) · save
   [ 0:18 - 0:22 ]  Add the 20 Skills (Section C)
-  [ 0:22 - 0:45 ]  Take 6 Snipping Tool screenshots (Section D guide)
+  [ 0:22 - 0:45 ]  Take 7 Snipping Tool screenshots (Section D guide)
                     · save to Upwork-Portfolio folder on Desktop
-  [ 0:45 - 0:60 ]  Add the 6 portfolio entries · upload screenshots ·
+  [ 0:45 - 0:60 ]  Add the 7 portfolio entries · upload screenshots ·
                     paste title + description + URL for each
 
 That gets you a fully repositioned profile inside an hour.
@@ -574,6 +604,173 @@ THEN:
   Tomorrow morning · run the Daily Ops Loop (Section G)
   Use Template 2 or 3 first · they have the lowest friction
   Track which template gets the first reply · double down on it
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION J · 2026 VERIFIED PLAYS  (added post-deep-research · 48% refute rate)
+═══════════════════════════════════════════════════════════════════════
+
+Source: UPWORK-PLAYBOOK-2026.md · 25 claims verified · 12 confirmed · 12 refuted
+
+THE HEADLINE WIN
+  Race the queue + 10s value proof + Loom artifact = 18-28% reply rate
+  vs ~7.45% platform mean.
+
+  Operational translation for si-didy:
+    · 15-60 min submit window after a job posts is the gold band
+    · 60-90s Loom of a working artifact OR FallMap one-pager is the wedge
+    · Sweet-spot budget: $2k-$10k AI/automation band
+    · Top Rated · UK · responsive · niche specialised
+
+CONFIRMED PLAYS (use these)
+  1. Submit fast (within 60min of posting · 2-3x reply rate vs Hour 24+)
+  2. Lead with concrete proof in the first 3 lines (Loom URL, live demo,
+     FallMap one-pager · NOT credentials)
+  3. Mirror exact language from the job post in your opening sentence
+  4. Quote a real number after a scope call · refuse hourly pyramid
+  5. Send 60-90s Loom when the job allows attachments
+  6. Match niche language (compliance · sovereignty · audit chain · MIT)
+  7. Address ONE specific signal from the post (proves it's not generic)
+  8. Use the FallMap one-pager URL as the free-info exchange hook
+  9. Reply to first message within ~2 hours during waking hours
+ 10. Filter for $5k+ jobs in AI/automation band specifically
+ 11. Use saved-search alerts (Upwork email pings · ~12-15 alerts/week)
+ 12. Keep responsiveness score >90% (drop = visibility penalty)
+
+REFUTED COMMON WISDOM (do NOT do)
+  ✗ Specific algorithm-weight percentages (JSS=25-30%, Top Rated=20-30%)
+    · reverse-engineered guesses, not from Upwork
+  ✗ Single-decimal precision on reply rates from analytics SaaS
+    · treat as theatre, round to nearest 5%
+  ✗ "70% of clients reject proposals missing specifics" · no methodology
+  ✗ "First 5 proposals get 3-5x views" · conflates speed with view count
+  ✗ Boost Your Profile pay-to-play · leave OFF (per Section A4)
+  ✗ Generic "I have X years of experience" openers · zero conversion
+  ✗ "I can do this for $X less" · race to bottom · kills positioning
+  ✗ Sending Calendly link before a real conversation
+  ✗ Pre-built "value stack" lists in the proposal (buyers skim past)
+  ✗ Asking for portfolio review before they've shown intent
+  ✗ Treating Upwork message threads like email (they're not)
+  ✗ Treating Boosted Proposals as default (only on $5k+ jobs)
+
+NUMBER FLOOR (the actual budget)
+  Connects/week: 60-100 (Top Rated · scales with proposal count)
+  Proposals/week: 25-40 quality > volume · cap 5-7/day
+  Expected reply rate: 12-18% with the play (vs ~7.45% platform mean)
+  First contract close time (Top Rated · strong portfolio):
+    7-21 days from profile finish to first close
+    Median sits around 14 days · half of new closes happen in week 2
+
+5 SAVED SEARCHES (si-didy fires these on every scan tick)
+  1. "AI agent" · $5k+ · posted last 24h · client spent $10k+
+  2. "AI automation" · hourly $50+ · proposals < 5 · last 12h
+  3. "Custom GPT" OR "Claude integration" · fixed $1k+ · last 48h
+  4. "Replace HubSpot" OR "alternative to Calendly" · any · last week
+  5. "Sovereign" OR "self-hosted" OR "no SaaS" · any · last week (gold)
+
+HONEST CAVEATS
+  · GigRadar (133K-proposal dataset) is one vendor's outbound pipeline
+    · directional truth, not vendor-precision
+  · Niche-specific · these numbers assume AI/automation buyers
+  · The Loom + FallMap combo is YOUR specific edge · most freelancers
+    can't make a 60-90s artifact in their proposal window · don't waste
+    that advantage on cheap jobs
+  · Refute the urge to optimise beyond the verified plays · single-
+    decimal "growth hacks" are 48% noise
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION K · SI-DIDY DAILY OPS LOOP (cron-tick-aligned)
+═══════════════════════════════════════════════════════════════════════
+
+When SIDIDY_UP_AUTOPILOT=1 the cron rotates: scan → propose → reply.
+
+PER TICK (~every 120 min · 07-21h UK):
+  SCAN MODE:
+    1. upwork_find_jobs across the 5 saved searches above (cap 10 each)
+    2. score against archetype matcher (Section H)
+    3. dedup vs memory scope `up-jobs-seen`
+    4. queue scored to ./queues/up-jobs/<date>-<slug>.json
+    5. broadcast `upwork_jobs_scanned` count + top-score
+
+  PROPOSE MODE:
+    1. Read today's scored queue · pick top 5 not-yet-proposed
+    2. For each: spawn child Claude session with proposal brief
+       - load UPWORK-PACK Section B (overview) + Section H (archetype)
+       - select matching portfolio entry from Section D (use fall-substrate
+         for AI agent jobs · fallfind for "show me your work" jobs ·
+         fallcrm for sales-tool jobs · GymOps for B2B service-business
+         · fallinvoice for cash-flow pain · fall-verify for "we need
+         confidence in our AI" jobs)
+       - draft 150-220 word cover letter:
+         · Hook: mirror their language + name 1 specific signal
+         · Proof: 1 portfolio link · 1 Loom URL or FallMap URL
+         · Close: "10-min scope call, I quote real after that"
+         · Seal: "Top Rated · UK · ◊"
+    3. Queue each to ./queues/up-proposal/<date>-<job-id>.md
+    4. broadcast `upwork_proposal_drafted` for each
+
+  REPLY MODE:
+    1. Open Upwork Messages · find threads with unanswered last message
+    2. For each (cap 10): spawn child Claude with reply brief
+       - If qualifying-questions → answer + ask 2 of yours back
+       - If stalling → offer 10-min scope call · paste fallslot URL
+       - If closing-curious → send FallMap URL + propose fixed price
+    3. Queue each draft to ./queues/up-reply/<date>-<thread-id>.md
+    4. broadcast `upwork_reply_drafted` for each
+
+HUMAN APPROVAL (always · NEVER auto-submit):
+  · Simon opens cockpit · sees queue counts
+  · Types "approve up-proposal/<file>" → si-didy fires T3 plan
+    (browser navigate → paste → screenshot → ask_user "send?")
+  · Simon types yes → click Submit · memory_note · broadcast complete
+  · Drop a follow-up `learn_log` after every 5 sends ("what worked / what failed")
+
+DAILY DIGEST (08:00 every morning):
+  · vetter_digest equivalent for Upwork
+  · summarise: scans run, jobs queued, proposals drafted/sent,
+    replies received, calls booked, contracts closed
+  · output to cockpit chat stream
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION L · THE ONE-SHOT · paste verbatim into si-didy
+═══════════════════════════════════════════════════════════════════════
+
+upwork full finish + client hunt · run all steps end-to-end:
+
+(1) pack_load 'UPWORK-PACK.txt'
+(2) upwork_open the profile page · confirm logged in as Simon
+(3) drive the profile finish via browser_* tools:
+    - Settings → Title: paste Section A1 headline
+    - Settings → Hourly: $95 (Section A2)
+    - Settings → Availability: "As needed - open to offers" (Section A3)
+    - Boost Your Profile: leave OFF (Section A4)
+    - Profile → Overview: paste Section B verbatim (the 89+ version)
+    - Profile → Skills: paste Section C 20 skills one-by-one
+    - Profile → Portfolio: 7 entries from Section D (1-6 + new 7 fallfind)
+      Screenshots live at: C:\Users\sjgan\Downloads\upwork-portfolio\
+      Each entry: paste title + description + drag corresponding PNGs
+    - Profile → Specialized Profile 1 + 2: Section E hooks
+    - Settings → Saved Responses: save Section F.1 FallMap response template
+    - Pause for ask_user before each Save
+(4) once profile is verified live:
+    - upwork_find_jobs across all 5 Section J saved searches · cap 10 each
+    - score the queue
+    - upwork_propose top 5 (dry_run:true initially · queue drafts to ./queues/up-proposal/)
+    - report queue counts in the cockpit
+(5) ask_user "ready to send proposals?"
+    - on yes: for each queued proposal, fire upwork_propose dry_run:false
+    - PAUSE before every Submit · approve per-proposal
+(6) memory_note + learn_log + fall_signal broadcast every step
+(7) when done: report summary
+    - profile finished · checklist of what was paste-verified
+    - proposals queued · how many · which searches matched
+    - proposals sent · how many · expected reply window per Section J
+
+NEVER click Submit/Send without ask_user.
+NEVER skip the pause-before-Save on the profile.
+ALL portfolio screenshot uploads come from C:\Users\sjgan\Downloads\upwork-portfolio\.
+The FallMap URL https://sjgant80-hub.github.io/fallmap/ MUST appear in every proposal.
+The fallfind URL https://sjgant80-hub.github.io/fallfind/ goes into Portfolio Entry 7.
+═══════════════════════════════════════════════════════════════════════
 
 ═══════════════════════════════════════════════════════════════════════
   END OF PACK · ◊·κ=1
