@@ -50,7 +50,10 @@ const QUEUES_DIR   = './queues';
 const PACKS_DIR    = './packs';
 
 // scaffold dirs · idempotent
-for (const d of [MEMORY_DIR, MISSIONS_DIR, QUEUES_DIR, PACKS_DIR]) {
+for (const d of [MEMORY_DIR, MISSIONS_DIR, QUEUES_DIR, PACKS_DIR,
+                 path.join(QUEUES_DIR, 'up-jobs'),
+                 path.join(QUEUES_DIR, 'up-proposal'),
+                 path.join(QUEUES_DIR, 'up-reply')]) {
   fs.mkdirSync(d, { recursive: true });
 }
 
@@ -1273,6 +1276,453 @@ SAFETY: NEVER auto-send · ALL drafts await Simon's approval`;
     ),
 
     // ═══════════════════════════════════════════════════════════════
+    // ◊ UPWORK AUTOPILOT · v1.0 · always-on client-hunt engine
+    // Doctrine: NEVER auto-submit · ALWAYS queue + ask_user before fire
+    // FallMap-bait CTA baked into every proposal · TOS-compliant
+    // ═══════════════════════════════════════════════════════════════
+    tool('upwork_open', '◊·κ=1 · Open Upwork in the persistent Chromium profile (shared with LinkedIn · ./si-didy-profile). First call may prompt for one-time login; session is saved. Returns screenshot + logged-in status. Call ONCE per session before any upwork_autopilot / find_jobs / propose / reply.',
+      { url: z.string().default('https://www.upwork.com/nx/find-work/').describe('Where to land · default = find-work feed') },
+      async ({ url }) => {
+        console.log(`  ◊· upwork_open ${url}`);
+        try {
+          const { chromium } = await import('playwright');
+          if (!_ctx) {
+            console.log('◊ T3 · Chromium opening (persistent profile · ./si-didy-profile)');
+            _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled'] });
+            _page = _ctx.pages()[0] || await _ctx.newPage();
+            await _page.setViewportSize(VIEWPORT);
+          }
+          if (!_page) _page = await _ctx.newPage();
+          await _page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+          await _page.waitForTimeout(2500);
+          const pageUrl = _page.url();
+          const loggedIn = !/login|sign-?in/i.test(pageUrl);
+          const buf = await _page.screenshot({ type: 'png' });
+          try {
+            if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'upwork_opened', payload: { url: pageUrl, loggedIn }, ts: new Date().toISOString() });
+          } catch (_) {}
+          return { content: [
+            { type: 'text', text: `◊ upwork_open · landed at ${pageUrl} · logged_in=${loggedIn}${loggedIn ? '' : '\n  ↳ login screen detected · log in manually · session will persist'}` },
+            { type: 'image', data: buf.toString('base64'), mimeType: 'image/png' }
+          ] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'upwork_open error: ' + e.message }] };
+        }
+      }
+    ),
+    tool('upwork_find_jobs', '◊·κ=φ⁶ · UPWORK JOB SCANNER · Search the Upwork job feed for a query, scrape the visible cards, score against UPWORK-PACK Section H archetype matcher, filter posted-since-hours, dedupe via up-jobs-seen memory. Queues scored candidates to ./queues/up-jobs/. NEVER applies · just scans.',
+      { query: z.string().describe('Search query · e.g. "AI agent", "Claude integration", "sovereign self-hosted"'),
+        n: z.number().min(1).max(20).default(10).describe('Max candidates to return · default 10'),
+        since_hours: z.number().min(1).max(168).default(24).describe('Filter jobs posted within N hours · default 24') },
+      async ({ query: q, n, since_hours }) => {
+        console.log(`  ◊· upwork_find_jobs "${q}" · n=${n} · since=${since_hours}h`);
+        const today = new Date().toISOString().slice(0,10);
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'upwork_scan_started', payload: { query: q, n, since_hours }, ts: new Date().toISOString() });
+        } catch (_) {}
+
+        const findPrompt = SYSTEM_DOCTRINE + `\n\nMISSION: UPWORK JOB SCAN · query="${q}" · n=${n} · since=${since_hours}h
+
+PRE-FLIGHT:
+  1. pack_load('UPWORK-PACK.txt') · read Section H (archetypes) + Section F (templates)
+  2. memory_recall('up-jobs-seen', limit:100) · do NOT re-surface jobs we've already scored
+  3. browser_screenshot · confirm logged into Upwork
+
+PHASE 1 · SEARCH
+  · browser_navigate https://www.upwork.com/nx/search/jobs/?q=${encodeURIComponent(q)}&sort=recency
+  · browser_screenshot · capture the top of the results
+  · Scroll through the first ~30 visible job cards · extract from each:
+       - job_id (the slug in the URL path · e.g. ~012abc...)
+       - title
+       - posted_time (parse to relative · "2 hours ago" → hours)
+       - budget (hourly range OR fixed amount)
+       - client_spent_history (total spent if visible · "$10k+ spent")
+       - proposals_count (e.g. "5 to 10 proposals")
+       - description_snippet (first 200 chars visible)
+       - job_url (full https://www.upwork.com/jobs/~... URL)
+
+PHASE 2 · FILTER
+  · Drop any job posted MORE than ${since_hours} hours ago
+  · Drop any job whose job_id appears in up-jobs-seen memory
+  · Cap remaining to top ${n}
+
+PHASE 3 · SCORE (archetype matcher · UPWORK-PACK Section H)
+  For each surviving job, classify into ONE of:
+    1. BURNED_FOUNDER     (mentions specific SaaS names, price hikes, "we tried X")
+    2. COMPLIANCE_NERVOUS (legal/finance/healthcare/GDPR/data sovereignty/on-prem)
+    3. AGENCY_RESELLER    (white-label, "for our clients", agency posting)
+    4. BOOTSTRAPPER       (solo founder, "small budget", weekend-coder energy)
+    5. ENTERPRISE_TIRE_KICKER (vague brief, "exploratory", budget mismatch)
+  And score 0-100 on { budget_fit, archetype_clarity, freshness, competition_low }.
+  Compute total_score = avg of the four.
+
+PHASE 4 · QUEUE
+  · Write the full scored list to ./queues/up-jobs/${today}-${q.replace(/[^a-z0-9]/gi,'-').slice(0,30)}.json via queue_write
+  · memory_note each job_id to scope 'up-jobs-seen' (so next scan skips)
+
+PHASE 5 · REPORT (return ONLY · short)
+  · Total candidates surfaced
+  · Top 5 by total_score · for each: title · archetype · score · job_url
+  · Suggested next verb (e.g. "upwork_propose job_id_or_url for top hit")
+
+SAFETY: SCAN ONLY · NEVER click Apply / Send Proposal / Submit · drafts come from upwork_propose`;
+
+        let final = '';
+        try {
+          const child = query({ prompt: findPrompt, options: queryOpts });
+          for await (const m of child) {
+            if (m.type === 'assistant') {
+              const t = (m.message?.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+              if (t) final = t;
+            }
+          }
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'upwork_find_jobs error: ' + e.message }] };
+        }
+        try { fs.appendFileSync(path.join(MEMORY_DIR, 'up-actions.jsonl'), JSON.stringify({ ts: new Date().toISOString(), mode: 'find_jobs', query: q, n, since_hours, summary: final.slice(0, 2000) }) + '\n'); } catch (_) {}
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'upwork_jobs_scanned', payload: { query: q, n }, ts: new Date().toISOString() });
+        } catch (_) {}
+        return { content: [{ type: 'text', text: `◊ upwork_find_jobs · query="${q}" · ≤${n} candidates queued\n\n${final}` }] };
+      }
+    ),
+    tool('upwork_propose', '◊·κ=φ⁷ · UPWORK PROPOSAL DRAFTER · Read a job (by URL or queued job_id) · spawn a child Claude that loads UPWORK-PACK Sections B+F+H · match archetype · draft a 150-220 word cover letter with FallMap-bait CTA + ONE portfolio link + UK/Top Rated closer · write to ./queues/up-proposal/. If dry_run:false · ask_user then return a T3 step plan with PAUSE-BEFORE-SUBMIT. NEVER auto-submits.',
+      { job_id_or_url: z.string().describe('Upwork job_id (e.g. ~012abc...) OR full job URL'),
+        dry_run: z.boolean().default(true).describe('true = draft + queue · false = ask_user + return T3 submit-plan (still pauses before Submit)') },
+      async ({ job_id_or_url, dry_run }) => {
+        console.log(`  ◊· upwork_propose ${job_id_or_url} dry_run=${dry_run}`);
+        const today = new Date().toISOString().slice(0,10);
+        const safeId = job_id_or_url.replace(/[^a-z0-9~]/gi,'-').slice(0,40);
+
+        // Daily cap check · UPWORK-PACK Section G: 5-8 sends/day · we cap at 5
+        try {
+          const fp = path.join(MEMORY_DIR, 'up-actions.jsonl');
+          if (fs.existsSync(fp)) {
+            const lines = fs.readFileSync(fp, 'utf8').trim().split('\n').filter(Boolean)
+              .map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean)
+              .filter(l => (l.ts || '').slice(0,10) === today && l.mode === 'propose_sent');
+            if (lines.length >= 5 && !dry_run) {
+              return { content: [{ type: 'text', text: `✗ daily propose-cap reached (${lines.length}/5 sent today) · come back tomorrow · or run dry_run:true to keep drafting` }] };
+            }
+          }
+        } catch (_) {}
+
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'upwork_propose_started', payload: { job_id_or_url, dry_run }, ts: new Date().toISOString() });
+        } catch (_) {}
+
+        const proposalPrompt = SYSTEM_DOCTRINE + `\n\nMISSION: UPWORK PROPOSAL DRAFT · target="${job_id_or_url}" · dry_run=${dry_run}
+
+PRE-FLIGHT:
+  1. pack_load('UPWORK-PACK.txt') · read Section B (overview voice) + Section F (3 templates) + Section H (archetypes) + Section D (portfolio entries 1-6) + Section E (FallMap-bait play)
+  2. learn_recall(scope:'upwork-proposals') · what template won last time
+
+PHASE 1 · READ THE JOB
+  If "${job_id_or_url}" looks like a URL · browser_navigate to it · browser_screenshot
+  Otherwise · look for it in ./queues/up-jobs/${today}-*.json via queue_read · or browser_navigate https://www.upwork.com/jobs/${job_id_or_url}
+  Extract: title · full description · budget · client info · stated tech stack · timeline · any specific SaaS named
+
+PHASE 2 · CLASSIFY (Section H archetype matcher)
+  Pick ONE of: BURNED_FOUNDER / COMPLIANCE_NERVOUS / AGENCY_RESELLER / BOOTSTRAPPER / ENTERPRISE_TIRE_KICKER
+  Pick the matching template: 1=custom build ($5k+) · 2=automation ($2-5k) · 3=discovery/audit (entry)
+
+PHASE 3 · PORTFOLIO MATCH
+  Pick ONE most-relevant entry from Section D (1-6):
+    1. ai-nativesolutions.com (the hub · use for generic AI / agency reseller)
+    2. fallpost (LinkedIn / content / marketing automation)
+    3. fallmap (cost-comparison / consulting-replacement · ALSO the bait link)
+    4. fallvault (backup / sovereignty / encryption)
+    5. fallforce (CRM / procurement / audit chain / compliance)
+    6. trilogy-forge (meta / archetype tooling / agencies)
+
+PHASE 4 · DRAFT (150-220 words · STRICT)
+  Structure:
+    LINE 1-2:  FallMap-bait opener · "Before you read the rest — here's what your workflow costs as a sovereign build vs the consultant quote: https://sjgant80-hub.github.io/fallmap/ — if the number surprises you, the rest is worth reading."
+    LINE 3-5:  Name ONE specific signal from the job post (a SaaS they named, a feature they want, a constraint they stated) · proves it's not generic
+    LINE 6-8:  Link to the ONE most-relevant portfolio item · 1-line why it matches
+    LINE 9-11: Pricing posture from the matched template
+    CLOSER:    "Top Rated · UK · ◊"
+
+  Output a JSON object ONLY · no prose:
+  {
+    "archetype": "BURNED_FOUNDER|COMPLIANCE_NERVOUS|AGENCY_RESELLER|BOOTSTRAPPER|ENTERPRISE_TIRE_KICKER",
+    "template_used": 1|2|3,
+    "cover_letter": "...the full 150-220 word draft...",
+    "fallmap_url": "https://sjgant80-hub.github.io/fallmap/",
+    "portfolio_link_used": "https://sjgant80-hub.github.io/...",
+    "proposed_rate": "...e.g. $95/hr or $3500 fixed...",
+    "time_estimate": "...e.g. 5-day turnaround...",
+    "specific_signal_quoted": "...the exact phrase from their post you referenced..."
+  }
+
+PHASE 5 · QUEUE
+  · queue_write to ./queues/up-proposal/${today}-${safeId}.md
+    Frontmatter: status:pending_review · archetype · template · proposed_rate · time_estimate · fallmap_url
+    Body: the cover_letter verbatim · then a "──── meta ────" block with the JSON
+  · memory_note { scope:'up-proposals', job: '${job_id_or_url}', archetype, template, dry_run: ${dry_run} }
+
+${dry_run ? `STOP HERE · return the queue path + a 3-line summary (archetype · template · word count). Do NOT navigate to the proposal form.` : `PHASE 6 · LIVE MODE (dry_run=false)
+  · ask_user("send this proposal as drafted? [yes/no/edit]")
+  · If user says "edit" · take their edits and re-queue · stop
+  · If user says "no" · stop · log the rejection to learn_log
+  · If user says "yes" · return this T3 STEP PLAN as your final text output:
+
+       STEP 1: browser_navigate to the job's apply URL (the job URL + "/apply/")
+       STEP 2: browser_wait 2000ms
+       STEP 3: browser_type the cover_letter into the proposal textarea (locator: textarea[name="coverLetter"], or first visible textarea)
+       STEP 4: browser_type the proposed_rate into the rate input (if hourly job) OR the fixed budget input
+       STEP 5: browser_screenshot · show Simon the filled form
+       STEP 6: ask_user "Submit this proposal? [yes/no]" · NON-NEGOTIABLE PAUSE
+       STEP 7: ONLY if user says yes · browser_click the Submit button
+       STEP 8: browser_screenshot · capture the success page
+       STEP 9: memory_note { scope:'up-proposals', status:'sent', job: '${job_id_or_url}', sent_at: now }
+       STEP 10: append to up-actions.jsonl with mode:'propose_sent'
+       STEP 11: fall_signal broadcast: upwork_proposal_sent
+
+  STEP 6 IS THE GATE · NEVER skip · NEVER infer "yes" from silence.`}
+
+SAFETY:
+  · NEVER click "Send Proposal" / "Submit" without ask_user
+  · NEVER pay connects for boost without ask_user
+  · The FallMap URL is a free tool / portfolio link · NOT off-platform redirect · TOS-compliant
+  · If you see "We've limited your account" · STOP and ask_user`;
+
+        let final = '';
+        try {
+          const child = query({ prompt: proposalPrompt, options: queryOpts });
+          for await (const m of child) {
+            if (m.type === 'assistant') {
+              const t = (m.message?.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+              if (t) final = t;
+            }
+          }
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'upwork_propose error: ' + e.message }] };
+        }
+        const queuePath = `./queues/up-proposal/${today}-${safeId}.md`;
+        try { fs.appendFileSync(path.join(MEMORY_DIR, 'up-actions.jsonl'), JSON.stringify({ ts: new Date().toISOString(), mode: dry_run ? 'propose_drafted' : 'propose_sent', job: job_id_or_url, queue_path: queuePath, summary: final.slice(0, 2000) }) + '\n'); } catch (_) {}
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: dry_run ? 'upwork_proposal_drafted' : 'upwork_proposal_sent', payload: { job: job_id_or_url, queue_path: queuePath }, ts: new Date().toISOString() });
+        } catch (_) {}
+        return { content: [{ type: 'text', text: `◊ upwork_propose · ${dry_run ? 'DRAFTED' : 'LIVE'} · queue=${queuePath}\n\n${final}` }] };
+      }
+    ),
+    tool('upwork_reply', '◊·κ=φ⁶ · UPWORK MESSAGE REPLY · Open a specific Upwork message thread · read the last 3-5 client messages · route to one of three patterns (qualify / unstall-with-fallslot / closing-FallMap-one-pager) · draft a reply · queue for approval. dry_run:false returns a T3 plan with PAUSE-BEFORE-SEND.',
+      { thread_url: z.string().describe('Full Upwork message thread URL (https://www.upwork.com/messages/rooms/...)'),
+        dry_run: z.boolean().default(true).describe('true = draft + queue · false = ask_user + return T3 send-plan (still pauses before Send)') },
+      async ({ thread_url, dry_run }) => {
+        console.log(`  ◊· upwork_reply ${thread_url} dry_run=${dry_run}`);
+        const today = new Date().toISOString().slice(0,10);
+        const threadId = (thread_url.match(/rooms\/([a-z0-9~_-]+)/i) || [,'thread'])[1].slice(0,40);
+
+        // Daily cap check: 10 replies/day
+        try {
+          const fp = path.join(MEMORY_DIR, 'up-actions.jsonl');
+          if (fs.existsSync(fp)) {
+            const lines = fs.readFileSync(fp, 'utf8').trim().split('\n').filter(Boolean)
+              .map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean)
+              .filter(l => (l.ts || '').slice(0,10) === today && l.mode === 'reply_sent');
+            if (lines.length >= 10 && !dry_run) {
+              return { content: [{ type: 'text', text: `✗ daily reply-cap reached (${lines.length}/10 sent today) · come back tomorrow · or run dry_run:true to keep drafting` }] };
+            }
+          }
+        } catch (_) {}
+
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'upwork_reply_started', payload: { thread_url, dry_run }, ts: new Date().toISOString() });
+        } catch (_) {}
+
+        const replyPrompt = SYSTEM_DOCTRINE + `\n\nMISSION: UPWORK MESSAGE REPLY · thread="${thread_url}" · dry_run=${dry_run}
+
+PRE-FLIGHT:
+  1. pack_load('UPWORK-PACK.txt') · read Section E (FallMap-bait + Loom escalation) + Section H (archetypes)
+  2. memory_recall('up-replies', limit:20) · check if we've drafted in this thread today already
+
+PHASE 1 · READ THE THREAD
+  · browser_navigate ${thread_url}
+  · browser_wait 2500
+  · browser_screenshot
+  · Scroll the message panel · extract the last 3-5 messages FROM THE CLIENT (skip Simon's own messages)
+  · Note: client name, current job title (if shown in sidebar), tone, most recent timestamp
+
+PHASE 2 · CLASSIFY CLIENT INTENT (pick exactly ONE)
+  ROUTE A · QUALIFYING:    client asked specific questions ("can you do X?", "do you handle Y?")
+       → answer each question directly + ask 2 sharper questions back (scope · timeline · success criteria)
+  ROUTE B · STALLING:      client went quiet · last message was "let me think about it" / "circle back" / >48h since
+       → offer a 10-minute scope call · paste fallslot URL: https://sjgant80-hub.github.io/fallslot/
+       → "if a call's the wrong format, just paste your current workflow here and I'll come back with the number"
+  ROUTE C · CLOSING-CURIOUS: client asked about pricing / next steps / "what would this cost?"
+       → drop the FallMap one-pager URL with their workflow modelled · propose a fixed price · "happy to scope on a 15-min call if you want a tighter number"
+
+PHASE 3 · DRAFT THE REPLY (80-180 words · Simon's voice per Section B)
+  Output JSON ONLY:
+  {
+    "route": "A|B|C",
+    "client_last_message_summary": "...1-line gist...",
+    "reply_text": "...the full draft...",
+    "links_included": ["..."],
+    "escalation_offer": "...if any · e.g. 'Loom video next step' or 'fallslot 15-min call'..."
+  }
+
+PHASE 4 · QUEUE
+  · queue_write to ./queues/up-reply/${today}-${threadId}.md
+    Frontmatter: status:pending_review · route · thread_url · links_included
+    Body: reply_text verbatim · then "──── meta ────" block with the JSON
+  · memory_note { scope:'up-replies', thread: '${thread_url}', route, dry_run: ${dry_run} }
+
+${dry_run ? `STOP HERE · return queue path + 3-line summary (route · word count · links). Do NOT type into the message box.` : `PHASE 5 · LIVE MODE (dry_run=false)
+  · ask_user("send this reply as drafted? [yes/no/edit]")
+  · If edit · re-queue · stop
+  · If no · log to learn_log · stop
+  · If yes · return this T3 STEP PLAN:
+
+       STEP 1: browser_navigate to ${thread_url} (refresh focus)
+       STEP 2: browser_wait 1500
+       STEP 3: browser_click the message input box (locator: div[role="textbox"], or contenteditable area)
+       STEP 4: browser_type the reply_text into it
+       STEP 5: browser_screenshot · show Simon the composed reply
+       STEP 6: ask_user "Send this reply? [yes/no]" · NON-NEGOTIABLE PAUSE
+       STEP 7: ONLY if yes · browser_click the Send button
+       STEP 8: browser_screenshot · capture confirmation
+       STEP 9: memory_note { scope:'up-replies', status:'sent', thread: '${thread_url}', sent_at: now }
+       STEP 10: append up-actions.jsonl with mode:'reply_sent'
+       STEP 11: fall_signal broadcast: upwork_reply_sent
+
+  STEP 6 IS THE GATE · NEVER skip.`}
+
+SAFETY:
+  · NEVER click Send without ask_user
+  · NEVER paste a Stripe / external payment link · only fallmap / fallslot / portfolio URLs
+  · If Upwork warns about off-platform contact · STOP and ask_user`;
+
+        let final = '';
+        try {
+          const child = query({ prompt: replyPrompt, options: queryOpts });
+          for await (const m of child) {
+            if (m.type === 'assistant') {
+              const t = (m.message?.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+              if (t) final = t;
+            }
+          }
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'upwork_reply error: ' + e.message }] };
+        }
+        const queuePath = `./queues/up-reply/${today}-${threadId}.md`;
+        try { fs.appendFileSync(path.join(MEMORY_DIR, 'up-actions.jsonl'), JSON.stringify({ ts: new Date().toISOString(), mode: dry_run ? 'reply_drafted' : 'reply_sent', thread: thread_url, queue_path: queuePath, summary: final.slice(0, 2000) }) + '\n'); } catch (_) {}
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: dry_run ? 'upwork_reply_drafted' : 'upwork_reply_sent', payload: { thread: thread_url, queue_path: queuePath }, ts: new Date().toISOString() });
+        } catch (_) {}
+        return { content: [{ type: 'text', text: `◊ upwork_reply · ${dry_run ? 'DRAFTED' : 'LIVE'} · queue=${queuePath}\n\n${final}` }] };
+      }
+    ),
+    tool('upwork_autopilot', '◊·κ=φ⁷ · ALWAYS-ON UPWORK ENGINE · Runs ONE cycle: scan saved searches · OR draft proposals for top-scored queued jobs · OR draft replies to unanswered message threads · QUEUES EVERYTHING for human approval (./queues/up-*). NEVER auto-submits. Daily caps: propose ≤5/day · reply ≤10/day · scan unlimited. Memory-deduped.',
+      { mode: z.enum(['scan','propose','reply']).default('scan').describe('scan=run 5 saved searches · propose=draft N proposals for top queue · reply=draft replies to unanswered threads'),
+        cap: z.number().min(1).max(10).default(5).describe('Max drafts to produce this cycle (default 5)') },
+      async ({ mode, cap }) => {
+        console.log(`  ◊· upwork_autopilot mode=${mode} cap=${cap}`);
+        const today = new Date().toISOString().slice(0,10);
+
+        // Daily caps · UPWORK-PACK Section G
+        const limits = { scan: 999, propose: 5, reply: 10 };
+        try {
+          const fp = path.join(MEMORY_DIR, 'up-actions.jsonl');
+          if (fs.existsSync(fp)) {
+            const lines = fs.readFileSync(fp, 'utf8').trim().split('\n').filter(Boolean)
+              .map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean)
+              .filter(l => (l.ts || '').slice(0,10) === today && (
+                (mode === 'propose' && (l.mode === 'propose_drafted' || l.mode === 'propose_sent')) ||
+                (mode === 'reply' && (l.mode === 'reply_drafted' || l.mode === 'reply_sent')) ||
+                (mode === 'scan' && l.mode === 'find_jobs')
+              ));
+            if (lines.length >= limits[mode]) {
+              return { content: [{ type: 'text', text: `✗ daily cap reached for mode=${mode} (${lines.length}/${limits[mode]}) · skipping · come back tomorrow` }] };
+            }
+            cap = Math.min(cap, limits[mode] - lines.length);
+          }
+        } catch (_) {}
+
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'up_autopilot_started', payload: { mode, cap }, ts: new Date().toISOString() });
+        } catch (_) {}
+
+        // Default search list · 5 queries · matches UPWORK-PACK Section C skills + Section G discipline
+        const SAVED_SEARCHES = [
+          'AI agent',
+          'AI automation',
+          'Claude integration',
+          'sovereign self-hosted',
+          'alternative to HubSpot'
+        ];
+
+        const autopilotPrompt = SYSTEM_DOCTRINE + `\n\nYOU ARE THE UPWORK AUTOPILOT for Simon · MODE=${mode} · CAP=${cap}
+
+PRE-FLIGHT (always):
+  1. pack_load('UPWORK-PACK.txt') · the immutable spec
+  2. memory_recall('up-jobs-seen', limit:50) · don't re-surface
+  3. memory_recall('up-proposals', limit:30) · don't re-draft
+  4. browser_screenshot · confirm logged into Upwork (if not · run upwork_open first)
+
+MODE: ${mode}
+
+${mode === 'scan' ? `SCAN MODE (the default · safe to run repeatedly · UNLIMITED daily cap):
+  · For each query in [${SAVED_SEARCHES.map(s => `"${s}"`).join(', ')}]:
+       - Call upwork_find_jobs(query, n:5, since_hours:24)
+       - Capture the top scored hits
+  · Aggregate the across-query top ${cap} jobs by total_score
+  · Emit a tight summary: top ${cap} jobs ready for upwork_propose
+  · DO NOT draft proposals in scan mode · scan ONLY · the human decides which to propose
+` : mode === 'propose' ? `PROPOSE MODE (draft up to ${cap} cover letters for top-scored queued jobs):
+  · Read ./queues/up-jobs/${today}-*.json (queue_read each) · aggregate · sort by total_score desc
+  · memory_recall 'up-proposals' · drop any job we've already drafted for
+  · Pick the top ${cap} unseen jobs
+  · For each: call upwork_propose(job_id_or_url, dry_run:true)
+  · Each proposal lands in ./queues/up-proposal/${today}-*.md
+  · DO NOT call upwork_propose with dry_run:false · the human reviews + approves before any submit
+` : `REPLY MODE (draft up to ${cap} replies to unanswered message threads):
+  · browser_navigate https://www.upwork.com/nx/messages/
+  · browser_wait 2500
+  · browser_screenshot
+  · Scan the inbox · identify threads where the LAST message is from the client (Simon hasn't replied)
+  · For each unanswered thread in the top ${cap}:
+       - Extract the thread URL
+       - Call upwork_reply(thread_url, dry_run:true)
+  · Each draft lands in ./queues/up-reply/${today}-*.md
+  · DO NOT call upwork_reply with dry_run:false · human reviews + approves before any send
+`}
+END OF CYCLE:
+  · memory_note { scope:'up-actions', ts, mode:'${mode}', drafts_queued: N }
+  · learn_log scope:'upwork-autopilot' { what_worked, what_failed, next_time }
+  · fall_signal broadcast: up_autopilot_complete with counts
+  · Return a tight summary: N drafts queued · paths · top score · next-cycle suggestion
+
+SAFETY:
+  · NEVER click any Submit/Send Proposal/Send Message button
+  · NEVER pay connects for Boosted Proposals without ask_user
+  · NEVER include off-platform payment links in any draft · FallMap and fallslot URLs are portfolio/free-tool links · TOS-compliant
+  · Pause 30-90s between job-detail navigations (Upwork flags rapid scrolling)
+  · If you see "We've limited your account" · STOP and ask_user`;
+
+        let final = '';
+        try {
+          const child = query({ prompt: autopilotPrompt, options: queryOpts });
+          for await (const m of child) {
+            if (m.type === 'assistant') {
+              const t = (m.message?.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+              if (t) final = t;
+            }
+          }
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'upwork_autopilot error: ' + e.message }] };
+        }
+        try { fs.appendFileSync(path.join(MEMORY_DIR, 'up-actions.jsonl'), JSON.stringify({ ts: new Date().toISOString(), mode: 'autopilot_' + mode, cap, summary: final.slice(0, 2000) }) + '\n'); } catch (_) {}
+        try {
+          if (typeof broadcast === 'function') broadcast({ type: 'fall_signal', source: 'si-didy', kind: 'up_autopilot_complete', payload: { mode, cap }, ts: new Date().toISOString() });
+        } catch (_) {}
+        return { content: [{ type: 'text', text: `◊ upwork_autopilot cycle complete · mode=${mode}\n\n${final}` }] };
+      }
+    ),
+
+    // ═══════════════════════════════════════════════════════════════
     // ◊ COGNITIVE SUBSTRATE · v1.0 · the agentic-corp verbs
     // ═══════════════════════════════════════════════════════════════
     tool('research', '◊·κ=φ⁵ · RESEARCH-AS-A-SERVICE · Run adversarially-verified deep research on any question. Spawns N angle-specialists in parallel via Claude Agent SDK, fetches sources via WebSearch/WebFetch, runs an M-vote refute panel on each claim, returns cited synthesis. Use BEFORE drafting strategy or shipping a tool — research grounds the spec.',
@@ -1539,6 +1989,17 @@ LINKEDIN AUTOPILOT (always-on draft engine · NEVER auto-sends):
 - ALL ACTIONS QUEUE FOR HUMAN APPROVAL · si-didy NEVER clicks Submit/Send/Connect/Post without ask_user
 - "find me a client" / "scan linkedin" / "any new comments?" route to these verbs
 
+UPWORK AUTOPILOT (always-on client-hunt engine · NEVER auto-sends):
+- upwork_open                  → Chromium · persistent profile · log in once
+- upwork_find_jobs(q,n,since)  → scrape feed · score against archetype matcher · queue
+- upwork_propose(jobOrUrl)     → pack-aligned cover letter · FallMap CTA · ask_user before Submit
+- upwork_reply(threadUrl)      → reply draft routed by client intent · ask_user before Send
+- upwork_autopilot(mode,cap)   → cron-ticked scan/propose/reply rotation
+- SIDIDY_UP_AUTOPILOT=1 enables · 120 min default · waking hours only
+- ALL submits/sends gated by ask_user · daily caps respected (propose ≤5/day · reply ≤10/day)
+- FallMap URL in every proposal · TOS-compliant (free portfolio tool, not payment funnel)
+- "find me an upwork client" / "scan upwork" / "draft proposals" route here
+
 LINKEDIN ORCHESTRATION (when user says "linkedin post" / "li drop" / "post B5.1" / similar):
 - ALWAYS pack_load('LINKEDIN-PACK.txt') FIRST · the pack is the immutable copy spec
 - ALWAYS memory_recall('li-posts') with today's date filter · dedup before drafting
@@ -1687,6 +2148,10 @@ const allowedTools = [
   'mcp__estate__linkedin_open', 'mcp__estate__linkedin_autopilot', 'mcp__estate__find_client',
   // ◊ Carousel engine + scheduler
   'mcp__estate__capture_estate_screenshots', 'mcp__estate__linkedin_schedule',
+  // ◊ Upwork AUTOPILOT · client-hunt engine · NEVER auto-submits
+  'mcp__estate__upwork_open', 'mcp__estate__upwork_find_jobs',
+  'mcp__estate__upwork_propose', 'mcp__estate__upwork_reply',
+  'mcp__estate__upwork_autopilot',
 ];
 
 console.log('\n◊ tiers loaded:');
@@ -2033,6 +2498,43 @@ Execute the n=4-7 doctrine. Estate-first. Log mission. Stream tier calls. Pause 
   }
 
   // ═════════════════════════════════════════════════════════════════
+  //  ◊ UPWORK AUTOPILOT CRON · always-on while cockpit is alive
+  //  Env: SIDIDY_UP_AUTOPILOT=1 to enable · SIDIDY_UP_AUTOPILOT_MINUTES=120 default
+  //  Waking-hour gate: only fires 07:00-21:00 UK local time
+  //  Never fires unless at least one SSE client is connected (proves laptop open)
+  // ═════════════════════════════════════════════════════════════════
+  const UP_AUTOPILOT_ON = process.env.SIDIDY_UP_AUTOPILOT === '1';
+  const UP_AUTOPILOT_INTERVAL_MIN = Math.max(45, parseInt(process.env.SIDIDY_UP_AUTOPILOT_MINUTES || '120', 10));
+  let upTickCount = 0;
+  if (UP_AUTOPILOT_ON) {
+    const upModes = ['scan', 'propose', 'reply']; // rotate
+    const upTick = async () => {
+      try {
+        const now = new Date();
+        const hour = now.getHours();
+        if (hour < 7 || hour >= 21) {
+          console.log(`◊ up-autopilot · skipped (outside waking hours · ${hour}h)`);
+          return;
+        }
+        if (sseClients.length === 0) {
+          console.log(`◊ up-autopilot · skipped (no cockpit clients · laptop assumed closed)`);
+          return;
+        }
+        const mode = upModes[upTickCount % upModes.length];
+        upTickCount++;
+        const directive = `upwork_autopilot mode:"${mode}" cap:5 · queue all drafts · NEVER submit`;
+        console.log(`◊ up-autopilot tick #${upTickCount} · mode=${mode}`);
+        broadcast({ type: 'fall_signal', source: 'up-autopilot', kind: 'up_autopilot_tick', payload: { mode, count: upTickCount, hour }, ts: new Date().toISOString() });
+        runDirective(directive).catch(e => broadcast({ type: 'error', message: 'up-autopilot tick error: ' + e.message }));
+      } catch (e) {
+        console.log('◊ up-autopilot tick err:', e.message);
+      }
+    };
+    // First tick after 3 min (let LinkedIn autopilot go first), then every N minutes
+    setTimeout(() => { upTick(); setInterval(upTick, UP_AUTOPILOT_INTERVAL_MIN * 60 * 1000); }, 3 * 60 * 1000);
+  }
+
+  // ═════════════════════════════════════════════════════════════════
   //  ◊ LINKEDIN SCHEDULE CRON · checks every 60s for due posts
   //  Fires linkedin_drop(frame, screenshot_dir) at the scheduled hour
   //  Auto-captures screenshots first if scheduled with auto_capture:true
@@ -2078,6 +2580,11 @@ Execute the n=4-7 doctrine. Estate-first. Log mission. Stream tier calls. Pause 
       console.log(`◊ autopilot ARMED · every ${AUTOPILOT_INTERVAL_MIN}min · 07-21h · drafts only · NEVER auto-sends`);
     } else {
       console.log(`◊ autopilot OFF · set SIDIDY_AUTOPILOT=1 to enable (rotates scan/reply/engage)`);
+    }
+    if (UP_AUTOPILOT_ON) {
+      console.log(`◊ upwork autopilot ARMED · every ${UP_AUTOPILOT_INTERVAL_MIN}min · 07-21h · drafts only · NEVER auto-sends`);
+    } else {
+      console.log(`◊ upwork autopilot OFF · set SIDIDY_UP_AUTOPILOT=1 to enable (rotates scan/propose/reply)`);
     }
     console.log('');
   });
