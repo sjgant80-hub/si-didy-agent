@@ -32,7 +32,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import readline from 'node:readline';
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 
 // ───────────── config ─────────────
 const ARGS         = process.argv.slice(2);
@@ -1318,6 +1318,132 @@ SAFETY: NEVER auto-send · ALL drafts await Simon's approval`;
         }
       }
     ),
+    tool('upwork_assisted_paste', '◊·κ=1 · LinkedIn-flow for Upwork profile fill · pack-driven paste + pause-before-Save. Mirrors linkedin_drop rail: si-didy navigates section URL · loads content to system clipboard · YOU Ctrl+V into the field · YOU hit Save · type "next" between sections. Zero auto-clicks. Zero selector risk. ~8 Save presses total. Use after upwork_open confirms login.',
+      { section: z.enum(['all','A','B','C','D','E','F']).default('all').describe('Which section · "all" runs A→F sequentially · or pick one to retry'),
+        pack_path: z.string().default('./packs/UPWORK-PACK.txt'),
+        portfolio_dir: z.string().default('C:\\Users\\sjgan\\Downloads\\upwork-portfolio') },
+      async ({ section, pack_path, portfolio_dir }) => {
+        console.log(`  ◊· upwork_assisted_paste section=${section}`);
+        const setClipboard = (text) => {
+          try { spawnSync('clip.exe', [], { input: text, encoding: 'utf8' }); return true; }
+          catch (e) { console.log(`  ⚠ clipboard set failed: ${e.message}`); return false; }
+        };
+        let pack;
+        try { pack = fs.readFileSync(pack_path, 'utf8'); }
+        catch (e) { return { content: [{ type: 'text', text: `pack read failed: ${e.message}` }] }; }
+        const grab = (re) => { const m = pack.match(re); return m ? m[1].trim() : ''; };
+        const allBlocks = [
+          { id: 'A1', label: 'Headline', target: 'Profile Title field',
+            url: 'https://www.upwork.com/freelancers/settings/profile',
+            clipboard: grab(/A1\.\s*HEADLINE[\s\S]*?▼ COPY ▼\s*\n([\s\S]*?)\n▲ END ▲/),
+            hint: 'Click pencil next to Title · Ctrl+V · Save · type "next"' },
+          { id: 'A2', label: 'Hourly Rate · $95', target: 'Hourly rate field',
+            url: 'https://www.upwork.com/freelancers/settings/profile',
+            clipboard: '95',
+            hint: 'Click pencil next to Hourly rate · clear · paste 95 · Save · type "next"' },
+          { id: 'A3', label: 'Availability', target: 'Availability setting',
+            url: 'https://www.upwork.com/freelancers/settings/profile',
+            clipboard: '',
+            hint: 'Click pencil next to Availability · select "As needed - open to offers" · Save · type "next"' },
+          { id: 'B', label: 'Overview · the bio',  target: 'Overview field',
+            url: 'https://www.upwork.com/freelancers/settings/profile',
+            clipboard: grab(/SECTION B[\s\S]*?▼ COPY ▼[^\n]*\n([\s\S]*?)\n▲ END ▲/),
+            hint: 'Click pencil next to Overview · select-all + Ctrl+V · Save · type "next"' },
+          { id: 'C', label: 'Skills · 20 items', target: 'Skills section',
+            url: 'https://www.upwork.com/freelancers/settings/profile',
+            clipboard: grab(/SECTION C[\s\S]*?▼ COPY \(one at a time\) ▼\s*\n([\s\S]*?)\n▲ END ▲/),
+            hint: 'Click pencil next to Skills · type each skill one-by-one (Upwork autocompletes · the 20-list is in your clipboard for reference) · Save · type "next"' },
+        ];
+        for (let i = 1; i <= 7; i++) {
+          const re = new RegExp(`PORTFOLIO ENTRY ${i}[\\s\\S]*?▼ TITLE ▼\\s*\\n([\\s\\S]*?)\\n▲ END ▲[\\s\\S]*?▼ DESCRIPTION ▼\\s*\\n([\\s\\S]*?)\\n▲ END ▲[\\s\\S]*?▼ PROJECT LINK ▼\\s*\\n([\\s\\S]*?)\\n▲ END ▲`);
+          const m = pack.match(re);
+          if (!m) continue;
+          const title = m[1].trim(), desc = m[2].trim(), pURL = m[3].trim();
+          const pngCandidates = fs.existsSync(portfolio_dir)
+            ? fs.readdirSync(portfolio_dir).filter(f => f.match(new RegExp(`^0?${i}-`)) && f.endsWith('.png')) : [];
+          const imgPath = pngCandidates[0] ? path.join(portfolio_dir, pngCandidates[0]) : '(none found)';
+          allBlocks.push({
+            id: `D${i}`, label: `Portfolio Entry ${i} · ${title.slice(0, 50)}`,
+            target: 'Portfolio · Add Work modal',
+            url: 'https://www.upwork.com/freelancers/settings/profile',
+            clipboard: title,
+            hint: `Click "Add work" · paste TITLE with Ctrl+V · sub-blocks (desc/url/image) will sequence automatically · final Save · type "next"`,
+            subBlocks: { description: desc, projectUrl: pURL, image: imgPath }
+          });
+        }
+        const fSaved = grab(/SAVED RESPONSE[\s\S]*?▼ COPY ▼\s*\n([\s\S]*?)\n▲ END ▲/) || grab(/SECTION F[\s\S]*?▼ COPY ▼\s*\n([\s\S]*?)\n▲ END ▲/);
+        if (fSaved) allBlocks.push({
+          id: 'F', label: 'Saved Response · FallMap bait',
+          target: 'Messages → Settings → Quick replies',
+          url: 'https://www.upwork.com/ab/messages/settings/quick-replies',
+          clipboard: fSaved,
+          hint: 'Click "New quick reply" · paste with Ctrl+V · name "FallMap bait" · Save · type "next"'
+        });
+        const wanted = section === 'all' ? allBlocks : allBlocks.filter(b => b.id === section || b.id.startsWith(section));
+        if (!wanted.length) return { content: [{ type: 'text', text: `no blocks match section="${section}"` }] };
+        try {
+          if (!_ctx) {
+            const { chromium } = await import('playwright');
+            console.log('◊ T3 · Chromium opening (persistent profile · ./si-didy-profile)');
+            _ctx = await chromium.launchPersistentContext(USER_DATA, {
+              headless: false, viewport: VIEWPORT,
+              args: ['--disable-blink-features=AutomationControlled']
+            });
+            _page = _ctx.pages()[0] || await _ctx.newPage();
+            await _page.setViewportSize(VIEWPORT);
+          }
+        } catch (e) { return { content: [{ type: 'text', text: 'browser open failed: ' + e.message }] }; }
+        const log = [];
+        for (const block of wanted) {
+          try {
+            await _page.goto(block.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+            await _page.waitForTimeout(1500);
+          } catch (e) { console.log(`  ⚠ nav to ${block.url} failed: ${e.message} · continuing`); }
+          if (block.clipboard) setClipboard(block.clipboard);
+          console.log(`\n${'═'.repeat(64)}`);
+          console.log(`◊ ${block.id} · ${block.label}`);
+          console.log(`  Target:    ${block.target}`);
+          console.log(`  Clipboard: ${block.clipboard ? `loaded (${block.clipboard.length} chars)` : '(empty · no paste needed)'}`);
+          console.log(`  Action:    ${block.hint}`);
+          console.log('═'.repeat(64));
+          let ans = ((await ask(`\n  ◊ ${block.id} > [next / skip / stop] > `)) || '').trim().toLowerCase();
+          if (block.subBlocks && !ans.startsWith('stop') && !ans.startsWith('skip')) {
+            if (block.subBlocks.description) {
+              setClipboard(block.subBlocks.description);
+              console.log(`\n  ◊ ${block.id}.desc · clipboard loaded (${block.subBlocks.description.length} chars) · paste in Description field`);
+              await ask(`  ◊ ${block.id}.desc > [next] > `);
+            }
+            if (block.subBlocks.projectUrl) {
+              setClipboard(block.subBlocks.projectUrl);
+              console.log(`\n  ◊ ${block.id}.url · clipboard: ${block.subBlocks.projectUrl} · paste in Project Link field`);
+              await ask(`  ◊ ${block.id}.url > [next] > `);
+            }
+            if (block.subBlocks.image && block.subBlocks.image !== '(none found)') {
+              console.log(`\n  ◊ ${block.id}.img · file: ${block.subBlocks.image} · drag into upload zone OR click "Add image" → browse to this path`);
+              await ask(`  ◊ ${block.id}.img > [next] > `);
+            }
+            ans = 'next';
+          }
+          if (ans.startsWith('stop')) { log.push({ section: block.id, status: 'stopped' }); break; }
+          const status = ans.startsWith('skip') ? 'skipped' : 'saved';
+          log.push({ section: block.id, status });
+          try {
+            fs.appendFileSync(path.join(MEMORY_DIR, 'up-actions.jsonl'),
+              JSON.stringify({ ts: new Date().toISOString(), mode: 'assisted_paste', section: block.id, status, label: block.label }) + '\n');
+          } catch (_) {}
+          try {
+            if (typeof broadcast === 'function') broadcast({
+              type: 'fall_signal', source: 'si-didy', kind: 'upwork_section_processed',
+              payload: { section: block.id, status }, ts: new Date().toISOString()
+            });
+          } catch (_) {}
+        }
+        const savedCount = log.filter(l => l.status === 'saved').length;
+        return { content: [{ type: 'text', text:
+          `◊ upwork_assisted_paste complete\n${log.map(l => `  ${l.section}: ${l.status}`).join('\n')}\n\n${savedCount}/${wanted.length} sections saved · ◊·κ=1`
+        }] };
+      }
+    ),
     tool('upwork_find_jobs', '◊·κ=φ⁶ · UPWORK JOB SCANNER · Search the Upwork job feed for a query, scrape the visible cards, score against UPWORK-PACK Section H archetype matcher, filter posted-since-hours, dedupe via up-jobs-seen memory. Queues scored candidates to ./queues/up-jobs/. NEVER applies · just scans.',
       { query: z.string().describe('Search query · e.g. "AI agent", "Claude integration", "sovereign self-hosted"'),
         n: z.number().min(1).max(20).default(10).describe('Max candidates to return · default 10'),
@@ -2014,7 +2140,8 @@ UPWORK AUTOPILOT (always-on client-hunt engine · NEVER auto-sends):
 - upwork_propose(jobOrUrl)     → pack-aligned cover letter · FallMap CTA · ask_user before Submit
 - upwork_reply(threadUrl)      → reply draft routed by client intent · ask_user before Send
 - upwork_autopilot(mode,cap)   → cron-ticked scan/propose/reply rotation
-- upwork_profile_setup · REMOVED 2026-06-02 (v2.1 konomi-clean) · stale DOM selectors burned tokens · profile fill is now a Simon-paste workflow per UPWORK-PACK.txt
+- upwork_assisted_paste(section)→ LinkedIn-flow rail · navigates to each section URL · loads paste blocks to system clipboard · YOU Ctrl+V + Save · type "next" between sections · ~8 saves total · zero selector risk
+- upwork_profile_setup · REMOVED 2026-06-02 (v2.1 konomi-clean) · stale DOM selectors burned tokens · superseded by upwork_assisted_paste above
 - SIDIDY_UP_AUTOPILOT=1 enables · 120 min default · waking hours only
 - ALL submits/sends gated by ask_user · daily caps respected (propose ≤5/day · reply ≤10/day)
 - FallMap URL in every proposal · TOS-compliant (free portfolio tool, not payment funnel)
@@ -2172,7 +2299,8 @@ const allowedTools = [
   'mcp__estate__upwork_open', 'mcp__estate__upwork_find_jobs',
   'mcp__estate__upwork_propose', 'mcp__estate__upwork_reply',
   'mcp__estate__upwork_autopilot',
-  // ◊ Upwork PROFILE-FILL · REMOVED 2026-06-02 (v2.1 konomi-clean · stale selectors)
+  // ◊ Upwork PROFILE-FILL · v2.2 · LinkedIn-flow rail · pack-driven paste + pause-before-Save
+  'mcp__estate__upwork_assisted_paste',
 ];
 
 console.log('\n◊ tiers loaded:');
