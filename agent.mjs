@@ -1159,18 +1159,18 @@ const estateMcp = createSdkMcpServer({
             await _page.locator('text=/start a post/i').first().click({ timeout: 8000 });
           }
 
-          // Wait for the compose dialog · this is the gate against typing into search bar
-          await _page.waitForSelector('div[role="dialog"]', { timeout: 10000 });
+          // Wait for the VISIBLE compose dialog · filter aria-hidden ghosts
+          // (LinkedIn has vjs-error-display dialogs with role=dialog but aria-hidden=true · they never become visible)
+          // Skip the dialog-wait entirely · go straight to waiting for the composer ql-editor inside a VISIBLE dialog
           await _page.waitForTimeout(1500);
-
-          // Composer selector SCOPED TO DIALOG · not page-wide · prevents matching the LinkedIn search bar
-          let composer = _page.locator('div[role="dialog"] div.ql-editor[contenteditable="true"]').first();
+          let composer = _page.locator('div[role="dialog"]:not([aria-hidden="true"]) div.ql-editor[contenteditable="true"]').first();
           try {
-            await composer.waitFor({ state: 'visible', timeout: 8000 });
+            await composer.waitFor({ state: 'visible', timeout: 12000 });
             await composer.click({ timeout: 3000 });
           } catch (_) {
-            // fallback STILL within dialog only · never page-wide
-            composer = _page.locator('div[role="dialog"] [contenteditable="true"]').first();
+            // fallback · still scoped to visible dialog · never page-wide
+            composer = _page.locator('div[role="dialog"]:not([aria-hidden="true"]) [contenteditable="true"]').first();
+            await composer.waitFor({ state: 'visible', timeout: 5000 });
             await composer.click({ timeout: 3000 });
           }
           await _page.waitForTimeout(500);
