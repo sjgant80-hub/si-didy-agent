@@ -1138,28 +1138,55 @@ const estateMcp = createSdkMcpServer({
           await _page.waitForLoadState('domcontentloaded');
           await _page.waitForTimeout(2500);
 
+          // Verify we landed on /feed/ before proceeding
+          if (!_page.url().includes('linkedin.com/feed')) {
+            throw new Error('not on /feed/ after navigation · landed at: ' + _page.url());
+          }
+
+          // Close any stray tabs (Playwright sometimes opens about:blank)
+          try {
+            const _pages = _ctx.pages();
+            for (let i = 1; i < _pages.length; i++) { try { await _pages[i].close(); } catch (_) {} }
+          } catch (_) {}
+
           // Click "Start a post"
           try {
             await _page.getByRole('button', { name: /start a post/i }).first().click({ timeout: 8000 });
           } catch (_) {
             await _page.locator('text=/start a post/i').first().click({ timeout: 8000 });
           }
+
+          // Wait for the compose dialog · this is the gate against typing into search bar
+          await _page.waitForSelector('div[role="dialog"]', { timeout: 10000 });
           await _page.waitForTimeout(1500);
 
-          // Click the editable area · try multiple selectors
-          let editor = null;
-          for (const sel of ['div.ql-editor[contenteditable="true"]', '[contenteditable="true"][role="textbox"]', '[contenteditable="true"]', '.ql-editor']) {
-            const loc = _page.locator(sel).first();
-            try { if (await loc.count() > 0) { await loc.click({ timeout: 3000 }); editor = loc; break; } } catch (_) {}
-          }
-          if (!editor) {
-            try { editor = _page.getByRole('textbox').first(); await editor.click({ timeout: 3000 }); } catch (_) {}
+          // Composer selector SCOPED TO DIALOG · not page-wide · prevents matching the LinkedIn search bar
+          let composer = _page.locator('div[role="dialog"] div.ql-editor[contenteditable="true"]').first();
+          try {
+            await composer.waitFor({ state: 'visible', timeout: 8000 });
+            await composer.click({ timeout: 3000 });
+          } catch (_) {
+            // fallback STILL within dialog only · never page-wide
+            composer = _page.locator('div[role="dialog"] [contenteditable="true"]').first();
+            await composer.click({ timeout: 3000 });
           }
           await _page.waitForTimeout(500);
 
           // Type the body char-by-char to defeat anti-paste detection
           await _page.keyboard.type(body, { delay: 5 });
           await _page.waitForTimeout(800);
+
+          // VERIFY body actually landed in the composer (not the search bar)
+          try {
+            const typed = await composer.innerText();
+            const typedLen = (typed || '').replace(/\s+/g, '').length;
+            const bodyLen = body.replace(/\s+/g, '').length;
+            if (typedLen < bodyLen * 0.85) {
+              throw new Error('body did not land in composer · typed=' + typedLen + ' chars · expected ~' + bodyLen + ' · likely typed into search bar');
+            }
+          } catch (e) {
+            throw new Error('composer verification failed: ' + e.message);
+          }
 
           // Attach media
           if (carouselImages.length > 0) {
