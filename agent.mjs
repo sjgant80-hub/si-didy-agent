@@ -794,6 +794,158 @@ const estateMcp = createSdkMcpServer({
       }
     ),
     // ═══════════════════════════════════════════════════════════════
+    // ◊ SESSION AUDIT · operational hygiene scan (OP1-OP5 doctrine)
+    // ═══════════════════════════════════════════════════════════════
+    tool('session_audit',
+      '◊·κ=φ³ · SESSION AUDIT · Read-only operational sweep. Counts and classifies: agent.mjs --server instances, ' +
+      'MCP server processes (orphans across sessions), playwright chromium processes, listening on :1618, ' +
+      'zombie playwright temp profile dirs. Returns colour-coded status (ok / amber / red) per category with ' +
+      'recommended actions. NEVER kills anything · purely diagnostic. Call before any heavy build to catch leaks. ' +
+      'Implements OP5 daily hygiene from estate doctrine.',
+      {
+        verbose: z.boolean().default(false).describe('Include full process commandlines · default false (counts only)'),
+      },
+      async ({ verbose }) => {
+        try {
+          const { execSync } = await import('node:child_process');
+          const home = process.env.LOCALAPPDATA || (process.env.USERPROFILE ? path.join(process.env.USERPROFILE, 'AppData', 'Local') : '');
+
+          // 1. agent.mjs --server count
+          let agentServerCount = 0;
+          let agentServerDetails = [];
+          try {
+            const wmicOut = execSync('wmic process where "name=\'node.exe\'" get processid,commandline /format:list', { encoding: 'utf8', stdio: ['ignore','pipe','ignore'] });
+            const blocks = wmicOut.split(/\r?\n\r?\n/);
+            for (const b of blocks) {
+              if (/agent\.mjs\s+--server/i.test(b)) {
+                agentServerCount++;
+                const pidMatch = b.match(/ProcessId=(\d+)/);
+                const cmdMatch = b.match(/CommandLine=([^\r\n]+)/);
+                if (pidMatch) agentServerDetails.push({ pid: pidMatch[1], cmd: cmdMatch ? cmdMatch[1].trim() : '' });
+              }
+            }
+          } catch (_) {}
+
+          // 2. MCP server count (onlybrains + fallcore)
+          let mcpProcCount = 0;
+          let mcpSets = 0;
+          try {
+            const wmicOut = execSync('wmic process where "name=\'node.exe\'" get processid,commandline /format:list', { encoding: 'utf8', stdio: ['ignore','pipe','ignore'] });
+            const blocks = wmicOut.split(/\r?\n\r?\n/);
+            for (const b of blocks) {
+              if (/onlybrains-mcp|fallcore-mcp/i.test(b)) mcpProcCount++;
+            }
+            // approx: each session has 4 MCP-related procs (2 npx wrappers + 2 actual servers)
+            mcpSets = Math.round(mcpProcCount / 4);
+          } catch (_) {}
+
+          // 3. Playwright chromium count
+          let playwrightCount = 0;
+          try {
+            const wmicOut = execSync('wmic process where "name=\'chrome.exe\'" get processid,executablepath /format:list', { encoding: 'utf8', stdio: ['ignore','pipe','ignore'] });
+            const blocks = wmicOut.split(/\r?\n\r?\n/);
+            for (const b of blocks) {
+              if (/ms-playwright/i.test(b)) playwrightCount++;
+            }
+          } catch (_) {}
+
+          // 4. Port 1618 listening
+          let port1618Listening = false;
+          try {
+            const netOut = execSync('netstat -ano', { encoding: 'utf8', stdio: ['ignore','pipe','ignore'] });
+            port1618Listening = /:1618\s+0\.0\.0\.0:0\s+LISTENING/.test(netOut) || /:1618.*LISTENING/.test(netOut);
+          } catch (_) {}
+
+          // 5. Zombie temp profile dirs
+          let zombieDirs = 0;
+          const claudeTempPath = home ? path.join(home, 'Temp', 'claude') : '';
+          if (claudeTempPath && fs.existsSync(claudeTempPath)) {
+            try {
+              for (const e of fs.readdirSync(claudeTempPath)) {
+                if (/^playwright_chromium/i.test(e)) zombieDirs++;
+              }
+            } catch (_) {}
+          }
+
+          // ─── Classify ───
+          const status = (kind, value) => {
+            if (kind === 'agentServer') return value === 0 ? 'ok' : (value === 1 ? 'amber' : 'red');
+            if (kind === 'mcpSets')     return value <= 1 ? 'ok' : 'amber';
+            if (kind === 'playwright')  return value === 0 ? 'ok' : 'amber';
+            if (kind === 'port1618')    return value ? 'amber' : 'ok';
+            if (kind === 'zombies')     return value === 0 ? 'ok' : 'amber';
+            return 'ok';
+          };
+          const flag = s => s === 'red' ? '✗' : (s === 'amber' ? '⚠' : '✓');
+
+          const sAgent = status('agentServer', agentServerCount);
+          const sMcp = status('mcpSets', mcpSets);
+          const sPlay = status('playwright', playwrightCount);
+          const sPort = status('port1618', port1618Listening);
+          const sZomb = status('zombies', zombieDirs);
+
+          const reds = [sAgent, sMcp, sPlay, sPort, sZomb].filter(x => x === 'red').length;
+          const ambers = [sAgent, sMcp, sPlay, sPort, sZomb].filter(x => x === 'amber').length;
+          const overall = reds > 0 ? 'RED' : (ambers > 0 ? 'AMBER' : 'GREEN');
+
+          // ─── Build report ───
+          let report = '◊ SESSION AUDIT · estate operational hygiene · OP5 doctrine\n';
+          report += '  overall: ' + overall + ' · reds=' + reds + ' · ambers=' + ambers + '\n\n';
+          report += '  ' + flag(sAgent) + ' agent.mjs --server         ' + agentServerCount + ' running';
+          if (agentServerCount === 0) report += ' · clean\n';
+          else if (agentServerCount === 1) report += ' · check PowerShell profile for autostart\n';
+          else report += ' · MULTIPLE INSTANCES · only one needed\n';
+
+          report += '  ' + flag(sMcp) + ' MCP processes              ' + mcpProcCount + ' procs (~' + mcpSets + ' Claude Code session' + (mcpSets === 1 ? '' : 's') + ')';
+          if (mcpSets <= 1) report += ' · clean\n';
+          else report += ' · ' + (mcpSets - 1) + ' ORPHAN SET' + (mcpSets > 2 ? 'S' : '') + ' from prior sessions · close extra Claude Code via /exit\n';
+
+          report += '  ' + flag(sPlay) + ' Playwright chromium        ' + playwrightCount + ' alive';
+          if (playwrightCount === 0) report += ' · clean\n';
+          else report += ' · kill if not in active use · they leak profile locks\n';
+
+          report += '  ' + flag(sPort) + ' Port :1618 (si-didy cockpit) ' + (port1618Listening ? 'BOUND' : 'free') + '\n';
+
+          report += '  ' + flag(sZomb) + ' Zombie playwright temp dirs ' + zombieDirs + ' in %LOCALAPPDATA%\\Temp\\claude\\';
+          if (zombieDirs > 0) report += ' · ~' + (zombieDirs * 50) + 'MB to free\n';
+          else report += '\n';
+
+          // ─── Actions ───
+          report += '\n  RECOMMENDED ACTIONS:\n';
+          if (overall === 'GREEN') {
+            report += '    · none · estate is in steady state\n';
+          } else {
+            if (agentServerCount > 1) report += '    · kill duplicate agent.mjs --server instances · taskkill /F /PID <pid>\n';
+            if (mcpSets > 1) report += '    · close orphan Claude Code sessions (use /exit) · then scan again\n';
+            if (playwrightCount > 0) report += '    · kill playwright chromium if no active build · taskkill /F /IM chrome.exe /FI "MODULES eq playwright"\n';
+            if (zombieDirs > 0) report += '    · delete zombie temp dirs · Remove-Item "$env:LOCALAPPDATA\\Temp\\claude\\playwright_chromium*" -Recurse -Force\n';
+            if (port1618Listening && agentServerCount === 0) report += '    · :1618 bound but no agent.mjs --server · another process owns the port\n';
+          }
+
+          report += '\n  doctrine: OP1 env-first · OP2 name-before-kill · OP3 improvisation=stop-the-line\n';
+          report += '            OP4 30-min env time-box · OP5 /exit always · session_audit before heavy builds';
+
+          if (verbose && agentServerCount > 0) {
+            report += '\n\n  agent.mjs --server details:\n';
+            for (const a of agentServerDetails) report += '    PID ' + a.pid + ' · ' + a.cmd.slice(0, 100) + '\n';
+          }
+
+          // emit to fall-signal
+          try {
+            if (typeof broadcast === 'function') broadcast({
+              type: 'fall_signal', source: 'si-didy', kind: 'session_audit_run',
+              payload: { overall, reds, ambers, agentServerCount, mcpSets, playwrightCount, port1618: port1618Listening, zombieDirs },
+              ts: new Date().toISOString()
+            });
+          } catch (_) {}
+
+          return { content: [{ type: 'text', text: report }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: 'session_audit error: ' + e.message }] };
+        }
+      }
+    ),
+    // ═══════════════════════════════════════════════════════════════
     // ◊ CASSANDRA · vetter_digest · fall-vetter v2.0 daily summary
     // ═══════════════════════════════════════════════════════════════
     tool('vetter_digest',
@@ -2435,6 +2587,8 @@ const allowedTools = [
   // ◊ Cognitive Substrate verbs · the agentic-corp mouth
   'mcp__estate__research', 'mcp__estate__verify', 'mcp__estate__substrate_build',
   'mcp__estate__konomi_mint', 'mcp__estate__konomi_meter',
+  // ◊ Operational hygiene · OP5 doctrine · session-leak diagnostic
+  'mcp__estate__session_audit',
   // ◊ Cassandra · fall-vetter v2.0 daily digest
   'mcp__estate__vetter_digest',
   // ◊ LinkedIn orchestrator · pack-driven · pause-before-Post
