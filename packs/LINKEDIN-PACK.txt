@@ -553,5 +553,84 @@ CAVEATS · NEVER DROP THESE IN A POST
   until konomi_meter has a month of data + a verified anchor on BSV.
 
 ═══════════════════════════════════════════════════════════════════════
+  SECTION OPS · THE PROVEN B5.2 FIRE FLOW · 2026-06-03
+═══════════════════════════════════════════════════════════════════════
+
+After 5 patches across two days, B5.2 posted live via this exact flow.
+For B5.3 (and every B5.x after), this is the one-paste fire command:
+
+  PASTE INTO POWERSHELL:
+  ──────────────────────────────────────────────────────────────────
+  cd C:\Users\sjgan\Downloads\si-didy-agent ; node agent.mjs --tool linkedin_drop --frame B5.X --carousel_pdf_path ./bX-X-carousel.pdf
+  ──────────────────────────────────────────────────────────────────
+
+  Replace B5.X and bX-X with the actual frame and carousel filename.
+
+PRE-FLIGHT (run once before fire):
+
+  1. session_audit (estate hygiene check):
+       node agent.mjs --tool session_audit
+     Want GREEN. If amber/red, follow recommended actions.
+
+  2. Confirm carousel PDF exists at the path you'll pass.
+
+  3. Close any running Chromium / agent.mjs --server.
+
+EXPECTED FLOW (60-90 seconds):
+
+  0:00  agent.mjs loads · tool mode · linkedin_drop invoked
+  0:05  Playwright Chromium opens (persistent profile · already logged in)
+  0:10  Navigates to linkedin.com/feed/
+  0:12  Closes any stray about:blank tabs (max 1-2 expected)
+  0:14  Clicks "Start a post" button
+  0:16  Waits for VISIBLE composer (filters aria-hidden ghosts)
+  0:18  Types body char-by-char (delay 5ms · defeats anti-paste)
+  0:32  Verifies body landed in composer (throws if <85% of expected)
+  0:35  Attempts document/photo attach (silent fail if it misses)
+  0:38  Waits 3s for preview
+  0:40  PAUSE · "◊ ready to Post · approve? [yes/no] > "
+  ←     YOUR GATE · type yes or no
+  0:45  Clicks Post · screenshots success · logs to memory
+
+KNOWN ISSUES (handle in advance):
+
+  ⚠ DOC ATTACH SILENT FAIL · setInputFiles for carousel PDF times out
+    silently in try/catch · post goes through text-only
+    - Workaround: edit the post after publish (remove "Carousel ↓" line)
+      OR add carousel as pinned comment manually
+    - Fix needed: more robust document button selector + verify attach
+      succeeded before approve gate · TBD before B5.4
+
+  ⚠ AUTO LINK PREVIEW · LinkedIn auto-generates link preview cards from
+    body content mentioning brands or URLs (e.g. "Monday.com" became
+    a Monday.com preview card for B5.2)
+    - Not a bug · expected LinkedIn behaviour
+    - To avoid: rewrite the mention OR accept the preview as part of
+      the post visual
+
+  ⚠ DEDUP CAN BLOCK RE-FIRES · if a previous attempt logged
+    status=posted (even if it didn't actually post), dedup blocks
+    the next try
+    - Fix: check memory/li-posts.jsonl and memory/li-actions.jsonl
+      for today's frame entries · remove false positives before re-fire
+    - Or pass --memory_scope a-different-name to bypass
+
+FIXED BUGS (DON'T let them regress):
+
+  ✓ commit 65bc29a · composer selector scoped to dialog
+                      (was hitting search bar contenteditable page-wide)
+  ✓ commit 6a32cc6 · zod defaults re-applied in --tool mode
+                      (was writing to memory/undefined.jsonl)
+  ✓ commit dcb2f52 · dialog selector filters aria-hidden ghosts
+                      (vjs-error-display was blocking the gate)
+
+POST-FIRE CHECKLIST:
+
+  1. Eyeball your feed at linkedin.com/feed/ · confirm post is there
+  2. If carousel missing · edit post OR add as pinned comment
+  3. Add the SECTION J pinned comment from this pack (frame-specific)
+  4. Mark B5.X status=fired in memory/li-schedule.jsonl (auto by verb)
+
+═══════════════════════════════════════════════════════════════════════
   END OF PACK · ◊·κ=1
 ═══════════════════════════════════════════════════════════════════════
