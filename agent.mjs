@@ -1052,8 +1052,11 @@ const estateMcp = createSdkMcpServer({
         dry_run: z.boolean().default(false).describe('If true: draft only, do not open the browser'),
         memory_scope: z.string().default('li-posts').describe('Dedup scope') },
       async ({ frame, body_override, carousel_pdf_path, screenshot_dir, dry_run, memory_scope }) => {
+        // ◊ guard · --tool mode skips zod default · re-apply
+        if (!memory_scope) memory_scope = 'li-posts';
+        if (dry_run === undefined) dry_run = false;
         const today = new Date().toISOString().slice(0,10);
-        console.log(`  ◊· linkedin_drop frame=${frame} dry_run=${dry_run}`);
+        console.log(`  ◊· linkedin_drop frame=${frame} dry_run=${dry_run} scope=${memory_scope}`);
 
         // 1. dedup · don't post the same frame twice in one day
         try {
