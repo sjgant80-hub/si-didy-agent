@@ -1,0 +1,213 @@
+═══════════════════════════════════════════════════════════════════════
+  GROUNDLEVEL · LAUNCH POST · "for the people not the few" · ◊·κ=φ⁴
+  prime 613 · sovereign legal toolkit
+  live: https://sjgant80-hub.github.io/groundlevel
+  repo: https://github.com/sjgant80-hub/groundlevel
+═══════════════════════════════════════════════════════════════════════
+
+POST 1 · THE SHIP (the philosophical hammer · day 1)
+────────────────────────────────────────────────────────
+audience: anyone who has been stiffed by a platform · landlord · employer · corporation
+hook: £0 vs £5,000 · same outcome · different access
+carousel: optional · screenshot of any module's "Step 3 · Letter Before Action" page
+pinned comment: link to docs + the open-source repo
+
+▼ COPY ▼
+The law exists to protect everyone.
+
+Lawyers exist to charge for access to the law.
+
+The law is public. The templates are simple.
+
+The jargon is the paywall.
+
+So I removed the paywall.
+
+I shipped GroundLevel today.
+
+One HTML file. 12 legal modules. 60 letter templates. Works offline. Your case stays on your device.
+
+What it covers:
+
+· unpaid work (DataAnnotation, Upwork, any platform that owes you)
+· frozen accounts (PayPal, Stripe, Wise holding your money)
+· employment disputes (dismissal, unpaid wages, grievance)
+· landlord disputes (deposit, disrepair, illegal eviction)
+· consumer rights (faulty goods, subscription traps, Section 75)
+· GDPR data access (force a company to disclose or delete)
+· small claims (any debt, any size)
+· international freelancer (cross-border platform issues)
+· regulator complaints (UK + US + EU · one-click factory)
+· subscription traps (unfair terms, dark-pattern auto-renewal)
+· cross-border disputes (you here, platform there)
+· public accountability (when private remedies have failed)
+
+Every template has the actual law cited. Real Act. Real section. Plain English explanation of what it does before the legal jargon.
+
+Every evidence item gets SHA-256 hashed and chained. Court-admissible.
+
+Every deadline gets tracked the moment you mark a letter sent.
+
+The asymmetry reversal:
+
+· corporation's lawyer: £500/hour
+· GroundLevel: £0/hour
+· every hour of dispute drains them, costs you nothing
+· time is on your side · you just need the right letter
+
+I have been on both sides of this. I have paid £500 for the consultation that just told me "send a Letter Before Action." I have also written enough of them now to know they are a template with five variables.
+
+You don't need to pay for the template. You need to know it's a template.
+
+Now you know. Now it's free.
+
+Sovereign by design. Open source. MIT.
+
+https://sjgant80-hub.github.io/groundlevel
+
+For the people not the few.
+
+◊·κ=φ⁴
+▲ END COPY ▲
+
+PINNED COMMENT (drop within 30 seconds of posting):
+▼ COMMENT ▼
+The full repo (fork it, modify it, self-host it):
+github.com/sjgant80-hub/groundlevel
+
+What's already inside:
+· 9 LBA / demand letter variants (UK 7-day · 14-day · 30-day Protocol · US demand · statutory demand · late-payment interest)
+· every UK GDPR template (DSAR · erasure · portability · ICO complaint · PECR opt-out)
+· every UK housing template (deposit return · disrepair · illegal eviction · S21 challenge · rent reduction)
+· every UK employment template (grievance · appeal · ACAS EC · ET1 · whistleblowing · flexible working)
+· UK consumer rights · Section 75 · chargeback · subscription cancellation
+· US BBB · FTC · CFPB · State AG complaint factories
+· UK FCA · FOS · Ofcom · ICO · Trading Standards
+· court process: MCO guide · witness statement · warrant of control · attachment of earnings · third-party debt order
+
+Print-to-PDF every letter cleanly. Court-formatted.
+
+If you spot a template missing or a citation that needs updating: open an issue. I commit on Sundays.
+
+◊
+▲ END COMMENT ▲
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 2 · THE SPECIFIC STORY (the proof · day 4)
+────────────────────────────────────────────────────────
+audience: gig workers · platform workers · stiffed freelancers
+hook: a specific path · DataAnnotation style platform
+pinned comment: the live URL + the Unpaid Work module deep-link
+
+▼ COPY ▼
+A specific story.
+
+You signed up to a labelling platform. You did 47 hours of work. They emailed: "great work, approved." Now their payment system says: "balance £0." Support is a chatbot loop.
+
+You spend £500 on a lawyer who tells you: "send a Letter Before Action."
+
+That's it. That's what £500 buys.
+
+The Letter Before Action is a public template. It has 5 variables: who owes, how much, for what, deadline, consequences. The Civil Procedure Rules Pre-Action Protocol publishes the format. The court expects to see it before they'll hear you.
+
+It is not £500 of work. It is a form.
+
+The lawyer's £500 is for KNOWING it's a form.
+
+I built the form into GroundLevel. With:
+
+· the actual CPR-compliant text
+· the variables filled from your case data
+· the 14-day deadline auto-tracked
+· the BBB / FTC / Attorney General complaints generated in parallel
+· the County Court Money Claim Online walk-through next
+· the warrant of control / attachment of earnings templates at the end
+
+Six steps. £35-80 in court fees (recoverable from them). 80% settle after the LBA.
+
+If you have been stiffed by a platform and your "ask the AI" attempts have failed: open the Unpaid Work module. Walk the 6 steps. You'll be at "served the LBA" within an hour. They have 14 days to pay or settle. Most do.
+
+https://sjgant80-hub.github.io/groundlevel
+
+The legal process exists. The lawyers gatekeep it. The templates are public.
+
+◊
+▲ END COPY ▲
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 3 · FOR BUILDERS (the architecture · day 8)
+────────────────────────────────────────────────────────
+audience: developers · open-source supporters · privacy-tech crowd
+hook: the architecture choices · what sovereign single-file looks like
+pinned comment: source code link · CLAUDE.md philosophy
+
+▼ COPY ▼
+The technical architecture of GroundLevel · for builders who want to see how a sovereign legal tool can be built.
+
+One HTML file. 187KB. 4717 lines. Vanilla JS.
+
+Why:
+
+· no backend means nothing to subpoena. The bailiff cannot serve papers on a server that does not exist.
+· no account means no honeypot. There is no user database to breach.
+· no CDN dependency in the core shell means the tool works when the platform you're suing is your internet provider.
+· no framework means the file is auditable in a weekend. Read it. Verify it. Fork it.
+
+Three things make it different from any "AI lawyer" product on the market:
+
+1. Storage is IndexedDB in YOUR browser. The case file never traverses a network. There is no privacy policy because there is no data collection.
+
+2. The evidence vault uses SHA-256 prevHash chaining. Every captured item links to the previous via cryptographic hash. Tamper-evident by construction. Same standard digital forensics uses for chain of custody.
+
+3. EU AI Act Article 12 audit shim is baked in. Drop-in script tag from fall-euaiact CDN. Every interaction creates a logged event. Regulator walks in, you open DevTools, you show them the chain.
+
+What it does NOT have:
+
+· no LLM API calls at runtime. The templates are static text with variable substitution. No inference cost. No model dependency. T0 always works.
+· no analytics. No telemetry. No "anonymous usage data."
+· no premium tier. No "Pro" features held back. The whole tool is free.
+
+What it has at its core:
+
+· 60 templates. Every one cites a real Act, real section, real CPR rule.
+· 12 module flows. Each walks you through evidence → letter → regulator → court → enforcement.
+· Plain-English explanation for every legal concept. Before the jargon. Always.
+
+MIT licence. Fork it. Self-host it. White-label it for your bar association if you want — just keep the philosophy in the LICENCE: this is for the people not the few.
+
+Source: github.com/sjgant80-hub/groundlevel
+Live: sjgant80-hub.github.io/groundlevel
+
+◊·κ=φ⁴
+▲ END COPY ▲
+
+═══════════════════════════════════════════════════════════════════════
+  NOTES
+═══════════════════════════════════════════════════════════════════════
+
+· cadence: 3-4 day gap between posts · don't fire all 3 same week
+· optimal fire time: Bangkok 9am OR 8pm (catches Asia morning + US evening)
+· this is the FREE giveaway in the estate · use it to build trust and audience
+· DON'T monetise in posts · the tool is free is the message
+· DO offer 1:1 review / custom drafting / consultation in pinned comments AFTER traction shows
+· track DMs but expect different mix than fall-euaiact (this is altruism-coded · expect more emotion · less commercial)
+
+═══════════════════════════════════════════════════════════════════════
+  STATS TO QUOTE
+═══════════════════════════════════════════════════════════════════════
+
+· 80% of UK small claims settle after the Letter Before Action
+  source: HM Courts & Tribunals Service annual statistics
+· UK GDPR fines: up to £17.5M or 4% of global turnover · ICO routinely fines £100k+
+· Average lawyer hourly rate for civil work in UK: £200-500
+· Average lawyer hourly rate for civil work in US: $200-500
+· Employment Tribunal fees in UK: £0 (abolished July 2017)
+· County Court fees: £35-£455 depending on claim value · recoverable from losing party
+· Tenancy deposit unprotected awards: 1-3x the deposit + return of deposit
+· Section 75 Consumer Credit Act 1974: applies to credit-card purchases £100-£30,000
+
+═══════════════════════════════════════════════════════════════════════
+  END OF PACK · ◊·κ=φ⁴
+═══════════════════════════════════════════════════════════════════════
