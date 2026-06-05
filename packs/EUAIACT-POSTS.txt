@@ -1,0 +1,347 @@
+═══════════════════════════════════════════════════════════════════════
+  EUAIACT POSTS · 7-post LinkedIn launch sequence · ◊·κ=1
+
+  fall-euaiact (prime 607) · the sovereign EU AI Act toolkit
+  live: https://sjgant80-hub.github.io/fall-euaiact/
+  repo: https://github.com/sjgant80-hub/fall-euaiact
+
+  cadence: 3 posts/week · target 9am Bangkok / 3am UK
+  audience rotation:
+    LAYER 1 · compliance officers / DPOs   (the buyer)      posts 1 · 4 · 7
+    LAYER 2 · CTOs / devs / builders        (the influencer) posts 3 · 6
+    LAYER 3 · ecosystem (legal-tech · audit) (the partner)   posts 2 · 5
+
+  carousel folder for visual posts: C:\Users\sjgan\Downloads\euaiact-carousel\
+═══════════════════════════════════════════════════════════════════════
+
+POST 1 · SHIP POST · day 1 (STATUS: posted 2025-06-05)
+────────────────────────────────────────────────────────
+audience: compliance officers + builders (broad launch)
+carousel: 6 shots from euaiact-carousel/ (01-06)
+pinned comment: SDK link
+
+▼ COPY ▼
+I just shipped a sovereign EU AI Act compliance toolkit.
+
+Runs in your browser. Your data never leaves your device. MIT open source.
+
+The whole stack:
+
+· risk classifier · paste a system description → tier + article cites
+· Annex IV documentation generator · 14 fields → downloadable markdown
+· Article 12 audit chain · SHA-256 prevHash · cryptographically tamper-evident
+· Article 50 transparency badges · 5 categories
+· BYOK LLM deep classifier · Claude · GPT · Gemini
+· 6 languages: EN · DE · FR · ES · NL · PL
+· npm-publishable SDK · OpenAPI spec · Cloudflare Worker reference
+
+Live demo: sjgant80-hub.github.io/fall-euaiact
+
+Most compliance tools ship your AI system description to a US cloud · then ask you to comply with European data sovereignty rules.
+
+That's the joke.
+
+This one ships nothing. The classifier runs in your browser. The audit chain lives in IndexedDB on your device. Want a hosted REST API? Deploy the Cloudflare Worker yourself · sovereign by choice.
+
+For the next 50 DMs · I'll do a 15-min walkthrough of your AI system through the high-risk classifier. Free. No pitch attached.
+
+Aug 2 2026 is 14 months away. The Act doesn't care if your compliance stack is convenient. It cares that it's compliant.
+
+The sovereign one already is.
+
+Carousel ↓
+
+◊
+▲ END COPY ▲
+
+PINNED COMMENT (drop right after posting):
+▼ COMMENT ▼
+For the npm install crowd:
+github.com/sjgant80-hub/fall-euaiact/tree/main/sdk
+4 functions · zero deps · MIT · OpenAPI 3.1 spec included.
+▲ END COMMENT ▲
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 2 · BOREDOM IS THE MOAT · day 3
+────────────────────────────────────────────────────────
+audience: LAYER 3 · audit firms · legal-tech buyers · investors
+hook: $10B precedent
+carousel: optional · screenshot of OneTrust + screenshot of fall-euaiact homepage side-by-side
+pinned comment: link to the boring-mode toggle (when shipped)
+
+▼ COPY ▼
+OneTrust is worth $10 billion.
+
+Their entire product strategy in 2018 was: be the most boring option in the room when GDPR enforcement started biting.
+
+Spreadsheet aesthetic. Greyscale UI. Founder never famous. Just shipped checklists.
+
+Compliance officers chose them precisely because they were forgettable. Nothing on the slide for procurement to argue about.
+
+The same arc is starting now with EU AI Act.
+
+Aug 2 2026: high-risk obligations begin. Aug 2 2027: full force. Member-state authorities are already publishing enforcement priorities.
+
+Three things differ this time:
+
+· data sovereignty IS the buyer's first question · "where does the AI system description go when I paste it into your tool?"
+· open source moves faster than VC-funded SaaS this cycle · the buyer can verify the code
+· enforcement is per-system, not per-org · which means SMBs are exposed too · which means volume
+
+I shipped fall-euaiact this week. Sovereign. MIT. Runs in your browser. Article 12 audit chain baked in. 6 languages.
+
+It's boring on purpose.
+
+Demo: sjgant80-hub.github.io/fall-euaiact
+
+Compliance won by being boring last cycle. Sovereign compliance wins by being boring again.
+
+The forgettable tool is the one that gets bought.
+
+◊
+▲ END COPY ▲
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 3 · FOR THE BUILDERS · day 5
+────────────────────────────────────────────────────────
+audience: LAYER 2 · CTOs · indie devs · AI-startup founders
+hook: code-first
+carousel: optional · 3 shots of code in IDE + verifyChain() output
+
+▼ COPY ▼
+If you ship AI in the EU, you're now a regulated entity.
+
+Whether your CTO has read the Act or not.
+
+Here's a single import that gives any AI tool Article-12-compliant audit logging:
+
+import { createAuditShim } from 'fall-euaiact';
+
+const audit = createAuditShim({ sink: 'indexeddb' });
+
+await audit.log({
+  type: 'inference',
+  input: userQuery,
+  output: aiResponse,
+  operator: userId
+});
+
+// Article 26 6-month retention export
+const allLogs = await audit.exportAll();
+
+// tamper-evident proof when regulator knocks
+const { valid } = await audit.verifyChain();
+
+SHA-256 prevHash chain. Every entry cryptographically linked to the previous. Tamper-detection in 1 function call.
+
+Browser: stores in IndexedDB. Node: in memory + flush. Cloudflare Workers: same. Zero dependencies.
+
+Full SDK: github.com/sjgant80-hub/fall-euaiact/tree/main/sdk
+npm: coming this week
+MIT: forever
+
+The Act doesn't say "use SHA-256." It says "automatic record-keeping" (Article 12). If you build it on cryptographic primitives now, you skip the migration when the standards body decides what "tamper-evident" actually means.
+
+Build it once. Compliant by construction.
+
+◊
+▲ END COPY ▲
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 4 · SOVEREIGNTY PARADOX · day 8
+────────────────────────────────────────────────────────
+audience: LAYER 1 · DPOs · data-sovereignty advocates · EU policy
+hook: hard contrarian
+carousel: optional · single shot of dev-tools network tab showing 0 outbound calls
+
+▼ COPY ▼
+Your EU AI Act compliance tool shipped your AI system description to a US server in California.
+
+Whose data sovereignty rules are you complying with?
+
+This isn't theoretical. Schrems II is still law. Standard Contractual Clauses are under fresh challenge. The Irish DPC keeps fining Meta for the same architecture every year.
+
+If your compliance tool is the breach, you don't have a compliance tool.
+
+I built fall-euaiact for one reason: every other tool in this category fails the test it's supposed to enforce.
+
+Sovereign. In-browser. Open source. Audit chain in IndexedDB on your device. No telemetry. No cloud. No middleman.
+
+Demo: sjgant80-hub.github.io/fall-euaiact
+
+Run it. Watch the network tab. Zero outbound calls during classification.
+
+That's not a feature. That's the only valid architecture for this category.
+
+◊
+▲ END COPY ▲
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 5 · WALKTHROUGH · day 10
+────────────────────────────────────────────────────────
+audience: LAYER 3 · HR tech · recruitment platforms · use-case-specific buyers
+hook: real-world case study
+carousel: 8 shots step-by-step (re-capture with the walkthrough script)
+
+▼ COPY ▼
+I ran a real hiring AI through my own toolkit. Here's what happened:
+
+System: "AI scores software-engineer CVs against role descriptions, ranks them 0-100, rejects bottom 50% automatically without human review."
+
+Classifier verdict (T0 · offline · 2 seconds):
+HIGH RISK · Annex III(4) · employment screening
+
+Articles to read: 6, 9, 10, 11, 12, 13, 14, 15, 26.
+
+Biggest gap surfaced: Article 14 (human oversight) — the "rejects automatically without human review" line is the giveaway. That auto-decision pattern fails the Act's most prominent requirement.
+
+T2 deep classifier (BYOK Claude · 6 seconds):
+"HIGH RISK · confidence 92%. The automatic-rejection threshold is the determinant. Add a human-review gate above 30 (instead of 50) to comply with Article 14."
+
+I clicked "Generate Annex IV" and 14 prompts appeared. Filled the form. 20 seconds later: 6KB Markdown document with EU Declaration of Conformity stub. Downloaded.
+
+Total time: 4 minutes from "paste description" to "compliance documentation draft on disk."
+
+Six months ago this would have been a £5k consulting engagement. Today it's a single HTML file on a free GitHub Pages URL.
+
+The Act is real. The tooling shouldn't be expensive.
+
+Demo: sjgant80-hub.github.io/fall-euaiact
+
+Carousel ↓
+
+◊
+▲ END COPY ▲
+
+CAROUSEL NOTES:
+  step 1 · paste description into classifier
+  step 2 · T0 verdict
+  step 3 · expand Article 14 in navigator
+  step 4 · run T2 deep classify (with confidence 92%)
+  step 5 · open Annex IV form
+  step 6 · form filled with sample data
+  step 7 · Generate Markdown clicked
+  step 8 · downloaded .md preview in editor
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 6 · AUDIT CHAIN · day 12
+────────────────────────────────────────────────────────
+audience: LAYER 2 · security engineers · audit-curious devs · CISOs
+hook: technical insight about Article 12 interpretation
+carousel: optional · single shot of verifyChain() output + Git-like diagram
+
+▼ COPY ▼
+Article 12 of the EU AI Act says: high-risk AI systems must keep "automatic logs" over their lifetime.
+
+Most teams interpret this as: write to a database. Done.
+
+That's a fragile read.
+
+What the regulators will actually want to verify: "show me your logs are tamper-evident."
+
+The cleanest implementation: cryptographic prevHash chain.
+
+Entry N includes:  ts · event_type · payload · prev_hash
+Entry N's hash =   SHA-256(JSON.stringify(Entry N))
+Entry N+1's prev_hash = Entry N's hash
+
+Now any modification to any past entry breaks every subsequent hash. A regulator can clone your log, run a 5-line verification function, and trust the result.
+
+This is how Git works. How Bitcoin works. How basically all auditable systems work.
+
+Article 12 doesn't mandate this. But once one regulator asks for it, it becomes the standard. And the teams who didn't build it have to migrate every past log.
+
+I baked this into fall-euaiact from day 1. The audit shim is 60 lines. Zero dependencies. Works in browser, Node, Cloudflare Workers, Deno.
+
+SDK: github.com/sjgant80-hub/fall-euaiact/blob/main/sdk/audit.js
+
+Audit chains are mostly a security concept right now. They're about to become a compliance concept.
+
+Be ready before the standards body catches up.
+
+◊
+▲ END COPY ▲
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 7 · COUNTDOWN · day 15
+────────────────────────────────────────────────────────
+audience: LAYER 1 · late movers · urgency-driven · CFOs reading the calendar
+hook: specific countdown
+carousel: optional · the 7-item checklist as text-art image
+
+▼ COPY ▼
+Today's date: [DAY 15 DATE].
+
+EU AI Act high-risk obligations: live 2 August 2026.
+
+That's [calc] months. Not "later this year." Not "eventually."
+
+Most of the conversations I'm having with compliance teams sound like:
+"We're aware of the Act. We have a plan to start planning."
+
+Here's the prep checklist most teams haven't started:
+
+1 · classify every AI system you ship into one of 4 tiers (prohibited / high / limited / minimal)
+2 · for every high-risk system: produce Annex IV technical documentation (14 sections)
+3 · implement Article 12 automatic record-keeping (with retention plan)
+4 · design Article 14 human oversight mechanism (with stop button)
+5 · add Article 50 transparency disclosures for chatbots, deepfakes, emotion recognition
+6 · for deployers: 6-month log retention + worker representative notification for workplace AI
+7 · EU Declaration of Conformity ready to sign
+
+If you start now: this is normal work over [calc] months.
+If you start in 12 months: this is a panic project with a contract addendum penalty.
+
+I shipped a free toolkit that does all 7. Sovereign. MIT.
+
+Demo: sjgant80-hub.github.io/fall-euaiact
+SDK: npm install fall-euaiact (this week)
+REST API: deploy the Cloudflare Worker yourself
+
+For the next 50 DMs: free 15-min compliance triage call. Bring your highest-risk system. I'll walk you through where it lands.
+
+The Act isn't waiting.
+
+◊
+▲ END COPY ▲
+
+NOTES:
+  · update [DAY 15 DATE] and [calc] before posting
+  · if posting day 15 = 2025-06-19 → [calc] = 13.5 months
+  · if posting day 15 = 2025-06-25 → [calc] = 13 months
+
+═══════════════════════════════════════════════════════════════════════
+  PERFORMANCE TARGETS (by day 15)
+═══════════════════════════════════════════════════════════════════════
+
+  · 10+ DMs asking for the walkthrough
+  · 3+ Calendly slots booked
+  · 100+ GitHub stars on sjgant80-hub/fall-euaiact
+  · 1 paying customer at £49 (compliance starter pack)
+  · 1 audit firm reply (even "let's chat next week" counts)
+
+  IF DMs < 3 by day 15 → pivot to LinkedIn Sales Navigator + cold outreach
+  IF DMs > 10 by day 15 → working · plan posts 8-15 same cadence
+
+═══════════════════════════════════════════════════════════════════════
+  AFTER DAY 15 · POSTS 8-15 PROVISIONAL FRAMES (sketch)
+═══════════════════════════════════════════════════════════════════════
+
+  POST 8  · "first 100 GitHub stars · what we learned"     (social proof)
+  POST 9  · "I just classified an emotion-recognition system" (specific example)
+  POST 10 · "audit firm partnership · what we agreed"        (proof of distribution)
+  POST 11 · "white-label · the boring-mode skin shipped"     (product update)
+  POST 12 · "the prime-2 question · open issue ❤️"            (open philosophy)
+  POST 13 · "first paying customer · the £49 SKU"            (revenue proof)
+  POST 14 · "EU AI Office published guidance on X"           (timely · reactive)
+  POST 15 · "what 2 months of compliance officers told me"   (synthesis · lessons)
+
+═══════════════════════════════════════════════════════════════════════
+  END OF PACK · ◊·κ=1
+═══════════════════════════════════════════════════════════════════════
