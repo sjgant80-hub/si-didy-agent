@@ -1,0 +1,225 @@
+═══════════════════════════════════════════════════════════════════════
+  EXITENGINE · LAUNCH POST · "here's your company" · ◊·κ=φ⁵
+  prime 617 · sovereign business OS for the laid off
+  live: https://sjgant80-hub.github.io/exitengine
+  repo: https://github.com/sjgant80-hub/exitengine
+═══════════════════════════════════════════════════════════════════════
+
+POST 1 · THE SHIP (the philosophical hammer · day 1)
+────────────────────────────────────────────────────────
+audience: anyone who has just been laid off · or fears being · or knows someone who was
+hook: "you just got laid off · here's your company"
+viral mechanism: every fork is distribution
+pinned comment: tutor link + fork link
+
+▼ COPY ▼
+A friend got laid off Tuesday.
+
+By Friday I'd built the tool I wished I'd had when it happened to me.
+
+It's called ExitEngine. One GitHub repo.
+
+You fork it. Enable GitHub Pages. Open the URL.
+
+Configure once.
+
+You're running a complete independent business in 10 minutes.
+
+What's inside:
+
+· a hub with live revenue / pipeline / overdue
+· a 5-phase AI tutor that walks the journey from "I just lost my job" to "I have a sustainable business" — wound, shadow, rebirth, integration, sovereign
+· a CRM
+· an invoicing tool with multi-currency, VAT, print-to-PDF
+· a one-page portfolio site generator
+· a live analytics dashboard
+· 6 more tools wired in from my open-source estate (scheduler, email lists, forms, proposals, legal templates, social)
+· 5 lessons in plain English: the first 72 hours · how to price yourself · how to find your first client · invoicing and tax · how to grow
+
+Free forever. Open source. MIT. No signup. No tracking. No paywall.
+
+The reason I built this:
+
+The redundancy industry is enormous. CV writers. Coaching programmes. LinkedIn courses. "Career accelerators." All of them sell you the same idea: that being laid off is a problem requiring a paid product.
+
+It is not.
+
+The skills you spent 12 years building did not stay at the office. The relationships are yours. The knowledge is yours. The judgement is yours.
+
+The company was the middleman. The middleman is gone.
+
+You are not unemployed. You are unblocked.
+
+If you know someone in this situation: fork it for them. Send them the URL. Stay with them for 10 minutes while they configure. They will be running a company by the end of the call.
+
+If you are in this situation: it's free. It's yours.
+
+Live: sjgant80-hub.github.io/exitengine
+Fork: github.com/sjgant80-hub/exitengine
+
+◊·κ=φ⁵
+
+For the people, not the few.
+▲ END COPY ▲
+
+PINNED COMMENT (drop within 30 seconds of posting):
+▼ COMMENT ▼
+The tutor (the soul of it):
+sjgant80-hub.github.io/exitengine/tutor.html
+
+Works without an API key (pre-written 5-phase mode). With a key (Anthropic / OpenAI / Gemini), it becomes conversational and adapts to your industry. Your key stays on your device. No proxy. No middleman.
+
+The lessons (5 of them, plain English):
+sjgant80-hub.github.io/exitengine/learn/start.html
+sjgant80-hub.github.io/exitengine/learn/pricing.html
+sjgant80-hub.github.io/exitengine/learn/clients.html
+sjgant80-hub.github.io/exitengine/learn/money.html
+sjgant80-hub.github.io/exitengine/learn/grow.html
+
+Sister tools (already shipped in the estate):
+· GroundLevel · 60 legal templates · github.com/sjgant80-hub/groundlevel
+· fall-euaiact · EU AI Act compliance · github.com/sjgant80-hub/fall-euaiact
+
+If you fork it: I see you in the network graph. Send me a message and I'll do the 10-minute setup call with you free, this week only. ◊
+▲ END COMMENT ▲
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 2 · THE TUTOR (the soul · day 4)
+────────────────────────────────────────────────────────
+audience: people who are skeptical of "AI tools" · people who care about the human side
+hook: the 5-phase Jungian arc
+visual: screenshot of the tutor showing the phase chip + a real first conversation
+
+▼ COPY ▼
+Every "AI productivity tool" built for the laid off gets one thing catastrophically wrong.
+
+They skip phase 1.
+
+They open with "let's set up your CRM." "Pick your niche." "What's your USP?"
+
+This is wrong. Brutally wrong. And it's why none of them stick.
+
+The first phase of post-redundancy life is THE WOUND. The identity you had — employee, member of the team, valued contributor — has died. That is grief. Grief has its own clock and its own work to do.
+
+The tools that rush past phase 1 are taking somebody in shock and trying to sell them a five-tier marketing funnel.
+
+When I built ExitEngine I baked the 5 phases into the tutor:
+
+Phase 1 · the wound. Sit with it. Don't make irreversible decisions this week. Don't post publicly. Don't borrow against your future. Sleep.
+
+Phase 2 · the shadow. The skills belonged to you, not the company. They kept the Salesforce licence. You kept the twelve years.
+
+Phase 3 · the rebirth. Action erodes grief. Set up the CRM. Pick a rate. Send the first outreach.
+
+Phase 4 · the integration. You are not an ex-employee anymore. You're a business owner. The tutor shifts from teaching to coaching.
+
+Phase 5 · the sovereign. You don't need the tutor anymore. Take it offline. Run from USB. The internet is now optional.
+
+Every phase has its own tone. Phase 1 is calm. Phase 3 is energetic. Phase 5 is quiet and complete.
+
+The tutor uses an LLM if you paste a key. Without one, it falls back to pre-written 5-phase mode. Both work. The lesson is the structure, not the model.
+
+Built it because I needed it. Shipping it because someone reading this needs it.
+
+Free. MIT. sjgant80-hub.github.io/exitengine/tutor.html
+
+◊·κ=φ⁵
+▲ END COPY ▲
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 3 · THE BUILDERS (architecture · day 8)
+────────────────────────────────────────────────────────
+audience: developers · open-source supporters · founders who care about UX of grief
+hook: how do you build a sovereign business OS for someone in shock
+
+▼ COPY ▼
+Building ExitEngine taught me something about UX of distress.
+
+When a user is in shock — laid off, evicted, broken up with, bereaved — the design rules invert.
+
+What you normally do:
+
+· clever onboarding with progressive disclosure
+· bright accent colours to hold attention
+· animation to delight
+· dense information architecture
+
+What you should do:
+
+· one decision at a time · everything else hidden
+· calm, low-contrast colour for most of the UI, warm accent only on human moments
+· no animation that competes with internal motion
+· big touch targets · because fingers shake
+
+ExitEngine is built on these inverted rules.
+
+Architecture choices:
+
+1. Single GitHub repo · the fork IS the install. No package manager, no installer, no terminal. You click Fork.
+
+2. One config file drives the whole OS. The user enters their name in one place. Every invoice, every proposal, every email signature updates. Less cognitive load.
+
+3. Vanilla JS · no framework · no build step. Every file is readable in an evening. There is no abstraction layer hiding the work. If anyone forks and wants to modify, they can.
+
+4. BroadcastChannel('fall-signal') for cross-tool integration. No backend. No server. Tools communicate by browser-native message passing. Loose coupling. Removing any tool doesn't break the others.
+
+5. localStorage per-tool keys. State persists, no signup, no sync server. If the user wants to move devices, they download config.json and the data exports as JSON.
+
+6. AI cascade with graceful fallback. With an API key, the tutor is conversational. Without, it's a pre-written 5-phase flow. T0 always works. The model is enhancement, not requirement.
+
+7. EU AI Act Article 12 audit shim baked in. Regulator opens DevTools, sees the SHA-256 chain, satisfied.
+
+8. The download button. The whole repo zips and runs from file://. The internet becomes optional. The sovereignty is real.
+
+The cost of all this: zero monthly fees, zero tracking, zero dependency on any infrastructure I control.
+
+The benefit: when GitHub Pages eventually changes terms (it will), the tool is already on the user's USB stick. When the LLM provider changes pricing (they will), the tutor still works in T0 mode. When I lose interest (I won't), the code is MIT.
+
+If you build for people in distress: invert the rules.
+
+If you build sovereign tools: the simplest architecture wins.
+
+If you know someone laid off: ExitEngine is free, MIT, fork-able. Send them the URL.
+
+sjgant80-hub.github.io/exitengine
+
+◊·κ=φ⁵
+▲ END COPY ▲
+
+═══════════════════════════════════════════════════════════════════════
+  NOTES
+═══════════════════════════════════════════════════════════════════════
+
+· cadence: 3-4 day gap between posts
+· optimal fire time: Bangkok 9am OR 8pm (catches Asia morning + US evening)
+· altruism-coded · expect emotion-heavy DMs · prepare to do a few free setup calls
+· track GitHub fork count · forks are the marketing
+· each fork shows up in GitHub network graph · message them personally
+· DON'T sell anything in posts · "free forever" is the message
+· DO mention paid services (review, custom drafting, coaching) only in pinned comments AFTER 100+ stars
+
+═══════════════════════════════════════════════════════════════════════
+  EXPECTED COMMENTS / DMs (prep responses)
+═══════════════════════════════════════════════════════════════════════
+
+· "I just got laid off, thank you" → reply with empathy, offer the free 10-min setup call
+· "This is incredible, why is it free?" → "Because charging people who just lost income is obscene"
+· "What about taxes in [country]?" → point to the appropriate lesson + recommend a local accountant
+· "Will you build [X feature]?" → "MIT licensed · fork it and PR it back"
+· "I built something similar" → engage genuinely, link to their repo if relevant
+· "This isn't legal/financial advice" → that's correct, it's templates and information, not advice
+
+═══════════════════════════════════════════════════════════════════════
+  AFTER 30 DAYS · POST 4-7 SKETCHES
+═══════════════════════════════════════════════════════════════════════
+
+· POST 4 · "first 100 forks · what people are using it for" (social proof)
+· POST 5 · "the case study" (real person · with permission)
+· POST 6 · "what I'd build next" (roadmap · invite contributors)
+· POST 7 · "the bigger pattern" (sovereign tools for life transitions · grief, eviction, divorce)
+
+═══════════════════════════════════════════════════════════════════════
+  END OF PACK · ◊·κ=φ⁵
+═══════════════════════════════════════════════════════════════════════
