@@ -336,11 +336,66 @@ NOTES:
   POST 8  · "first 100 GitHub stars · what we learned"     (social proof)
   POST 9  · "I just classified an emotion-recognition system" (specific example)
   POST 10 · "audit firm partnership · what we agreed"        (proof of distribution)
-  POST 11 · "white-label · the boring-mode skin shipped"     (product update)
+  POST 11 · "the audit shim ripple · 24 tools Article 12 ready" (estate-as-proof) [DRAFTED BELOW]
   POST 12 · "the prime-2 question · open issue ❤️"            (open philosophy)
   POST 13 · "first paying customer · the £49 SKU"            (revenue proof)
   POST 14 · "EU AI Office published guidance on X"           (timely · reactive)
   POST 15 · "what 2 months of compliance officers told me"   (synthesis · lessons)
+
+═══════════════════════════════════════════════════════════════════════
+  POST 11 · THE AUDIT SHIM RIPPLE · day ~30 · estate-as-proof
+═══════════════════════════════════════════════════════════════════════
+audience: CTOs · compliance officers · ecosystem
+hook: skin in the game · I shipped to my OWN tools first
+optional carousel: before/after screenshots of 4-6 estate tools showing
+  the audit panel · OR just the ripple report log dump
+
+▼ COPY ▼
+I just made 24 of my own sovereign tools EU AI Act Article 12 compliant in one afternoon.
+
+Not by re-writing them. By adding a single 1-line script tag to each.
+
+The shim:
+
+· 6KB · vanilla JS · zero deps
+· SHA-256 prevHash chain · tamper-evident by construction
+· IndexedDB persistent · stays on-device
+· auto-bootstraps to window.__audit
+· emits "euaiact:ready" on the estate mesh so other tools know it's compliant
+
+The integration · per tool:
+
+<script src="https://sjgant80-hub.github.io/fall-euaiact/cdn/audit-shim.js"
+        data-tool="fallcrm" data-tier="limited"></script>
+
+That's it. Article 12 record-keeping satisfied. Auditor walks in · I run window.__audit.verifyChain() · they see the hash chain holds.
+
+Why this matters:
+
+OneTrust ships compliance as a separate product layer you bolt onto your stack. I ship it as a CDN file every tool in the estate inherits at load time. Compliance baked in · not bolted on.
+
+The build-by-construction posture isn't marketing. The same shim that classifies your AI system on sjgant80-hub.github.io/fall-euaiact also lives inside fallcrm · fallflow · gymops · fallforce · fallmind · 19 others.
+
+If the regulator asks where the audit log is · I open DevTools.
+
+I'm not selling you a separate compliance suite. The Act compliance comes with the tools.
+
+For the next 50 DMs: I'll send you the 6-line PR diff that does the same to your tool. Free. No pitch.
+
+Source: github.com/sjgant80-hub/fall-euaiact/tree/main/cdn
+
+◊
+▲ END COPY ▲
+
+PINNED COMMENT (drop right after posting):
+▼ COMMENT ▼
+Full integration guide:
+github.com/sjgant80-hub/fall-euaiact/blob/main/cdn/README.md
+
+And if you want to see the ripple report:
+the script that did all 24 tools in one go:
+github.com/sjgant80-hub/fall-euaiact/blob/main/scripts/ripple-audit-shim.mjs
+▲ END COMMENT ▲
 
 ═══════════════════════════════════════════════════════════════════════
   END OF PACK · ◊·κ=1
