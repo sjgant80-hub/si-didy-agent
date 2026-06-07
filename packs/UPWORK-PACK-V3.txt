@@ -1,0 +1,926 @@
+═══════════════════════════════════════════════════════════════════════
+  UPWORK PACK v3.0 · THE COMPLIANCE LANE PIVOT · ◊·κ=1
+  Simon Gant · post-GroundLevel · post-ExitEngine · post-fall-euaiact
+  built on deep-research workflow wf_4d2046cd-2df
+  · 105 agents · 23 sources · 25 claims verified · 9 confirmed · 16 KILLED
+  · superseding UPWORK-PACK v2 where new research conflicts
+═══════════════════════════════════════════════════════════════════════
+
+HOW v3 RELATES TO v2:
+
+  v2 sections A-L stay valid as the profile rebuild scaffold.
+  v3 adds the STRATEGIC PIVOT discovered in research and rewrites
+  the parts where the pivot changes the answer (headline · category
+  · skills · proposal templates · ramp plan).
+  Read v3 first. Use v2 for the mechanical "fill these fields" parts.
+
+═══════════════════════════════════════════════════════════════════════
+  TL;DR · THE NEW STRATEGIC PICTURE (this is the whole thing)
+═══════════════════════════════════════════════════════════════════════
+
+  1. STOP competing in "AI & Machine Learning" category on Upwork.
+     Reply rate there: 7.21% (UNDER platform mean of 7.45%) despite
+     AI GSV crossing $300M with 50%+ YoY growth.
+     Supply outpaced demand. The AI/ML lane is saturated.
+
+  2. PIVOT into "Information Security & Compliance" category.
+     Reply rate: 11.21% (1.5x platform mean).
+     Your fall-euaiact + audit-shim + GDPR/PDPA/PDPL depth lands
+     exactly here · zero gap between your IP and what's hiring.
+
+  3. SECONDARY lane: "AI Apps & Integration" inside Web/Software
+     Development (NOT AI/ML). Same demand, less bidder competition.
+
+  Source: GigRadar pipeline data Dec 2025 - Feb 2026 · n=133,872
+  proposals · single-vendor but largest available sample.
+  Caveat: agency outbound sample, not solo-specialist sample · the
+  directional pivot holds, the exact percentages should be re-verified.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION M · THE 3 ARCHETYPES (research-anchored · paste-ready)
+═══════════════════════════════════════════════════════════════════════
+
+  These are the THREE projects to lean into. Each one:
+  · maps to your existing IP (delivery time << work scope)
+  · sits in the high-reply-rate lane
+  · packages as a productized service with 3-tier pricing
+  · has a paste-ready proposal template (Section N below)
+
+─────────────────────────────────────────────────────────────────────
+  M1 · "EU AI Act Compliance Pack"   (Information Security & Compliance)
+─────────────────────────────────────────────────────────────────────
+
+  TARGET BUYER
+    · EU-facing AI SaaS founders feeling Aug 2 2026 pressure
+    · indie devs who shipped an AI tool and got an enterprise question
+      asking "are you AI Act compliant"
+    · mid-market SaaS in regulated verticals (legal-tech, fintech,
+      HR-tech) needing a quick audit-posture upgrade
+    · agencies needing a white-label compliance layer for their AI
+      product engagements
+
+  WHAT THEY WANT
+    · Article 12 audit chain wired into their existing tool
+    · Annex IV technical documentation pack (the 14-field doc gen)
+    · Article 50 transparency disclosure copy + UI badges
+    · risk-tier classifier they can run against their system desc
+    · a written compliance posture letter they can attach to deals
+
+  YOUR IP LEVERAGE (this is the asymmetry)
+    · fall-euaiact CDN audit-shim → 1-script-tag install
+    · SDK + Cloudflare Worker reference → drop into their backend
+    · Annex IV doc gen with 14 prefilled fields → copy and adapt
+    · 24 estate tools already audit-shimmed → live referenceable proof
+
+  TIME-TO-DELIVER (real engineering hours · not calendar)
+    Starter (single retrofit):     4-6 hrs over 1 week
+    Standard (multi-component):    10-15 hrs over 2 weeks
+    Premium (full compliance pack): 20-30 hrs over 3-4 weeks
+
+  PRICING ANCHOR · USD · TEST IN FIRST 30 DAYS
+    Starter:   $1,500 - $2,500 fixed
+    Standard:  $4,500 - $6,500 fixed
+    Premium:   $9,500 - $14,500 fixed
+    Hourly equivalent: $200-$400/hr effective (well above $150)
+
+    NOTE: the deep-research refuted the specific marketplace fixed-
+    price ceilings ($5K-$15K range was killed in 3-vote). These
+    anchors are educated test-points, not verified ceilings. Adjust
+    after the first 5 awards based on what actually closes.
+
+  PIPELINE FREQUENCY (your bid concentration target)
+    · 30% of all your bids should go to this archetype
+    · realistic: 2-3 awards/month at standard tier
+    · monthly revenue ceiling at this archetype alone: $12k-$20k
+
+  SEARCH TERMS TO MONITOR (set 4 saved searches)
+    · "EU AI Act compliance"
+    · "AI compliance audit"
+    · "Article 12" OR "Annex IV"
+    · "AI risk assessment" + "EU"
+
+─────────────────────────────────────────────────────────────────────
+  M2 · "Multi-Jurisdiction Privacy Retrofit"  (Info Sec & Compliance)
+─────────────────────────────────────────────────────────────────────
+
+  TARGET BUYER
+    · UK SaaS hitting EU/UK GDPR cleanup before Q4 audit
+    · APAC-facing tools with users in Thailand/Vietnam/Singapore/
+      Indonesia/Philippines/Australia (PDPA / PDPL 2025 / DPA / APP)
+    · acquisition-readiness CTO who needs DPO-equivalent docs for
+      diligence
+    · companies recovering from a near-miss data incident who want
+      tamper-evident logging baked in fast
+
+  WHAT THEY WANT
+    · UK + EU GDPR DSAR + erasure + portability flow templates
+    · Thailand PDPA Section 37 + Vietnam PDPL 2025 jurisdiction notes
+    · DPA template with sub-processor list and cross-border clauses
+    · privacy policy + cookie banner replacement (sovereign-by-design)
+    · audit-shim baked into their app for the access-log record-keeping
+
+  YOUR IP LEVERAGE
+    · GroundLevel 60-template library (DSAR, erasure, portability,
+      ICO, PECR, marketing opt-out · all UK-flavoured but cite-able)
+    · GymOps sales pack already includes a Master Services Agreement,
+      DPA, AUP, Privacy Policy template stack with verified TH+VN
+      jurisdiction-specific notes
+    · audit-shim install pattern (same as M1)
+
+  TIME-TO-DELIVER
+    Starter (single jurisdiction):  3-5 hrs over 1 week
+    Standard (UK + EU):              8-12 hrs over 2 weeks
+    Premium (UK + EU + APAC + retrofit): 15-25 hrs over 3-4 weeks
+
+  PRICING ANCHOR · USD · TEST IN FIRST 30 DAYS
+    Starter:   $900 - $1,800 fixed
+    Standard:  $3,500 - $5,500 fixed
+    Premium:   $7,500 - $12,000 fixed
+
+  PIPELINE FREQUENCY
+    · 25% of bids
+    · 2-3 awards/month at standard tier
+    · monthly ceiling: $7k-$15k
+
+  SEARCH TERMS
+    · "GDPR consultant" + "single jurisdiction" (your starter wedge)
+    · "PDPA Thailand" OR "PDPL Vietnam" OR "PDPA Singapore"
+    · "Privacy Impact Assessment" + "SaaS"
+    · "DPO services" + "fractional"
+
+─────────────────────────────────────────────────────────────────────
+  M3 · "AI Apps & Integration BYOK Build"  (Web/Software Dev category)
+─────────────────────────────────────────────────────────────────────
+
+  CRITICAL: list this under Web/Software Development → AI Apps &
+  Integration. NOT under AI & Machine Learning (which is saturated).
+  Same demand · less bidder competition.
+
+  TARGET BUYER
+    · founders sick of paying Mailchimp/Calendly/Typeform/etc, want
+      a sovereign single-file alternative they own outright
+    · indie hackers wanting to ship privacy-first tool with BYOK
+    · CTOs needing a POC for an AI feature against their existing API
+    · agencies needing a white-label AI assistant to ship to clients
+
+  WHAT THEY WANT
+    · single-file HTML tool that does X (form, scheduler, list, etc)
+    · BYOK LLM integration (Claude/OpenAI/Gemini direct, no proxy)
+    · IndexedDB persistence · no backend required
+    · MIT licensed source they can host on their own GitHub Pages
+    · either a "convert my existing SaaS away" deliverable OR a
+      "build me one from scratch" deliverable
+
+  YOUR IP LEVERAGE
+    · ExitEngine architecture (BroadcastChannel mesh, IndexedDB
+      pattern, BYOK cascade, audit-shim hook)
+    · FallSlot · FallList · FallForm · FallCarousel · etc as
+      direct reference templates
+    · the sovereign single-file pattern is a unique selling angle
+      no other Upwork seller is positioning on
+    · MIT estate at github.com/sjgant80-hub provides instant
+      verifiable proof of capability
+
+  TIME-TO-DELIVER
+    Starter (POC · single feature):     6-10 hrs over 1-2 weeks
+    Standard (multi-feature tool):       15-25 hrs over 3-4 weeks
+    Premium (full estate clone or tool): 30-50 hrs over 4-6 weeks
+
+  PRICING ANCHOR · USD · TEST IN FIRST 30 DAYS
+    Starter:   $1,500 - $3,000 fixed
+    Standard:  $5,000 - $8,500 fixed
+    Premium:   $12,000 - $22,000 fixed
+
+  PIPELINE FREQUENCY
+    · 25% of bids
+    · 1-2 awards/month at standard or premium tier
+    · monthly ceiling: $10k-$25k
+
+  SEARCH TERMS
+    · "BYOK" + "AI integration"
+    · "single file HTML" OR "no backend" OR "offline-first"
+    · "Claude integration" OR "Anthropic API" + "custom"
+    · "privacy-first" + "AI tool"
+
+─────────────────────────────────────────────────────────────────────
+  ARCHETYPE PORTFOLIO TARGET (the bid concentration that hits $20k/mo)
+─────────────────────────────────────────────────────────────────────
+
+  Of every 10 bids you send:
+    3 should be M1 (EU AI Act compliance)
+    3 should be M2 (GDPR/PDPA privacy retrofit)
+    3 should be M3 (BYOK AI build)
+    1 wildcard (a job that doesn't fit but has a high signal · keep
+                10% allocation for opportunistic premium wins)
+
+  At a verified 11.21% reply rate in Info Sec & Compliance and
+  ~7-8% in Web/Software Dev:
+    · 30 bids / week → ~3 replies in Info Sec lanes (M1, M2)
+    · ~2 replies in Web/Dev lane (M3)
+    · ~5 conversations / week → 1-2 awards / week realistic
+    · monthly: 4-8 awards
+    · at $4-6k average across tiers: $16k-$48k/mo gross ceiling
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION N · PROPOSAL TEMPLATES (one per archetype · paste-ready)
+═══════════════════════════════════════════════════════════════════════
+
+  RULES THAT APPLY TO ALL THREE:
+    · first 2 lines decide whether they expand (Upwork shows those
+      first in the proposal preview)
+    · open with their specific tech / problem · NOT with your bio
+    · include 1 verifiable URL (live tool or repo) in the first paragraph
+    · "value drop" before "let's chat" — give them a useful nudge
+      before asking for the call
+    · close with two specific time slots, not "let me know"
+    · keep it under 250 words · longer correlates with lower reply
+      (refuted: the specific reply rates by bid size; verified
+      directionally: shorter proposals beat boilerplate)
+
+  NOTE on lengths/format: the deep-research refuted specific reply-
+  rate claims by bid value and most format-vs-format studies. The
+  rules above are pattern observations from v2 + general SaaS sales
+  practice, not newly-verified research.
+
+─────────────────────────────────────────────────────────────────────
+  TEMPLATE N1 · EU AI Act compliance proposal
+─────────────────────────────────────────────────────────────────────
+
+▼ COPY (fill the [brackets] before sending) ▼
+
+[ONE-LINE OPENER referencing their specific AI system or product]
+
+Article 12 — the "automatic record-keeping" obligation under the EU
+AI Act — is the cheapest part of the Act to satisfy if you build it
+on a SHA-256 prevHash chain. I just open-sourced a CDN-loadable
+audit shim that drops in as one script tag:
+
+  https://sjgant80-hub.github.io/fall-euaiact/cdn/audit-shim.js
+
+I rippled it into 24 of my own sovereign tools last week — single-
+line install, full Article 12 posture without refactor. Code:
+
+  github.com/sjgant80-hub/fall-euaiact
+
+For your [system/product], the realistic compliance-pack scope is:
+
+  · Article 12 audit chain wired into your inference layer
+  · Annex IV technical documentation (14 fields · pre-templated)
+  · Article 50 transparency badge for AI-generated output
+  · risk-tier classifier (Prohibited / High / Limited / Minimal)
+  · written compliance posture letter for your enterprise deals
+
+I can deliver the [Standard / Premium] tier in [2 / 4] weeks fixed
+at $[anchor]. The first audit-shim retrofit is usually live within
+4-6 working hours of kickoff.
+
+Quick question before we go further: are your highest-risk system
+flows currently logged anywhere, or would Article 12 require us to
+add logging from scratch? The answer changes the scope by 30-40%.
+
+Two slots open this week — [Day at time] or [Day at time].
+
+[Your name]
+sjgant80-hub.github.io/fall-euaiact
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────────────────────────────────
+  TEMPLATE N2 · GDPR/PDPA multi-jurisdiction privacy proposal
+─────────────────────────────────────────────────────────────────────
+
+▼ COPY (fill the [brackets]) ▼
+
+[ONE-LINE OPENER referencing their stack / jurisdictions / member countries]
+
+The cleanest GDPR/PDPA retrofit for [their product] usually breaks
+into three parts:
+
+  1. Data subject rights flows (DSAR / erasure / portability)
+  2. Audit-trail logging that satisfies record-keeping obligations
+  3. Updated privacy policy + DPA with sub-processor list and
+     cross-border clauses that hold up under whatever jurisdictions
+     your members actually live in
+
+I have 60 templates published as open source at:
+
+  github.com/sjgant80-hub/groundlevel
+
+— UK Pre-Action Protocol level rigour on each one, with jurisdiction
+notes for Thailand PDPA, Vietnam PDPL 2025, Singapore PDPA, UK +
+EU GDPR. I can adapt them to your stack and your member geography
+inside [1 / 2 / 4] weeks fixed at $[anchor].
+
+The audit-trail piece reuses the same Article 12 shim I shipped
+for EU AI Act work — drops in as a one-script-tag install,
+satisfies most jurisdiction record-keeping clauses at once.
+
+Two questions:
+  · Which countries do your members actually live in today? That
+    determines the SCCs / TIAs we need.
+  · Do you have an existing privacy policy and DPA, or are we
+    starting from scratch?
+
+Two slots open this week — [Day at time] or [Day at time].
+
+[Your name]
+sjgant80-hub.github.io/groundlevel
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────────────────────────────────
+  TEMPLATE N3 · AI Apps & Integration BYOK build proposal
+─────────────────────────────────────────────────────────────────────
+
+▼ COPY (fill the [brackets]) ▼
+
+[ONE-LINE OPENER referencing their specific feature or replaced SaaS]
+
+I build single-file HTML tools your business owns outright. The
+pattern: vanilla JS, no backend, no per-seat fees, BYOK to the LLM
+provider, IndexedDB for persistence, runs from file:// on a USB
+stick if you want.
+
+I shipped ExitEngine last week as the reference architecture for
+this — a complete business OS that forks-and-runs:
+
+  sjgant80-hub.github.io/exitengine
+
+For [your tool / replacement of X], the realistic shape is:
+
+  · single index.html (the deliverable)
+  · BYOK cascade (Claude / OpenAI / Gemini · client-side, no proxy)
+  · IndexedDB persistence
+  · BroadcastChannel mesh for cross-tool wiring
+  · MIT licensed source you host yourself
+  · live preview / iteration loop inside the contract
+
+I can deliver the [Starter POC / Standard tool / Premium full clone]
+in [1-2 / 3-4 / 4-6] weeks fixed at $[anchor]. The starter usually
+runs live in your browser within 24 hours of kickoff so you can
+iterate against real interaction, not specs.
+
+Two questions:
+  · Do you want this to LIVE in the browser only, or do you need
+    server-side fallback for cron / scheduled tasks?
+  · Are you bringing your own API key, or do you want me to wire
+    the cost-routing logic to keep model spend predictable?
+
+Two slots open this week — [Day at time] or [Day at time].
+
+[Your name]
+github.com/sjgant80-hub
+
+◊
+▲ END ▲
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION O · PROFILE REPOSITIONING (rewrite v2 sections A-D)
+═══════════════════════════════════════════════════════════════════════
+
+  This is where v3 overrides v2's A1 headline and B-overview because
+  the strategic pivot to Information Security & Compliance changes
+  the optimal copy.
+
+─────────────────────────────────────────────────────────────────────
+  O1 · CATEGORY CHANGE (do this BEFORE the headline rewrite)
+─────────────────────────────────────────────────────────────────────
+
+  Upwork Profile Settings → Category & Specialization
+
+  PRIMARY CATEGORY:          Information Security & Compliance
+  PRIMARY SPECIALIZATION:    Compliance (Cybersecurity)
+  SECONDARY CATEGORY:        Web, Mobile & Software Dev
+  SECONDARY SPECIALIZATION:  AI Apps & Integration
+
+  Why: GigRadar pipeline data shows Info Sec & Compliance at 11.21%
+  reply rate vs platform mean 7.45% vs AI/ML at 7.21%. Source: their
+  Dec 2025-Feb 2026 sample of 133,872 outbound proposals. Single
+  vendor, but largest available signal · agency-pipeline-biased so
+  treat as directional · the pivot is the right move regardless of
+  exact percentages.
+
+─────────────────────────────────────────────────────────────────────
+  O2 · HEADLINE REWRITE (supersedes v2 A1)
+─────────────────────────────────────────────────────────────────────
+
+▼ COPY ▼
+EU AI Act + GDPR Retrofits · 24 Tools Article-12 Compliant in One Week · Sovereign by Design
+▲ END ▲
+
+  Why: identity hook (EU AI Act + GDPR · the compliance buyer's exact
+  search) · receipt anchor (24 tools rippled this week is current
+  and unique) · differentiator (sovereign by design) · positions
+  in the Info Sec lane explicitly.
+
+  This is 102 characters. Upwork title field allows ~70-150.
+
+─────────────────────────────────────────────────────────────────────
+  O3 · HOURLY RATE (supersedes v2 A2 if you took it)
+─────────────────────────────────────────────────────────────────────
+
+  v2 stretch goal was $95 → $125/hr.
+  Post-fall-euaiact + GroundLevel + ExitEngine receipts:
+  set hourly to $145/hr.
+
+  Stretch goal at end of 90 days (after 3 closes at $145):
+  raise to $175/hr.
+
+  CAVEAT: the deep research REFUTED the specific reply-rate
+  advantage at $250+/hr (3-vote refute). Don't assume a hidden
+  reply-rate cliff above any specific number. Test by adjusting in
+  $20-25 increments after each closed contract.
+
+  PACKAGE PRICING > HOURLY. Most of your delivery should be fixed-
+  fee productized packs (M1/M2/M3 tiers above). Hourly is for
+  exploratory consultation or for retainer extension after a fixed
+  project closes. See O4.
+
+─────────────────────────────────────────────────────────────────────
+  O4 · PRODUCTIZED SERVICES (NEW — wasn't in v2)
+─────────────────────────────────────────────────────────────────────
+
+  Upwork Profile → Projects (paid feature on Top Rated profile)
+
+  Create 6 productized packages (2 per archetype, anchor + premium):
+
+    M1.S · "EU AI Act Article 12 Audit-Chain Retrofit"
+           $2,250 · ~1 week · single-component install + verify
+    M1.P · "Full EU AI Act Compliance Pack"
+           $12,500 · ~4 weeks · audit + Annex IV + Article 50 + classifier
+
+    M2.S · "GDPR DSAR/Erasure Flow + Privacy Policy"
+           $1,500 · ~1 week · UK or EU jurisdiction
+    M2.P · "Multi-Jurisdiction Privacy Retrofit (UK+EU+APAC)"
+           $9,500 · ~3 weeks · full template stack + DPA + audit
+
+    M3.S · "Single-File Sovereign Tool POC"
+           $2,500 · ~1-2 weeks · one feature · BYOK
+    M3.P · "Full Sovereign Tool Build (replaces $X/mo SaaS)"
+           $14,500 · ~4-6 weeks · multi-feature · MIT · with hosting
+
+  Each package becomes a click-to-buy button on your Upwork profile.
+  Reduces proposal-writing fatigue. Many buyers prefer "click and
+  pay" over "send a proposal then negotiate."
+
+─────────────────────────────────────────────────────────────────────
+  O5 · OVERVIEW REWRITE (supersedes v2 Section B)
+─────────────────────────────────────────────────────────────────────
+
+  First 200 chars before "more" — make them count.
+
+▼ COPY ▼
+EU AI Act compliance + GDPR/PDPA retrofits for SaaS that ship to regulated markets. 24 of my own tools went Article-12 compliant in one CDN install · live receipts on GitHub.
+
+For the founders, CTOs, and DPOs reading this: I do compliance work the way Stripe did payments — drop-in shims, not 200-page reports.
+
+What I ship:
+· EU AI Act Article 12 audit chain (SHA-256 prevHash · IndexedDB / Node / Workers)
+· Annex IV technical documentation (14-field template · 6 languages)
+· Article 50 transparency badges (chatbot, AI-generated content, etc.)
+· GDPR + UK GDPR + Thailand PDPA + Vietnam PDPL 2025 + Singapore PDPA jurisdiction notes
+· 60+ legal templates (DSAR · erasure · portability · ICO · PECR · SCCs)
+· BYOK LLM integration when the compliance work needs AI inference
+
+What I don't do:
+· "compliance theatre" (the SOC 2 cosplay that doesn't change your posture)
+· vendor lock-in (everything I ship is MIT · you own it forever)
+· hourly drift on undefined scope (every engagement is a fixed-fee pack)
+
+Recent receipts:
+· fall-euaiact · EU AI Act SDK + audit-shim CDN + Cloudflare Worker · github.com/sjgant80-hub/fall-euaiact
+· GroundLevel · 60 legal templates · 12 modules · sovereign · github.com/sjgant80-hub/groundlevel
+· ExitEngine · single-fork business OS · 5-phase AI tutor · github.com/sjgant80-hub/exitengine
+· 24 of my own estate tools made Article-12 compliant via one-line CDN install last week
+
+How I price:
+· Productized packs ($1,500-$14,500 fixed · see Projects below)
+· Hourly only for exploratory or extension scope (currently $145/hr · was $95)
+· No retainer minimums · no commitment beyond the current contract
+
+How to engage:
+· Click any of the productized packages below
+· Or send a job invite if you want me to scope your specific situation
+· I respond inside 4 working hours (Bangkok timezone primarily ·
+  active 11pm-11am UK · always reachable for enterprise scope)
+
+◊
+▲ END ▲
+
+  NOTE: keep the seal (◊). After 5 contracts it becomes recognisable.
+
+─────────────────────────────────────────────────────────────────────
+  O6 · SKILLS REWRITE (supersedes v2 Section C · use all 20 slots)
+─────────────────────────────────────────────────────────────────────
+
+  Re-prioritize from "AI tools" to "compliance + AI integration".
+  Type each into Skills field, hit Enter.
+
+▼ COPY (one at a time) ▼
+
+  1. GDPR
+  2. EU AI Act Compliance
+  3. Information Security
+  4. Data Protection
+  5. Compliance Consulting
+  6. Privacy Policy
+  7. Audit Trails
+  8. SHA-256 Cryptography
+  9. ISO 27001
+ 10. SOC 2
+ 11. JavaScript
+ 12. HTML
+ 13. AI Integration
+ 14. LLM Integration
+ 15. Anthropic Claude API
+ 16. OpenAI API
+ 17. Single-File Web Apps
+ 18. IndexedDB
+ 19. Cloudflare Workers
+ 20. Open Source MIT Licensing
+
+▲ END ▲
+
+  Why this order: Upwork weights the FIRST skills more in their
+  job-matching algorithm. Compliance up front. AI/LLM in the
+  middle. Open-source/MIT at the end as the differentiator hook.
+
+─────────────────────────────────────────────────────────────────────
+  O7 · PORTFOLIO UPDATE (extend v2 Section D from 7 to 9 entries)
+─────────────────────────────────────────────────────────────────────
+
+  Add TWO new portfolio entries that didn't exist when v2 was written.
+  Put them as Portfolio Entry 1 and 2 (most prominent slot).
+
+  PORTFOLIO 1 · fall-euaiact (EU AI Act compliance toolkit)
+    Title: "EU AI Act Compliance · 24-Tool Estate-Wide Article 12 Retrofit"
+    Screenshot:  the Article 12 audit-chain code block from the live
+                 demo · with the verify-chain "valid:true" output
+                 visible · clean dark mode
+    Cover URL:   https://sjgant80-hub.github.io/fall-euaiact/
+    Body (under 600 chars):
+
+▼ COPY ▼
+Single CDN-loadable audit shim · drop-in as one script tag · gives any
+AI tool Article 12 compliance · SHA-256 prevHash chain · IndexedDB or
+in-memory · works in browser / Node / Workers / Deno.
+
+Rippled into 24 sovereign tools across my estate in one week.
+
+· Full SDK + Cloudflare Worker reference · MIT
+· 6 languages (EN · DE · FR · ES · NL · PL)
+· Annex IV technical-documentation generator (14 fields)
+· Article 50 transparency-badge generator (5 categories)
+
+Built for SaaS founders, indie AI devs, and CTOs who need posture
+ahead of Aug 2 2026 · "boring on purpose" · the OneTrust precedent
+applied to the AI Act cycle.
+▲ END ▲
+
+  PORTFOLIO 2 · GroundLevel (sovereign legal toolkit)
+    Title: "Sovereign Legal Toolkit · 60 Templates · 12 Modules"
+    Screenshot:  the dashboard view with 12 module cards + the
+                 evidence-vault verify-chain badge visible
+    Cover URL:   https://sjgant80-hub.github.io/groundlevel/
+    Body (under 600 chars):
+
+▼ COPY ▼
+Single-file HTML legal toolkit · 60 templates with real Acts cited
+plain English explanations · 12 modules (unpaid work · employment ·
+landlord · GDPR · consumer · small claims · international · etc.)
+· evidence vault with SHA-256 prevHash chain · court-admissible
+chain of custody · PWA installable · works offline.
+
+· UK Pre-Action Protocol compliant LBAs (7-day · 14-day · 30-day)
+· US Demand Letter equivalents
+· UK GDPR / Thailand PDPA / Vietnam PDPL / Singapore PDPA notes
+· Regulator complaint factory (UK · US · EU)
+· Open source MIT.
+▲ END ▲
+
+  Then SHIFT v2 portfolio entries 1-7 to positions 3-9.
+
+─────────────────────────────────────────────────────────────────────
+  O8 · VIDEO INTRO (NEW · v2 didn't address)
+─────────────────────────────────────────────────────────────────────
+
+  60-90 second Loom or Vidyard · embed in profile.
+
+  Script:
+
+▼ COPY (read off camera, casual) ▼
+I'm Simon. I build sovereign software · which means tools your
+business owns outright instead of renting from a SaaS company.
+
+In the last week I shipped three things you can fork right now ·
+all MIT licensed:
+
+· fall-euaiact · which gives any AI tool Article 12 compliance
+  in one CDN script tag. I just rippled it into 24 of my own
+  estate tools.
+
+· GroundLevel · which is 60 letter templates covering unpaid
+  invoices, GDPR, employment, landlord, all of it. Plain English.
+
+· ExitEngine · a fork-and-run business OS for the laid off.
+
+If you're shipping AI into the EU before August 2026 · or you
+need a GDPR retrofit that takes hours not months · or you want a
+sovereign single-file tool instead of another monthly SaaS bill ·
+the Projects below are productized packs you can hire me on
+directly. Or message me with your situation and I'll scope it.
+
+Either way · everything I ship · you own forever.
+▲ END ▲
+
+  CAVEAT: the deep-research could not verify whether video intros
+  specifically convert at higher rates · this is a "test it" not a
+  "verified moves you up the rankings."
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION P · 90-DAY RAMP · $0 → $20k/mo (replaces v2 Section I)
+═══════════════════════════════════════════════════════════════════════
+
+  Adjust expectations: 90 days is the realistic ramp to a STEADY
+  $15k-$20k/mo. First 30 days is the build-receipt phase · most
+  closes are in days 45-90.
+
+─────────────────────────────────────────────────────────────────────
+  WEEK 1 (Days 1-7) · PIVOT + PROFILE REBUILD
+─────────────────────────────────────────────────────────────────────
+
+  Day 1
+    □ Switch primary category to Information Security & Compliance
+    □ Switch primary specialization to Compliance (Cybersecurity)
+    □ Paste new headline (O2)
+    □ Set rate to $145/hr (O3)
+    □ Paste new overview (O5)
+    □ Replace skills with new list (O6)
+    □ Add Portfolio entries 1 and 2 (O7)
+    □ Record + upload video intro (O8)
+    □ Create 6 productized packages (O4)
+
+  Days 2-3
+    □ Set up 4 saved searches per archetype (total 12 saved searches)
+    □ Audit your first 15 candidate jobs across the 3 archetypes
+    □ Send 10 bids using the templates from Section N
+    □ Track in si-didy CRM: which template · which archetype · time
+      sent · reply Y/N
+
+  Days 4-7
+    □ Reply within 4 hours to any inbound message
+    □ Send 5 more bids per day
+    □ End of week 1: ~30 bids out · expect 2-4 replies based on
+      11.21% / 7.21% reply rates · 1-2 calls booked
+
+─────────────────────────────────────────────────────────────────────
+  WEEKS 2-4 (Days 8-30) · FIRST CLOSES + RECEIPT BUILDING
+─────────────────────────────────────────────────────────────────────
+
+  Daily ops:
+    □ 10 bids per weekday (5 morning · 5 afternoon)
+    □ 4 hour SLA on all inbound replies
+    □ Discovery calls run on the standard "what do you have · what
+      do you need · what's the timeline" structure
+    □ Don't drop your tier-pricing in proposal — quote it on the call
+
+  Goal:
+    □ 2-3 contracts closed at Standard tier ($4-6k each)
+    □ Revenue: $8k-$18k closed
+    □ First contract delivered fast (use your IP · don't drift)
+    □ Ask for testimonial AND a public-profile reference on every
+      contract close
+
+  Watch for:
+    □ Top-Rated tier (top 10%) achieved if Job Success Score holds
+      above 90% over 12 closed contracts (slower for you given small
+      n — focus on JSS)
+
+─────────────────────────────────────────────────────────────────────
+  MONTH 2 (Days 31-60) · PRICING LIFT + REFERRAL ENGINE
+─────────────────────────────────────────────────────────────────────
+
+  □ After 2 contracts closed at $4-6k Standard tier · raise Premium
+    package to $14,500 for M1 and $12,000 for M2
+  □ After 3 contracts closed · raise hourly to $175/hr
+  □ Add testimonials to overview (cycle 2 in, 2 out · keep freshest)
+  □ Apply for Top-Rated Plus once at top 3% threshold (the criterion
+    Upwork still publishes; the timeline-to-eligibility was killed
+    in research, so just check eligibility every 2 weeks)
+  □ Volume target: 4-6 contracts closed this month
+  □ Revenue target: $15k-$25k closed
+
+─────────────────────────────────────────────────────────────────────
+  MONTH 3 (Days 61-90) · EXPERT-VETTED APPLICATION + LIFTED LANE
+─────────────────────────────────────────────────────────────────────
+
+  □ Apply for Expert-Vetted once Top-Rated Plus is held for 30+
+    days. Pre-screened by Upwork Talent Managers · visible only to
+    Business Plus + Enterprise/Lifted clients. This is the gate
+    into the higher-budget lane.
+  □ Maintain bid concentration · 30% M1 · 25% M2 · 25% M3 · 10% wild
+  □ Expect 6-10 contracts closed this month
+  □ Revenue target: $18k-$30k closed
+  □ Steady state by end of Month 3: $15k-$20k/mo with 6-10 active
+    contracts, ~70% Standard tier, ~25% Premium tier, ~5% Starter
+
+  CAVEAT: Expert-Vetted timeline claims (9-18 months from baseline)
+  were REFUTED in research. The real timeline is unknown. Apply as
+  soon as eligibility is met. Worst case it's declined and you
+  re-apply quarterly.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION Q · SI-DIDY AUTOPILOT (extends v2 Sections K + L)
+═══════════════════════════════════════════════════════════════════════
+
+  Use existing si-didy verbs to run the daily ops loop. Three new
+  saved-search sets to add to si-didy memory:
+
+  SEARCH SET 1 · INFO SEC & COMPLIANCE
+    Saved search names:
+      up:euaiact_jobs       (search: "EU AI Act" OR "Article 12")
+      up:gdpr_retrofit      (search: "GDPR" + "audit" + "retrofit")
+      up:pdpa_apac          (search: "PDPA" OR "PDPL" + "compliance")
+      up:soc2_iso_quickwin  (search: "SOC 2" + "small business")
+
+  SEARCH SET 2 · WEB/SOFTWARE DEV (M3 lane)
+    Saved search names:
+      up:byok_ai_build      (search: "BYOK" + "AI" OR "Claude" + "build")
+      up:single_file_html   (search: "single file" + "HTML" + "tool")
+      up:offline_first      (search: "offline-first" + "app")
+      up:saas_replacement   (search: "replace" + "SaaS" + "custom")
+
+  SEARCH SET 3 · WILDCARD ($150+/hr signal jobs)
+    up:premium_signal       (filter: ≥$150/hr OR ≥$5,000 fixed budget,
+                             posted in last 24h, fewer than 5 proposals)
+
+  CRON RHYTHM (extends v2 Section K):
+    Per tick · every 90 min · 07-23h Bangkok:
+      1. upwork_find_jobs across all 9 saved searches (cap 8 each)
+      2. score against archetype matcher: M1/M2/M3 + price-floor + JSS
+      3. dedup vs memory scope `up-jobs-v3`
+      4. for top 5 surviving · queue proposal_draft using template
+         from Section N matched to archetype
+      5. Simon reviews + sends · or sets auto-approve threshold
+
+  ONE-SHOT (supersedes v2 Section L):
+
+▼ COPY ▼ (paste into si-didy verbatim)
+
+upwork v3 pivot · run all steps end-to-end:
+
+(1) pack_load 'UPWORK-PACK-V3.txt'
+(2) upwork_open the profile page · confirm logged in as Simon
+(3) profile_update_category to "Information Security & Compliance"
+    + secondary "Web/Software Dev → AI Apps & Integration"
+(4) profile_paste_headline from O2
+(5) profile_set_rate to $145/hr
+(6) profile_paste_overview from O5
+(7) profile_replace_skills with O6 list (20 items in order)
+(8) profile_add_portfolio_entries from O7 (entries 1 and 2)
+(9) profile_record_video_intro from O8 script
+(10) profile_create_projects with 6 productized packages from O4
+(11) saved_searches_create all 9 from Section Q
+(12) memory_init scope 'up-jobs-v3' for dedup
+(13) start cron schedule from Section Q rhythm
+(14) report daily: bids sent / replies received / calls booked /
+     contracts closed → to cockpit chat stream
+
+ALL portfolio screenshot uploads come from C:\Users\sjgan\Downloads\
+upwork-portfolio\. The fall-euaiact URL https://sjgant80-hub.github.
+io/fall-euaiact/ MUST appear in N1 proposals. The GroundLevel URL
+https://sjgant80-hub.github.io/groundlevel/ MUST appear in N2.
+The ExitEngine URL https://sjgant80-hub.github.io/exitengine/ MUST
+appear in N3.
+
+Do not drop the seal · ◊ · in any field.
+
+▲ END ▲
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION R · DON'T-SAY LIST (16 claims REFUTED in adversarial verify)
+═══════════════════════════════════════════════════════════════════════
+
+  These were claimed by various sources and KILLED in 3-vote
+  adversarial verification. Do NOT repeat them in proposals, posts,
+  or sales calls — they will be challenged and you will lose
+  credibility.
+
+  ✗ "Upwork marketplace fixed-price ceiling is $5K-$15K and
+     Enterprise/Lifted runs $50K-$250K"
+       → REFUTED 0-3. Quote your own tier anchors based on your
+         IP value-density · don't claim platform ceilings.
+
+  ✗ "Enterprise/Lifted hourly rates are 2.3-2.4x marketplace"
+       → REFUTED 0-3. Source: gigradar.io/blog/upwork-enterprise
+         Don't claim multiples · quote actual numbers.
+
+  ✗ "Bids at $250+/hr have a 14.71% reply rate"
+       → REFUTED 0-3. Don't assume a hidden rate-tier cliff at any
+         specific number · test in $20-25 increments.
+
+  ✗ "Connects cost $0.15 each, typical bid uses 12 connects, Agency
+     Plus at $19.99/mo includes 100 free connects"
+       → REFUTED 0-3. Verify connect economics in your actual Upwork
+         account · do not quote these numbers.
+
+  ✗ "Information Security & Compliance is a top-5 category by reply
+     rate"
+       → REFUTED 0-3 on the "top-5 ranking" claim specifically · the
+         11.21% reply rate itself is verified 2-1 · use the percentage,
+         skip the ranking.
+
+  ✗ "EU AI Act Compliance Solutions market projected $609.4M → $10.5B
+     by 2035 at 37.3% CAGR" / "EUR 17B-38B by 2030" / "64% compliance
+     software share" / "40% of AI deployers rely on third-party
+     vendors"
+       → ALL REFUTED 0-3. Source: dimensionmarketresearch.com and
+         sqmagazine.co.uk. Don't quote these market-sizing figures
+         · the bottom-up demand is real but the analyst projections
+         don't hold up.
+
+  ✗ "SMEs face EUR 50K-500K EU AI Act compliance costs"
+       → REFUTED 1-2. Don't anchor your fee scale against this.
+
+  ✗ "JSS 95%+ profiles earn 4x as much as standard Top Rated"
+       → REFUTED 0-3. Source: snipework.com Don't use this ratio.
+
+  ✗ "92-profile portfolio-item study · 16 of 20 top-ranked had
+     highlighted portfolio items"
+       → REFUTED 0-3. Don't quote this specific stat.
+
+  ✗ "Talent Cloud requires Top-Rated Plus or Expert-Vetted · realistic
+     timeline to Enterprise invites is 9-18 months"
+       → REFUTED 0-3. The visibility-criteria is correct, the
+         timeline is not. Don't quote 9-18 months.
+
+  ✗ Specific fee tier percentages (5-10% scarce / 10-12% mid /
+     15% commodity)
+       → CONFIRMED 2-1 with caveat: this is GigRadar's observation,
+         not Upwork policy. Use only if you label it as such.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION S · OPEN QUESTIONS (test empirically in first 30 days)
+═══════════════════════════════════════════════════════════════════════
+
+  The research did NOT verify these. Treat as hypotheses to test:
+
+  1. Median time-to-award for $5k+ Info Sec & Compliance projects
+     · estimate: 3-7 days from posting · TEST by tracking your
+     application dates against award dates over the first 30 days.
+
+  2. Loom video vs text-only proposals · the format that converts.
+     · TEST: send 5 with video, 5 without, same week, log replies.
+
+  3. Whether "sovereign / single-file / no-server" framing has
+     buyer pull on Upwork.
+     · TEST: include those keywords in N3 (M3 archetype) proposals
+     for 2 weeks · log reply rate vs proposals without them.
+
+  4. Real first-30-day-window project-value envelopes for the 3
+     archetypes — the refuted market-sizing claims mean we have no
+     anchor. The tier-pricing in Section M is educated guess. TEST
+     by tracking the actual close prices over the first 5 awards
+     in each archetype.
+
+═══════════════════════════════════════════════════════════════════════
+  SECTION T · SOURCE PROVENANCE
+═══════════════════════════════════════════════════════════════════════
+
+  Research: deep-research workflow wf_4d2046cd-2df
+            105 agents · 23 sources · 84 claims extracted · 25
+            verified via 3-vote adversarial · 9 confirmed · 16 KILLED
+
+  Primary sources (verified):
+    · support.upwork.com (fee structure + vetting tier definitions)
+    · upwork.com/enterprise/expert-vetted (top 1% + Talent Manager
+      pre-screen + Business Plus/Enterprise badge visibility)
+    · Upwork Q4 2025 earnings disclosure ($300M AI GSV + 50% YoY)
+
+  Secondary sources (used directionally):
+    · gigradar.io/blog/upwork-market-report-2026 (fee tiers · category
+      reply rates · agency-pipeline-biased)
+    · gigradar.io/blog/upwork-job-categories-agencies (the 11.21% /
+      7.45% / 7.21% reply-rate figures)
+    · tecla.io · checkthat.ai · hireinsouth.com (fee structure cross-
+      verification)
+
+  Blog-quality sources (treated as opinion):
+    · snipework.com / getmany.com / upcat.app / zenlance.net /
+      tymora.io · profile-optimization advice that mostly did NOT
+      survive adversarial verification
+
+  Caveats baked in throughout:
+    · GigRadar pipeline is agency-biased · solo specialist behaviour
+      may differ
+    · May 1 2025 fee restructure is recent · Upwork iterates fees
+      roughly annually · re-verify before 12-month commitments
+    · Lifted (rebranded Enterprise Aug 2025) is still settling ·
+      tier-positioning copy may shift
+
+═══════════════════════════════════════════════════════════════════════
+  END OF v3 · ◊·κ=1 · the pivot is the whole game
+  Info Sec & Compliance not AI/ML · receipts not theatre · MIT not SaaS
+═══════════════════════════════════════════════════════════════════════
