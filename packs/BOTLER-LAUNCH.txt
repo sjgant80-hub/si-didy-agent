@@ -1,0 +1,225 @@
+═══════════════════════════════════════════════════════════════════════
+  BOTLER · LAUNCH POSTS · "I really need a botler" · ◊·κ=φ⁴
+  prime 619 · sovereign personal memory agent
+  live: https://sjgant80-hub.github.io/botler
+  repo: https://github.com/sjgant80-hub/botler
+═══════════════════════════════════════════════════════════════════════
+
+NOTES BEFORE FIRING:
+  · POST 0 = a private DM to Alex (the guy who said the quote)
+    fire FIRST · before any public post · gives them the asset and the
+    invite to feedback before it goes broader
+  · POST 1 = public ship post · the philosophical hammer
+  · POST 2 = the trust model (the deepest cut · day 4)
+  · POST 3 = for builders (architecture · day 8)
+  · all altruism-coded · expect emotional DMs · prep responses
+  · the fork-as-distribution mechanic mirrors ExitEngine
+  · pacing: 3-4 days between public posts · DM Alex same day as ship
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 0 · THE DM TO ALEX (private · LinkedIn or Discord · fire day 1)
+────────────────────────────────────────────────────────
+target: Alex (the source of the seed quote)
+goal: get the asset into their hands first · honour the origin
+hook: "you said it · I built it"
+
+▼ COPY ▼
+Alex · you said: "I really need a botler. I would not trust a secretary. Why don't I have an AI botler by my side?"
+
+I built it.
+
+sjgant80-hub.github.io/botler
+
+Single HTML file. Runs in your browser. WebLLM does the AI locally — your data never leaves the device. OAuth handles Gmail and Calendar with readonly tokens that stay on your machine.
+
+5 commands:
+· botler remember: <anything>
+· botler what did I do in March
+· botler prep me for Thursday meeting with Acme
+· botler find that thing about circular dependencies
+· botler journal  (end of day)
+
+The trust model is the whole thing: if you trust your hard drive with your documents, you can trust botler with your memory. Same storage. Same access. Same security. The "secretary" is a static HTML file on your laptop.
+
+Free forever. Open source. MIT.
+
+If it works for you I'll share it broader. But I wanted you to have it first — the seed was yours.
+
+◊·κ=φ⁴
+▲ END COPY ▲
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 1 · THE SHIP POST (public · day 1 · after Alex sees it)
+────────────────────────────────────────────────────────
+audience: anyone who has ever said "I should remember to..."
+hook: the Alex quote → the build receipt
+length: ~2,400 chars (under 3,000)
+visual: optional · screenshot of the home view with the 5 commands
+
+▼ COPY ▼
+Last week a friend told me he forgot two breakthrough projects from March. "How can I blot such important parts of my life when they happened only two months ago?"
+
+Then he said: "I would not trust a secretary. Why don't I have an AI botler by my side?"
+
+So I built one.
+
+It's called botler. Single HTML file. Runs in your browser.
+
+Five commands:
+
+· botler remember: <anything>
+· botler what did I do in March
+· botler prep me for the Thursday meeting
+· botler find that thing about circular dependencies
+· botler journal  (end of day)
+
+Three things make it different from any "AI memory" product on the market:
+
+1 · The AI runs in your browser. WebLLM downloads a 2GB quantized model once. After that, every inference happens locally. Your prompts and memory never leave the device. No cloud. No API call. No subscription.
+
+2 · OAuth tokens stay client-side. If you connect Gmail (readonly) or Calendar (readonly), the token goes from Google directly to your IndexedDB. I never see it. Nobody else does either.
+
+3 · No backend exists. There is nothing to subpoena. No central database to breach. No company database to get sold when the startup pivots. If GitHub Pages disappeared tomorrow, you'd just open the saved HTML file from your laptop and keep going.
+
+The trust model is the whole thing.
+
+If you trust your hard drive with your documents, you can trust botler with your memory.
+
+Same storage. Same access. Same security.
+
+The "secretary" is a static HTML file on your laptop.
+
+Free forever. Open source. MIT.
+
+sjgant80-hub.github.io/botler
+
+For the people who forgot what they shipped in March.
+
+◊·κ=φ⁴
+▲ END COPY ▲
+
+PINNED COMMENT (drop within 30 seconds):
+▼ COMMENT ▼
+Fork it: github.com/sjgant80-hub/botler
+
+If you want OAuth (Gmail / Calendar):
+1. Fork the repo to your own GitHub
+2. Enable Pages on the fork (Settings → Pages → main branch)
+3. Create your own Google OAuth Client ID at console.cloud.google.com/apis/credentials
+4. Add YOUR Pages URL as the redirect URI
+5. Paste the Client ID into the Integrations tab in your forked botler
+
+Your OAuth setup → your tokens → your data. Zero middleman.
+
+Sister tools in the estate · all MIT · all sovereign:
+· groundlevel (60 legal templates · sovereign legal toolkit)
+· exitengine (single-fork business OS for the laid off)
+· fall-euaiact (EU AI Act Article 12 compliance kit)
+
+If the philosophy resonates · fork it · run it · DM me what you'd want me to build next.
+
+◊
+▲ END COMMENT ▲
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 2 · THE TRUST MODEL (the deepest cut · day 4)
+────────────────────────────────────────────────────────
+audience: privacy-tech crowd · people building agentic systems · anyone burned by SaaS
+hook: the architectural answer to the trust problem
+length: ~2,200 chars
+
+▼ COPY ▼
+"I would not trust that secretary."
+
+That sentence is the most accurate critique of every AI assistant on the market right now.
+
+The standard pattern: you give the assistant access to your memory, your calendar, your email. They process it on their servers. They retain logs "for service improvement." They train future models on your data unless you remember to opt out. They could be subpoenaed. They could be breached. They could pivot. They could be sold. They could lose your CEO.
+
+The trust problem cannot be solved by policy. Every "we don't sell your data" promise relies on a future executive at the company keeping that promise. Every "we encrypt at rest" promise is undone by anyone with database access. Every "we comply with GDPR" is at most a defence against fines, not a defence against access.
+
+The trust problem can be solved by architecture.
+
+Not by adding more rules. By removing the third party from the data path.
+
+That's what botler is. The AI runs in your browser. The memory lives in your IndexedDB. The OAuth tokens are stored on your device. There is no server because there is no need for one.
+
+You don't have to trust me · because nothing reaches me to be trusted with.
+
+If you trust your hard drive with your documents, you can trust botler with your memory.
+
+Same storage. Same access. Same security.
+
+I built this because Alex needed it · and because every "AI productivity tool" that asked for my Gmail was a permission I couldn't justify.
+
+sjgant80-hub.github.io/botler
+
+Open source. MIT. Forkable.
+
+◊·κ=φ⁴ · the trust problem solved by architecture, not policy
+▲ END COPY ▲
+
+═══════════════════════════════════════════════════════════════════════
+
+POST 3 · FOR BUILDERS (architecture · day 8)
+────────────────────────────────────────────────────────
+audience: developers · privacy-tech builders · "I want to build this for X"
+hook: the technical receipt of how a single-file sovereign agent works
+length: ~2,600 chars
+
+▼ COPY ▼
+The architecture of botler · for builders who want to ship sovereign agents.
+
+Single HTML file. ~1,900 lines of vanilla JS. No framework. No build step. No backend.
+
+Five core decisions:
+
+1 · WebLLM via ESM dynamic import.
+The model (Llama-3.2-3B-Instruct-q4f16_1-MLC) loads on first use through `import('https://esm.run/@mlc-ai/web-llm')`. ~2GB downloads once · cached in OPFS · runs offline forever after. No GPU required — WebGPU fallback handles older devices. T0 (grep-only) works without it for users on slow connections.
+
+2 · OAuth 2.0 PKCE flow, client-side.
+S256 challenge generated via crypto.subtle.digest. Verifier in sessionStorage (clears on tab close). Authorization code exchanged for token directly with Google's token endpoint from the browser. Token persisted to IndexedDB. No backend proxy. Each user runs their own OAuth client ID — that's why the README has fork-and-configure instructions.
+
+3 · IndexedDB schema with 4 memory kinds.
+daily · project · person · note. Each item has id · title · content · ts · tags[] · people[] · deadlines[]. Auto-extraction at T0 uses regex (tags via #word, people via capitalised multi-word patterns, deadlines via month-day patterns). T2/T3 adds AI classification on top.
+
+4 · BroadcastChannel mesh integration.
+On boot, emits `tool:ready` on `fall-signal` so sibling estate tools know botler is live. Listens for cross-tool events. Same pattern as ExitEngine. Zero coupling — botler works standalone, augmented when adjacent tools are present.
+
+5 · Service worker skip-list for the AI path.
+The SW caches the shell aggressively but skips intercepting esm.run, googleapis.com, anthropic.com, openai.com, huggingface.co. The model fetch and the OAuth flow MUST go direct or they break. SW intercepting third-party CDN fetches is the silent killer of in-browser AI tools.
+
+The whole file: github.com/sjgant80-hub/botler
+
+The hardest part wasn't the AI. It was the OAuth PKCE flow without a backend, and the SW skip-list logic.
+
+If you build sovereign agents: those two patterns matter more than the model choice.
+
+◊·κ=φ⁴
+▲ END COPY ▲
+
+═══════════════════════════════════════════════════════════════════════
+  EXPECTED COMMENTS / DMs (prep responses)
+═══════════════════════════════════════════════════════════════════════
+
+· "Does it work on iPhone?" → Safari has limited WebGPU support · T0 + T3 (BYOK API) work fine · T2 WebLLM works on iOS 17+ Safari with experimental flag · honest answer
+
+· "What about Android?" → Chrome on Android supports WebGPU in 121+ · works · 2GB download eats data, recommend WiFi
+
+· "Can I use it for X (work / family / clients)?" → "Yes if X is your own memory. Don't put data that belongs to others in it without their knowledge — that's a policy problem the tool can't solve."
+
+· "What about end-to-end sync between my devices?" → "On the roadmap v1.1 · client-side encrypted via libsodium · until then: export → import. JSON file moves between devices."
+
+· "Will you build [feature X]?" → "MIT licensed · fork it and PR back · or DM and I'll prioritise based on what folks ask for"
+
+· "Why no voice?" → "Whisper.cpp WASM is in v1.1 · audio gets stored as blob in IndexedDB today, transcription comes next."
+
+· "Why not Phi-3.5 or Qwen?" → "Llama 3.2 3B chosen because it's the smallest model with strong instruction-following AND it has well-tested MLC quantization. Phi-3.5 next once their MLC build stabilises."
+
+· Negative: "AI memory is creepy" → don't argue · "Fair · the tool stores nothing without an explicit command. The point is sovereignty: you choose what to remember and what to forget."
+
+═══════════════════════════════════════════════════════════════════════
+  END OF PACK · ◊·κ=φ⁴ · "I really need a botler" → built it
+═══════════════════════════════════════════════════════════════════════
