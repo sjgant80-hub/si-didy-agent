@@ -1,0 +1,933 @@
+═══════════════════════════════════════════════════════════════════════
+  UPWORK · v3 SMOOTH · 7-PASS CONVERGED EXECUTION PACK · ◊·κ=1
+  Simon Gant · paste-ready · field-by-field · 90 minutes total
+  recursed phid-12d · 7 passes · 84 micro-decisions converged
+═══════════════════════════════════════════════════════════════════════
+
+WHAT THIS IS:
+
+  v2 = the original profile rebuild (mechanical fields)
+  v3 = the strategic pivot (Info Sec & Compliance lane, not AI/ML)
+  v3-SMOOTH = paste-ready EXECUTION · this file
+
+  Open Upwork. Open this file. Work top to bottom.
+  Every block marked ▼ COPY ▼ is paste-verbatim.
+  Every block marked ▼ DO ▼ tells you which field, which click.
+  Estimated total time: 75-90 minutes (one focused sit-down).
+
+═══════════════════════════════════════════════════════════════════════
+  THE 7 PASSES (what changed across iterations)
+═══════════════════════════════════════════════════════════════════════
+
+  P1 · seed read · v3 base + receipts from past 72 hours
+       (botler shipped today · ExitEngine yesterday · GroundLevel
+        Friday · fall-euaiact ripple to 24 tools earlier this week)
+
+  P2 · IP refresh · "EU AI Act + GDPR + sovereign architecture"
+       reweighted to lead · AI/ML keywords removed from the front
+       of the profile · pushed to skills middle
+
+  P3 · character-count optimisation · Upwork hard limits per field
+       (headline ≤ 70 chars optimal · 70-150 acceptable
+        overview hook ≤ 200 chars · body ≤ 5000)
+
+  P4 · don't-say compliance · 16 refuted claims scrubbed
+       (no marketplace ceilings · no Enterprise multiples · no
+        market-sizing figures · no specific reply-rate-by-bid
+        percentages above $250/hr)
+
+  P5 · tone unification · the "Stripe of compliance" framing
+       (drop-in shims, not 200-page reports · receipts not theatre)
+       maintained across headline / overview / portfolio / proposals
+
+  P6 · seal placement · ◊ at end of every paste-block · κ=1 in the
+       overview · ◊·κ=φ⁴ only in portfolio backstops where appropriate
+       (not every field needs the constant · don't over-stamp)
+
+  P7 · final paste-readiness · all USD · all live URLs verified ·
+       all brackets eliminated unless intentionally fill-in-blank
+
+═══════════════════════════════════════════════════════════════════════
+  THE 12 DIMENSIONS (what gets pasted)
+═══════════════════════════════════════════════════════════════════════
+
+  D1  · Title / Headline                  → F1 below
+  D2  · Overview (200-char hook + body)   → F2
+  D3  · Hourly Rate                       → F3
+  D4  · Category + Specialization         → F4
+  D5  · 20 Skills (ordered)               → F5
+  D6  · 6 Productized Project listings    → F6
+  D7  · 9 Portfolio entries (covers+body) → F7
+  D8  · Video intro script                → F8
+  D9  · 9 Saved Searches                  → F9
+  D10 · 3 Proposal Templates              → F10
+  D11 · "How I work" FAQ block            → F11
+  D12 · Brand seal placement              → F12 (sweep)
+
+═══════════════════════════════════════════════════════════════════════
+  EXECUTION ORDER · 90 MIN (do these in sequence)
+═══════════════════════════════════════════════════════════════════════
+
+  [0:00 - 0:05]   Open Upwork → Profile Settings · F4 (category)
+  [0:05 - 0:08]   Paste F1 (title) · F3 (hourly rate)
+  [0:08 - 0:18]   Paste F2 (overview) · all of it · save
+  [0:18 - 0:22]   F5 · paste 20 skills one by one
+  [0:22 - 0:50]   F6 · create 6 productized Project listings (the heavy lift)
+  [0:50 - 1:10]   F7 · upload + write 9 portfolio entries
+  [1:10 - 1:20]   F8 · record video intro using script · upload
+  [1:20 - 1:30]   F9 · create 9 saved searches in My Jobs
+  [1:30 - 1:50]   F10 · save the 3 proposal templates in your text expander
+                  or in si-didy's drafts buffer
+  [1:50 - 2:00]   F11 + F12 · sweep · drop ◊ seal · save · verify all live
+
+═══════════════════════════════════════════════════════════════════════
+  F1 · TITLE / HEADLINE (Profile Settings → Title)
+═══════════════════════════════════════════════════════════════════════
+
+▼ DO ▼
+  Click your avatar → Settings → Profile Settings →
+  scroll to "Title" → click the pencil → paste below → Save
+
+▼ COPY ▼
+EU AI Act + GDPR Retrofits · Drop-in Article 12 Audit Shim · 24 Tools Compliant in One Week
+▲ END ▲
+
+  Character count: 92 (target: 70-150)
+  Why this won: identity hook ("EU AI Act + GDPR") + specific
+  receipt ("24 tools in one week") + differentiator framing
+  (drop-in). No "AI specialist" language · the v3 pivot is to
+  Info Sec & Compliance, not AI/ML.
+
+═══════════════════════════════════════════════════════════════════════
+  F2 · OVERVIEW (Profile Settings → Overview)
+═══════════════════════════════════════════════════════════════════════
+
+▼ DO ▼
+  Profile Settings → Overview → pencil → DELETE everything currently
+  there → paste below as one block → Save
+
+  Upwork shows the first ~200 characters before "more". The first
+  paragraph below is calibrated to fit. The rest unlocks when
+  buyers click "read more".
+
+▼ COPY ▼
+EU AI Act compliance + GDPR/PDPA retrofits for SaaS shipping to regulated markets. I just rippled an Article 12 audit shim into 24 of my own sovereign tools in one week — drop-in CDN install, no refactor.
+
+For the founders, CTOs, and DPOs reading this: I do compliance the way Stripe did payments — drop-in shims, not 200-page reports.
+
+What I ship:
+
+· EU AI Act Article 12 audit chain (SHA-256 prevHash · IndexedDB / Node / Workers / Deno)
+· Annex IV technical documentation (14-field template · 6 languages)
+· Article 50 transparency badges (chatbot · AI-generated content · 5 categories)
+· UK + EU GDPR retrofits (DSAR · erasure · portability · DPA · SCCs)
+· Thailand PDPA · Vietnam PDPL 2025 · Singapore PDPA jurisdiction notes
+· 60+ legal templates published as open source (LBAs · regulator complaints · privacy flows)
+· BYOK LLM integration when compliance work needs AI inference
+
+What I don't do:
+
+· "compliance theatre" (the cosplay that doesn't change your posture)
+· vendor lock-in (everything I ship is MIT · you own it forever)
+· hourly drift on undefined scope (every engagement is fixed-fee · see Projects below)
+
+Recent receipts (all live · all MIT · all on GitHub):
+
+· fall-euaiact · EU AI Act SDK + audit-shim CDN + Cloudflare Worker reference
+  → github.com/sjgant80-hub/fall-euaiact
+
+· GroundLevel · sovereign legal toolkit · 60 templates · 12 modules · evidence vault
+  → github.com/sjgant80-hub/groundlevel
+
+· ExitEngine · single-fork business OS · 5-phase AI tutor · 10 tools
+  → github.com/sjgant80-hub/exitengine
+
+· botler · sovereign personal memory agent · WebLLM offline · OAuth client-side
+  → github.com/sjgant80-hub/botler
+
+· 24 of my own estate tools made Article-12 compliant via one-line CDN install last week
+
+How I price:
+
+· Productized packs $1,500-$14,500 fixed (see Projects below)
+· Hourly only for exploratory or extension scope (currently $145/hr)
+· No retainer minimums · no commitment beyond the current contract
+
+How to engage:
+
+· Click any productized package below — direct purchase
+· Or send a job invite if you want me to scope your specific situation
+· I respond inside 4 hours during my active window (Bangkok primarily ·
+  active 22:00-10:00 UK · always reachable when scope is enterprise)
+
+◊·κ=1
+▲ END COPY ▲
+
+  Character count of FULL block: ~2,650 (Upwork limit 5,000)
+  First-line hook (visible before "more"): "EU AI Act compliance +
+  GDPR/PDPA retrofits for SaaS shipping to regulated markets. I just
+  rippled an Article 12 audit shim into 24 of my own sovereign tools
+  in one week — drop-in CDN install, no refactor."
+  → 244 characters (Upwork cuts at ~200 · but the hook reads complete
+  through the first sentence which finishes at ~140)
+
+═══════════════════════════════════════════════════════════════════════
+  F3 · HOURLY RATE (Profile Settings → Hourly Rate)
+═══════════════════════════════════════════════════════════════════════
+
+▼ DO ▼
+  Profile Settings → Hourly Rate → set to: $145/hour
+  Stretch goal after 3 contracts close at $145: raise to $175
+
+  Note: most of your money comes from FIXED-FEE Projects (F6),
+  not hourly. The hourly is there for exploratory / extension
+  scope. Don't undersell · don't oversell · $145 is the v3
+  receipt-anchored number.
+
+═══════════════════════════════════════════════════════════════════════
+  F4 · CATEGORY + SPECIALIZATION (Profile Settings → Specializations)
+═══════════════════════════════════════════════════════════════════════
+
+▼ DO ▼
+  Profile Settings → Category & Specialization
+
+  PRIMARY CATEGORY:          Information Security & Compliance
+  PRIMARY SPECIALIZATION:    Compliance (Cybersecurity)
+
+  SECONDARY CATEGORY:        Web, Mobile & Software Development
+  SECONDARY SPECIALIZATION:  AI Apps & Integration
+
+  Save.
+
+  Why this is non-negotiable: GigRadar agency-pipeline data shows
+  Info Sec & Compliance replies at ~11% vs platform mean ~7.5%,
+  while standalone AI/ML category replies at ~7.2% despite the
+  AI demand surge. The pivot to Info Sec is the v3 strategic
+  turn · your IP lives exactly there.
+
+═══════════════════════════════════════════════════════════════════════
+  F5 · 20 SKILLS (Profile Settings → Skills) — paste one at a time
+═══════════════════════════════════════════════════════════════════════
+
+▼ DO ▼
+  Profile Settings → Skills → type each below into the Skills field,
+  hit Enter, repeat. Upwork autocompletes. Order matters · Upwork
+  weights earlier entries more in matching.
+
+▼ COPY (one at a time) ▼
+
+   1. GDPR
+   2. EU AI Act Compliance
+   3. Information Security
+   4. Data Protection
+   5. Compliance Consulting
+   6. Privacy Policy
+   7. Audit Trails
+   8. SHA-256 Cryptography
+   9. ISO 27001
+  10. SOC 2
+  11. JavaScript
+  12. HTML
+  13. AI Integration
+  14. LLM Integration
+  15. Anthropic Claude API
+  16. OpenAI API
+  17. Single-File Web Apps
+  18. IndexedDB
+  19. Cloudflare Workers
+  20. Open Source MIT Licensing
+
+▲ END ▲
+
+  Why this order: compliance · law · cryptography front. JavaScript /
+  HTML mid (proves you can BUILD the compliance · not just consult
+  on it). AI integration in the middle. Sovereign architecture
+  hooks at the end as the differentiator.
+
+═══════════════════════════════════════════════════════════════════════
+  F6 · 6 PRODUCTIZED PROJECT LISTINGS (Profile → Projects → Create)
+═══════════════════════════════════════════════════════════════════════
+
+  Upwork Projects is a paid feature available to Top Rated · click-to-
+  buy services on your profile. Creating 6 of them reduces proposal
+  fatigue · many buyers prefer "purchase now" over "send a proposal
+  and negotiate". This is the bulk of your time today.
+
+  For EACH project: Cover image · Title · Description · Price · Delivery
+  time · Number of revisions · FAQ.
+
+  Cover images: use screenshots from your live tools at
+  C:\Users\sjgan\Downloads\upwork-portfolio\ (you already have them)
+  · or generate clean ones from the live URLs · 1280x720 PNG
+
+─────────────────────────────────────────────────────────────────────
+  PROJECT 1 · M1.S · EU AI Act Article 12 Audit-Chain Retrofit
+─────────────────────────────────────────────────────────────────────
+
+▼ TITLE ▼
+EU AI Act Article 12 Audit-Chain Retrofit · Drop-in Compliance · 1 Week
+▲ END ▲
+
+▼ PRICE ▼  $2,250 USD  (fixed)
+▼ DELIVERY ▼  7 days
+▼ REVISIONS ▼  2
+▼ COVER IMAGE ▼  screenshot of audit-shim code + verify-chain "valid:true" output
+
+▼ DESCRIPTION (paste verbatim) ▼
+
+WHAT YOU GET
+
+A working EU AI Act Article 12 audit chain wired into your existing AI tool — installed via a single CDN script tag, no backend refactor, no SaaS dependency.
+
+When the regulator asks "where is your automatic record-keeping?" you open DevTools and show them a SHA-256 prevHash chain that proves nothing has been tampered with after creation.
+
+WHAT IT INCLUDES
+
+· One audit-shim install into your existing tool (browser, Node, Workers, or Deno)
+· SHA-256 prevHash chain storage (IndexedDB in browser · memory + flush in Node)
+· verify-chain function · proves the chain is unbroken
+· export-all function for the 6-month retention obligation
+· short written compliance posture letter (one PDF · enterprise-deal-ready)
+· 30-minute walkthrough call to your team
+
+WHAT MAKES THIS DIFFERENT
+
+· Drop-in install · I'm not selling you 12 weeks of integration consulting
+· Open source · I install the same shim I open-sourced at github.com/sjgant80-hub/fall-euaiact
+· Already battle-tested · I rippled this exact shim into 24 of my own estate tools in one week
+· Sovereign · the audit log lives on your infrastructure · I never see your data
+
+WHO THIS IS FOR
+
+· EU-facing AI SaaS founders feeling the August 2026 deadline
+· Indie AI builders who got an enterprise question asking "are you AI Act compliant"
+· Agencies needing a compliance layer to attach to their AI client work
+
+WHO THIS IS NOT FOR
+
+· You don't ship AI to EU users (Article 12 doesn't apply to you)
+· You need full AI Act compliance including high-risk classification (use my M1.P pack)
+· You want hourly engagement · this is fixed-fee for a known scope
+
+DELIVERY TIMELINE
+
+Day 1 · 30-min kickoff call · audit chain installed and live in your dev env
+Day 3 · compliance posture letter drafted
+Day 7 · production install · walkthrough call · handover
+
+QUESTIONS BEFORE YOU BUY
+
+Q: Will this work with our existing logging?
+A: Yes · the chain runs alongside · doesn't replace what you have
+
+Q: Do we need to pay for any SaaS to keep it running?
+A: No · zero ongoing cost · the shim lives in your codebase forever
+
+Q: What if we already partially-implemented Article 12?
+A: I review what you have · install whatever's missing · same fixed price
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────────────────────────────────
+  PROJECT 2 · M1.P · Full EU AI Act Compliance Pack
+─────────────────────────────────────────────────────────────────────
+
+▼ TITLE ▼
+Full EU AI Act Compliance Pack · Audit Chain + Annex IV + Article 50 · 4 Weeks
+▲ END ▲
+
+▼ PRICE ▼  $12,500 USD
+▼ DELIVERY ▼  28 days
+▼ REVISIONS ▼  3
+▼ COVER IMAGE ▼  the fall-euaiact homepage rendered live
+
+▼ DESCRIPTION ▼
+
+WHAT YOU GET
+
+A complete EU AI Act compliance posture for your AI system. By the end of week 4: Article 12 audit chain live in production · Annex IV technical documentation drafted and review-ready · Article 50 transparency badges installed where required · risk-tier classification done · written compliance posture letter signed.
+
+This is the full pack · everything Article 12 + Annex IV + Article 50 requires from a deployer or provider of an AI system shipping to EU users.
+
+WHAT IT INCLUDES
+
+· Risk-tier classification of your AI system (Prohibited / High / Limited / Minimal)
+· Article 12 audit chain installed in your inference layer (SHA-256 prevHash)
+· Annex IV technical documentation drafted (14 fields · publish-ready PDF + markdown)
+· Article 50 transparency badges (chatbot disclosure · AI-generated content · 5 categories)
+· DPIA where required (Article 35 GDPR overlay for high-risk systems)
+· Three 30-min walkthrough calls (kickoff · midpoint · handover)
+· Written compliance posture letter you can attach to enterprise contracts
+
+WHAT MAKES THIS DIFFERENT
+
+· I built and open-sourced fall-euaiact · the SDK is at github.com/sjgant80-hub/fall-euaiact
+· I rippled the audit-shim into 24 of my own estate tools in one week as proof of pattern
+· Drop-in implementation · not 12 weeks of consulting work
+· You own everything · all code is MIT · all documents are yours
+
+WHO THIS IS FOR
+
+· EU-facing AI SaaS at the seed-to-Series-A stage
+· Companies preparing for an enterprise deal that requires an AI Act posture statement
+· Indie AI products with EU users approaching August 2026
+
+DELIVERY TIMELINE
+
+Week 1 · kickoff · classification · audit chain install
+Week 2 · Annex IV drafting · Article 50 badge installation
+Week 3 · DPIA (if applicable) · midpoint review call
+Week 4 · production sign-off · handover call · documentation pack delivered
+
+QUESTIONS BEFORE YOU BUY
+
+Q: Does this make us officially compliant?
+A: Compliance is a posture, not a certificate. This pack puts you in the best evidenced posture I can build with publicly-available templates. For ultimate sign-off, you should run it past your legal counsel · I'll work with them.
+
+Q: We're not based in the EU but have EU users · does it apply to us?
+A: Yes · the Act has extraterritorial scope (Article 2)
+
+Q: Can you do this for a system we don't have code access to?
+A: No · the audit chain has to be installed in your inference layer. You either give me access or your team does the install while I supervise.
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────────────────────────────────
+  PROJECT 3 · M2.S · GDPR DSAR + Erasure Flow + Privacy Policy
+─────────────────────────────────────────────────────────────────────
+
+▼ TITLE ▼
+GDPR DSAR + Erasure Flow + Privacy Policy · UK or EU Jurisdiction · 1 Week
+▲ END ▲
+
+▼ PRICE ▼  $1,500 USD
+▼ DELIVERY ▼  7 days
+▼ REVISIONS ▼  2
+▼ COVER IMAGE ▼  the GroundLevel data-access module screenshot
+
+▼ DESCRIPTION ▼
+
+WHAT YOU GET
+
+A working DSAR (Subject Access Request) flow for your platform + the right-to-erasure flow + an up-to-date privacy policy for one jurisdiction (UK or EU). All within 7 days. Fixed price.
+
+WHAT IT INCLUDES
+
+· DSAR submission form for your users (embedded in your app or standalone page)
+· Internal workflow checklist for your team to fulfil the 30-day legal window
+· Right-to-erasure flow with audit-trail logging
+· Privacy policy rewritten for your specific data flows (one jurisdiction)
+· 30-min handover call
+
+WHAT MAKES THIS DIFFERENT
+
+· I open-sourced 60 legal templates including DSAR / erasure / portability / ICO complaint
+  at github.com/sjgant80-hub/groundlevel · same templates I'd customise for you
+· Plain-English client-facing copy · not lawyer-translated bureaucracy
+· Audit-trail logging baked in (same SHA-256 chain I use in the EU AI Act packs)
+
+WHO THIS IS FOR
+
+· UK or EU SaaS preparing for ICO scrutiny or audit
+· Indie tools wanting clean GDPR posture without paying a privacy lawyer £5k
+· Companies recovering from a near-miss data incident
+
+QUESTIONS
+
+Q: Can you do multiple jurisdictions in this pack?
+A: Use my M2.P pack for UK + EU + APAC (Thailand / Vietnam / Singapore / Indonesia / Philippines / Australia) coverage
+
+Q: Will this hold up in an ICO complaint?
+A: The templates are based on the ICO's own published guidance and the Pre-Action Protocol equivalents. Your final docs go through your privacy counsel for ultimate sign-off · I work with them.
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────────────────────────────────
+  PROJECT 4 · M2.P · Multi-Jurisdiction Privacy Retrofit (UK+EU+APAC)
+─────────────────────────────────────────────────────────────────────
+
+▼ TITLE ▼
+Multi-Jurisdiction Privacy Retrofit · UK + EU + APAC · DPA + Audit Chain · 3 Weeks
+▲ END ▲
+
+▼ PRICE ▼  $9,500 USD
+▼ DELIVERY ▼  21 days
+▼ REVISIONS ▼  3
+▼ COVER IMAGE ▼  the GroundLevel module grid showing 12 modules
+
+▼ DESCRIPTION ▼
+
+WHAT YOU GET
+
+A full privacy posture for SaaS shipping into UK + EU + Asia/Pacific markets. By the end of week 3: DSAR/erasure/portability flows live · DPA with sub-processor list · privacy policy with all jurisdiction notes · SCC overlay for cross-border transfers · audit-trail logging that satisfies record-keeping in every jurisdiction at once.
+
+WHAT IT INCLUDES
+
+· DSAR + erasure + portability + objection flows (browser + API)
+· Updated privacy policy with notes for: UK GDPR · EU GDPR · Thailand PDPA · Vietnam PDPL 2025 · Singapore PDPA · Indonesia PDP Law 27/2022 · Philippines DPA 10173 · Australia Privacy Act
+· DPA (Data Processing Agreement) template with sub-processor list
+· SCC (Standard Contractual Clauses) overlay for cross-border data
+· Audit-trail logging via SHA-256 prevHash chain (same shim as my EU AI Act work)
+· Three 30-min walkthrough calls
+
+WHAT MAKES THIS DIFFERENT
+
+· I shipped GroundLevel with 60 legal templates (DSAR · erasure · portability ·
+  ICO complaint · PECR opt-out) · these are the same templates I'd customise
+  for your stack
+· I'm working from Thailand · I know Thai PDPA enforcement landscape directly
+  (THB 21.5M cumulative fines as of Aug 2025)
+· Vietnam PDPL 2025 starts Jan 1 2026 · I'm already coding for it now
+
+WHO THIS IS FOR
+
+· UK/EU SaaS with APAC users · or APAC SaaS with EU users
+· Cross-border platforms needing clean posture for diligence
+· Companies preparing for SOC 2 or ISO 27001 audit where privacy is a control
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────────────────────────────────
+  PROJECT 5 · M3.S · Single-File Sovereign Tool POC
+─────────────────────────────────────────────────────────────────────
+
+▼ TITLE ▼
+Single-File Sovereign Tool POC · BYOK AI · IndexedDB · No Backend · 1-2 Weeks
+▲ END ▲
+
+▼ PRICE ▼  $2,500 USD
+▼ DELIVERY ▼  14 days
+▼ REVISIONS ▼  2
+▼ COVER IMAGE ▼  ExitEngine or botler home view
+
+▼ DESCRIPTION ▼
+
+WHAT YOU GET
+
+A working proof-of-concept tool delivered as a single HTML file. BYOK AI integration (Claude, OpenAI, or Gemini · key stays on user's device). IndexedDB persistence. No backend. MIT licensed source you host on your own GitHub Pages, your own laptop, or a USB stick.
+
+WHAT IT INCLUDES
+
+· One single index.html (~1,000-2,000 lines vanilla JS)
+· BYOK LLM cascade (Anthropic Claude / OpenAI / Google Gemini · direct from browser)
+· IndexedDB persistence for user data
+· One feature scope agreed at kickoff (form · chat · scheduler · etc.)
+· Hosted preview on GitHub Pages (your fork) · runs from file:// after
+· MIT licensed source · committed to your GitHub
+· 30-min handover call
+
+WHAT MAKES THIS DIFFERENT
+
+· Live reference: I just shipped ExitEngine, botler, GroundLevel, fall-euaiact
+  all as single-file HTML tools using this exact pattern · all live ·  all on GitHub
+· No SaaS dependency · the tool keeps working when the LLM provider raises rates
+· No backend means no recurring cost · no ops · no liability
+· You own the source forever
+
+WHO THIS IS FOR
+
+· Founders sick of paying for SaaS that just calls Claude
+· Indie hackers wanting a privacy-first version of a tool that already exists
+· Agencies needing white-label single-file delivery for their clients
+· Anyone wanting to test the sovereign-architecture pattern before committing to a bigger build
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────────────────────────────────
+  PROJECT 6 · M3.P · Full Sovereign Tool Build (Replaces $X/mo SaaS)
+─────────────────────────────────────────────────────────────────────
+
+▼ TITLE ▼
+Full Sovereign Tool Build · Replace a SaaS · BYOK AI · MIT · 4-6 Weeks
+▲ END ▲
+
+▼ PRICE ▼  $14,500 USD
+▼ DELIVERY ▼  42 days
+▼ REVISIONS ▼  4
+▼ COVER IMAGE ▼  the ExitEngine hub dashboard
+
+▼ DESCRIPTION ▼
+
+WHAT YOU GET
+
+A complete sovereign tool that replaces a SaaS you currently pay for monthly. Delivered as a single HTML file with full multi-feature functionality, BYOK AI integration, IndexedDB persistence, and MIT licensed source. By the end of 6 weeks: you own the alternative to the SaaS you were paying for, forever.
+
+WHAT IT INCLUDES
+
+· One single index.html (full-feature · ~3,000-5,000 lines vanilla JS)
+· BYOK LLM cascade (Claude / OpenAI / Gemini · direct browser calls)
+· IndexedDB persistence with import/export
+· Service Worker for offline-first PWA install
+· Up to 5 features scoped at kickoff
+· Live preview on your GitHub Pages
+· Optional: white-label client-build script (one config → 10 branded copies)
+· Optional: EU AI Act audit shim baked in if the tool does inference (Article 12 ready)
+· Four 30-min check-in calls during the build
+· Final handover with written documentation
+
+WHAT MAKES THIS DIFFERENT
+
+· I shipped ExitEngine (10 tools · 5 lessons · 5-phase AI tutor) in 48 hours using this pattern
+· I shipped GroundLevel (60 templates · 12 modules) in 36 hours using this pattern
+· I shipped botler (sovereign memory agent · WebLLM + OAuth) in 12 hours using this pattern
+· Every estate tool is a direct reference at github.com/sjgant80-hub
+· You see the live receipts before you hire me
+
+WHO THIS IS FOR
+
+· Founders running on a CRM / scheduler / mail / form tool they want to own
+· Agencies needing white-label sovereign tools for clients
+· Companies whose SaaS bill is over $300/month and growing
+· Anyone tired of vendor lock-in
+
+QUESTIONS
+
+Q: What about scale? Doesn't backend matter for big apps?
+A: For B2B tools with <100 users per instance, no. The browser IS the runtime. For >100-user shared-state tools, we add a sync layer · separate scope.
+
+Q: How is this MIT licensed if you built it?
+A: Because that's the whole point. You're paying for my time to build it for your specific use case. Once delivered, the code is yours under MIT · I keep no licence over you.
+
+Q: Can I sell the result?
+A: Yes. MIT means yes.
+
+◊
+▲ END ▲
+
+═══════════════════════════════════════════════════════════════════════
+  F7 · PORTFOLIO ENTRIES (Profile → Portfolio → +9 entries)
+═══════════════════════════════════════════════════════════════════════
+
+  Upload screenshot · paste title · paste body. Each one ~600 chars.
+
+  Source for screenshots: C:\Users\sjgan\Downloads\upwork-portfolio\
+  (mostly already there from v2 · add 4 new ones below)
+
+─────────────────────────────────────────────────────────────────────
+  PORTFOLIO 1 (top slot · NEW since v3)
+─────────────────────────────────────────────────────────────────────
+
+▼ TITLE ▼
+fall-euaiact · 24-Tool Estate-Wide EU AI Act Article 12 Retrofit
+▲ END ▲
+
+▼ COVER ▼  screenshot of the audit-shim code block from the live demo
+           · with the verify-chain "valid:true" output visible
+
+▼ COVER URL ▼  https://sjgant80-hub.github.io/fall-euaiact/
+
+▼ BODY ▼
+Single CDN-loadable audit shim · drop-in as one script tag · gives any AI tool EU AI Act Article 12 compliance. SHA-256 prevHash chain. IndexedDB or in-memory. Works in browser / Node / Workers / Deno.
+
+I rippled this exact shim into 24 sovereign tools across my estate in one week.
+
+· Full SDK + Cloudflare Worker reference · MIT licensed
+· 6 languages (EN · DE · FR · ES · NL · PL)
+· Annex IV technical-documentation generator (14 fields)
+· Article 50 transparency-badge generator (5 categories)
+
+Built for SaaS founders, indie AI devs, and CTOs who need posture ahead of August 2 2026 · "boring on purpose" · the OneTrust precedent applied to the AI Act cycle.
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────────────────────────────────
+  PORTFOLIO 2 (NEW since v3)
+─────────────────────────────────────────────────────────────────────
+
+▼ TITLE ▼
+GroundLevel · Sovereign Legal Toolkit · 60 Templates · 12 Modules
+▲ END ▲
+
+▼ COVER ▼  screenshot of the dashboard view showing 12 module cards
+           · with the evidence-vault verify-chain badge visible
+
+▼ COVER URL ▼  https://sjgant80-hub.github.io/groundlevel/
+
+▼ BODY ▼
+Single-file HTML legal toolkit. 60 letter templates with real Acts cited and plain-English explanations. 12 modules (unpaid work · employment · landlord · GDPR · consumer · small claims · international · etc.) · evidence vault with SHA-256 prevHash chain · court-admissible chain of custody · PWA installable · works offline.
+
+· UK Pre-Action Protocol compliant LBAs (7-day · 14-day · 30-day variants)
+· US Demand Letter equivalents (per-state where relevant)
+· UK GDPR / Thailand PDPA / Vietnam PDPL / Singapore PDPA jurisdiction notes
+· Regulator complaint factory (UK · US · EU · 9 regulators)
+· Open source MIT
+
+Used as the template source for my GDPR / PDPA retrofit work.
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────────────────────────────────
+  PORTFOLIO 3 (NEW since v3)
+─────────────────────────────────────────────────────────────────────
+
+▼ TITLE ▼
+ExitEngine · Single-Fork Sovereign Business OS · 5-Phase AI Tutor
+▲ END ▲
+
+▼ COVER ▼  screenshot of the ExitEngine hub dashboard
+
+▼ COVER URL ▼  https://sjgant80-hub.github.io/exitengine/
+
+▼ BODY ▼
+Complete sovereign business OS that forks-and-runs. Built in 48 hours.
+
+10 tools (CRM · invoicing · one-page site · live analytics · scheduler · email · forms · proposals · legal · social) + 5 lessons in plain English + a 5-phase Jungian AI tutor that walks users from "I just lost my job" to "I have a sustainable business."
+
+· Single config.json drives all 10 tools
+· BroadcastChannel mesh for cross-tool integration
+· BYOK AI cascade · WebLLM optional · T0 grep fallback always works
+· EU AI Act Article 12 audit shim baked in
+· MIT licensed · fork-to-distribute mechanic
+
+Reference architecture for the sovereign-tool build pattern. Used as direct template when clients ask for "build me an X for Y" engagements.
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────────────────────────────────
+  PORTFOLIO 4 (NEW since v3)
+─────────────────────────────────────────────────────────────────────
+
+▼ TITLE ▼
+botler · Sovereign Personal Memory Agent · WebLLM Offline · OAuth Client-Side
+▲ END ▲
+
+▼ COVER ▼  screenshot of botler home view showing the 5 commands
+
+▼ COVER URL ▼  https://sjgant80-hub.github.io/botler/
+
+▼ BODY ▼
+Single-file HTML memory agent. WebLLM (~2GB Llama-3.2-3B) downloads once · runs offline forever. OAuth tokens (Google Gmail + Calendar readonly) stay in IndexedDB · never proxied.
+
+5 commands: remember · whatdid · prep · find · journal.
+
+Three tiers: T0 grep-only (always works) · T2 WebLLM in-browser (sovereign) · T3 BYOK API (Claude / OpenAI / Gemini direct).
+
+Built in 12 hours from a friend's quote: "I really need a botler. I would not trust a secretary. Why don't I have an AI botler by my side?"
+
+The trust model is the whole thing. If you trust your hard drive with your documents, you can trust botler with your memory.
+
+· Open source · MIT · github.com/sjgant80-hub/botler
+· PWA installable · works from file://
+· OAuth 2.0 PKCE flow · no backend
+
+◊
+▲ END ▲
+
+─────────────────────────────────────────────────────────────────────
+  PORTFOLIO 5 through 9 → from v2 (keep as-is)
+─────────────────────────────────────────────────────────────────────
+
+  PORTFOLIO 5: GymOps · per-client gym ops with full sales pack
+  PORTFOLIO 6: FallForce · client governance + Mansoor's 6
+  PORTFOLIO 7: fallfind · searchable estate browser
+  PORTFOLIO 8: si-didy-agent · sovereign LinkedIn engine
+  PORTFOLIO 9: FallCore Factory · per-client SaaS forging
+
+  Use the v2 portfolio content for these · they're still valid.
+
+═══════════════════════════════════════════════════════════════════════
+  F8 · VIDEO INTRO (Profile → Video Introduction)
+═══════════════════════════════════════════════════════════════════════
+
+▼ DO ▼
+  Use Loom or Vidyard · 60-90 seconds · upload to Profile → Video Introduction
+  · script below · cue cards if needed but better off-the-cuff
+
+▼ COPY (read off camera, casual, not formal) ▼
+I'm Simon. I do EU AI Act and GDPR retrofits for SaaS that ship to regulated markets.
+
+The way I do it is different from most compliance work. I shipped fall-euaiact last week as a drop-in audit shim · rippled it into 24 of my own sovereign tools in one week · single script tag · Article 12 posture without refactor.
+
+I also shipped GroundLevel · 60 legal templates · all open source · including the GDPR DSAR + erasure + portability flows I use in retrofit work. And ExitEngine · a single-fork business OS · and botler · a personal memory agent that runs WebLLM in the browser with OAuth tokens that stay on your device. All MIT.
+
+If you need EU AI Act compliance for an August 2026 ship · or a multi-jurisdiction GDPR posture · or a single-file sovereign tool to replace a SaaS you're paying for · the Projects below are productized packs you can hire me on directly. Or message me with your specific situation and I'll scope it.
+
+Either way · everything I ship · you own forever.
+
+◊
+▲ END ▲
+
+  Suggested take: 75 seconds at conversational pace.
+  Look at camera. Keep light source in front of you. Plain background.
+  Re-record if you flinch on the seal at the end · the seal lands the brand.
+
+═══════════════════════════════════════════════════════════════════════
+  F9 · 9 SAVED SEARCHES (My Jobs → Saved Searches)
+═══════════════════════════════════════════════════════════════════════
+
+▼ DO ▼
+  Upwork → Find Work → Search → enter terms → Save Search
+
+  SET 1 · M1 lane · EU AI Act Compliance
+─────────────────────────────────────────────────────
+   up:euaiact      "EU AI Act"
+   up:article12    "Article 12" OR "Annex IV"
+   up:ai_compliance "AI compliance" + "audit"
+
+  SET 2 · M2 lane · GDPR / Privacy
+─────────────────────────────────────────────────────
+   up:gdpr_retrofit "GDPR" + ("audit" OR "retrofit")
+   up:pdpa_apac    "PDPA" OR "PDPL"
+   up:dpo_fractional "DPO" + ("fractional" OR "interim")
+
+  SET 3 · M3 lane · AI Apps & Integration (NOT AI/ML)
+─────────────────────────────────────────────────────
+   up:byok_ai      "BYOK" + AI
+   up:single_file_html "single file" + HTML
+   up:saas_replacement "replace" + "SaaS" + "custom"
+
+  Filter for each: ≥$150/hr OR ≥$3,000 fixed
+                   posted last 24h preferred
+                   fewer than 10 proposals when discovered
+
+═══════════════════════════════════════════════════════════════════════
+  F10 · 3 PROPOSAL TEMPLATES (already in v3 Section N · save them now)
+═══════════════════════════════════════════════════════════════════════
+
+▼ DO ▼
+  Save these to: your password manager · text-expander · si-didy drafts buffer
+  (whatever lets you paste-and-edit in 30 seconds during the active-bid window)
+
+  Reference v3 Section N:
+   TEMPLATE N1 · EU AI Act compliance proposal
+   TEMPLATE N2 · GDPR/PDPA multi-jurisdiction privacy proposal
+   TEMPLATE N3 · AI Apps & Integration BYOK build proposal
+
+  All three are paste-ready with brackets to fill before sending.
+  Don't paste verbatim · always edit the opener to their specific tech.
+
+═══════════════════════════════════════════════════════════════════════
+  F11 · "HOW I WORK" FAQ BLOCK (Profile → FAQ if available · or in overview)
+═══════════════════════════════════════════════════════════════════════
+
+▼ DO ▼
+  Upwork's profile FAQ section is buyer-facing · adds trust without
+  taking up overview space. If FAQ is shown on your profile, paste these.
+
+▼ COPY ▼
+
+Q: Do you work hourly or fixed-fee?
+
+A: Both. Most of my engagements are fixed-fee productized packs (see Projects above). Hourly is only for exploratory or extension scope · currently $145/hour.
+
+Q: How fast do you respond?
+
+A: Within 4 hours during my active window (22:00-10:00 UK / 09:00-21:00 Bangkok). I check Upwork notifications every couple of hours during that window.
+
+Q: Where do you actually do the work?
+
+A: From Bangkok. I work remote with clients globally. Compliance work especially benefits from the timezone offset · I can hand work back to your team overnight (your time) and have iteration ready by morning.
+
+Q: Do you have a non-Upwork portfolio?
+
+A: Yes. Every tool I reference in my profile is live and inspectable. Start at ai-nativesolutions.com or github.com/sjgant80-hub. Or just open any of the live URLs in my Portfolio entries above.
+
+Q: Do I own the code at the end?
+
+A: Yes. All my deliverables are MIT licensed. You get full ownership · I keep no rights over your codebase after delivery.
+
+Q: What if my project needs scope beyond your Projects?
+
+A: Send me a job invite or message with your specific situation. I'll scope it as either a custom fixed-fee or an hourly engagement. I respond within 4 hours.
+
+◊
+▲ END ▲
+
+═══════════════════════════════════════════════════════════════════════
+  F12 · SEAL PLACEMENT SWEEP (final pass · 5 minutes)
+═══════════════════════════════════════════════════════════════════════
+
+▼ DO ▼
+  Sweep all pasted fields. Verify:
+
+  □ headline (F1): does NOT contain ◊ (Upwork title field is too short to waste 1 char)
+  □ overview (F2): ENDS with ◊·κ=1 (single seal · close)
+  □ each Project description (F6 ×6): ends with ◊
+  □ each Portfolio body (F7 ×9): ends with ◊
+  □ video intro (F8): closing line is "◊" spoken or signed-off on screen
+  □ FAQ (F11): ends with ◊
+
+  Then: profile page screenshot · save to your phone.
+  This is the "before commit" receipt for your records.
+
+═══════════════════════════════════════════════════════════════════════
+  THE DON'T-SAY CHECK (16 refuted claims · pre-flight before client calls)
+═══════════════════════════════════════════════════════════════════════
+
+  Re-read v3 Section R · do not repeat any of these in proposals, calls,
+  or marketing copy:
+
+  ✗ marketplace ceiling $5K-$15K (REFUTED)
+  ✗ Enterprise hourly 2.3-2.4x marketplace (REFUTED)
+  ✗ $250+/hr bid 14.71% reply rate (REFUTED)
+  ✗ EU AI Act market $609M→$10.5B sizing (REFUTED)
+  ✗ EUR 17B-38B by 2030 (REFUTED)
+  ✗ SME compliance cost EUR 50K-500K envelope (REFUTED)
+  ✗ JSS 95%+ "4x earnings" ratio (REFUTED)
+  ✗ 92-profile portfolio-item study (REFUTED)
+  ✗ 9-18 month Expert-Vetted timeline (REFUTED)
+  ✗ Compliance Software 64% market share (REFUTED)
+  ✗ 40% of AI deployers rely on third-party vendors (REFUTED)
+  ✗ Information Security & Compliance "top-5" ranking (REFUTED)
+  ✗ Connects cost $0.15 with 12/bid (REFUTED · verify in your account)
+  ✗ Talent Cloud "requires Top-Rated Plus or Expert-Vetted" timeline (REFUTED)
+  ✗ JSS above 90% boost from 2025 algorithm update (REFUTED)
+  ✗ Specific fee tier percentages (CONFIRMED with caveat · label as observation)
+
+═══════════════════════════════════════════════════════════════════════
+  AUDIT TRAIL · WHAT CHANGED ACROSS THE 7 PASSES
+═══════════════════════════════════════════════════════════════════════
+
+  PASS 1 · base
+    · v3 Section O (headline · rate · overview · skills · portfolio)
+    · v3 Section M (3 archetypes with starter / standard / premium pricing)
+    · v3 Section N (3 proposal templates)
+    · v3 Sections P-T (ramp · si-didy · don't-say · open questions)
+
+  PASS 2 · IP refresh
+    · added botler to portfolio (today's ship)
+    · "3 sovereign builds this week" → "4 live tools + 24-tool ripple" framing
+    · receipt-density increased in overview hook
+
+  PASS 3 · character-count tightening
+    · headline trimmed: 102 chars → 92 chars
+    · overview hook tightened: 244 → 244 (under 200 unattainable while keeping
+      "24 tools in one week" receipt · accepted)
+    · project descriptions: each kept under Upwork's ~3,000 char limit
+    · video intro: 90 seconds target
+
+  PASS 4 · don't-say compliance scrub
+    · removed all market-sizing language from overview + portfolio
+    · removed Enterprise-multiple claims from rate justification
+    · removed any "top-5" / "highest reply rate" ranking claims
+
+  PASS 5 · tone unification
+    · "Stripe of compliance · drop-in shims, not 200-page reports" maintained
+    · receipts-not-theatre voice throughout
+    · "I shipped X in Y hours" pattern in each portfolio entry
+    · "what I do / what I don't do" structure in overview
+
+  PASS 6 · seal placement
+    · ◊·κ=1 reserved for overview close (single field)
+    · ◊ at end of every product / portfolio body
+    · NO seal in title field (Upwork field too short)
+    · NO κ=φ⁴ stamping (reserved for builds, not for Upwork copy)
+
+  PASS 7 · final paste-readiness
+    · all USD verified
+    · all live URLs verified live (curl-tested today)
+    · all brackets eliminated except 3 in proposal templates (intentional)
+    · all character counts inside Upwork limits
+
+═══════════════════════════════════════════════════════════════════════
+  END OF SMOOTH PACK · ◊·κ=1 · 90 minutes to a converged Upwork posture
+  the lane is Info Sec & Compliance · the IP is yours · go execute
+═══════════════════════════════════════════════════════════════════════
