@@ -46,17 +46,121 @@ const SERVER_PORT  = parseInt(process.env.SIDIDY_PORT || '1618', 10); // φ port
 const USER_DATA    = './si-didy-profile';
 const VIEWPORT     = { width: 1280, height: 800 };
 
-// ◊ pre-launch self-heal · reset exit_type so Chromium doesn't show the
-// "restore pages" yellow bar (which intercepts focus + blocks DOM ops)
-// after a prior force-kill. Call before every launchPersistentContext.
+// ◊·κ=φ⁴ · TIER 2 BROWSER ATTACH (Thomas-upgrade) · use your REAL Chrome via CDP
+// Set CHROME_CDP_URL to attach to a Chrome started with --remote-debugging-port=N.
+// Drives your already-logged-in browser · no Playwright launch · no ghost tabs ·
+// no separate profile sync · no login fights. The actual sovereign move.
+//
+// Start Chrome once:
+//   chrome.exe --remote-debugging-port=9222
+//   (or use a fresh debug profile · see briefs/CDP-SETUP.txt)
+// Then:
+//   export CHROME_CDP_URL=http://localhost:9222
+//   npm run cockpit
+const CHROME_CDP_URL = process.env.CHROME_CDP_URL || null;
+
+// ◊ pre-launch self-heal · v2 · prime 379
+// Three things that cause Chromium to spawn ghost tabs on launch:
+//   1. exit_type="Crashed" → yellow "restore pages" bar (intercepts focus + blocks DOM ops)
+//   2. Sessions/Session_* + Sessions/Tabs_* files → Chromium replays the prior session's tabs
+//      ALONGSIDE the one Playwright opens, producing a "second window blocking the right one"
+//   3. restore_on_startup defaults to 1 ("continue where you left off") → same effect even
+//      when Sessions/ is empty if Tabs/* lingers
+// This function nukes all three. Call before EVERY launchPersistentContext.
 function resetProfileExitType() {
   try {
-    const prefPath = path.join(USER_DATA, 'Default', 'Preferences');
-    if (!fs.existsSync(prefPath)) return;
-    let pref = fs.readFileSync(prefPath, 'utf8');
-    pref = pref.replace(/"exit_type":"Crashed"/g, '"exit_type":"Normal"')
-               .replace(/"exited_cleanly":false/g, '"exited_cleanly":true');
-    fs.writeFileSync(prefPath, pref);
+    const defaultDir = path.join(USER_DATA, 'Default');
+    if (!fs.existsSync(defaultDir)) return;
+
+    // 1 · clear crash-restore + the yellow bar trigger
+    const prefPath = path.join(defaultDir, 'Preferences');
+    if (fs.existsSync(prefPath)) {
+      let pref = fs.readFileSync(prefPath, 'utf8');
+      pref = pref.replace(/"exit_type":"Crashed"/g, '"exit_type":"Normal"')
+                 .replace(/"exited_cleanly":false/g, '"exited_cleanly":true');
+      // 3 · set restore_on_startup = 5 ("Open the New Tab page") · this is the canonical
+      // Chromium policy value that disables session restore. Try injecting into both
+      // legacy ("restore_on_startup") and modern ("session.restore_on_startup") keys.
+      try {
+        const j = JSON.parse(pref);
+        if (j && typeof j === 'object') {
+          j.restore_on_startup = 5;
+          j.session = j.session || {};
+          j.session.restore_on_startup = 5;
+          j.startup_urls = [];
+          pref = JSON.stringify(j);
+        }
+      } catch (_) {
+        // if Preferences isn't pure JSON (shouldn't happen but defensive), fall through
+        // and just write the regex-cleaned version
+      }
+      fs.writeFileSync(prefPath, pref);
+    }
+
+    // 2 · wipe the saved-tabs state · this is the ACTUAL bytes Chromium reads to restore tabs
+    const sessionsDir = path.join(defaultDir, 'Sessions');
+    if (fs.existsSync(sessionsDir)) {
+      for (const f of fs.readdirSync(sessionsDir)) {
+        if (/^(Session_|Tabs_|Current|Last)/.test(f)) {
+          try { fs.unlinkSync(path.join(sessionsDir, f)); } catch (_) {}
+        }
+      }
+    }
+    // Some Chromium builds also write Current Session / Current Tabs / Last Session / Last Tabs
+    // directly into Default/ (not inside Sessions/). Wipe those too.
+    for (const f of ['Current Session', 'Current Tabs', 'Last Session', 'Last Tabs']) {
+      const p = path.join(defaultDir, f);
+      if (fs.existsSync(p)) {
+        try { fs.unlinkSync(p); } catch (_) {}
+      }
+    }
+  } catch (_) { /* swallow · best-effort */ }
+}
+
+// ◊·κ=φ⁴ · canonical browser-context entry point · prime 379
+// One helper · two paths · CDP attach (Tier 2 · drives user's real Chrome) takes
+// precedence over Playwright launch (Tier 1 · spawns own Chromium with the
+// ghost-tab + login-fight problems). Set CHROME_CDP_URL to flip the switch.
+async function getOrLaunchContext(chromium) {
+  if (CHROME_CDP_URL) {
+    try {
+      console.log(`◊ T2 · CDP attach → ${CHROME_CDP_URL} · driving your real Chrome (no Playwright launch · no ghost tabs · no login)`);
+      const browser = await chromium.connectOverCDP(CHROME_CDP_URL);
+      const ctxs = browser.contexts();
+      const ctx = ctxs[0] || await browser.newContext({ viewport: VIEWPORT });
+      // DELIBERATELY skip closeOrphanPages — those are the user's real tabs
+      return ctx;
+    } catch (e) {
+      console.warn('◊ T2 · CDP attach failed (' + e.message + ') · falling back to T1 Playwright launch');
+    }
+  }
+  resetProfileExitType();
+  const ctx = await chromium.launchPersistentContext(USER_DATA, {
+    headless: false,
+    viewport: VIEWPORT,
+    args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check']
+  });
+  await closeOrphanPages(ctx);
+  return ctx;
+}
+
+// ◊ post-launch self-heal · v2 · close any orphan tabs the profile restored anyway
+// (defence-in-depth · if Chromium's behaviour changes or the prefs wipe is partial,
+// this still guarantees a single-tab context). Call IMMEDIATELY after
+// launchPersistentContext, BEFORE _page = _ctx.pages()[0].
+async function closeOrphanPages(ctx) {
+  try {
+    if (!ctx || typeof ctx.pages !== 'function') return;
+    const pages = ctx.pages();
+    if (pages.length <= 1) return;
+    // keep the first page · close the rest
+    const orphans = pages.slice(1);
+    for (const p of orphans) {
+      try { await p.close({ runBeforeUnload: false }); } catch (_) {}
+    }
+    if (orphans.length) {
+      console.log(`◊ T3 · closed ${orphans.length} orphan tab(s) from prior session`);
+    }
   } catch (_) { /* swallow · best-effort */ }
 }
 const MAX_TURNS    = 200;
@@ -310,11 +414,7 @@ async function ensureBrowser() {
   console.log('◊ T3 · loading Playwright (lazy) · this may take a sec…');
   const { chromium } = await import('playwright');
   _playwright = chromium;
-  resetProfileExitType(); _ctx = await chromium.launchPersistentContext(USER_DATA, {
-    headless: false,
-    viewport: VIEWPORT,
-    args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check']
-  });
+  _ctx = await getOrLaunchContext(chromium);
   _page = _ctx.pages()[0] || await _ctx.newPage();
   await _page.setViewportSize(VIEWPORT);
   console.log('◊ T3 · Chromium open · persistent profile: ' + USER_DATA);
@@ -355,12 +455,54 @@ const tierThreeMcp = createSdkMcpServer({
         return { content: [{ type: 'image', data: buf.toString('base64'), mimeType: 'image/png' }] };
       }
     ),
-    tool('browser_type', 'TIER 3 · Type text at current focus.',
+    tool('browser_type', 'TIER 3 · Type text at current focus (keystroke-by-keystroke, fires onChange per char). Prefer browser_fill for long descriptions / form fields · single atomic set-value avoids debounce truncation that caused the "exiteng cutoff" bug.',
       { text: z.string() },
       async ({ text }) => {
         const page = await ensureBrowser();
         await page.keyboard.type(text, { delay: 15 });
         return { content: [{ type: 'text', text: `typed ${text.length} chars` }] };
+      }
+    ),
+    tool('browser_fill', '◊·κ=φ⁴ · TIER 3 · ATOMIC SET-VALUE · Fills a labeled field in one operation · bypasses keystroke loop · bypasses Fiverr/Upwork onChange debounce truncation. Use this for ANY description / textarea / long-text field · use `label` to target by ARIA label (most robust) OR `selector` to target by CSS selector if label is ambiguous. Returns the actual character count written back from the DOM so you can verify the field accepted the full text.',
+      { label: z.string().optional().describe('ARIA label or placeholder of the field · e.g. "Project description"'),
+        selector: z.string().optional().describe('CSS selector if label-based location fails · e.g. "textarea[name=description]"'),
+        text: z.string().describe('the full text to set · no length cap from us · the field itself may truncate, see returned char count') },
+      async ({ label, selector, text }) => {
+        if (!label && !selector) return { content: [{ type: 'text', text: '✗ provide either label or selector' }] };
+        const page = await ensureBrowser();
+        let locator, strategy;
+        if (label) {
+          // try ARIA label first · most robust to UI changes
+          try {
+            locator = page.getByLabel(label, { exact: false });
+            await locator.first().waitFor({ state: 'visible', timeout: 3000 });
+            strategy = `label:"${label}"`;
+          } catch (_) {
+            // fall through to placeholder
+            try {
+              locator = page.getByPlaceholder(label);
+              await locator.first().waitFor({ state: 'visible', timeout: 2000 });
+              strategy = `placeholder:"${label}"`;
+            } catch (e2) {
+              if (!selector) return { content: [{ type: 'text', text: `✗ no field with label/placeholder "${label}" found in 5s · pass selector instead` }] };
+            }
+          }
+        }
+        if (!locator || strategy === undefined) {
+          locator = page.locator(selector);
+          await locator.first().waitFor({ state: 'visible', timeout: 3000 });
+          strategy = `selector:"${selector}"`;
+        }
+        // atomic fill · single set-value · NO keystroke loop · NO debounce drop
+        await locator.first().fill(text);
+        // verify · read back the field value
+        let writtenLen = 0;
+        try {
+          const val = await locator.first().inputValue();
+          writtenLen = (val || '').length;
+        } catch (_) { writtenLen = text.length; }
+        const truncated = writtenLen < text.length;
+        return { content: [{ type: 'text', text: `${truncated ? '⚠ TRUNCATED' : '✓ filled'} via ${strategy} · sent ${text.length} chars · field has ${writtenLen} chars${truncated ? ` (field limit ≈ ${writtenLen})` : ''}` }] };
       }
     ),
     tool('browser_key', 'TIER 3 · Press a key or combo (Enter, Tab, Control+a, etc.).',
@@ -1130,8 +1272,7 @@ const estateMcp = createSdkMcpServer({
           const { chromium } = await import('playwright');
           if (!_ctx) {
             console.log('◊ T3 · Chromium opening (persistent profile · ' + USER_DATA + ')');
-            resetProfileExitType();
-            _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check'] });
+            _ctx = await getOrLaunchContext(chromium);
             _page = _ctx.pages()[0] || await _ctx.newPage();
             await _page.setViewportSize(VIEWPORT);
           }
@@ -1404,7 +1545,7 @@ NEXT: hand outputs to linkedin_drop(frame:'${scope}', screenshot_dir:'${outDir}'
           const { chromium } = await import('playwright');
           if (!_ctx) {
             console.log('◊ T3 · Chromium opening (persistent profile · ./si-didy-profile)');
-            resetProfileExitType(); _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check'] });
+            _ctx = await getOrLaunchContext(chromium);
             _page = _ctx.pages()[0] || await _ctx.newPage();
             await _page.setViewportSize(VIEWPORT);
           }
@@ -1612,7 +1753,7 @@ SAFETY: NEVER auto-send · ALL drafts await Simon's approval`;
           const { chromium } = await import('playwright');
           if (!_ctx) {
             console.log('◊ T3 · Chromium opening (persistent profile · ./si-didy-profile)');
-            resetProfileExitType(); _ctx = await chromium.launchPersistentContext(USER_DATA, { headless: false, viewport: VIEWPORT, args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check'] });
+            _ctx = await getOrLaunchContext(chromium);
             _page = _ctx.pages()[0] || await _ctx.newPage();
             await _page.setViewportSize(VIEWPORT);
           }
@@ -1715,10 +1856,7 @@ SAFETY: NEVER auto-send · ALL drafts await Simon's approval`;
           if (!_ctx) {
             const { chromium } = await import('playwright');
             console.log('◊ T3 · Chromium opening (persistent profile · ./si-didy-profile)');
-            resetProfileExitType(); _ctx = await chromium.launchPersistentContext(USER_DATA, {
-              headless: false, viewport: VIEWPORT,
-              args: ['--disable-blink-features=AutomationControlled', '--disable-session-crashed-bubble', '--restore-last-session=false', '--no-first-run', '--no-default-browser-check']
-            });
+            _ctx = await getOrLaunchContext(chromium);
             _page = _ctx.pages()[0] || await _ctx.newPage();
             await _page.setViewportSize(VIEWPORT);
           }
@@ -2494,7 +2632,31 @@ AUTH
 - Use env interpolation: write \${env:GITHUB_TOKEN} in headers/args · it's replaced at call time.
 - list_env_keys tells you which auth vars are available · NEVER print the values.
 
-SAFETY (non-negotiable)
+SAFETY · TRUST TIERS (the operator-friendly upgrade · prime 379)
+Every action falls into one of three trust tiers. The brief or the user can promote/demote operations between tiers · default behavior is Tier A for unknown actions.
+
+  TIER A · ALWAYS PAUSE · public irreversible · single ask_user per action
+    examples: LinkedIn POST · Upwork Submit · payment · message-send · gh repo delete
+    examples: public-facing edits that announce to others (DMs, posts, sends)
+    behavior: ask_user before EVERY individual call · no exceptions
+
+  TIER B · PAUSE ONCE PER MISSION · private reversible · one ask_user covers N items
+    examples: Fiverr portfolio save · profile field update · gig description edit
+    examples: ANY save that only affects the operator's own account · easily edited later
+    behavior: at the FIRST Tier-B operation of a mission, ask_user "OK to auto-approve
+    the rest of this mission's Tier-B saves? Reply 'all' to auto-approve · 'each' to keep
+    pausing per item · 'stop' to halt." Cache the answer for the rest of the mission.
+
+  TIER C · NO PAUSE · soft-state reads + form-field fills
+    examples: browser_navigate · browser_screenshot · browser_click on form fields,
+    examples: dropdowns, checkboxes · browser_type into text fields · browser_scroll
+    behavior: just do it · these don't commit anything · operator can revert by closing tab
+
+When a brief explicitly assigns trust tiers to its steps · honor them.
+When a brief is silent · default to Tier A for anything labeled Save/Submit/Send/Delete/Confirm.
+This applies across ALL execution tiers (T0/T1/T2/T3) · CLI deletes need Tier A too.
+
+LEGACY SAFETY (still applies · trust tiers do not weaken these)
 - BEFORE any irreversible action (Save, Submit, Send, Delete, Confirm, payment, message-send):
     call ask_user with a clear yes/no question.
     Do not perform the action until the user replies "yes" or "go".
@@ -2653,7 +2815,7 @@ const allowedTools = [
   'mcp__cli__cli_run', 'mcp__cli__cli_which',
   'mcp__http__http_fetch', 'mcp__http__graphql_query',
   'mcp__browser__browser_screenshot', 'mcp__browser__browser_click',
-  'mcp__browser__browser_type', 'mcp__browser__browser_key',
+  'mcp__browser__browser_type', 'mcp__browser__browser_fill', 'mcp__browser__browser_key',
   'mcp__browser__browser_scroll', 'mcp__browser__browser_wait',
   'mcp__browser__browser_navigate', 'mcp__browser__browser_upload',
   'mcp__browser__browser_url',

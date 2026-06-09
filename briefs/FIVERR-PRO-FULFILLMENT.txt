@@ -1,0 +1,454 @@
+◊·κ=φ⁴ · si-didy · Fiverr Pro profile fulfillment · v2 · prime 379
+
+═══════════════════════════════════════════════════════════════════════
+  WHAT CHANGED FROM v1 (from the run earlier today · learnings)
+═══════════════════════════════════════════════════════════════════════
+
+LESSON 1 · keystroke-by-keystroke browser_type was truncating long
+descriptions mid-word ("exiteng" cutoff on the ExitEngine entry).
+FIX: this brief uses browser_fill (atomic page.fill()) for every
+description. Single set-value · no debounce drop · verified char count
+returned · explicit truncation warning if Fiverr's field is shorter
+than the text we sent.
+
+LESSON 2 · v1 brief silently assumed portfolio = one-step form. Fiverr
+has STEP 1 OF 2 → STEP 2 OF 2 where step 2 is image upload + tags.
+FIX: each portfolio item now has a STEP 2 handler · uses pre-rendered
+thumbnails from packs/FIVERR-PACK-V1/screenshots/ if available · falls
+through to browser_screenshot of the live tool URL otherwise.
+
+LESSON 3 · pause-before-every-Save (Tier A) created button fatigue.
+FIX: portfolio saves are reclassified as Tier B (private, reversible).
+ONE ask_user at the top of the mission asks Simon how he wants Tier B
+handled. After that, no pauses until the close-out summary.
+
+═══════════════════════════════════════════════════════════════════════
+  TRUST TIER ASSIGNMENT for THIS mission
+═══════════════════════════════════════════════════════════════════════
+
+  Tier C (no pause):  browser_navigate, screenshot, click, fill, scroll
+  Tier B (pause once): portfolio Save, experience Save, certification Save
+  Tier A (always pause): NONE in this mission · all surfaces are private
+
+═══════════════════════════════════════════════════════════════════════
+  MISSION
+═══════════════════════════════════════════════════════════════════════
+
+Drive Simon's Fiverr Pro profile from 8/12 to 11/12 (12/12 needs intro
+video which Simon records himself). Fill: 6 portfolio items (with both
+steps including images), 2 experience entries, 5 certifications.
+
+═══════════════════════════════════════════════════════════════════════
+  PRE-FLIGHT
+═══════════════════════════════════════════════════════════════════════
+
+1. mission_log("Fiverr Pro fulfillment v2 · 09 Jun 2026 · post-patch")
+2. memory_recall("fv-actions") · 5 entries · dedup what we've already done
+3. learn_recall(scope:"fiverr") · pull prior lessons
+
+═══════════════════════════════════════════════════════════════════════
+  STEP 0 · TRUST-TIER NEGOTIATION (one ask · sets the tone)
+═══════════════════════════════════════════════════════════════════════
+
+ask_user("◊ Fiverr Pro fulfillment ready · 6 portfolio + 2 experience + 5 cert.
+
+This mission has 13 Save operations · all are Tier B (your Fiverr account,
+fully reversible, easily edited later).
+
+How do you want them handled?
+  [all]  · auto-approve all 13 · I just report progress · fastest
+  [first] · pause once after the FIRST item lands so you can verify the
+            pattern · then auto-approve the remaining 12
+  [each] · pause before every single Save · slowest but most controlled
+  [stop] · cancel mission")
+
+Cache the answer in mission state. Honor it for the rest of the run.
+
+═══════════════════════════════════════════════════════════════════════
+  STEP 1 · LOGIN HANDOFF (skip if CDP attach is on · you're already in)
+═══════════════════════════════════════════════════════════════════════
+
+· browser_navigate https://pro.fiverr.com/seller_dashboard
+· browser_screenshot
+· If the page shows login fields:
+    - ask_user("Log in directly in the Chromium window · cookies persist
+       forever (T1) or you're already logged in (T2/CDP). Reply 'in'.")
+    - wait for reply
+    - browser_screenshot to confirm dashboard
+· If we're already on the dashboard: proceed
+
+memory_note({type:'fv', action:'session_ready', ts:Date.now()})
+
+═══════════════════════════════════════════════════════════════════════
+  PORTFOLIO ITEM 1 · fall-euaiact
+═══════════════════════════════════════════════════════════════════════
+
+  STEP 1 OF 2 · fields
+
+  browser_navigate https://pro.fiverr.com/users/sjgant80/portfolio/new
+  browser_screenshot · confirm "Add a new project to your portfolio"
+
+  browser_fill label:"Project name" text:"fall-euaiact · EU AI Act Compliance SDK"
+
+  For Industry (multi-select dropdown · 6 picks):
+    browser_click on the Industry dropdown
+    For each industry · browser_click the matching option (or browser_type the
+    name + Enter if the dropdown is search-based):
+      Software Development, Technology, Legal,
+      Marketing & Advertising, Financial & Business Services,
+      Health Care & Medical Center
+
+  browser_click Project duration dropdown · select "3 to 6 months"
+   (if not present, pick closest: "More than 6 months" or "1 to 3 months")
+
+  browser_fill label:"Project cost" text:"25000"
+   (no commas, no $ sign)
+
+  browser_click MM dropdown · select 03
+  browser_click YY dropdown · select 2026
+
+  browser_fill label:"Project description" text:"""
+fall-euaiact is the open-source EU AI Act compliance SDK now embedded in 30+ live AI products. Engaged to ship a production-ready toolkit ahead of the August 2026 enforcement deadline.
+
+Delivered:
+· Risk classifier across all 4 tiers (Prohibited/High/Limited/Minimal)
+· Article 11 Annex IV documentation generator · 14-field schema · 6 EU languages · exports Markdown, HTML print-ready, JSON envelope
+· Article 12 audit-shim · SHA-256 prevHash chain · IndexedDB persistence · drop-in vanilla JS
+· Article 50 transparency badge factory · 5 categories · A11y role=note
+· Ed25519 signing layer · libsodium browser + node:crypto server
+
+Pure ESM, zero hard deps, MIT licence forever. SDK ships at v1.1.0 with 25 named exports + TypeScript definitions. LinkedIn launch series drove 10K+ impressions, 50+ saves week one.
+
+Repo: github.com/sjgant80-hub/fall-euaiact
+"""
+
+  CRITICAL: if browser_fill returns "⚠ TRUNCATED · field has N chars",
+  log the limit: memory_note({type:'fv', action:'description_limit_discovered',
+  field_limit: N, ts:Date.now()}). The next portfolio items use that limit.
+
+  browser_screenshot · show filled form
+
+  ─── decision point per trust-tier answer ───
+    If trust=all: just browser_click Continue (no pause)
+    If trust=first and this is item 1: ask_user("Item 1 step 1 looks
+      right? Reply 'go' to Continue and auto-approve the rest, or 'fix
+      X' to correct.")
+    If trust=each: ask_user("OK to click Continue on item 1?")
+
+  STEP 2 OF 2 · gallery + tags
+
+  browser_screenshot · confirm step 2 loaded (look for "Add cover image"
+  / "Project gallery" / similar)
+
+  COVER IMAGE upload:
+    Check if packs/FIVERR-PACK-V1/screenshots/gig-3-annexiv.png exists
+    (it's the rendered EU AI Act thumbnail · pre-built · 1280x769).
+    If yes · browser_upload selector:"input[type=file]" path:"packs/FIVERR-PACK-V1/screenshots/gig-3-annexiv.png"
+    If no · browser_navigate https://sjgant80-hub.github.io/fall-euaiact/
+            browser_screenshot · save as ./tmp-cover-fall-euaiact.png
+            browser_navigate back to the portfolio step 2
+            browser_upload selector:"input[type=file]" path:"./tmp-cover-fall-euaiact.png"
+
+  TAGS (if present · usually 3-5 keywords):
+    browser_fill label:"Tags" text:"eu-ai-act, compliance, annex-iv, sovereign-software, mit"
+    (or click the tag input and browser_type each then Enter)
+
+  browser_screenshot · final review
+
+  ─── Tier B Save · honor trust setting ───
+    If trust=all or (trust=first and item>1): browser_click Save
+    If trust=first and item=1: ask_user("Save item 1 to portfolio?")
+    If trust=each: ask_user("Save item 1?")
+
+  memory_note({type:'fv', action:'portfolio:fall-euaiact:saved', ts:Date.now()})
+
+═══════════════════════════════════════════════════════════════════════
+  PORTFOLIO ITEM 2 · GymOps
+═══════════════════════════════════════════════════════════════════════
+
+  Same flow as item 1 · these fields:
+
+  Project name:  GymOps · Sovereign AI Gym Operations
+  Industry:      Software Development, Technology, Health Care & Medical Center,
+                 Marketing & Advertising, Financial & Business Services, Legal
+  Duration:      1 to 3 months
+  Cost:          8000
+  Started:       04 / 2026
+  Description (~720 chars · tighter):
+    """
+GymOps is a single-file sovereign replacement for $300/month gym-management SaaS (Mindbody, Glofox, GymMaster). Runs entirely in the buyer's browser · IndexedDB persistence · zero servers · MIT.
+
+· Member CRM with check-in tracking and retention scoring
+· Class scheduling and waitlist management
+· 8-card onboarding flow covering sales, retention, ops
+· BYOK LLM cascade (Claude / OpenAI / WebLLM offline) for coach scripts
+· Per-client branding via single config.json · multi-tenant
+· KCC κ-ledger compliance · fall-euaiact audit baked
+
+Deployed live across Thailand, Vietnam, Indonesia, Australia. PWA · MIT forever.
+Live: sjgant80-hub.github.io/gymops/sales.html
+"""
+
+  Cover image: packs/FIVERR-PACK-V1/screenshots/gig-5-saas-replacement.png
+   (fallback: screenshot of gymops/sales.html)
+
+  Tags: gym-software, sovereign, vanilla-js, single-file, byok-llm, pwa
+
+  Save according to trust setting. memory_note.
+
+═══════════════════════════════════════════════════════════════════════
+  PORTFOLIO ITEM 3 · GroundLevel
+═══════════════════════════════════════════════════════════════════════
+
+  Project name:  GroundLevel · Sovereign UK Legal-Tech Platform
+  Industry:      Legal, Software Development, Technology, Education,
+                 Marketing & Advertising, Financial & Business Services
+  Duration:      1 to 3 months
+  Cost:          15000
+  Started:       05 / 2026
+  Description (~800 chars):
+    """
+Single-file legal-tech platform for UK practitioners and litigants in person. Replaces 3+ £200/month SaaS subscriptions with one HTML file the user owns forever.
+
+· 12 guided-step modules: case file, evidence vault, deadline tracker, complaint factory
+· 50+ pre-drafted UK letter templates with citations
+· CASE_DB: 50+ landmark UK cases compressed offline-queryable
+· 7-strand weave engine across constitutional, criminal, civil, employment, housing, commercial, procedural strands
+· AI cascade T0-T3 + risk scoring · BYOK LLM
+· Service worker · offline-first PWA · PDF print
+· fall-euaiact audit-shim + Konomi Ed25519 evidence integrity
+
+Single HTML · MIT · works offline. Live across multiple practitioners.
+Live: sjgant80-hub.github.io/groundlevel/
+"""
+
+  Cover image: browser_navigate https://sjgant80-hub.github.io/groundlevel/
+   then browser_screenshot · save as ./tmp-cover-groundlevel.png
+   browser_navigate back · browser_upload that PNG.
+
+  Tags: uk-legal-tech, case-research, sovereign, single-file, mit
+
+  Save per trust setting.
+
+═══════════════════════════════════════════════════════════════════════
+  PORTFOLIO ITEM 4 · ExitEngine
+═══════════════════════════════════════════════════════════════════════
+
+  Project name:  ExitEngine · Sovereign Company-in-a-Box
+  Industry:      Software Development, Technology, Marketing & Advertising,
+                 Financial & Business Services, Education, Legal
+  Duration:      1 to 3 months
+  Cost:          12000
+  Started:       04 / 2026
+  Description (~750 chars):
+    """
+Single-file business OS for solo founders. Replaces the typical CRM + accounts + site-builder + analytics + tutoring SaaS stack with one browser-resident HTML file. MIT forever, no recurring fees.
+
+· Hub dashboard · tool grid · single config.json drives everything
+· 5-phase Jungian arc tutor with 8 lessons · adaptive AI cascade
+· Inline-functional CRM, Accounts, Site builder, Analytics
+· 6 wrapper links to canonical estate tools for advanced workflows
+· 5 lesson HTMLs covering start, pricing, clients, money, grow
+· Service worker · PWA-installable · audit-shim baked
+· Per-client config builder · multi-tenant ready
+
+For founders walking launch → first revenue → repeatability.
+Live: sjgant80-hub.github.io/exitengine/
+"""
+
+  Cover image: browser_navigate the exitengine URL, screenshot, upload.
+
+  Tags: solo-founder, company-os, sovereign, single-file, mit
+
+  Save per trust setting.
+
+═══════════════════════════════════════════════════════════════════════
+  PORTFOLIO ITEM 5 · Botler
+═══════════════════════════════════════════════════════════════════════
+
+  Project name:  Botler · Personal On-Device AI Assistant
+  Industry:      Software Development, Technology, Marketing & Advertising,
+                 Education, Financial & Business Services, Legal
+  Duration:      Less than 1 month   (fall back: "1 to 3 months")
+  Cost:          6000
+  Started:       05 / 2026
+  Description (~700 chars):
+    """
+Personal AI that runs entirely on the user's device. No cloud · no third-party data exposure · AI lives in browser cache forever after first load.
+
+· WebLLM Llama-3.2-3B-Instruct-q4f16_1-MLC baked as always-on offline engine
+· OAuth integration to Gmail and Calendar (read-only · PKCE flow)
+· Inbox processing · drag-drop files · paste URLs · pull Gmail threads
+· Auto-journal scheduler · markdown export bundle
+· 5-command UI · IndexedDB memory · PWA-installable
+· audit-shim baked · estate-mesh BroadcastChannel signal
+
+For executives and researchers who want Claude-class AI without exposing inbox/calendar to a third-party cloud.
+Live: sjgant80-hub.github.io/botler/
+"""
+
+  Cover image: browser_navigate botler URL, screenshot, upload.
+   Or use packs/FIVERR-PACK-V1/screenshots/gig-6-ai-mvp.png as alternative.
+
+  Tags: personal-ai, on-device, webllm, sovereign, mit
+
+  Save per trust setting.
+
+═══════════════════════════════════════════════════════════════════════
+  PORTFOLIO ITEM 6 · AI Native Solutions hub
+═══════════════════════════════════════════════════════════════════════
+
+  Project name:  AI Native Solutions · Sovereign Tool Marketplace
+  Industry:      Software Development, Technology, Marketing & Advertising,
+                 Education, Financial & Business Services, Legal
+  Duration:      More than 6 months
+  Cost:          20000
+  Started:       02 / 2026
+  Description (~780 chars):
+    """
+AI Native Solutions is the curated marketplace and discovery platform for sovereign single-file AI tools. Each tool runs entirely in the buyer's browser · no servers · MIT-licensed · zero recurring fees.
+
+· Hub architecture · 30+ shipped sovereign tools across compliance, CRM, scheduling, forms, content engines, legal-tech, gym ops, personal AI
+· Live marketplace with guild signup (fall-vetter Cassandra-mode gating)
+· Forge-detail pages with try-free interactive demos
+· Auto-sync new repo registrations + payment-link generation
+· GitHub-native DM channel via Issue Forms
+· Estate-wide BroadcastChannel mesh
+· Reverse cross-link to teslasolar guild
+
+30+ live products. Whole estate runs on a single sovereign Konomi Ed25519 root.
+Live: ai-nativesolutions.com
+"""
+
+  Cover image: browser_navigate ai-nativesolutions.com, screenshot, upload.
+
+  Tags: ai-marketplace, sovereign, mit, single-file, estate
+
+  Save per trust setting.
+
+═══════════════════════════════════════════════════════════════════════
+  EXPERIENCE ENTRIES (find Experience section in dashboard)
+═══════════════════════════════════════════════════════════════════════
+
+  browser_navigate https://pro.fiverr.com/seller_dashboard
+  Find and browser_click "Add experience"
+  browser_screenshot
+
+  ENTRY 1:
+    browser_fill label:"Title" text:"Founder · AI Native Solutions"
+    browser_fill label:"Company" text:"AI Native Solutions"
+    From: 2024  ·  To: Present (or current year)
+    Description (~650 chars):
+      """
+Founder and lead architect of the AI Native Solutions sovereign-tool estate. Shipped 30+ single-file AI products across compliance, CRM, scheduling, content, legal-tech verticals. Author of fall-euaiact (open-source EU AI Act SDK), GroundLevel (UK legal-tech), GymOps (APAC gym software), and the LinkedIn 10K-impression content formula.
+
+Stack: vanilla JavaScript · IndexedDB · BYOK LLM cascade (Claude/OpenAI/Gemini/WebLLM) · Ed25519 Konomi signing · MIT licence on every ship.
+"""
+    Save per trust setting.
+
+  ENTRY 2:
+    Title: Independent AI Compliance Consultant
+    Company: Independent
+    From: 2024  ·  To: Present
+    Description (~600 chars):
+      """
+Specialise in EU AI Act (Regulation 2024/1689) risk classification, Article 11 Annex IV documentation, Article 12 audit chain installation, and Article 50 transparency disclosures.
+
+Deliver production-ready, MIT-licensed compliance toolkits to AI-product teams across the EU and APAC. Typical engagements: 24-hour classifications, 5-day Annex IV generators, 72-hour transparency badge installs. All deliverables tamper-evident via Ed25519 envelope signing.
+"""
+    Save per trust setting.
+
+  memory_note each entry.
+
+═══════════════════════════════════════════════════════════════════════
+  CERTIFICATIONS / ACCOMPLISHMENTS
+═══════════════════════════════════════════════════════════════════════
+
+  browser_navigate https://pro.fiverr.com/seller_dashboard
+  Find "Add certifications" · browser_click
+  browser_screenshot
+
+  Add these 5 (one entry each · or paste-block if single-textarea):
+
+    1. Name: fall-euaiact SDK · Open-Source Author
+       Org: sjgant80-hub (self-published)
+       Year: 2026
+
+    2. Name: GroundLevel UK Legal-Tech · Architect
+       Org: sjgant80-hub (self-published)
+       Year: 2026
+
+    3. Name: Konomi Protocol · Ed25519 Sovereign Signing Standard
+       Org: AI Native Solutions
+       Year: 2026
+
+    4. Name: LinkedIn 10K+ Impression Series · EU AI Act
+       Org: LinkedIn (verifiable analytics)
+       Year: 2026
+
+    5. Name: 30+ Live MIT-Licensed Sovereign AI Tools
+       Org: github.com/sjgant80-hub
+       Year: 2024-2026
+
+  Save per trust setting after each (or once at the end if single-block).
+  memory_note each entry.
+
+═══════════════════════════════════════════════════════════════════════
+  CLOSE-OUT
+═══════════════════════════════════════════════════════════════════════
+
+· browser_navigate https://pro.fiverr.com/seller_dashboard
+· browser_screenshot · confirm Profile Strength reads 11/12 (12/12 needs
+  intro video which Simon records himself · separate task)
+
+· learn_log({
+    scope: 'fiverr',
+    lesson: 'v2 fulfilment results · what worked, UI gotchas, time per item,
+             description char limits discovered, trust-tier UX feedback',
+    success: true
+  })
+
+· mission_finish({ outcome: 'Fiverr Pro profile · 6 portfolio + 2 experience
+   + 5 cert filled and saved · pending intro video · time elapsed Xmin · char
+   limits discovered: portfolio=N exp=M cert=K · trust-tier mode: <setting>' })
+
+═══════════════════════════════════════════════════════════════════════
+  ERROR RECOVERY
+═══════════════════════════════════════════════════════════════════════
+
+· If browser_fill returns TRUNCATED · use the discovered limit for the
+  REST of the descriptions · don't re-truncate the already-filled one
+  (Fiverr already cut it off · just continue · note in memory).
+
+· If a tier-B Save fails (validation error / network):
+  - screenshot the error
+  - ask_user("Save failed on item X · here's the error · how to proceed?
+    Reply 'retry' / 'skip' / 'stop'")
+
+· If Fiverr's UI differs from what's described:
+  - DO NOT improvise field values
+  - screenshot · ask_user("UI differs · here's what I see · how to fill?")
+  - wait for guidance
+
+· If an Industry dropdown option isn't there (e.g. "Health Care & Medical
+  Center" missing in some categories):
+  - pick the closest fallback from the descending priority list:
+    Education > Consulting > Other
+  - log in memory which fallback was used
+
+═══════════════════════════════════════════════════════════════════════
+  HARD GUARDRAILS · NOT NEGOTIABLE
+═══════════════════════════════════════════════════════════════════════
+
+· NO posting on LinkedIn (unrelated to this mission)
+· NO sending Upwork proposals (unrelated)
+· NO scheduling anything (li-schedule.jsonl stays empty)
+· NO Tier-B Saves before the user has answered Step 0
+· NO closing the Chromium window unless explicitly told
+· NO assuming defaults · ALWAYS ask if uncertain
+· If the user types 'STOP' at any prompt · halt immediately · save state
+  to memory · mission_finish with outcome 'halted_by_user'
+
+═══════════════════════════════════════════════════════════════════════
+
+For the people not the few. ◊·κ=φ⁴

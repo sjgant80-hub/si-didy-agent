@@ -1,0 +1,91 @@
+◊·κ=φ⁴ · si-didy · CDP-attach setup · Thomas-upgrade · prime 379
+
+═══════════════════════════════════════════════════════════════════════
+  WHY THIS · the Thomas answer
+═══════════════════════════════════════════════════════════════════════
+
+Playwright (T1) spawns its OWN Chromium with its OWN profile.
+Result: ghost tabs from saved sessions, login fights, profile sync issues,
+        detectable automation fingerprint.
+
+CDP attach (T2) drives YOUR REAL CHROME.
+Result: already logged into Fiverr/LinkedIn/Upwork forever, no ghost tabs
+        (you control your tabs), your real fingerprint, no separate profile,
+        instant launch.
+
+"Playwright is for noobs" — Thomas. He's right.
+
+═══════════════════════════════════════════════════════════════════════
+  ONE-TIME SETUP · 2 MINUTES · Windows
+═══════════════════════════════════════════════════════════════════════
+
+1. Close all Chrome windows (important · Chrome detects multiple instances
+   and ignores the debug flag if there's already one running).
+
+2. Open a fresh PowerShell terminal · paste:
+
+   $chrome = "${env:ProgramFiles}\Google\Chrome\Application\chrome.exe"
+   if (-not (Test-Path $chrome)) { $chrome = "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe" }
+   Start-Process $chrome -ArgumentList @(
+     "--remote-debugging-port=9222",
+     "--user-data-dir=$env:LOCALAPPDATA\Google\Chrome\User Data",
+     "--restore-last-session=false"
+   )
+
+   This opens YOUR real Chrome (with all your logins) on debug port 9222.
+
+3. Confirm by opening http://localhost:9222/json/version in any tab. You
+   should see a JSON with "Browser":"Chrome/..." and a webSocketDebuggerUrl.
+
+4. In a SEPARATE PowerShell, before starting si-didy, set:
+
+   $env:CHROME_CDP_URL = "http://localhost:9222"
+
+5. Start si-didy from that same terminal:
+
+   cd C:\Users\sjgan\Downloads\si-didy-agent
+   npm run cockpit
+
+   You should see in the boot log:
+   ◊ T2 · CDP attach → http://localhost:9222 · driving your real Chrome ...
+
+   (Instead of ◊ T3 · loading Playwright lazy ...)
+
+═══════════════════════════════════════════════════════════════════════
+  HOW IT WORKS AT RUNTIME
+═══════════════════════════════════════════════════════════════════════
+
+When si-didy needs a browser, getOrLaunchContext() checks CHROME_CDP_URL.
+If set: chromium.connectOverCDP() attaches to your real Chrome.
+        No new window opens · si-didy drives your existing one.
+        New tabs si-didy creates are clearly visible (you see them appear).
+If unset: falls back to T1 Playwright launch (the old behavior · still
+          works · uses ./si-didy-profile with the ghost-tab patches).
+
+So the same agent.mjs works both ways. Toggle by setting/unsetting the
+env var. Defaults to T1 for backward compatibility.
+
+═══════════════════════════════════════════════════════════════════════
+  TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════
+
+· "CDP attach failed (connect ECONNREFUSED)" — Chrome not started with
+   --remote-debugging-port, or already-running Chrome ate the flag. Close
+   all Chrome windows · retry step 2.
+
+· si-didy spawned its own Chromium anyway — CHROME_CDP_URL is empty in
+   the agent's env. Check with: echo $env:CHROME_CDP_URL
+
+· Chrome opens but si-didy can't see your tabs — different Chrome user-
+   data-dir. The default is the one in step 2. If you use a different
+   profile, change --user-data-dir to match.
+
+· You don't want si-didy touching your main browsing — start a dedicated
+   debug Chrome with a fresh data dir:
+   --user-data-dir=$env:LOCALAPPDATA\Google\Chrome\sidify-debug
+   Log into Fiverr/LinkedIn/Upwork once in THAT Chrome · si-didy attaches
+   to it · your main Chrome stays clean.
+
+═══════════════════════════════════════════════════════════════════════
+
+For the people not the few. ◊·κ=φ⁴
