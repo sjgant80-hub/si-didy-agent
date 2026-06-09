@@ -2866,7 +2866,11 @@ console.log('\n◊ tiers loaded:');
 console.log('   T0 · CLI       · ' + CLI_ALLOW.size + ' commands allowed');
 console.log('   T1 · HTTP      · REST + GraphQL ready');
 console.log('   T2 · MCP proxy · ' + (Object.keys(configuredMcps).length ? Object.keys(configuredMcps).join(', ') : '(none registered · create ./mcps.json to add)'));
-console.log('   T3 · Browser   · Playwright (lazy · loaded on first browser_* call)');
+if (CHROME_CDP_URL) {
+  console.log('   T3 · Browser   · ◊ CDP ATTACH → ' + CHROME_CDP_URL + ' · drives your real Chrome');
+} else {
+  console.log('   T3 · Browser   · Playwright (lazy) · set CHROME_CDP_URL to attach to real Chrome');
+}
 console.log('   ·· · Memory   · ./memory · ./missions · ./queues · ./packs');
 
 // list available packs at startup
