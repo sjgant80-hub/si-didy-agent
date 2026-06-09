@@ -332,7 +332,98 @@ Repo: github.com/sjgant80-hub/fall-euaiact
   NEXT POSTS QUEUED (Monday morning rotation)
 ═══════════════════════════════════════════════════════════════════════
 
-  POST #6 · GroundLevel SDK · UK case-search for legal-tech founders
+═══════════════════════════════════════════════════════════════════════
+  POST #6 · OPERATOR · McKinsey framework cascade · 4-surface ecosystem · paste-ready
+═══════════════════════════════════════════════════════════════════════
+
+  USE CASE · OPERATOR launch · 4 surfaces shipped same day (HTML + SDK + API + MCP)
+  · audience pivot to strategy/consulting buyers · adjacent to EU AI Act series
+  · ties to deep-api (research backbone) as the credibility multiplier
+
+▼ COPY ▼
+
+Most strategy decks die before slide 3 because the framework order is wrong.
+
+McKinsey's edge isn't smarter frameworks. They use the same 6 you'd find in any MBA textbook: MECE · Porter 5 · 7S · BCG · Value-Driver Tree · Minto pyramid. The edge is the ORDER they apply them, and the research backbone that makes every claim defensible under the CFO's microscope.
+
+I open-sourced both.
+
+import { createDeck } from '@sjgant80-hub/operator';
+
+const deck = await createDeck({
+  question: "Should we acquire X?",
+  research: 'deep-api',           // ← adversarial-verified findings
+  frameworks: ['MECE', 'Porter5', 'Minto'],
+});
+
+await deck.export({ format: 'reveal' });  // also pdf, gslides, pptx
+
+OPERATOR runs the McKinsey framework cascade against your strategic question, pulls research via deep-api (3-vote adversarial verify · 52% of plausible LLM claims fail this gate), and emits a reveal.js / PDF / PPTX deck where every supporting claim has a citation and a refute-attempt receipt.
+
+The frameworks come from the textbook. The order is the moat. The verification is what makes it survive the CFO test.
+
+Same playbook as the EU AI Act series (15K+ impressions, 70+ saves over 3 posts · thank you). Build it once · defensible by construction.
+
+OPERATOR live: sjgant80-hub.github.io/operator/
+deep-api repo: github.com/sjgant80-hub/deep-api
+npm: @sjgant80-hub/operator
+MCP plugin (Claude Desktop): @sjgant80-hub/operator-mcp
+MIT: forever
+
+For founders writing investor decks · PMs writing PRDs · consultants on a 48-hour turnaround.
+
+P.S. · final week of the 50% promo. First 3 DMs get my productized M&A strategy deck retrofit for $2,000 (normally $4,000). Fixed-fee. 7 days. Your strategic question → cited deck → CFO-ready. Comment "OPERATOR" or DM me.
+
+For the people not the few.
+
+◊·κ=φ⁴
+
+▲ END COPY ▲
+
+  CHARS · ~1,910 · fits clean (LinkedIn limit 3,000)
+
+  WITHIN 30 SECONDS · drop this PINNED COMMENT:
+
+▼ COMMENT ▼
+
+The 6-framework cascade and what each surfaces:
+
+1. MECE (Mutually Exclusive · Collectively Exhaustive)
+   → blueprints the problem space so nothing gets double-counted
+
+2. PORTER 5 (5 Forces)
+   → maps industry structure · where margin actually lives
+
+3. 7S (Strategy · Structure · Systems · Shared values · Skills · Style · Staff)
+   → the organisational alignment check · catches the "great plan, wrong company" failure
+
+4. BCG (Growth-Share Matrix)
+   → portfolio prioritisation · which bets get the capital
+
+5. VALUE-DRIVER TREE
+   → traces every recommendation back to a measurable financial impact
+
+6. MINTO PYRAMID
+   → the only framework that gets the deck PAST slide 3 · top-down argument structure
+
+The order matters because the OUTPUT of one becomes the INPUT of the next. Skip MECE and Porter inherits double-counting. Skip 7S and BCG over-invests in misaligned units. Skip Minto and your perfectly analysed deck loses the CFO at "agenda."
+
+deep-api sits underneath the whole stack: every claim that lands in the deck gets a 3-vote adversarial check first. 52% of plausible LLM-generated claims fail this gate. Half your typical AI-drafted strategy memo is refutable.
+
+Four surfaces shipped same day:
+- Live HTML · sjgant80-hub.github.io/operator
+- SDK · @sjgant80-hub/operator on npm
+- API · operator-api on Render (POST /v1/deck)
+- MCP plugin · @sjgant80-hub/operator-mcp for Claude Desktop
+
+Repo: github.com/sjgant80-hub/operator
+
+◊
+
+▲ END COMMENT ▲
+
+═══════════════════════════════════════════════════════════════════════
+  POST #7 · GroundLevel SDK · UK case-search for legal-tech founders (shelved · was #6)
     · audience pivot to legal-tech buyers
     · code: searchCases('unfair dismissal', 'employment')
 
