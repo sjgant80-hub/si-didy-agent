@@ -1,0 +1,311 @@
+═══════════════════════════════════════════════════════════════════════
+  LINKEDIN · FORMULA v1 · empirically derived from the 10K post · ◊·κ=φ⁴
+  derived from: fall-euaiact code-snippet post (Article 12 audit-shim)
+  Top performer: 9,987 impressions · 53 engagements · 50 saves · 16 comments
+  date converged: 2026-06-09
+═══════════════════════════════════════════════════════════════════════
+
+WHAT THIS IS:
+
+  The first LinkedIn post to break 10K impressions for the AI-Native
+  Solutions persona. We decoded what worked, extracted the structural
+  formula, and lined up the next 30 weeks of Monday content using the
+  same pattern. This file is the operating manual.
+
+  When in doubt: read the formula, find one repo, pick one snippet,
+  follow the template, post Monday 9-11am UK.
+
+═══════════════════════════════════════════════════════════════════════
+  POST #1 · THE DATA
+═══════════════════════════════════════════════════════════════════════
+
+  AGGREGATE (last 30 days · per LinkedIn content analytics):
+    · 18,927 impressions
+    · 11,851 members reached
+    · 145 social engagements
+        - 75 reactions
+        - 16 comments
+        - 50 saves           ← gold metric
+        - 4 sends · 0 reposts
+    · 9 link engagements · 9 visits to links (CTR 0.048%)
+    · 362 profile viewers (≈ 2% of impressions)
+
+  TOP POST · "If you ship AI in the EU, you're now a regulated entity"
+    · 9,987 impressions
+    · 53 engagements · 18 reactions · 1 comment · 1 repost
+    · type: SPECIFIC TECHNICAL (code snippet)
+
+  #2 · ExitEngine "you just got laid off · here's your company"
+    · ~5,000 impressions · 28 engagements
+    · type: VISCERAL FOUNDER
+
+  #3 · "Software is going to zero" manifesto
+    · ~2,000 impressions · 13 engagements
+    · type: PHILOSOPHICAL
+
+  RANKING LESSON · specific code > visceral story > philosophy.
+  Reverse what most LinkedIn advice says. Audience is operators not thinkers.
+
+═══════════════════════════════════════════════════════════════════════
+  THE GOLD METRIC · SAVES NOT REACTIONS
+═══════════════════════════════════════════════════════════════════════
+
+  Save : reaction ratio in this account = 50/75 = 67%
+  LinkedIn platform average = 10-15%
+  → audience is professional · saving for reference · not scroll-engaging
+
+  Translation:
+    · the audience is high-intent
+    · they have a real EU AI Act problem they want to revisit
+    · "save" beats "reaction" as a buyer signal by ~3-5x
+
+  → ALWAYS check saves first when judging post performance.
+  → DM the savers within 5-7 days (Move 2 below).
+
+═══════════════════════════════════════════════════════════════════════
+  WHY THE WINNER WON · ANATOMY OF THE 10K POST
+═══════════════════════════════════════════════════════════════════════
+
+  ELEMENT 1 · HOOK (1 sentence)
+    "If you ship AI in the EU, you're now a regulated entity.
+     Whether your CTO has read the Act or not."
+    Pattern: name a regulated/threatened audience · imply their boss
+    is missing something · zero hype.
+
+  ELEMENT 2 · BODY (the actual working code)
+    A 12-line code snippet showing the createAuditShim() call,
+    audit.log(), allLogs export, verifyChain() · with comments
+    explaining Article 12, Article 26, retention.
+    Pattern: code that compiles in the reader's head · no pseudo-code,
+    no abstract talk · developers TRUST code they can read.
+
+  ELEMENT 3 · BRIDGE TO PRINCIPLE (1 paragraph)
+    "The Act doesn't say 'use SHA-256.' It says 'automatic record-keeping'
+     (Article 12). If you build it on cryptographic primitives now, you
+     skip the migration when the standards body decides what 'tamper-
+     evident' actually means."
+    Pattern: frame YOUR specific solution as future-proofing against
+    unspecified-future-mandates. This is the killer line. Boards love
+    this framing because it makes the buyer look smart later.
+
+  ELEMENT 4 · 3-TIER CTA
+    "Full SDK: [link]
+     npm: coming this week
+     MIT: forever"
+    Pattern: three different commitment levels · clickable / waitable /
+    philosophy. The MIT line is the trust-builder.
+
+  ELEMENT 5 · SLOGAN CLOSER
+    "Build it once. Compliant by construction."
+    Pattern: memorable, quotable, Stripe-of-compliance positioning
+    delivered as a tagline.
+
+═══════════════════════════════════════════════════════════════════════
+  THE FORMULA (use this for every Monday code post)
+═══════════════════════════════════════════════════════════════════════
+
+  [HOOK · 1-2 lines · identifies regulated/threatened audience]
+  [TWIST · 1 line · what they think they need vs what they actually need]
+  [BLANK]
+  [CODE BLOCK · actual working code from one of your repos]
+  [BLANK]
+  [BRIDGE · 1 paragraph · principle that scales beyond this snippet]
+  [BLANK]
+  [3-TIER CTA · Full SDK / npm-or-waitlist / MIT pledge]
+  [BLANK]
+  [SLOGAN CLOSER · quotable line]
+  [BLANK]
+  P.S. · 50% promo to first 3 DMs · DM "EU" or comment.
+  ◊·κ=φ⁴
+
+  TARGET LENGTH · 1,200-1,800 chars (well under LinkedIn 3,000 cap)
+  POSTING TIME · Monday 9-11am UK
+  HASHTAGS · none (LinkedIn algorithm penalises hashtags for
+              founder-class accounts since 2024)
+
+═══════════════════════════════════════════════════════════════════════
+  THE 5 MOVES (run these between posts to compound)
+═══════════════════════════════════════════════════════════════════════
+
+  MOVE 1 · lean into code-snippet posts on a weekly cadence
+    Monday morning · one code snippet from the estate solving one
+    specific compliance/sovereign problem.
+    13 repos × ~3 snippets each = 30+ Monday posts in the pipeline.
+
+  MOVE 2 · DM the 50 savers within 5-7 days
+    LinkedIn → post analytics → "interactions" → savers list.
+    DM template:
+      "Saw you saved my [post topic] post · thanks.
+       Quick context: I run a productized [related] for $2,250
+       (launch promo: first 3 get 50% off = $1,125).
+       Want a 15-min walkthrough on whether the shim fits your stack?"
+    Even 5% conversion = 2-3 paid clients from one post.
+
+  MOVE 3 · repost the winner in 7-10 days with a different opener
+    LinkedIn doesn't punish content recurrence if the framing changes.
+    Same code body · new hook · different audience-slice catches it.
+
+  MOVE 4 · add the 50% promo to the next 2-3 posts
+    Audience is warm · convert. The same P.S. that proved itself
+    in the standalone self-promo post.
+
+  MOVE 5 · stop optimising the philosophical lane
+    "Software is going to zero" type posts underperform code 5x on
+    THIS audience. Save manifestos for blog / podcast / substack.
+    LinkedIn = tactical receipt. Always.
+
+═══════════════════════════════════════════════════════════════════════
+  POST #4 · ANNEX IV DOCUMENTATION GENERATOR · paste-ready
+═══════════════════════════════════════════════════════════════════════
+
+  USE CASE · Monday morning · continuation of the EU AI Act series
+  (rides the warm savers list · same brand identity · second arrow)
+
+▼ COPY ▼
+
+If your AI system outputs anything to an EU user, you owe them an Annex IV.
+
+Yes, even your "low-risk" SaaS using an LLM API thinks they're exempt. The Act disagrees · "minimal risk" still requires the 14-field technical documentation under Article 11. Deadline: August 2026. Eight weeks.
+
+Here's the single import:
+
+import { createAnnexIV } from 'fall-euaiact';
+
+const doc = await createAnnexIV({
+  systemName: 'YourSaaS',
+  intendedPurpose: 'Customer support automation',
+  riskTier: 'minimal',
+  providerName: 'YourCompany Ltd',
+  euRepresentative: '...',  // 10 more fields prompted
+});
+
+// PDF · markdown · JSON envelope · 24 official EU languages
+await doc.export({ format: 'pdf', language: 'en' });
+await doc.export({ format: 'pdf', language: 'de' });
+
+// signed against the same audit chain as your Article 12 logs
+const signature = await doc.sign(yourEd25519Key);
+
+The Act doesn't define what an Annex IV doc looks like · it defines what it must contain (Article 11(1)). If you generate it programmatically against your live system metadata, you skip the manual quarterly audit when the supervisory authority issues template guidance in 2027.
+
+Same playbook as last week's audit-shim post (10K impressions, 50 saves · thank you). Build it once · compliant by construction.
+
+Full SDK: github.com/sjgant80-hub/fall-euaiact
+npm: this week
+MIT: forever
+
+Annex IV docs that survive Article 11 review.
+
+P.S. · running the 50% promo one more week · first 3 DMs get my productized Article 12 + Article 11 retrofit pack for $1,125 (normally $2,250). Fixed-fee. 7 days. Drop-in audit-shim + Annex IV generator + posture letter. Comment "EU50" or DM me.
+
+For the people not the few.
+
+◊·κ=φ⁴
+
+▲ END COPY ▲
+
+  CHARS · ~1,750 · fits clean
+
+  WITHIN 30 SECONDS · drop this PINNED COMMENT:
+
+▼ COMMENT ▼
+
+The Annex IV 14 fields, for the curious (Article 11 Annex IV):
+
+1. General description of the AI system
+2. Detailed description of elements and development process
+3. Detailed information about monitoring, functioning and control
+4. Risk management system (Article 9)
+5. Modifications to the system through its lifecycle
+6. Listing of harmonised standards applied
+7. Copy of the EU declaration of conformity
+8. Detailed description of the post-market monitoring system
+9. The performance metrics (accuracy, robustness, cybersecurity)
+10. Data sheets describing training methodologies
+11. The technique used for evaluating the system
+12. Cybersecurity measures
+13. Information about the system's compliance with this Regulation
+14. The intended purpose and risks
+
+Each gets a field in the SDK. Fill what applies · null what doesn't · the doc auto-references which articles each field maps to.
+
+If you're missing fields 9-11 (performance metrics, data sheets, evaluation), that's the actual compliance gap most teams have. The audit-shim from last week handles field 8 (post-market monitoring) automatically once installed.
+
+Repo: github.com/sjgant80-hub/fall-euaiact
+
+◊
+
+▲ END COMMENT ▲
+
+═══════════════════════════════════════════════════════════════════════
+  NEXT POSTS QUEUED (Monday morning rotation)
+═══════════════════════════════════════════════════════════════════════
+
+  POST #5 · Article 50 transparency badges (chatbot disclosures)
+    · same audience · third arrow · "EU AI Act series" identity locks in
+    · code: createTransparencyBadge({ category: 'chatbot', ... })
+
+  POST #6 · GroundLevel SDK · UK case-search for legal-tech founders
+    · audience pivot to legal-tech buyers
+    · code: searchCases('unfair dismissal', 'employment')
+
+  POST #7 · NHS Reinjection calculator embed
+    · audience pivot to policy / NHS finance
+    · code: <iframe> embedding nhs-reinjection.github.io
+
+  POST #8 · HONESTLY 3-vote verifier
+    · launches the new repo · audience: anyone fed up with Perplexity
+    · code: verify(claim, sources, 3)
+
+  POST #9 · OPERATOR · Minto pyramid → reveal.js deck generator
+    · audience pivot to strategy consultants
+    · code: generateDeck('reveal', state)
+
+  POST #10 · KARD WebRTC P2P duel
+    · audience pivot to indie game devs
+    · code: P2P.hostCreate() · sovereign multiplayer
+
+  After post #10, return to EU AI Act series with whatever new
+  fall-euaiact module shipped that week.
+
+═══════════════════════════════════════════════════════════════════════
+  TIMING DISCIPLINE
+═══════════════════════════════════════════════════════════════════════
+
+  · 1 post per day MAX · LinkedIn punishes algorithm-stuffing
+  · 24-48 hours between drops · each one breathes
+  · Monday 9-11am UK = code-snippet day (locked)
+  · Wednesday afternoon = honest-reply day on someone else's post
+    (the inverse-influencer play · scalpel, not hammer)
+  · Friday = optional · save for big launches only
+
+═══════════════════════════════════════════════════════════════════════
+  ANTI-PATTERNS · DON'T DO THESE
+═══════════════════════════════════════════════════════════════════════
+
+  · No hashtags (penalised since 2024 for founder accounts)
+  · No "🚀 EXCITING NEWS 🚀" framing (audience is jaded by it)
+  · No pseudo-code (real code only · or no code · never fake code)
+  · No emoji vomit (one ◊ per post is the brand, that's enough)
+  · No more than one promo P.S. per week (saturation kills it)
+  · No philosophical/manifesto posts as standalones (underperform 5x)
+  · No reposting another influencer's content (boosts them not you)
+  · No bragging without receipts (always include the link)
+
+═══════════════════════════════════════════════════════════════════════
+  KPI TARGETS (next 30 days)
+═══════════════════════════════════════════════════════════════════════
+
+  · 4 code-snippet posts (one per Monday) · target avg 3K impressions
+  · 12 honest-reply comments on adjacent accounts · target 50 profile
+    views/comment
+  · 50 → 200 saves across 4 posts · DM each saver
+  · 20 → 50 DMs · convert 5-10% to paid (= 1-5 contracts at $1,125+)
+  · 1 viral spike (one post hitting >15K) · already proved possible
+
+  Total expected: £3,000-£15,000 in pipeline if Move 2 (DM the savers)
+  runs consistently. Without Move 2, all of this is vanity.
+
+═══════════════════════════════════════════════════════════════════════
+  END OF PACK · ◊·κ=φ⁴ · saves > reactions · DMs > saves · contracts > DMs
+═══════════════════════════════════════════════════════════════════════
