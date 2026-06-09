@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FIVERR-PACK-V1 · Thumbnails · 1280×769</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #11131a;
+    --cream: #e8e8ea;
+    --grey: #9a9aa3;
+    --brass: #b8974a;
+    --ox: #8b1a1a;
+    --teal: #5fb3a8;
+    --grain: rgba(255,255,255,0.012);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1a1a22;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--cream);
+    padding: 20px;
+  }
+  .controls {
+    position: fixed; top: 10px; right: 10px;
+    background: var(--void);
+    border: 1px solid var(--brass);
+    padding: 12px 16px;
+    border-radius: 4px;
+    z-index: 100;
+    font: 13px/1.4 'DM Sans', sans-serif;
+  }
+  .controls h3 {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--brass);
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  .controls button {
+    background: var(--brass);
+    color: var(--void);
+    border: none;
+    padding: 6px 10px;
+    margin: 4px 4px 0 0;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .controls button:hover { background: #d4ab50; }
+  .gig-label {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--brass);
+    font-size: 13px;
+    margin: 30px 0 8px;
+    letter-spacing: 0.05em;
+  }
+  /* Fiverr cover image spec: 1280x769 · 16:9.6 */
+  .thumb {
+    width: 1280px;
+    height: 769px;
+    background: var(--void);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #2a2a35;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    page-break-after: always;
+  }
+  .thumb::before {
+    /* subtle grain */
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(184,151,74,0.04) 0%, transparent 60%),
+      radial-gradient(circle at 80% 70%, rgba(95,179,168,0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .thumb::after {
+    /* corner mark */
+    content: '◊·κ=1';
+    position: absolute;
+    bottom: 28px; right: 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--brass);
+    opacity: 0.6;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+  }
+  .inner {
+    position: relative;
+    z-index: 2;
+    padding: 80px 70px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .badge {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: var(--brass);
+    background: rgba(184,151,74,0.08);
+    border: 1px solid rgba(184,151,74,0.4);
+    padding: 6px 16px;
+    border-radius: 20px;
+    letter-spacing: 0.12em;
+    align-self: flex-start;
+  }
+  .headline {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 82px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    max-width: 1100px;
+    margin-top: 22px;
+    font-weight: 700;
+  }
+  .thumb.compact .headline { font-size: 72px; }
+  .thumb.compact .code-block { font-size: 20px; padding: 18px 24px; margin-top: 24px; }
+  .headline em {
+    color: var(--brass);
+    font-style: normal;
+  }
+  .subhead {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 30px;
+    color: var(--grey);
+    font-weight: 400;
+    margin-top: 26px;
+    max-width: 900px;
+    line-height: 1.35;
+  }
+  .subhead strong { color: var(--cream); font-weight: 600; }
+  .code-block {
+    background: rgba(0,0,0,0.4);
+    border-left: 3px solid var(--teal);
+    padding: 22px 28px;
+    margin-top: 30px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    color: var(--cream);
+    line-height: 1.5;
+    max-width: 940px;
+  }
+  .code-block .kw { color: var(--teal); }
+  .code-block .fn { color: var(--brass); }
+  .code-block .str { color: #d4a04d; }
+  .code-block .comment { color: #6a6a73; font-style: italic; }
+
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 30px;
+  }
+  .price {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 64px;
+    color: var(--brass);
+    font-weight: 700;
+  }
+  .price small {
+    font-size: 26px;
+    color: var(--grey);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    margin-left: 8px;
+    letter-spacing: 0.04em;
+  }
+  .ribbon {
+    text-align: right;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .ribbon .delivery {
+    font-size: 24px;
+    color: var(--cream);
+    font-weight: 500;
+  }
+  .ribbon .by {
+    font-size: 16px;
+    color: var(--grey);
+    margin-top: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.08em;
+  }
+
+  /* Money-gig accent (GIG-3) */
+  .thumb.money .badge {
+    background: rgba(139,26,26,0.15);
+    border-color: var(--ox);
+    color: #e2a4a4;
+  }
+  .thumb.money .headline em { color: var(--ox); }
+  .thumb.money .price { color: var(--ox); }
+
+  /* API-gig accent (GIG-8) */
+  .thumb.api .badge {
+    background: rgba(95,179,168,0.12);
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+  .thumb.api .headline em { color: var(--teal); }
+  .thumb.api .price { color: var(--teal); }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .controls { display: none; }
+    .gig-label { display: none; }
+    .thumb { box-shadow: none; border: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <h3>◊·κ=1 · Thumbnail Render</h3>
+  <div>Spec: 1280×769 (Fiverr cover)</div>
+  <div style="margin-top:6px; color: var(--grey);">Use Chrome → Print → Save as PDF (Landscape)<br>or screenshot each panel.</div>
+  <button onclick="window.print()">Print to PDF</button>
+</div>
+
+<!-- ─────────────────────────────────────────────── GIG-1 -->
+<div class="gig-label">GIG-1 · classify your AI · $97</div>
+<div class="thumb">
+  <div class="inner">
+    <div>
+      <span class="badge">GIG-1 · EU AI ACT</span>
+      <h1 class="headline">Classify Your AI<br><em>In 24 Hours.</em></h1>
+      <div class="subhead">5-page PDF · tier + article cites + penalty exposure + <strong>14-field Annex IV gap list</strong> · delivered by tomorrow.</div>
+      <div class="code-block">
+<span class="comment">// powered by fall-euaiact (open source)</span><br>
+<span class="kw">import</span> { <span class="fn">classify</span> } <span class="kw">from</span> <span class="str">'fall-euaiact'</span>;<br>
+<span class="kw">const</span> r = <span class="fn">classify</span>(yourSystem);<br>
+<span class="comment">// → { tier: 'high', articles: ['Art 6'...] }</span>
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="price">$97<small>· from</small></div>
+      <div class="ribbon">
+        <div class="delivery">24-hour delivery</div>
+        <div class="by">sjgant80-hub · MIT</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────── GIG-2 -->
+<div class="gig-label">GIG-2 · audit-shim install · $147</div>
+<div class="thumb">
+  <div class="inner">
+    <div>
+      <span class="badge">GIG-2 · ARTICLE 12</span>
+      <h1 class="headline">Article 12<br><em>Audit Chain.</em></h1>
+      <div class="subhead">SHA-256 prev-hash · IndexedDB · drop-in vanilla JS · <strong>installed on your live product in 48h</strong>.</div>
+      <div class="code-block">
+<span class="kw">const</span> audit = <span class="fn">createAuditShim</span>();<br>
+<span class="kw">await</span> audit.<span class="fn">log</span>({ <span class="str">type</span>: <span class="str">'inference'</span> });<br>
+<span class="kw">const</span> { valid } = <span class="kw">await</span> audit.<span class="fn">verifyChain</span>();<br>
+<span class="comment">// → cryptographic compliance evidence</span>
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="price">$147<small>· from</small></div>
+      <div class="ribbon">
+        <div class="delivery">48-hour delivery</div>
+        <div class="by">sjgant80-hub · MIT</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────── GIG-3 · MONEY -->
+<div class="gig-label">GIG-3 · Annex IV docgen · $297 ← MONEY GIG</div>
+<div class="thumb money compact">
+  <div class="inner">
+    <div>
+      <span class="badge">GIG-3 · ANNEX IV · MONEY GIG</span>
+      <h1 class="headline">14 Fields.<br>6 Languages.<br><em>1 Generator.</em></h1>
+      <div class="subhead">Article 11 Annex IV documentation as a <strong>signed, re-runnable artifact</strong> — PDF, HTML, JSON envelope.</div>
+      <div class="code-block">
+<span class="kw">const</span> doc = <span class="fn">createAnnexIV</span>(spec);<br>
+<span class="kw">await</span> doc.<span class="fn">export</span>({ <span class="str">format</span>: <span class="str">'pdf'</span>, <span class="str">language</span>: <span class="str">'de'</span> });<br>
+<span class="kw">await</span> doc.<span class="fn">sign</span>(yourEd25519Key);<br>
+<span class="comment">// → BfDI · CNIL · Garante · ready forever</span>
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="price">$297<small>· from</small></div>
+      <div class="ribbon">
+        <div class="delivery">5-day delivery</div>
+        <div class="by">sjgant80-hub · MIT</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────── GIG-4 -->
+<div class="gig-label">GIG-4 · Article 50 transparency · $197</div>
+<div class="thumb">
+  <div class="inner">
+    <div>
+      <span class="badge">GIG-4 · ARTICLE 50</span>
+      <h1 class="headline">5 Categories.<br><em>6 Locales.</em></h1>
+      <div class="subhead">Article 50 transparency badges on every AI surface · chatbot, generated text/image, audio, video · <strong>A11y compliant · €15M penalty avoided</strong>.</div>
+      <div class="code-block">
+<span class="kw">const</span> badge = <span class="fn">createTransparencyBadge</span>({<br>
+&nbsp;&nbsp;<span class="str">category</span>: <span class="str">'chatbot'</span>, <span class="str">language</span>: <span class="str">'de'</span>,<br>
+});<br>
+badge.<span class="fn">mount</span>(<span class="str">'#chat-header'</span>);
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="price">$197<small>· from</small></div>
+      <div class="ribbon">
+        <div class="delivery">72-hour delivery</div>
+        <div class="by">sjgant80-hub · MIT</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────── GIG-5 -->
+<div class="gig-label">GIG-5 · sovereign SaaS replacement · $397</div>
+<div class="thumb">
+  <div class="inner">
+    <div>
+      <span class="badge">GIG-5 · SOVEREIGN</span>
+      <h1 class="headline">Stop Paying<br><em>$300/Month.</em></h1>
+      <div class="subhead">Name any SaaS · get a sovereign single-file replacement · <strong>IndexedDB · PWA · MIT · forever yours</strong>.</div>
+      <div class="code-block">
+<span class="comment">// HubSpot     → fallcrm</span><br>
+<span class="comment">// Calendly    → fallslot</span><br>
+<span class="comment">// Typeform    → fallform</span><br>
+<span class="comment">// Mailchimp   → falllist</span>
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="price">$397<small>· from</small></div>
+      <div class="ribbon">
+        <div class="delivery">7-day delivery</div>
+        <div class="by">sjgant80-hub · MIT</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────── GIG-6 -->
+<div class="gig-label">GIG-6 · sovereign AI MVP · $497</div>
+<div class="thumb">
+  <div class="inner">
+    <div>
+      <span class="badge">GIG-6 · MVP IN 10 DAYS</span>
+      <h1 class="headline">Your AI Tool.<br><em>Sovereign.</em></h1>
+      <div class="subhead">Spec → single HTML file · BYOK LLM cascade · WebLLM offline · audit chain baked · <strong>your tool, your code, forever</strong>.</div>
+      <div class="code-block">
+<span class="comment">// proof: 30+ shipped tools</span><br>
+<span class="comment">// gymops · groundlevel · botler ·</span><br>
+<span class="comment">// exitengine · 25 more on github.com</span><br>
+<span class="comment">// /sjgant80-hub</span>
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="price">$497<small>· from</small></div>
+      <div class="ribbon">
+        <div class="delivery">10-day delivery</div>
+        <div class="by">sjgant80-hub · MIT</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────── GIG-7 -->
+<div class="gig-label">GIG-7 · LinkedIn 10K-formula posts · $297</div>
+<div class="thumb">
+  <div class="inner">
+    <div>
+      <span class="badge">GIG-7 · 10,000 IMPRESSIONS</span>
+      <h1 class="headline">The Formula<br><em>That Pulled 10K.</em></h1>
+      <div class="subhead">5 paste-ready LinkedIn posts using the exact structure that earned <strong>9,987 impressions · 50 saves · 67% save:reaction</strong>.</div>
+      <div class="code-block">
+<span class="comment">// formula:</span><br>
+<span class="kw">hook</span>     → falsifiable threat (date + €)<br>
+<span class="kw">tension</span>  → one specific failure mode<br>
+<span class="kw">reveal</span>   → single import · 5-12 lines<br>
+<span class="kw">cta</span>      → trigger word, never "DM me"
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="price">$297<small>· from</small></div>
+      <div class="ribbon">
+        <div class="delivery">7-day delivery</div>
+        <div class="by">sjgant80-hub · proven IP</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────── GIG-8 · API -->
+<div class="gig-label">GIG-8 · classifier API endpoint · $47</div>
+<div class="thumb api">
+  <div class="inner">
+    <div>
+      <span class="badge">GIG-8 · JSON API</span>
+      <h1 class="headline">EU AI Act<br><em>As An Endpoint.</em></h1>
+      <div class="subhead">POST a system description · get tier, articles, confidence, Annex IV gap · <strong>live in 1 hour · Zapier / n8n / Make ready</strong>.</div>
+      <div class="code-block">
+<span class="kw">POST</span> /v1/classify<br>
+{ <span class="str">"description"</span>: <span class="str">"AI tool that..."</span> }<br>
+<span class="comment">// ↓</span><br>
+{ <span class="str">"tier"</span>: <span class="str">"high"</span>, <span class="str">"articles"</span>: [...] }
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="price">$47<small>· from</small></div>
+      <div class="ribbon">
+        <div class="delivery">1-hour delivery</div>
+        <div class="by">sjgant80-hub · hosted</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────── PROFILE BANNER -->
+<div class="gig-label">PROFILE BANNER · 1280×260 (Fiverr profile cover)</div>
+<div class="thumb" style="height: 260px;">
+  <div class="inner" style="padding: 40px 60px; flex-direction: row; align-items: center; justify-content: space-between;">
+    <div>
+      <span class="badge" style="font-size: 12px;">FIVERR · sjgant80-hub</span>
+      <h1 class="headline" style="font-size: 48px; margin-top: 12px;">Sovereign AI Tools · <em>EU AI Act Ready.</em></h1>
+    </div>
+    <div style="text-align: right;">
+      <div style="font-family: 'IBM Plex Mono', monospace; color: var(--brass); font-size: 16px; letter-spacing: 0.08em;">◊·κ=φ⁴</div>
+      <div style="font-family: 'DM Sans'; color: var(--grey); font-size: 14px; margin-top: 6px;">30+ shipped tools · MIT forever</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1229 @@
+═══════════════════════════════════════════════════════════════════════
+  FIVERR-PACK-V1 · sjgant80-hub · MASTER PASTE-READY PACK
+  ◊·κ=1 · sovereign deliveries · fall-euaiact baked into every gig
+═══════════════════════════════════════════════════════════════════════
+
+CONTENTS
+  §A  · STRATEGY · why Fiverr, your edge, the funnel
+  §B  · PROFILE · bio + tagline + skills + portfolio (paste-ready)
+  §C  · GIG-1 · EU AI Act risk classification report · $97/$197/$397
+  §D  · GIG-2 · Article 12 audit-shim install · $147/$247/$397
+  §E  · GIG-3 · Annex IV documentation generator · $297/$497/$897  ← MONEY GIG
+  §F  · GIG-4 · Article 50 transparency badges · $197/$397/$697
+  §G  · GIG-5 · sovereign single-file SaaS replacement · $397/$797/$1497
+  §H  · GIG-6 · sovereign AI tool MVP from spec · $497/$997/$1997
+  §I  · GIG-7 · LinkedIn 10K-formula post engineering · $297/$497/$897
+  §J  · GIG-8 · EU AI Act classifier API endpoint · $47/$97/$197
+  §K  · THUMBNAIL specs (1280×769 · 8 designs) → see fiverr-thumbnails.html
+  §L  · VIDEO SCRIPTS · 60-90 sec per gig
+  §M  · INTAKE BRIEFS · requirements form (paste into "Requirements" tab)
+  §N  · DELIVERY MESSAGE TEMPLATES · paste at completion
+  §O  · REVIEW-REQUEST SCRIPT · 5-star psychology
+  §P  · UPSELL / OFF-PLATFORM playbook (without breaking ToS)
+  §Q  · si-didy AUTOMATION HOOKS · auto-fulfill Tier 1
+  §R  · 30-DAY LAUNCH CALENDAR · day-by-day playbook
+  §S  · PRICING LADDER LOGIC · when to bump, when to hold
+  §T  · FAQ TEMPLATES · paste-ready for each gig
+  §U  · DISPUTE / REFUND PROTOCOLS
+
+═══════════════════════════════════════════════════════════════════════
+  §A · STRATEGY · WHY FIVERR
+═══════════════════════════════════════════════════════════════════════
+
+  THE GAME
+    Fiverr ≠ Upwork. Buyer arrives KNOWING what they want.
+    No proposals, no discovery, no race-to-bottom bidding.
+    They pick a tier · they pay · you ship.
+
+  YOUR EDGE
+    1. Sovereign single-file delivery pattern — ship in hours not weeks
+    2. fall-euaiact v1.1 SDK + Konomi signing baked into every delivery
+    3. Estate of 30+ shipped tools = visual proof + portfolio
+    4. 10K-impression LinkedIn formula = unique sales asset
+    5. MIT licence forever = no recurring fees = buyer love
+
+  THE FALL-EUAIACT MOAT
+    Every delivery footer ships with:
+      <!-- ◊·κ=1 · fall-euaiact embedded · MIT -->
+      <script src="https://sjgant80-hub.github.io/fall-euaiact/cdn/audit-shim.js"></script>
+
+    Buyer pays for a CRM → gets EU AI Act-ready CRM as bonus
+    Credit line in footer → drives traffic to your SDK
+    SDK → drives traffic back to higher-tier gigs
+
+  THE FUNNEL
+    Tier 1 ($47-197) · 30 orders · ~$4,500 · seeds reviews + algo
+        ↓ "thanks · BTW here's GIG-3 for next tier"
+    Tier 2 ($297-497) · 10 orders · ~$4,000 · proves credibility
+        ↓ in delivery message: "for ongoing retainer, message me"
+    Tier 3 ($797-1997) · 5 orders · ~$5,000 · qualified buyers
+        ↓ DM after 30-day Fiverr cooldown clears
+    Off-platform retainer ($2,500/mo) · 2-3 clients · recurring forever
+
+    90-day realistic target: $13K Fiverr + 2-3 retainers = $20K+/mo trail.
+
+  WHAT MAKES YOU PRO
+    To unlock Fiverr Pro (5.5% take vs 20%):
+      · ~$500 lifetime sales
+      · 5+ reviews at 4.7+
+      · Pro application with portfolio (use AIN hub + fall-euaiact + GymOps)
+    GIG-1 at $97 × 6 orders = $582 + 6 reviews = Pro-ready in ~7 days.
+
+═══════════════════════════════════════════════════════════════════════
+  §B · PROFILE · PASTE-READY
+═══════════════════════════════════════════════════════════════════════
+
+  DISPLAY NAME      Simon Gant
+  HEADLINE          EU AI Act Compliance Engineer · Sovereign Tool Builder
+  FIVERR USERNAME   sjgant_sovereign   (or simon_gant_ai)
+
+  TAGLINE (under name · 70 chars)
+  ─────────────────────────────────────────────────────────────────────
+  Sovereign AI tools · EU AI Act-ready · MIT-licensed · 24-48h delivery
+
+  BIO (1,000 char limit · use 980)
+  ─────────────────────────────────────────────────────────────────────
+  I ship sovereign, single-file AI tools that run entirely in your browser · no servers · no recurring fees · MIT-licensed forever.
+
+  Built the fall-euaiact SDK — the open-source EU AI Act compliance toolkit (Regulation 2024/1689) now embedded in 30+ live products. Every delivery I ship is Article 11/12/50 ready out of the box: audit chain baked in, Annex IV documentation auto-generated, transparency badges across 6 EU languages, Ed25519-signed envelopes.
+
+  What I build:
+   · EU AI Act risk classifications + compliance retrofits
+   · Annex IV documentation generators (PDF + 6 languages)
+   · Sovereign single-file replacements for $300/mo SaaS
+   · LinkedIn code-snippet posts (my 10K-impression formula)
+   · Custom AI tool MVPs from spec → live in days
+
+  Stack: vanilla JS · no framework · IndexedDB · BYOK LLM (Claude/OpenAI/Gemini/WebLLM offline). Buyer keeps the code, the data, and the keys. Forever.
+
+  github.com/sjgant80-hub · 10K+ LinkedIn impressions on EU AI Act series
+
+  SKILLS (15 slots · order matters)
+  ─────────────────────────────────────────────────────────────────────
+  1. EU AI Act Compliance
+  2. AI Risk Classification
+  3. Single-Page Application
+  4. AI Integration
+  5. JavaScript
+  6. Vanilla JS
+  7. Compliance Documentation
+  8. Annex IV
+  9. Audit Trail
+  10. Web Application Development
+  11. Sovereign Software
+  12. LinkedIn Content
+  13. Technical Writing
+  14. AI Strategy
+  15. GDPR Adjacent
+
+  LANGUAGES
+  ─────────────────────────────────────────────────────────────────────
+  English · Native/Bilingual
+
+  EDUCATION (optional but boosts trust)
+  ─────────────────────────────────────────────────────────────────────
+  Add Master Sovereign Architect · sjgant80-hub estate (self-shipped 2024-2026)
+
+  CERTIFICATIONS (paste in)
+  ─────────────────────────────────────────────────────────────────────
+  · fall-euaiact SDK author · open-source EU AI Act toolkit
+  · ◊·κ=φ⁴ Konomi master keyholder · Ed25519 sovereign signing
+  · 30+ shipped sovereign tools live on github.com/sjgant80-hub
+
+  PORTFOLIO ITEMS (8 slots · external URLs)
+  ─────────────────────────────────────────────────────────────────────
+  1. fall-euaiact SDK              → sjgant80-hub.github.io/fall-euaiact/
+  2. AI Native Solutions hub       → ai-nativesolutions.com  (use AIN domain)
+  3. GymOps · sovereign gym ops    → sjgant80-hub.github.io/gymops/sales.html
+  4. GroundLevel · UK legal-tech   → sjgant80-hub.github.io/groundlevel/
+  5. ExitEngine · company-in-a-box → sjgant80-hub.github.io/exitengine/
+  6. Botler · personal AI bottler  → sjgant80-hub.github.io/botler/
+  7. fall-euaiact npm (1.1.0)      → github.com/sjgant80-hub/fall-euaiact/tree/main/sdk
+  8. LinkedIn 10K post analysis    → screenshot of analytics + formula breakdown
+
+═══════════════════════════════════════════════════════════════════════
+  §C · GIG-1 · EU AI Act risk classification report · 24h
+═══════════════════════════════════════════════════════════════════════
+
+  CATEGORY    Programming & Tech > AI Services > AI Consulting
+  TAGS        eu ai act · ai compliance · risk classification · regulation · annex iii
+
+  TITLE (80 char limit · use 75)
+  ─────────────────────────────────────────────────────────────────────
+  I will classify your AI system against the EU AI Act in 24 hours
+
+  SEARCH TAGS (5)
+  ─────────────────────────────────────────────────────────────────────
+  euaiact · aicompliance · airisk · regulation · annexiv
+
+  PACKAGES
+  ─────────────────────────────────────────────────────────────────────
+
+                       │  BASIC      │  STANDARD    │  PREMIUM
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  Name                 │  Classify   │  Classify+   │  Compliance
+                       │             │              │  Starter
+  Price                │  $97        │  $197        │  $397
+  Delivery             │  1 day      │  2 days      │  3 days
+  Revisions            │  1          │  2           │  Unlimited
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  5-page PDF report    │  ✓          │  ✓           │  ✓
+  Tier + article cites │  ✓          │  ✓           │  ✓
+  Penalty exposure     │  ✓          │  ✓           │  ✓
+  14-field gap list    │  ✓          │  ✓           │  ✓
+  30-min consult call  │             │  ✓           │  ✓
+  Annex IV draft       │             │  ✓           │  ✓
+  Audit-shim install   │             │              │  ✓
+  Konomi-signed env    │             │              │  ✓
+
+  DESCRIPTION (1,200 chars · paste-ready)
+  ─────────────────────────────────────────────────────────────────────
+  EU AI Act Regulation 2024/1689 enforcement kicks in August 2nd. Every AI system serving an EU user owes a documented risk classification — even "low risk" ones.
+
+  I will:
+  · Run your AI system description through the fall-euaiact classifier (the open-source SDK I built and ship to 30+ live products)
+  · Manually verify against the Act's text + Annex III categories
+  · Return a 5-page PDF: your tier (Prohibited / High / Limited / Minimal), the exact articles you owe compliance against, penalty exposure (up to €35M or 7% global turnover), the 14-field Annex IV gap list, and the deadlines you're racing.
+
+  This is the same classification engine that powers compliance audits at companies shipping AI tools across the EU. The classifier itself runs in under 1ms · the human review is what makes it bulletproof.
+
+  Premium tier includes drop-in installation of my Article 12 audit shim (SHA-256 prevHash chain, IndexedDB persistence) directly into your live product. From order to compliance evidence: 72 hours.
+
+  Honest framing: research-grade, not legal advice. For systems with significant exposure, take this report to qualified EU counsel · it will save them (and you) weeks.
+
+  fall-euaiact SDK: github.com/sjgant80-hub/fall-euaiact · MIT · forever.
+
+  ─────────────────────────────────────────────────────────────────────
+
+  REQUIREMENTS (buyer fills in after order)
+  ─────────────────────────────────────────────────────────────────────
+  1. One-paragraph description of your AI system (what it does, who uses it)
+  2. Industry / use-case (e.g. hiring, credit scoring, customer support, marketing)
+  3. EU users? (yes/no/some)
+  4. Any existing risk classification or compliance docs? (paste/upload)
+  5. (PREMIUM ONLY) Live URL of the product so I can scope the audit-shim install
+  6. (OPTIONAL) Anything else I should know
+
+  FAQ (paste-ready · 4 questions)
+  ─────────────────────────────────────────────────────────────────────
+  Q: Is this legal advice?
+  A: No. This is a research-grade compliance classification. Take the report to qualified counsel for any system with significant deployment.
+
+  Q: Can you handle non-EU companies serving EU users?
+  A: Yes. The EU AI Act applies extraterritorially. If your system serves any EU user, it falls under the Act.
+
+  Q: What does the Premium audit-shim install actually do?
+  A: Drops a vanilla JS audit module into your live product. Every inference, decision, and override gets SHA-256 chained into IndexedDB — Article 12 evidence ready for supervisory authority requests.
+
+  Q: Is the fall-euaiact SDK really free / open source?
+  A: Yes. MIT licence. github.com/sjgant80-hub/fall-euaiact. The classifier + audit-shim are CDN-free for anyone. I get paid for delivery, customisation, and the doc layer.
+
+═══════════════════════════════════════════════════════════════════════
+  §D · GIG-2 · Article 12 audit-shim install · 48h
+═══════════════════════════════════════════════════════════════════════
+
+  CATEGORY    Programming & Tech > Web Development > Audit & Logging
+  TAGS        article 12 · audit trail · compliance · javascript · sha-256
+
+  TITLE
+  ─────────────────────────────────────────────────────────────────────
+  I will install an EU AI Act Article 12 audit chain in your product in 48h
+
+  SEARCH TAGS
+  ─────────────────────────────────────────────────────────────────────
+  euaiact · article12 · audittrail · javascript · compliance
+
+  PACKAGES
+                       │  BASIC      │  STANDARD    │  PREMIUM
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  Name                 │  1 surface  │  3 surfaces  │  Full estate
+  Price                │  $147       │  $247        │  $397
+  Delivery             │  2 days     │  3 days      │  5 days
+  Revisions            │  1          │  2           │  3
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  audit-shim install   │  1 product  │  3 products  │  Unlimited
+  SHA-256 prev-hash    │  ✓          │  ✓           │  ✓
+  IndexedDB persist    │  ✓          │  ✓           │  ✓
+  CSV/JSON export      │  ✓          │  ✓           │  ✓
+  Verify-chain helper  │             │  ✓           │  ✓
+  Konomi Ed25519       │             │              │  ✓
+  1h architecture call │             │              │  ✓
+
+  DESCRIPTION
+  ─────────────────────────────────────────────────────────────────────
+  Article 12 of the EU AI Act requires automatic logging of every event affecting your AI system's behaviour: inputs, outputs, operator interventions, overrides. The fine for missing logs: up to €15M or 3% global turnover.
+
+  I will:
+  · Drop my open-source audit-shim.js into your product (vanilla JS · no npm deps · works in browser, Node, Workers)
+  · Wire it to your existing inference + UI event points (you don't need to refactor)
+  · Configure SHA-256 prev-hash chaining with IndexedDB persistence (offline-first)
+  · Add export + chain-verify helpers so you can ship logs to a regulator on demand
+
+  Premium tier adds Konomi Ed25519 signing — every log entry gets a signed envelope, cryptographic proof of integrity that survives supervisory review.
+
+  Same shim shipping in fall-euaiact SDK v1.1 + powering 30+ live tools across my estate. MIT licence. You own the code forever.
+
+  Live demo: sjgant80-hub.github.io/fall-euaiact/
+
+  REQUIREMENTS
+  ─────────────────────────────────────────────────────────────────────
+  1. Live URL or repo link to your product(s)
+  2. List of the events you want logged (inference / output / operator override / etc.)
+  3. Tech stack (vanilla / React / Vue / etc. — shim works in all but I'll adapt)
+  4. (PREMIUM) Konomi public-key acceptance: paste yours, or I'll generate one for you
+
+  FAQ
+  ─────────────────────────────────────────────────────────────────────
+  Q: Will this work with my React/Vue/Next.js app?
+  A: Yes. The shim is framework-agnostic — drop in, call log(event), done.
+
+  Q: Where do the logs live?
+  A: IndexedDB by default (offline-first, browser-local). Optional sink to memory or your own endpoint.
+
+  Q: Can the chain be tampered with?
+  A: Every entry hashes the previous. Verify the chain at any time — if anything was edited, verifyChain() returns the broken index.
+
+  Q: How is this different from just using a database?
+  A: Article 12 requires automatic logging with prev-hash integrity. A DB write alone doesn't satisfy the Act — the cryptographic chain does. That's what the shim builds.
+
+═══════════════════════════════════════════════════════════════════════
+  §E · GIG-3 · Annex IV documentation generator · 5 days  ← MONEY GIG
+═══════════════════════════════════════════════════════════════════════
+
+  CATEGORY    Programming & Tech > AI Services > AI Compliance
+  TAGS        annex iv · article 11 · technical documentation · ai compliance · eu ai act
+
+  TITLE
+  ─────────────────────────────────────────────────────────────────────
+  I will build your EU AI Act Annex IV documentation generator in 5 days
+
+  SEARCH TAGS
+  ─────────────────────────────────────────────────────────────────────
+  annexiv · article11 · euaiact · aicompliance · technicaldoc
+
+  PACKAGES
+                       │  BASIC      │  STANDARD    │  PREMIUM
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  Name                 │  1 system   │  3 systems   │  Multi-language
+                       │             │              │  + signed
+  Price                │  $297       │  $497        │  $897
+  Delivery             │  5 days     │  7 days      │  10 days
+  Revisions            │  2          │  3           │  Unlimited
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  14-field Annex IV    │  ✓          │  ✓           │  ✓
+  PDF export           │  ✓          │  ✓           │  ✓
+  Markdown export      │  ✓          │  ✓           │  ✓
+  HTML print-ready     │  ✓          │  ✓           │  ✓
+  Live web generator   │  ✓          │  ✓           │  ✓
+  JSON canonical env   │             │  ✓           │  ✓
+  3-language (EN/DE/FR)│             │  ✓           │  ✓
+  6-language (+ES/IT/NL│             │              │  ✓
+  Ed25519 signed       │             │              │  ✓
+  90-min consult       │             │              │  ✓
+
+  DESCRIPTION
+  ─────────────────────────────────────────────────────────────────────
+  Article 11 + Annex IV of the EU AI Act requires 14 fields of technical documentation for every AI system. Most teams treat this as a one-off Word doc. That breaks the moment your system changes.
+
+  I will build you a programmatic Annex IV generator using fall-euaiact v1.1's createAnnexIV factory · the same SDK I open-sourced and that powers compliance docs across 30+ live products.
+
+  You get:
+  · A live web tool you embed in your stack (single HTML file · vanilla JS · MIT)
+  · The full 14-field Annex IV schema wired to your system's metadata
+  · One-click export to PDF, Markdown, HTML print-ready, or canonical JSON envelope
+  · Standard tier: 3 languages (EN/DE/FR). Premium: 6 (+ES/IT/NL) — covers ~85% of EU member-state preferred filing languages
+  · Premium adds Ed25519-signed envelopes (Konomi-style) for tamper-evident audit trail
+
+  How it works:
+  ```
+  import { createAnnexIV } from 'fall-euaiact';
+  const doc = createAnnexIV({ ...yourSystemMetadata });
+  await doc.export({ format: 'pdf', language: 'de' });
+  await doc.sign(yourEd25519Key);
+  ```
+
+  The whole point: when your system changes, you re-run the generator and the docs update. No more out-of-date Word files. When the supervisory authority asks, you ship the signed envelope.
+
+  Live demo: sjgant80-hub.github.io/fall-euaiact/
+
+  REQUIREMENTS
+  ─────────────────────────────────────────────────────────────────────
+  1. System name + intended purpose (1-2 sentences each)
+  2. Provider entity details (company name, address, EU representative if applicable)
+  3. Risk tier (Prohibited / High / Limited / Minimal — or buy GIG-1 first for $97)
+  4. Brief overview of: development methodology, training data sources, performance metrics, monitoring approach, known limitations
+  5. (PREMIUM) Konomi public key for signing — or I'll generate a master pair for you
+
+  FAQ
+  ─────────────────────────────────────────────────────────────────────
+  Q: Do I need to know my risk tier first?
+  A: Helpful but not required — buy GIG-1 ($97) first for a full classification, or describe your system and I'll cross-reference Annex III as part of this gig.
+
+  Q: Will the doc satisfy supervisory authorities?
+  A: It satisfies Article 11(1) field-by-field. Supervisory authority guidance is still being clarified (expected 2027) — when it tightens, you re-run the generator with new fields. No rework.
+
+  Q: Why multi-language?
+  A: Each EU member state's supervisory authority can request docs in their official language. Filing in German for BfDI, French for CNIL, Italian for Garante, etc. Saves weeks of translation later.
+
+  Q: What's a "signed envelope"?
+  A: An Ed25519-signed JSON document — cryptographic proof of who, what, when. Same standard the Konomi licensing layer uses across the estate. Tamper-evident forever.
+
+═══════════════════════════════════════════════════════════════════════
+  §F · GIG-4 · Article 50 transparency badges · 3 days
+═══════════════════════════════════════════════════════════════════════
+
+  TITLE
+  ─────────────────────────────────────────────────────────────────────
+  I will install EU AI Act Article 50 AI transparency badges in 72 hours
+
+  SEARCH TAGS
+  ─────────────────────────────────────────────────────────────────────
+  article50 · aitransparency · chatbotdisclosure · euaiact · gdpr
+
+  PACKAGES
+                       │  BASIC      │  STANDARD    │  PREMIUM
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  Name                 │  1 surface  │  5 surfaces  │  Full kit
+  Price                │  $197       │  $397        │  $697
+  Delivery             │  3 days     │  5 days      │  7 days
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  Badge install        │  1 surface  │  5 surfaces  │  Unlimited
+  A11y compliant       │  ✓          │  ✓           │  ✓
+  English label        │  ✓          │  ✓           │  ✓
+  6 EU locales         │             │  ✓           │  ✓
+  Impression logging   │             │  ✓           │  ✓
+  Konomi Ed25519 sign  │             │              │  ✓
+  Custom CSS branding  │             │              │  ✓
+  60-min implementation│             │              │  ✓
+  call                 │             │              │
+
+  DESCRIPTION
+  ─────────────────────────────────────────────────────────────────────
+  Article 50 of the EU AI Act enforces August 2026. If your chatbot, generated image, deepfake audio, or AI-written email reaches an EU user without disclosure: up to €15M fine.
+
+  I will install transparency badges across every AI surface using fall-euaiact v1.1's createTransparencyBadge factory. Covers all 5 Article 50 categories (chatbot · generated-text · generated-image · audio · video) across 6 EU locales out of the box.
+
+  You get:
+  · Drop-in badge component (vanilla JS · A11y role=note · screen-reader compliant)
+  · Standard tier: 6 EU languages (EN/DE/FR/ES/IT/NL) auto-detected from user locale
+  · Impression logging for Article 26 record-keeping (no need to build it separately)
+  · Premium tier: Ed25519-signed badge config envelope — proof that THIS specific disclosure ran on THIS specific system at THIS specific time. Evidence layer for post-market monitoring (Articles 72-73)
+
+  Same component shipping in fall-euaiact SDK v1.1.
+
+  ```
+  const badge = createTransparencyBadge({
+    category: 'chatbot',
+    language: 'de',
+    optOutUrl: '/preferences/turn-off-ai',
+  });
+  badge.mount('#chat-header');
+  ```
+
+  Live demo: sjgant80-hub.github.io/fall-euaiact/
+
+  REQUIREMENTS
+  ─────────────────────────────────────────────────────────────────────
+  1. List of every AI surface in your product (chat / generated email / image gen / etc.)
+  2. URL or repo so I can scope mount points
+  3. Brand colors (HEX) for badge styling
+  4. Default language (EN/DE/FR/ES/IT/NL — or auto-detect)
+  5. (Optional) Opt-out URL where users can request a human
+
+  FAQ
+  ─────────────────────────────────────────────────────────────────────
+  Q: Will this affect my UX/conversion?
+  A: Designed to be minimal · 1-line disclosure · inline-flex pill · sits unobtrusively in headers, modals, or footers.
+
+  Q: Does it work with React/Vue?
+  A: Yes — call html() to get the string, or mount() to attach to a DOM element. Both work.
+
+  Q: Why 6 languages by default?
+  A: EN/DE/FR/ES/IT/NL covers ~85% of EU member-state preferred languages. PR another locale to the SDK and it ships free.
+
+  Q: What about US / UK / non-EU users?
+  A: Article 50 only applies to EU-facing surfaces · the badge can be conditionally rendered by detected locale.
+
+═══════════════════════════════════════════════════════════════════════
+  §G · GIG-5 · sovereign single-file SaaS replacement · 7 days
+═══════════════════════════════════════════════════════════════════════
+
+  TITLE
+  ─────────────────────────────────────────────────────────────────────
+  I will build a sovereign single-file replacement for any $300+/mo SaaS
+
+  SEARCH TAGS
+  ─────────────────────────────────────────────────────────────────────
+  sovereign · noSaaS · singlefile · vanilla · privacy
+
+  PACKAGES
+                       │  BASIC      │  STANDARD    │  PREMIUM
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  Name                 │  Clone      │  Branded     │  Custom +
+                       │             │              │  integrated
+  Price                │  $397       │  $797        │  $1497
+  Delivery             │  7 days     │  10 days     │  14 days
+  Revisions            │  2          │  3           │  Unlimited
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  Single HTML file     │  ✓          │  ✓           │  ✓
+  IndexedDB storage    │  ✓          │  ✓           │  ✓
+  PWA install          │  ✓          │  ✓           │  ✓
+  MIT licence          │  ✓          │  ✓           │  ✓
+  Audit-shim baked     │  ✓          │  ✓           │  ✓
+  Your branding        │             │  ✓           │  ✓
+  Custom integrations  │             │              │  ✓
+  30-day support       │             │              │  ✓
+
+  DESCRIPTION
+  ─────────────────────────────────────────────────────────────────────
+  Stop paying $300-$2,000/month for software that should be a single HTML file. I will build you a sovereign replacement for any SaaS tool you name — runs in your browser, stores in IndexedDB, ships as one file you own forever.
+
+  Already shipped in this pattern:
+  · HubSpot → fallcrm
+  · Calendly → fallslot
+  · Typeform → fallform
+  · Mailchimp → falllist
+  · GymMaster → GymOps
+  · Custom → 25+ more across sjgant80-hub
+
+  You get:
+  · One HTML file (vanilla JS · no framework · no build step)
+  · IndexedDB persistence (browser-local · zero server cost)
+  · PWA install (works offline · on phone or desktop)
+  · MIT licence (yours forever · modify, sell, redistribute)
+  · BYOK LLM option (Claude / OpenAI / Gemini / WebLLM offline)
+  · fall-euaiact audit-shim baked in (compliance bonus)
+  · Konomi Ed25519 signing (Premium · cryptographic data provenance)
+
+  No subscriptions. No servers. No vendor lock-in. Forever.
+
+  REQUIREMENTS
+  ─────────────────────────────────────────────────────────────────────
+  1. SaaS tool you want to replace (name + URL)
+  2. Top 3 features you actually use (not the full feature list — just yours)
+  3. How many users / team members
+  4. Brand colors + logo (Standard+)
+  5. Existing data export (CSV/JSON) if you want to migrate
+  6. (Premium) Any integrations needed (Slack / Zapier / your CRM / etc.)
+
+  FAQ
+  ─────────────────────────────────────────────────────────────────────
+  Q: How does data survive if everything's in the browser?
+  A: IndexedDB lives across sessions. JSON export for backup. PWA install puts it on your device permanently. For multi-device sync, Premium offers an optional sync endpoint (your own server).
+
+  Q: What if I want my team to share the tool?
+  A: Deploy the HTML file to your domain · everyone loads it · each user has their own local storage. For shared state, Premium adds a sync layer.
+
+  Q: Can you replace [my specific SaaS]?
+  A: If it's mostly CRUD + visualization (CRMs, project tools, form builders, schedulers, simple analytics): yes. If it's mostly backend (payment processing, email sending): I can build the dashboard but you'll need a payment/email provider.
+
+  Q: Why MIT?
+  A: You bought the build · you should own it. MIT means you can modify, fork, sell, embed without asking me.
+
+═══════════════════════════════════════════════════════════════════════
+  §H · GIG-6 · sovereign AI tool MVP from spec · 10-14 days
+═══════════════════════════════════════════════════════════════════════
+
+  TITLE
+  ─────────────────────────────────────────────────────────────────────
+  I will build a sovereign AI tool MVP for your business in 10 days
+
+  SEARCH TAGS
+  ─────────────────────────────────────────────────────────────────────
+  aitool · mvp · sovereign · aiintegration · javascript
+
+  PACKAGES
+                       │  BASIC      │  STANDARD    │  PREMIUM
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  Name                 │  MVP        │  Branded MVP │  MVP + Konomi
+                       │             │              │  + 30d support
+  Price                │  $497       │  $997        │  $1997
+  Delivery             │  10 days    │  12 days     │  14 days
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  Working single-file  │  ✓          │  ✓           │  ✓
+  BYOK LLM cascade     │  ✓          │  ✓           │  ✓
+  WebLLM offline mode  │  ✓          │  ✓           │  ✓
+  PWA install          │  ✓          │  ✓           │  ✓
+  Audit-shim + Annex IV│  ✓          │  ✓           │  ✓
+  Brand identity       │             │  ✓           │  ✓
+  Konomi Ed25519 lic   │             │              │  ✓
+  Deploy to your domain│             │              │  ✓
+  30-day support       │             │              │  ✓
+
+  DESCRIPTION
+  ─────────────────────────────────────────────────────────────────────
+  Got an AI tool idea? I will ship a working MVP as a single HTML file in 10 days. Same engine that built GymOps, GroundLevel (UK legal-tech), Botler (personal AI bottler), and 25+ more across my estate.
+
+  You get:
+  · One HTML file · vanilla JS · IndexedDB · PWA-installable
+  · BYOK LLM cascade: T0 keyword-only (offline) → T1 Claude → T2 OpenAI → T3 WebLLM Llama-3.2-3B
+  · fall-euaiact compliance baked: audit-shim active, Annex IV draft ready, Article 50 badges where applicable
+  · MIT licence — you own the code forever
+  · Premium tier: Konomi Ed25519 licensing (sell your tool to your customers with crypto-signed receipts) + deploy to your domain + 30-day support window
+
+  This is exactly how I shipped GymOps for a Thailand-based gym ops business, and GroundLevel for UK legal-tech founders. Same playbook · your spec.
+
+  Portfolio:
+  · GymOps         → sjgant80-hub.github.io/gymops/
+  · GroundLevel    → sjgant80-hub.github.io/groundlevel/
+  · ExitEngine     → sjgant80-hub.github.io/exitengine/
+  · Botler         → sjgant80-hub.github.io/botler/
+  · 25+ more       → ai-nativesolutions.com
+
+  REQUIREMENTS
+  ─────────────────────────────────────────────────────────────────────
+  1. One paragraph: what the tool does + who uses it
+  2. 3 must-have features (we'll scope to these for v1)
+  3. 3 nice-to-haves (v2 candidates)
+  4. Brand identity (logo + colors) if Standard+
+  5. Your domain for deploy (Premium)
+  6. Anything off-limits (privacy / data / industry constraints)
+
+  FAQ
+  ─────────────────────────────────────────────────────────────────────
+  Q: Can I add features later?
+  A: Yes. Premium includes 30-day support — typically enough for 2-3 minor feature additions. Larger expansions move to a separate gig.
+
+  Q: What's a BYOK LLM cascade?
+  A: Bring Your Own Key. Buyer enters their Claude / OpenAI / Gemini key once. The tool prefers cheaper tiers first, fails up to better models on failure. WebLLM Llama-3.2-3B runs locally as offline fallback (free, ~3GB browser cache).
+
+  Q: How is this MVP-ready?
+  A: All MVPs ship with: data persistence, export/import, settings panel, 5+ working flows, mobile responsive, PWA install, compliance baked. Production-ready for soft launch.
+
+  Q: Premium "Konomi licensing"?
+  A: If you want to SELL your tool: I add an Ed25519 license-key system. Customer pays you → you generate signed envelope → their tool unlocks. Self-hosted, sovereign, no Stripe lock-in.
+
+═══════════════════════════════════════════════════════════════════════
+  §I · GIG-7 · LinkedIn 10K-formula post engineering · 7 days
+═══════════════════════════════════════════════════════════════════════
+
+  TITLE
+  ─────────────────────────────────────────────────────────────────────
+  I will write 5 LinkedIn code-snippet posts using my 10K-impression formula
+
+  SEARCH TAGS
+  ─────────────────────────────────────────────────────────────────────
+  linkedinposts · technicalwriting · developercontent · b2bcontent · viralposts
+
+  PACKAGES
+                       │  BASIC      │  STANDARD    │  PREMIUM
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  Name                 │  5 posts    │  5 posts +   │  30-day
+                       │             │  strategy    │  calendar
+  Price                │  $297       │  $497        │  $897
+  Delivery             │  7 days     │  10 days     │  14 days
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  5 paste-ready posts  │  ✓          │  ✓           │  ✓
+  Pinned comment each  │  ✓          │  ✓           │  ✓
+  Hashtag set          │  ✓          │  ✓           │  ✓
+  Posting time guide   │             │  ✓           │  ✓
+  Comment strategy     │             │  ✓           │  ✓
+  DM follow-up scripts │             │  ✓           │  ✓
+  30-day post calendar │             │              │  ✓
+  Analytics tracking   │             │              │  ✓
+  template
+  60-min strategy call │             │              │  ✓
+
+  DESCRIPTION
+  ─────────────────────────────────────────────────────────────────────
+  My EU AI Act audit-shim post pulled 9,987 impressions, 50 saves, 16 comments, 67% save:reaction ratio · all because of one specific formula I now teach.
+
+  I will write 5 paste-ready LinkedIn posts for your technical product using this exact formula:
+  · Hook with a falsifiable threat (specific date + specific penalty)
+  · Tension via one specific failure mode
+  · Reveal as a single import + code snippet (5-12 lines max)
+  · Authority via shipped artifact (GitHub link + npm version)
+  · Soft CTA (DM trigger word, not "DM me")
+
+  You get:
+  · 5 paste-ready posts (~1,800 chars each — proven sweet spot)
+  · 5 pinned-comment scripts (drop within 30 sec for algo lift)
+  · Hashtag set (max 3 — over-hashtagging tanks reach)
+  · Standard: posting-time analysis for your timezone + comment-engagement strategy + DM follow-up scripts
+  · Premium: 30-day rolling content calendar + analytics-tracking template + 60-min strategy call
+
+  Honest: this only works for technical/B2B audiences. If you sell to consumer markets, this formula won't resonate · don't buy this gig.
+
+  Same playbook now shipping 10K+ impressions per post in my EU AI Act series.
+
+  REQUIREMENTS
+  ─────────────────────────────────────────────────────────────────────
+  1. Product link + one-paragraph elevator pitch
+  2. Your top 3 technical features (the actual import / function / endpoint)
+  3. Your audience persona (e.g. CTO at AI startup, dev at SaaS, etc.)
+  4. Any specific regulatory / deadline / cost angles I can lean into
+  5. Your LinkedIn URL (so I can match your existing voice)
+  6. (Premium) Your goal: leads / signups / brand / hiring
+
+  FAQ
+  ─────────────────────────────────────────────────────────────────────
+  Q: Will these work for non-EU products?
+  A: Yes — the formula adapts to any specific threat-deadline-import structure. Healthcare, fintech, security, devtools all map well.
+
+  Q: Can you post these for me?
+  A: No — your account, your voice. I provide paste-ready text + the timing playbook. You execute.
+
+  Q: How long until I see 10K impressions?
+  A: First post might do 1-3K. By post #3-#4 the formula compounds (algorithm recognises your pattern + your saver list warms). My 9,987 was on a Monday morning, 3rd post in a series.
+
+  Q: What if I'm not technical enough to verify the code snippets?
+  A: That's the deliverable — paste-ready. Just confirm the function names match your product before posting.
+
+═══════════════════════════════════════════════════════════════════════
+  §J · GIG-8 · EU AI Act classifier API endpoint · INSTANT
+═══════════════════════════════════════════════════════════════════════
+
+  TITLE
+  ─────────────────────────────────────────────────────────────────────
+  I will give you an EU AI Act risk classifier as a JSON API endpoint
+
+  SEARCH TAGS
+  ─────────────────────────────────────────────────────────────────────
+  api · euaiact · classifier · webhook · zapier
+
+  PACKAGES
+                       │  BASIC      │  STANDARD    │  PREMIUM
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  Name                 │  1K calls   │  10K calls   │  Unlimited
+                       │             │              │  30d
+  Price                │  $47        │  $97         │  $197
+  Delivery             │  1 hour     │  1 hour      │  1 hour
+  Revisions            │  unlim 7d   │  unlim 14d   │  unlim 30d
+  ─────────────────────┼─────────────┼──────────────┼─────────────────
+  POST /classify       │  ✓          │  ✓           │  ✓
+  Tier + articles      │  ✓          │  ✓           │  ✓
+  Confidence score     │  ✓          │  ✓           │  ✓
+  Annex IV checklist   │             │  ✓           │  ✓
+  Webhook integration  │             │  ✓           │  ✓
+  Custom rate limit    │             │              │  ✓
+  Slack/Zapier ready   │             │              │  ✓
+
+  DESCRIPTION
+  ─────────────────────────────────────────────────────────────────────
+  Plug an EU AI Act risk classifier into your Zapier / Make / n8n / Slack / custom workflow. POST a system description · get back JSON with tier, articles, penalties, deadlines, Annex IV gap.
+
+  Powered by the fall-euaiact SDK I built and open-sourced. Production hosted on Render. Live in 1 hour from order.
+
+  ```
+  POST https://api.fall-euaiact.fly.dev/v1/classify
+  Authorization: Bearer YOUR_TOKEN
+  Content-Type: application/json
+
+  { "description": "An AI tool that ranks job applicants..." }
+
+  Response:
+  {
+    "tier": "high",
+    "label": "High risk (Annex III §4)",
+    "articles": ["Art 6", "Art 8", "Art 14", "Art 27"],
+    "confidence": 78,
+    "annex_iv_fields_required": 14,
+    "deadlines": ["2 Aug 2026"],
+    "max_penalty": "€15M or 3% global turnover"
+  }
+  ```
+
+  Use cases:
+  · Auto-classify every new AI project in your team's Notion / Linear / Slack
+  · Webhook from your CI pipeline · fail builds that introduce prohibited features
+  · Lead-magnet on your own product site (let visitors classify their AI)
+
+  Premium: custom rate-limit + Slack/Zapier-ready payload + 30 days of unlimited calls.
+
+  REQUIREMENTS
+  ─────────────────────────────────────────────────────────────────────
+  1. Email for API token delivery
+  2. (Standard+) Webhook URL for response delivery (optional)
+  3. (Premium) Slack workspace or Zapier zap URL
+
+  FAQ
+  ─────────────────────────────────────────────────────────────────────
+  Q: Is this just calling the open-source classifier?
+  A: Yes — wrapped in a hosted endpoint for convenience. You can also self-host: `npm install fall-euaiact` and run it for free. Pay for the hosting + maintenance.
+
+  Q: Rate limits?
+  A: Basic: 1,000 calls within 7 days. Standard: 10K / 14 days. Premium: unlimited / 30 days.
+
+  Q: SLA?
+  A: 99% — hosted on Render free tier (cold starts possible). For production: see GIG-6 for a self-hosted deployment.
+
+═══════════════════════════════════════════════════════════════════════
+  §K · THUMBNAIL DESIGN SPECS · 1280×769 each
+═══════════════════════════════════════════════════════════════════════
+
+  Each gig needs ONE thumbnail image (cover) + optional 2 detail images.
+  Render all 8 at once: open fiverr-thumbnails.html (next to this file),
+  hit print-to-PDF or screenshot each panel.
+
+  PALETTE (matches fall-euaiact + estate aesthetic)
+  ─────────────────────────────────────────────────────────────────────
+  Background     #11131a  (void)
+  Foreground     #e8e8ea  (cream-grey)
+  Accent         #b8974a  (brass)
+  Hot accent     #8b1a1a  (oxblood)
+  Code accent    #5fb3a8  (teal-mint)
+
+  TYPOGRAPHY
+  ─────────────────────────────────────────────────────────────────────
+  Display        Libre Baskerville (serif · headline)
+  UI             DM Sans (sans · subhead + body)
+  Code           IBM Plex Mono (mono · code snippet block)
+
+  PER-GIG THUMBNAIL COPY (top headline · subhead · code teaser)
+  ─────────────────────────────────────────────────────────────────────
+
+  GIG-1   "Classify Your AI"          / "EU AI Act · 24h · $97"
+          code: classify(description)  → tier: 'high'
+
+  GIG-2   "Article 12 Logged"          / "Audit-shim · 48h · $147"
+          code: audit.log({type:'in'}) → hash chained
+
+  GIG-3   "Annex IV · Built"           / "14 fields · 6 langs · $297"   ← MONEY
+          code: createAnnexIV(spec).export({format:'pdf'})
+
+  GIG-4   "Article 50 · Disclosed"     / "5 categories · 6 locales · $197"
+          code: createTransparencyBadge({category:'chatbot'})
+
+  GIG-5   "Stop Paying $300/mo"        / "Sovereign single-file · MIT · $397"
+          code: <html> · IndexedDB · forever
+
+  GIG-6   "Your AI Tool · 10 Days"     / "Single-file MVP · $497"
+          code: spec → sovereign HTML · MIT
+
+  GIG-7   "10K-Impression Formula"     / "5 posts · paste-ready · $297"
+          code: hook → tension → import → CTA
+
+  GIG-8   "Classifier as a JSON API"   / "1 hour · webhook-ready · $47"
+          code: POST /v1/classify → {tier, articles}
+
+═══════════════════════════════════════════════════════════════════════
+  §L · VIDEO SCRIPTS · 60-90 SEC EACH
+═══════════════════════════════════════════════════════════════════════
+
+  Each gig needs ONE intro video (Fiverr converts 3-5x with video).
+  Tone: technical · matter-of-fact · no hype · let the artifact speak.
+  Format: screen-share with voice-over · show the live SDK + repo.
+
+  ─────────────────────────────────────────────────────────────────────
+  GIG-3 VIDEO SCRIPT · "Annex IV · the money gig" · 75 sec
+  ─────────────────────────────────────────────────────────────────────
+
+  [0-5s · screen: fall-euaiact GitHub repo]
+  "Article 11 of the EU AI Act requires 14 fields of technical documentation
+  for every AI system. Most teams treat this as a one-off Word doc."
+
+  [5-15s · screen: live createAnnexIV demo · fall-euaiact landing]
+  "I built the fall-euaiact SDK — the open-source toolkit now embedded in 30+
+  live products. The createAnnexIV factory generates Annex IV docs programmatically."
+
+  [15-30s · screen: code editor showing imports + spec object]
+  "You pass your system metadata. The factory returns a doc object. You call
+  dot-export with a format and a language. PDF, HTML, Markdown, or canonical
+  JSON envelope. Six EU languages."
+
+  [30-45s · screen: PDF preview in 3 languages side-by-side]
+  "When the supervisory authority asks: you ship the German for BfDI, the French
+  for CNIL, the Italian for Garante. Same source-of-truth. No manual translation."
+
+  [45-60s · screen: Ed25519 signature appearing under doc]
+  "Premium tier signs every envelope with Ed25519 — Konomi-style cryptographic
+  proof of what your AI looked like on the day you filed. Tamper-evident forever."
+
+  [60-75s · screen: order button highlighted]
+  "Five days. Two-ninety-seven dollars. One signed Annex IV generator your team
+  re-runs every quarter. Order on the right."
+
+  ─────────────────────────────────────────────────────────────────────
+  TEMPLATE for the other 7 (same beats · swap content)
+  ─────────────────────────────────────────────────────────────────────
+
+  Beat 1 (0-10s)   · the REAL problem · cite the article + deadline + penalty
+  Beat 2 (10-25s)  · "I built the open-source SDK that solves this"
+  Beat 3 (25-40s)  · live code demo of the single import
+  Beat 4 (40-55s)  · the deliverable (PDF / install / live tool)
+  Beat 5 (55-70s)  · proof point (GitHub stars / live demo / portfolio)
+  Beat 6 (70-75s)  · price + delivery time + order CTA
+
+  RECORDING TIPS
+  ─────────────────────────────────────────────────────────────────────
+  · OBS Studio (free) · 1080p · 30fps · single browser window
+  · Mic: any USB mic in a quiet room beats laptop mic 10x
+  · Cursor magnification ON (so viewers can see your clicks)
+  · NO music · NO transitions · NO logo intro · just the work
+  · One take if possible · re-cut in DaVinci Resolve (free)
+  · Export H.264 · 1080p · ~30 MB target (Fiverr limit: 75 MB)
+
+═══════════════════════════════════════════════════════════════════════
+  §M · INTAKE BRIEFS · "Requirements" tab paste-ready
+═══════════════════════════════════════════════════════════════════════
+
+  Each gig's "Requirements" tab needs a structured ask. Copy these in
+  exactly as written.
+
+  See per-gig REQUIREMENTS sections above (§C-§J). Each is paste-ready.
+
+  KEY DISCIPLINE
+  ─────────────────────────────────────────────────────────────────────
+  · Always 3-6 questions max
+  · Numbered list (Fiverr renders this clean)
+  · Mark (PREMIUM ONLY) clearly
+  · End with optional question for "anything else"
+
+═══════════════════════════════════════════════════════════════════════
+  §N · DELIVERY MESSAGE TEMPLATES
+═══════════════════════════════════════════════════════════════════════
+
+  At the moment you click "Deliver" — Fiverr requires a message + files.
+  Paste these. Both build trust + nudge toward review + plant upsell seeds.
+
+  ─────────────────────────────────────────────────────────────────────
+  GIG-1 (classification report) · DELIVERY MESSAGE
+  ─────────────────────────────────────────────────────────────────────
+
+  Hi {{buyer_name}} — delivery attached.
+
+  What you get:
+  · 5-page PDF: tier classification + article citations + penalty exposure + 14-field Annex IV gap list + deadlines
+  · Signed-envelope JSON (audit-evidence of when the classification ran)
+
+  Quick notes on the report:
+  · {{2-3 specific findings about THEIR system · personalised}}
+  · {{1 specific deadline they should know about}}
+
+  Important: this is research-grade compliance work, not legal advice. For systems with material exposure, share this report with qualified EU counsel — it'll save them (and you) weeks of catch-up.
+
+  If everything looks right, a 5-star review with one specific thing you found useful would mean the world. It directly drives whether other founders find this gig.
+
+  Next steps (zero pressure):
+  · GIG-2 → drop-in Article 12 audit chain ($147)
+  · GIG-3 → full Annex IV generator ($297)
+
+  Either way · grateful you trusted me with this. Reach out anytime.
+
+  Simon · github.com/sjgant80-hub/fall-euaiact
+
+  ─────────────────────────────────────────────────────────────────────
+  GIG-3 (Annex IV generator) · DELIVERY MESSAGE
+  ─────────────────────────────────────────────────────────────────────
+
+  Hi {{buyer_name}} — delivery attached.
+
+  Inside the zip:
+  1. annex-iv-generator.html — your single-file Annex IV generator (vanilla JS · MIT)
+  2. {{your_system_name}}-annexiv.pdf — pre-rendered EN version
+  3. {{your_system_name}}-annexiv-de.pdf — German variant (Standard+)
+  4. (PREMIUM) signed-envelope.json — Ed25519-signed canonical record
+  5. README.md — how to re-run when your system updates
+
+  Open the HTML in any browser. Edit the spec block. Click export. New doc in 2 seconds. Works offline forever.
+
+  When the supervisory authority asks, you ship the {{language}} version + the signed envelope. Done.
+
+  Important: research-grade work, not legal advice. For supervisory authority filings, share this with EU counsel before submission — guidance is still being clarified through 2027.
+
+  If everything checks out, a 5-star review with one specific thing you valued helps me ship more compliance work like this.
+
+  If you ever need:
+  · Article 50 transparency badges for AI surfaces · GIG-4
+  · Risk classification on a different system · GIG-1
+  · Full sovereign tool MVP · GIG-6
+
+  Just message — no pressure.
+
+  Simon · github.com/sjgant80-hub/fall-euaiact
+
+  (Template the others identically · swap deliverables + features.)
+
+═══════════════════════════════════════════════════════════════════════
+  §O · REVIEW-REQUEST PSYCHOLOGY
+═══════════════════════════════════════════════════════════════════════
+
+  Reviews are EVERYTHING on Fiverr — they drive ranking + conversion.
+
+  RULES
+  ─────────────────────────────────────────────────────────────────────
+  1. Ask AFTER delivery · IN the delivery message · NEVER in a follow-up
+  2. Ask for ONE SPECIFIC THING they liked (not generic 5-star)
+  3. NEVER incentivize a review (Fiverr ban)
+  4. If buyer responds positively but doesn't review: wait 48h, then ONE follow-up max
+
+  THE OPTIMAL ASK
+  ─────────────────────────────────────────────────────────────────────
+  Inside delivery message:
+  "If everything looks right, a 5-star review with ONE SPECIFIC THING
+   you found useful would mean the world. It directly drives whether
+   other [founders / engineers / compliance leads] find this gig."
+
+  Why this works:
+  · Specific = better quality review = better search ranking
+  · "Means the world" = honest emotional ask, not manipulative
+  · "Whether others find this" = altruistic framing, not selfish
+
+═══════════════════════════════════════════════════════════════════════
+  §P · UPSELL / OFF-PLATFORM PLAYBOOK · ToS-COMPLIANT
+═══════════════════════════════════════════════════════════════════════
+
+  FIVERR ToS
+  ─────────────────────────────────────────────────────────────────────
+  · CANNOT direct buyer off-platform during active order
+  · CANNOT contact buyer off-platform within 30 days of last order
+  · CAN mention adjacent Fiverr gigs in delivery message (encouraged)
+  · CAN respond to off-platform contact buyer-initiated AFTER 30 days
+
+  THE TIER-LADDER UPSELL (in-Fiverr · always safe)
+  ─────────────────────────────────────────────────────────────────────
+  In every delivery message:
+  · Mention 2 adjacent gigs by ID (never link · they're searchable)
+  · Reference how they fit the buyer's stated use case
+  · "Just message me" CTA — Fiverr-internal messaging is fine
+
+  THE 31-DAY OFF-PLATFORM CONVERSION
+  ─────────────────────────────────────────────────────────────────────
+  At delivery, NEVER drop your contact details. Wait.
+
+  Day 0   · deliver via Fiverr · mention next-tier gig
+  Day 30  · Fiverr cooldown clears
+  Day 31  · IF buyer reaches out via Fiverr asking for more work:
+            "For an ongoing retainer (not a one-off), my main offer
+             lives at ai-nativesolutions.com — happy to chat directly there."
+
+  This is ToS-compliant: you're not soliciting · you're responding to
+  buyer-initiated request after cooldown · pointing to your portfolio
+  domain not "DM me at email."
+
+═══════════════════════════════════════════════════════════════════════
+  §Q · si-didy AUTOMATION HOOKS · AUTO-FULFILL TIER 1
+═══════════════════════════════════════════════════════════════════════
+
+  GIG-1 (classification) and GIG-8 (API) can run 90% hands-off.
+
+  THE PIPELINE
+  ─────────────────────────────────────────────────────────────────────
+  1. Fiverr order arrives → email to your inbox
+  2. Botler / si-didy watches inbox for "Fiverr Order #" subject
+  3. Parses buyer description from intake brief
+  4. Runs fall-euaiact classify() on it
+  5. Generates PDF report via templated HTML → Puppeteer print
+  6. Drafts delivery message with 2-3 personalised findings (Claude T1)
+  7. Holds in "review queue" for you to one-click approve + send
+  8. You spend 5 minutes reviewing instead of 2 hours building
+
+  IMPLEMENTATION (paste into si-didy-agent/tools/fiverr-fulfill.ts)
+  ─────────────────────────────────────────────────────────────────────
+  ```js
+  // ◊·κ=1 · si-didy · Fiverr auto-fulfill · Tier 1 only
+  import { classify, createAnnexIV } from 'fall-euaiact';
+
+  export async function fulfillFiverrOrder(intake) {
+    // 1. classify
+    const result = classify(intake.systemDescription);
+
+    // 2. generate Annex IV gap-list
+    const doc = createAnnexIV({
+      '1_general_description': intake.systemDescription,
+      '2_intended_purpose': intake.intendedPurpose || '',
+    });
+
+    // 3. render PDF (template + Puppeteer)
+    const pdfBuffer = await renderClassificationPDF({
+      buyer: intake.buyerName,
+      result,
+      annexGap: doc.missing(),
+      penalty: getPenalty(result.tier),
+      deadlines: getDeadlines(result.tier),
+    });
+
+    // 4. draft delivery message via Claude T1
+    const message = await claudeDraft({
+      template: 'fiverr-gig1-delivery',
+      buyer: intake.buyerName,
+      result,
+    });
+
+    // 5. queue for review
+    return { pdfBuffer, message, status: 'awaiting_approval' };
+  }
+  ```
+
+  Tier 1 fulfillment cost: ~$0.40 in Claude tokens · ~3 minutes elapsed
+  Tier 1 revenue: $97 per order
+  Net margin: 99.5%
+
+═══════════════════════════════════════════════════════════════════════
+  §R · 30-DAY LAUNCH CALENDAR · DAY-BY-DAY PLAYBOOK
+═══════════════════════════════════════════════════════════════════════
+
+  WEEK 1 · SEED THE ALGO
+  ─────────────────────────────────────────────────────────────────────
+  Day 1   AM  Create Fiverr account + Pro application submitted
+              Use sjgant80-hub portfolio + AIN hub + fall-euaiact GitHub
+          PM  Publish GIG-1 (classification · $97)
+              Render thumbnail + record 75-sec video
+
+  Day 2   AM  Publish GIG-3 (Annex IV · $297) — the money gig
+          PM  Publish GIG-8 (API endpoint · $47) — passive seed
+
+  Day 3   AM  Promote each gig in LinkedIn post + AIN hub footer
+              "I now ship sovereign EU AI Act compliance on Fiverr · $47-$897"
+          PM  Outreach: DM 20 Fiverr buyers from EU AI Act search results
+              Soft pitch: "Just launched my classifier as a gig · $97 · 24h"
+
+  Day 4   FIRST ORDERS LIKELY
+          Respond within 10 minutes (Fiverr response time = ranking)
+          Deliver Day 1 (under-promise: 24h promised, deliver in 12h)
+
+  Day 5-7 Steady state: 1-2 orders/day in Tier 1
+          Hit 6+ deliveries + 5-star reviews → Pro application APPROVED
+
+  WEEK 2 · LADDER UP
+  ─────────────────────────────────────────────────────────────────────
+  Day 8   AM  Publish GIG-2 (audit-shim · $147) + GIG-4 (Art 50 · $197)
+          PM  Update GIG-1 description with "from a Fiverr Pro"
+
+  Day 9-10  Promote in fall-euaiact GitHub README + AIN footer
+            Add Fiverr links to LinkedIn featured section
+
+  Day 11    Publish GIG-7 (LinkedIn posts · $297)
+            Cross-sell to your existing LinkedIn audience
+
+  Day 12-14 Steady state: 3-5 orders/day, mix of Tier 1 + Tier 2
+            Continue 24h delivery for credibility
+
+  WEEK 3 · PREMIUM TIER UNLOCK
+  ─────────────────────────────────────────────────────────────────────
+  Day 15  Publish GIG-5 (SaaS replacement · $397-$1497)
+          Publish GIG-6 (AI MVP · $497-$1997)
+          You're now full-spectrum $47-$1997
+
+  Day 16-18 First Premium-tier orders likely
+            Spend full effort here — quality drives repeat + word-of-mouth
+
+  Day 19-21 First DMs from previous Tier 1 buyers asking about retainers
+            Point them to AIN hub (ToS-compliant · waited 30d)
+
+  WEEK 4 · OPTIMISE
+  ─────────────────────────────────────────────────────────────────────
+  Day 22-24 Analyse: which gig converts best? Promote that one harder.
+            Adjust pricing on under-performers (drop $20 / bump $50)
+
+  Day 25-26 Add a "Custom Offer" service to each gig
+            (Higher-AOV one-off projects · $1500-$5000)
+
+  Day 27-28 Bundle: launch GIG-9 "Full EU AI Act retrofit pack"
+            ($1500 fixed-fee · combines GIG-2 + GIG-3 + GIG-4)
+            This is the same $1500 promo currently on LinkedIn
+
+  Day 29-30 Capture metrics:
+            · Total revenue (target $5K-10K)
+            · Reviews avg (target 4.9+)
+            · Response time (keep under 1h)
+            · Repeat-buyer rate (target 15%+)
+
+  DAY 30 OUTCOME
+  ─────────────────────────────────────────────────────────────────────
+  Realistic: $8K-$12K revenue · 25-35 orders · 25+ reviews · Pro badge
+  Aggressive: $15K+ revenue · 40+ orders · 1-2 retainer conversations
+  Hidden upside: 5-10 LinkedIn followers per order · audience compounds
+
+═══════════════════════════════════════════════════════════════════════
+  §S · PRICING LADDER LOGIC
+═══════════════════════════════════════════════════════════════════════
+
+  RULE 1 · LAUNCH LOW
+  ─────────────────────────────────────────────────────────────────────
+  First 30 days: ship at the prices listed in §C-§J.
+  Goal is REVIEWS + RANK, not max revenue.
+
+  RULE 2 · BUMP ON RANK SHIFT
+  ─────────────────────────────────────────────────────────────────────
+  Once a gig has 10+ reviews + Pro badge:
+  · Bump Basic +$50
+  · Bump Standard +$100
+  · Bump Premium +$200
+  · Convert to BACKWARDS-COMPATIBLE (e.g. $197 → $247 doesn't lose ranking)
+
+  RULE 3 · THE PSYCHOLOGICAL HOOKS
+  ─────────────────────────────────────────────────────────────────────
+  · $97 not $100 (buyers feel "double digit")
+  · $197 not $200 (cliff under 200)
+  · $497 not $500 (under-$500 unlock)
+  · $897 not $899 (3-digit psychology · feel premium-but-cheap)
+  · $1497 not $1500 (under-$1500 trigger for "exec budget")
+
+  RULE 4 · WHEN TO HOLD PRICE
+  ─────────────────────────────────────────────────────────────────────
+  GIG-1 ($97) and GIG-8 ($47) should STAY at this price forever.
+  They're loss leaders that fund Tier 2/3 conversion.
+  The whole funnel breaks if entry-point gets expensive.
+
+═══════════════════════════════════════════════════════════════════════
+  §T · FAQ TEMPLATES · UNIVERSAL ADD-ONS
+═══════════════════════════════════════════════════════════════════════
+
+  Add these 3 questions to EVERY gig FAQ:
+  ─────────────────────────────────────────────────────────────────────
+
+  Q: Is this legal advice?
+  A: No. This is research-grade engineering work. For systems with significant exposure, take any deliverable to qualified EU counsel before relying on it.
+
+  Q: Why "sovereign" and what does that mean for me?
+  A: Everything I ship is single-file, runs in your browser, MIT-licensed, no servers, no SaaS dependency, no recurring fees. You keep the code, the data, the keys. Forever.
+
+  Q: What if I need something not listed in the packages?
+  A: Send me a message before ordering — I do custom offers for anything in the EU AI Act compliance, sovereign tool, or LinkedIn content space. Pricing transparent, scope confirmed before payment.
+
+═══════════════════════════════════════════════════════════════════════
+  §U · DISPUTE / REFUND PROTOCOLS
+═══════════════════════════════════════════════════════════════════════
+
+  FIVERR DISPUTE TRIGGERS
+  ─────────────────────────────────────────────────────────────────────
+  · Late delivery (auto-cancel after deadline)
+  · "Not as described" (buyer initiates)
+  · Quality complaint
+  · Communication breakdown
+
+  YOUR INSURANCE POLICY
+  ─────────────────────────────────────────────────────────────────────
+
+  1. EVERY GIG OFFERS RISK-REVERSAL in description:
+     "If the deliverable doesn't validate against the official EU AI Act
+      text within 48h of delivery, full refund — no questions."
+
+     This kills 95% of disputes BEFORE they happen.
+
+  2. ALWAYS deliver 12h BEFORE deadline.
+     Buys you a buffer · prevents auto-cancel.
+
+  3. SCOPE SCREEN at intake.
+     If buyer asks for something outside scope:
+     "Happy to handle that as a Custom Offer (Fiverr-internal).
+      Want me to send one over so we stay clean on this order?"
+
+     Never just absorb scope creep — it tanks margin AND quality.
+
+  4. IF DISPUTE FILED:
+     · Respond within 4 hours, calmly
+     · Cite deliverables shipped vs requirements
+     · Offer to revise (within original scope) within 24h
+     · NEVER threaten · NEVER cite policy
+     · Escalate to Fiverr CS only if buyer is clearly trying to extort
+
+  5. REFUND PHILOSOPHY:
+     Refund first, fight second.
+     A refund + 1-star review costs less than 2 weeks of CS battles + ranking drop.
+     Tier 1 ($97) refund is cheaper than burning the gig's review history.
+
+═══════════════════════════════════════════════════════════════════════
+  END OF MASTER PACK · v1.0 · prime 607
+
+  NEXT FILES IN THIS PACK:
+    · fiverr-thumbnails.html  → 8 thumbnails ready to screenshot
+    · sample-deliverables/    → templated PDFs for GIG-1 and GIG-3
+    · si-didy-integration.md  → automation wiring spec
+
+  PUSHED TO: github.com/sjgant80-hub/si-didy-agent
+  PATH:      packs/FIVERR-PACK-V1/
+
+  ◊·κ=φ⁴ · For the people not the few.
+═══════════════════════════════════════════════════════════════════════
