@@ -238,12 +238,99 @@ Repo: github.com/sjgant80-hub/fall-euaiact
 ▲ END COMMENT ▲
 
 ═══════════════════════════════════════════════════════════════════════
-  NEXT POSTS QUEUED (Monday morning rotation)
+  POST #5 · ARTICLE 50 TRANSPARENCY BADGES · paste-ready
 ═══════════════════════════════════════════════════════════════════════
 
-  POST #5 · Article 50 transparency badges (chatbot disclosures)
-    · same audience · third arrow · "EU AI Act series" identity locks in
-    · code: createTransparencyBadge({ category: 'chatbot', ... })
+  USE CASE · third arrow in the EU AI Act series · same audience · brand
+  identity locks in · code-snippet formula that pulled 10K + post #4's lift
+  · ride savers list · backed by createTransparencyBadge shipped in v1.1.0
+
+▼ COPY ▼
+
+If your AI talks to a human in the EU and doesn't say it's an AI, that's €15M.
+
+Article 50 of the EU AI Act kicks in August 2nd. Eight weeks. The bar is one sentence: "in a clear and distinguishable manner at the latest at the time of the first interaction or exposure." Chatbots. Generated text. Generated images. Synthetic audio. Deepfakes. Five categories. Same rule.
+
+Here's the single import:
+
+import { createTransparencyBadge } from 'fall-euaiact';
+
+const badge = createTransparencyBadge({
+  category: 'chatbot',              // or generated-text/image/audio/video
+  language: 'de',                   // en/de/fr/es/it/nl ship by default
+  systemId: 'support-bot-v3',
+  optOutUrl: '/preferences/turn-off-ai',
+});
+
+badge.mount('#chat-header');         // A11y role=note · screen-reader-ready
+await badge.recordImpression(userId); // impression log for Article 26
+
+// signed against the same Ed25519 chain as your Annex IV + audit
+await badge.sign(yourEd25519Key);
+
+The Act doesn't tell you what a badge looks like · it tells you what it must achieve. Six locales ship in the SDK · PR another and you cover an EEA jurisdiction · the style is a CSS-var override away from your brand.
+
+If your team is on its third "compliance copy review" meeting · the meeting is the gap.
+
+Same playbook as the last two posts (audit shim + Annex IV · 14K+ impressions, 70+ saves combined · thank you). Build it once · compliant by construction.
+
+Full SDK: github.com/sjgant80-hub/fall-euaiact
+npm: fall-euaiact@1.1.0
+MIT: forever
+
+Article 50 disclosures that survive supervisory review.
+
+P.S. · final week of the 50% promo. First 3 DMs get my productized Article 12 + 11 + 50 retrofit pack for $1,500 (normally $3,000). Fixed-fee. 10 days. Drop-in audit-shim + Annex IV generator + Article 50 badges for every disclosure surface. Comment "EU50" or DM me.
+
+For the people not the few.
+
+◊·κ=φ⁴
+
+▲ END COPY ▲
+
+  CHARS · ~1,820 · fits clean (LinkedIn limit 3,000)
+
+  WITHIN 30 SECONDS · drop this PINNED COMMENT:
+
+▼ COMMENT ▼
+
+The 5 Article 50 categories and what triggers each:
+
+1. CHATBOT · any system that converses with a user (Article 50(1))
+   → trigger: first user-facing turn
+   → typical miss: post-purchase support bots, in-app help widgets
+
+2. GENERATED-TEXT · text not authored by a human (Article 50(4))
+   → trigger: text published, sent, or shown to a third party
+   → typical miss: AI-drafted emails, AI-generated product descriptions
+
+3. GENERATED-IMAGE · synthetic or substantially modified images
+   → trigger: image distributed publicly or shown to a third party
+   → typical miss: stock-replacement AI images on marketing pages
+
+4. AUDIO · synthetic voice or substantially modified audio (deepfakes)
+   → trigger: playback to a third party
+   → typical miss: AI voiceovers in product demos
+
+5. VIDEO · synthetic or deepfake video
+   → trigger: playback to a third party
+   → typical miss: AI-generated talking-head explainers
+
+Each category gets its own badge variant in the SDK. Six locales ship · the optOutUrl renders only if you pass one · impressions log to in-memory by default, IndexedDB optional via opts.
+
+The €15M penalty (Article 99(4)) is the ceiling for Article 50 breaches · scaled to 3% of global turnover, whichever is higher. The badge ships with role=note and aria-label so screen-readers count too.
+
+If you ship 5 disclosure surfaces · that's 5 createTransparencyBadge calls and a CI test asserting each .mount() target exists. That's the whole project.
+
+Repo: github.com/sjgant80-hub/fall-euaiact
+
+◊
+
+▲ END COMMENT ▲
+
+═══════════════════════════════════════════════════════════════════════
+  NEXT POSTS QUEUED (Monday morning rotation)
+═══════════════════════════════════════════════════════════════════════
 
   POST #6 · GroundLevel SDK · UK case-search for legal-tech founders
     · audience pivot to legal-tech buyers
