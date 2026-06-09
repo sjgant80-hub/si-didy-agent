@@ -1,0 +1,101 @@
+{
+  "_doc": "◊·κ=1 · fiverr autopilot config · which gigs auto-fulfill, which need human · pricing + ladder logic",
+  "version": "1.0.0",
+  "autoFulfillTiers": [1],
+  "humanReviewTiers": [2, 3, 4, 5, 6, 7],
+  "instantApiTiers": [8],
+  "gigs": {
+    "1": {
+      "title": "EU AI Act risk classification report",
+      "autoFulfill": true,
+      "packages": {
+        "basic":    { "price_usd": 97,  "delivery_hours": 24, "revisions": 1 },
+        "standard": { "price_usd": 197, "delivery_hours": 48, "revisions": 2 },
+        "premium":  { "price_usd": 397, "delivery_hours": 72, "revisions": -1 }
+      },
+      "deliverables": ["5-page PDF", "signed envelope JSON", "Annex IV gap list"]
+    },
+    "2": {
+      "title": "Article 12 audit-shim install",
+      "autoFulfill": false,
+      "humanReason": "requires live-product wiring · 2-3hr engineering",
+      "packages": {
+        "basic":    { "price_usd": 147, "delivery_hours": 48, "revisions": 1 },
+        "standard": { "price_usd": 247, "delivery_hours": 72, "revisions": 2 },
+        "premium":  { "price_usd": 397, "delivery_hours": 120, "revisions": 3 }
+      }
+    },
+    "3": {
+      "title": "Annex IV documentation generator",
+      "autoFulfill": false,
+      "humanReason": "money gig · custom adaptation per buyer's system metadata",
+      "packages": {
+        "basic":    { "price_usd": 297, "delivery_hours": 120, "revisions": 2 },
+        "standard": { "price_usd": 497, "delivery_hours": 168, "revisions": 3 },
+        "premium":  { "price_usd": 897, "delivery_hours": 240, "revisions": -1 }
+      }
+    },
+    "4": {
+      "title": "Article 50 transparency badges",
+      "autoFulfill": false,
+      "humanReason": "needs DOM mount-point survey + brand colour matching",
+      "packages": {
+        "basic":    { "price_usd": 197, "delivery_hours": 72,  "revisions": 1 },
+        "standard": { "price_usd": 397, "delivery_hours": 120, "revisions": 2 },
+        "premium":  { "price_usd": 697, "delivery_hours": 168, "revisions": -1 }
+      }
+    },
+    "5": {
+      "title": "Sovereign single-file SaaS replacement",
+      "autoFulfill": false,
+      "humanReason": "fully custom · 7-14 days of build work per order",
+      "packages": {
+        "basic":    { "price_usd": 397,  "delivery_hours": 168, "revisions": 2 },
+        "standard": { "price_usd": 797,  "delivery_hours": 240, "revisions": 3 },
+        "premium":  { "price_usd": 1497, "delivery_hours": 336, "revisions": -1 }
+      }
+    },
+    "6": {
+      "title": "Sovereign AI tool MVP from spec",
+      "autoFulfill": false,
+      "humanReason": "spec interpretation + 10-14 day build cycle",
+      "packages": {
+        "basic":    { "price_usd": 497,  "delivery_hours": 240, "revisions": 2 },
+        "standard": { "price_usd": 997,  "delivery_hours": 288, "revisions": 3 },
+        "premium":  { "price_usd": 1997, "delivery_hours": 336, "revisions": -1 }
+      }
+    },
+    "7": {
+      "title": "LinkedIn 10K-formula post engineering",
+      "autoFulfill": false,
+      "humanReason": "voice-matching against buyer's existing LinkedIn",
+      "packages": {
+        "basic":    { "price_usd": 297, "delivery_hours": 168, "revisions": 1 },
+        "standard": { "price_usd": 497, "delivery_hours": 240, "revisions": 2 },
+        "premium":  { "price_usd": 897, "delivery_hours": 336, "revisions": -1 }
+      }
+    },
+    "8": {
+      "title": "EU AI Act classifier API endpoint",
+      "autoFulfill": true,
+      "endpointMode": true,
+      "packages": {
+        "basic":    { "price_usd": 47,  "calls": 1000,    "duration_days": 7  },
+        "standard": { "price_usd": 97,  "calls": 10000,   "duration_days": 14 },
+        "premium":  { "price_usd": 197, "calls": -1,      "duration_days": 30 }
+      }
+    }
+  },
+  "ladderLogic": {
+    "rule1_launch_low":      "first 30 days · ship at listed prices · goal is reviews not revenue",
+    "rule2_bump_on_pro":     "once 10+ reviews + Pro badge · bump basic+$50 standard+$100 premium+$200",
+    "rule3_hold_entry":      "GIG-1 ($97) and GIG-8 ($47) STAY · they're loss leaders",
+    "rule4_psychological":   "$97 not $100 · $197 not $200 · $497 not $500"
+  },
+  "estateSignals": {
+    "fall_signal":   "all fulfillment events · estate mesh listens",
+    "kcc_signal":    "κ-ledger receives every event for the bloom tally",
+    "konomi_bloom":  "shipped events trigger mint visualisation pulse",
+    "fiverr_queue":  "dashboard subscribes for live order watch"
+  }
+}

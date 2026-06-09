@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>◊·κ=φ⁴ · Fiverr Review · si-didy autopilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #11131a;
+    --void2: #1a1d28;
+    --cream: #e8e8ea;
+    --grey: #888894;
+    --brass: #b8974a;
+    --ox: #8b1a1a;
+    --teal: #5fb3a8;
+    --green: #4ea96a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--void);
+    color: var(--cream);
+    font: 14px/1.5 'DM Sans', system-ui, sans-serif;
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(90deg, var(--void2), var(--void));
+    border-bottom: 1px solid var(--brass);
+    padding: 16px 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 10;
+  }
+  h1 {
+    font: 700 22px 'Libre Baskerville', serif;
+    color: var(--cream);
+  }
+  h1 em { color: var(--brass); font-style: normal; }
+  .badges { display: flex; gap: 12px; }
+  .badge {
+    font: 11px/1 'IBM Plex Mono', monospace;
+    color: var(--brass);
+    background: rgba(184,151,74,0.08);
+    border: 1px solid rgba(184,151,74,0.4);
+    padding: 5px 12px;
+    border-radius: 14px;
+    letter-spacing: 0.1em;
+  }
+  .badge.live { color: var(--green); border-color: var(--green); background: rgba(78,169,106,0.1); }
+  .badge.live::before { content: '● '; }
+
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px 32px;
+  }
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .stat {
+    background: var(--void2);
+    border: 1px solid #2a2d38;
+    border-radius: 6px;
+    padding: 14px 18px;
+  }
+  .stat .label {
+    font: 10px/1.4 'IBM Plex Mono', monospace;
+    color: var(--grey);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .stat .value {
+    font: 700 26px 'Libre Baskerville', serif;
+    color: var(--cream);
+  }
+  .stat.accent .value { color: var(--brass); }
+  .stat.ox .value { color: var(--ox); }
+  .stat.teal .value { color: var(--teal); }
+
+  h2 { font: 700 16px 'DM Sans'; color: var(--cream); margin: 24px 0 12px; letter-spacing: -0.01em; }
+  h2 small { color: var(--grey); font-weight: 400; font-size: 13px; margin-left: 8px; }
+
+  .order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .order {
+    background: var(--void2);
+    border: 1px solid #2a2d38;
+    border-left: 3px solid var(--brass);
+    border-radius: 6px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .order:hover { border-left-color: var(--cream); background: #1d2030; }
+  .order.flagged { border-left-color: var(--ox); }
+  .order.auto-ship { border-left-color: var(--green); }
+
+  .order-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 6px;
+  }
+  .order-id { font: 500 13px 'IBM Plex Mono', monospace; color: var(--brass); }
+  .order-meta { font: 11px/1.4 'IBM Plex Mono', monospace; color: var(--grey); }
+  .order-line {
+    font: 14px/1.5 'DM Sans';
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .order-tags {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .tag {
+    font: 10px/1 'IBM Plex Mono', monospace;
+    padding: 3px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.04em;
+  }
+  .tag.tier-high { background: rgba(139,26,26,0.2); color: #e2a4a4; }
+  .tag.tier-limited { background: rgba(184,151,74,0.2); color: var(--brass); }
+  .tag.tier-minimal { background: rgba(95,179,168,0.15); color: var(--teal); }
+  .tag.tier-prohibited { background: var(--ox); color: var(--cream); font-weight: 700; }
+  .tag.verdict-auto-ship { background: rgba(78,169,106,0.2); color: var(--green); }
+  .tag.verdict-needs-review { background: rgba(139,26,26,0.2); color: #e2a4a4; }
+  .tag.gig { background: #2a2d38; color: var(--cream); }
+
+  /* details panel · slide in from right */
+  .panel-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    z-index: 50;
+  }
+  .panel-overlay.open { display: block; }
+  .panel {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: min(720px, 95vw);
+    background: var(--void2);
+    border-left: 1px solid var(--brass);
+    transform: translateX(100%);
+    transition: transform 0.2s ease;
+    overflow-y: auto;
+    z-index: 51;
+  }
+  .panel.open { transform: translateX(0); }
+  .panel-head {
+    padding: 20px 28px;
+    border-bottom: 1px solid #2a2d38;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .panel-head h3 {
+    font: 700 18px 'Libre Baskerville', serif;
+    color: var(--brass);
+  }
+  .panel-close {
+    background: transparent;
+    border: 1px solid var(--grey);
+    color: var(--cream);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font: 16px 'DM Sans';
+  }
+  .panel-close:hover { border-color: var(--cream); }
+  .panel-body { padding: 24px 28px 100px; }
+  .panel-body h4 {
+    font: 700 13px 'IBM Plex Mono', monospace;
+    color: var(--brass);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 24px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #2a2d38;
+  }
+  .panel-body h4:first-child { margin-top: 0; }
+  .panel-body p, .panel-body li { color: var(--cream); margin-bottom: 8px; }
+  .panel-body ul { padding-left: 20px; }
+  .panel-body pre {
+    background: var(--void);
+    border: 1px solid #2a2d38;
+    padding: 12px 14px;
+    border-radius: 4px;
+    font: 11px/1.5 'IBM Plex Mono', monospace;
+    color: var(--cream);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  .panel-body .flag {
+    background: rgba(139,26,26,0.15);
+    border-left: 2px solid var(--ox);
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    color: #e2a4a4;
+    font-size: 13px;
+  }
+
+  .actions {
+    position: sticky; bottom: 0;
+    background: linear-gradient(to top, var(--void2) 80%, transparent);
+    padding: 16px 28px 20px;
+    display: flex; gap: 12px;
+    border-top: 1px solid #2a2d38;
+    margin-top: 24px;
+  }
+  .btn {
+    flex: 1;
+    padding: 12px 18px;
+    border: 1px solid var(--grey);
+    background: transparent;
+    color: var(--cream);
+    border-radius: 4px;
+    font: 600 13px 'DM Sans';
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn:hover { border-color: var(--cream); }
+  .btn.primary { background: var(--brass); color: var(--void); border-color: var(--brass); }
+  .btn.primary:hover { background: #d4ab50; }
+  .btn.danger { color: var(--ox); border-color: var(--ox); }
+  .btn.danger:hover { background: rgba(139,26,26,0.1); }
+
+  .empty-state {
+    background: var(--void2);
+    border: 1px dashed #2a2d38;
+    border-radius: 6px;
+    padding: 60px 32px;
+    text-align: center;
+    color: var(--grey);
+  }
+  .empty-state h3 {
+    font: 700 18px 'Libre Baskerville', serif;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .empty-state .hint {
+    font: 12px/1.5 'IBM Plex Mono', monospace;
+    color: var(--brass);
+    margin-top: 16px;
+    padding: 12px;
+    background: var(--void);
+    border-radius: 4px;
+    text-align: left;
+  }
+
+  footer {
+    margin-top: 64px;
+    padding: 20px 32px;
+    text-align: center;
+    font: 11px 'IBM Plex Mono', monospace;
+    color: var(--grey);
+    border-top: 1px solid #2a2d38;
+  }
+  footer a { color: var(--brass); text-decoration: none; }
+
+  /* live signal indicator · pulses when broadcastchannel fires */
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .pulse { animation: pulse 1.4s infinite; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>◊·κ=φ⁴ · Fiverr <em>Review</em></h1>
+  <div class="badges">
+    <span class="badge" id="version">si-didy v2.0 · prime 379</span>
+    <span class="badge live pulse" id="liveStatus">listening</span>
+  </div>
+</header>
+
+<main>
+  <div class="stats-row" id="stats"></div>
+
+  <h2>Awaiting your approval <small id="queueCount">0 queued</small></h2>
+  <div class="order-list" id="orderList"></div>
+
+  <h2>Recently shipped <small id="shippedCount">0 in last 24h</small></h2>
+  <div class="order-list" id="shippedList"></div>
+</main>
+
+<div class="panel-overlay" id="overlay" onclick="closePanel()"></div>
+<div class="panel" id="panel">
+  <div class="panel-head">
+    <h3 id="panelTitle">Order detail</h3>
+    <button class="panel-close" onclick="closePanel()">×</button>
+  </div>
+  <div class="panel-body" id="panelBody"></div>
+  <div class="actions" id="panelActions" style="display:none;">
+    <button class="btn primary" onclick="approveOrder()">✓ Approve &amp; Ship</button>
+    <button class="btn" onclick="copyDelivery()">Copy delivery msg</button>
+    <button class="btn danger" onclick="flagForRework()">Flag for rework</button>
+  </div>
+</div>
+
+<footer>
+  ◊·κ=1 · 7-strand fiverr-autopilot · vendored fall-euaiact SDK · MIT ·
+  <a href="https://github.com/sjgant80-hub/si-didy-agent" target="_blank">github.com/sjgant80-hub/si-didy-agent</a>
+</footer>
+
+<script type="module">
+  // ── state ──────────────────────────────────────────────────────────
+  let queue = [];
+  let shipped = [];
+  let auditStats = { total: 0, byType: {}, last24h: 0 };
+  let activeOrder = null;
+
+  // ── data plumbing ──────────────────────────────────────────────────
+  // In production this calls the si-didy-agent HTTP server on port 1618.
+  // For demo / file:// mode, fall back to demo data.
+  const AGENT_BASE = (location.protocol === 'file:') ? null : `http://localhost:1618`;
+
+  async function fetchQueue() {
+    if (!AGENT_BASE) return demoQueue();
+    try {
+      const r = await fetch(`${AGENT_BASE}/api/fiverr/queue`);
+      if (!r.ok) throw new Error('api');
+      return await r.json();
+    } catch {
+      return demoQueue();
+    }
+  }
+
+  async function fetchStats() {
+    if (!AGENT_BASE) return demoStats();
+    try {
+      const r = await fetch(`${AGENT_BASE}/api/fiverr/stats`);
+      if (!r.ok) throw new Error('api');
+      return await r.json();
+    } catch {
+      return demoStats();
+    }
+  }
+
+  async function fetchShipped() {
+    if (!AGENT_BASE) return [];
+    try {
+      const r = await fetch(`${AGENT_BASE}/api/fiverr/shipped`);
+      if (!r.ok) throw new Error('api');
+      return await r.json();
+    } catch {
+      return [];
+    }
+  }
+
+  function demoQueue() {
+    return [
+      {
+        orderId: 'FO-DEMO-001',
+        gigId: 1,
+        tier: 'high',
+        verdict: 'auto-ship',
+        flags: 0,
+        buyer: 'JaneDoe',
+        elapsedMs: 2841,
+        path: 'FO-DEMO-001.json',
+      },
+      {
+        orderId: 'FO-DEMO-002',
+        gigId: 1,
+        tier: 'limited',
+        verdict: 'needs-review',
+        flags: 2,
+        buyer: 'JohnSmith',
+        elapsedMs: 3120,
+        path: 'FO-DEMO-002.json',
+      },
+    ];
+  }
+
+  function demoStats() {
+    return { total: 12, last24h: 4, byType: { order_received: 4, classified: 4, signed: 4, shipped: 3 } };
+  }
+
+  // ── render ─────────────────────────────────────────────────────────
+  function renderStats() {
+    const tile = (label, value, cls = '') => `
+      <div class="stat ${cls}">
+        <div class="label">${label}</div>
+        <div class="value">${value}</div>
+      </div>`;
+    document.getElementById('stats').innerHTML = [
+      tile('In queue',           queue.length, 'accent'),
+      tile('Auto-shippable',     queue.filter(o => o.verdict === 'auto-ship').length, 'teal'),
+      tile('Needs review',       queue.filter(o => o.verdict === 'needs-review').length, 'ox'),
+      tile('Audit events 24h',   auditStats.last24h, 'accent'),
+      tile('Lifetime fulfilled', auditStats.byType.shipped || 0, 'teal'),
+    ].join('');
+  }
+
+  function renderQueue() {
+    const el = document.getElementById('orderList');
+    if (!queue.length) {
+      el.innerHTML = `
+        <div class="empty-state">
+          <h3>Inbox zero · standing by</h3>
+          <p>When a Fiverr order arrives, the autopilot parses it, classifies the system, drafts the report, signs with Konomi, and queues it here for your approval.</p>
+          <div class="hint">
+            <strong>Test the pipeline locally:</strong><br>
+            $ node scripts/synthetic-order.mjs<br>
+            ◊ refreshes here in ~3 seconds
+          </div>
+        </div>`;
+      document.getElementById('queueCount').textContent = '0 queued';
+      return;
+    }
+    document.getElementById('queueCount').textContent = `${queue.length} queued`;
+    el.innerHTML = queue.map(o => `
+      <div class="order ${o.verdict || ''}" data-id="${o.orderId}">
+        <div class="order-head">
+          <span class="order-id">${o.orderId}</span>
+          <span class="order-meta">${o.buyer || 'buyer'} · ${(o.elapsedMs/1000).toFixed(1)}s pipeline</span>
+        </div>
+        <div class="order-line">GIG-${o.gigId} delivery ready · ${o.flags > 0 ? `${o.flags} flag${o.flags > 1 ? 's' : ''} to review` : 'all checks passed'}</div>
+        <div class="order-tags">
+          <span class="tag gig">GIG-${o.gigId}</span>
+          <span class="tag tier-${o.tier}">${o.tier || 'unknown'}</span>
+          <span class="tag verdict-${o.verdict || 'unknown'}">${o.verdict || 'unknown'}</span>
+        </div>
+      </div>`).join('');
+    el.querySelectorAll('.order').forEach(card => {
+      card.addEventListener('click', () => openPanel(card.dataset.id));
+    });
+  }
+
+  function renderShipped() {
+    const el = document.getElementById('shippedList');
+    if (!shipped.length) {
+      el.innerHTML = `<div class="empty-state" style="padding: 30px;"><p>No shipped orders yet · they'll appear here with their signed envelopes.</p></div>`;
+      document.getElementById('shippedCount').textContent = '0 in last 24h';
+      return;
+    }
+    const last24 = shipped.filter(o => Date.now() - new Date(o.shippedAt).getTime() < 86400000);
+    document.getElementById('shippedCount').textContent = `${last24.length} in last 24h`;
+    el.innerHTML = shipped.slice(0, 10).map(o => `
+      <div class="order auto-ship">
+        <div class="order-head">
+          <span class="order-id">${o.orderId}</span>
+          <span class="order-meta">${o.shippedAt || ''}</span>
+        </div>
+        <div class="order-line">GIG-${o.gigId} shipped · signature verified · in audit chain</div>
+        <div class="order-tags">
+          <span class="tag gig">GIG-${o.gigId}</span>
+          <span class="tag verdict-auto-ship">shipped</span>
+        </div>
+      </div>`).join('');
+  }
+
+  // ── detail panel ───────────────────────────────────────────────────
+  async function openPanel(orderId) {
+    activeOrder = queue.find(o => o.orderId === orderId);
+    if (!activeOrder) return;
+
+    document.getElementById('panelTitle').textContent = `${orderId} · GIG-${activeOrder.gigId}`;
+    document.getElementById('panelActions').style.display = 'flex';
+
+    // try to fetch full package
+    let pkg = null;
+    if (AGENT_BASE) {
+      try {
+        const r = await fetch(`${AGENT_BASE}/api/fiverr/order/${orderId}`);
+        if (r.ok) pkg = await r.json();
+      } catch {}
+    }
+
+    const bodyHtml = pkg ? renderFullPackage(pkg) : renderStubPackage(activeOrder);
+    document.getElementById('panelBody').innerHTML = bodyHtml;
+
+    document.getElementById('overlay').classList.add('open');
+    document.getElementById('panel').classList.add('open');
+  }
+
+  function renderFullPackage(p) {
+    const flagsHtml = p.verdict?.flags?.length
+      ? p.verdict.flags.map(f => `<div class="flag">⚠ ${f}</div>`).join('')
+      : `<p style="color:var(--green);">✓ all 3 adversarial votes passed</p>`;
+
+    return `
+      <h4>Classification</h4>
+      <p><strong>Tier:</strong> ${p.classification.tier} (${p.classification.label})</p>
+      <p><strong>Confidence:</strong> ${p.classification.confidence}/100</p>
+      <p><strong>Articles:</strong> ${p.classification.articles.join(', ') || '(none)'}</p>
+      <p><strong>Annex IV gap:</strong> ${p.classification.annexGap.length}/14 fields missing</p>
+
+      <h4>Personalised findings</h4>
+      <ul>${p.findings.findings.map(f => `<li>${f}</li>`).join('')}</ul>
+
+      <h4>Recommended next gigs</h4>
+      <ul>${(p.findings.recommendedGigs || []).map(g => `<li>${g}</li>`).join('') || '<li>(none for minimal-risk)</li>'}</ul>
+
+      <h4>3-vote verdict</h4>
+      ${flagsHtml}
+
+      <h4>Delivery message · paste-ready</h4>
+      <pre id="deliveryMsg">${escapeHtml(p.deliveryMessage)}</pre>
+
+      <h4>Signed envelope</h4>
+      <pre>${escapeHtml(JSON.stringify(p.envelope, null, 2))}</pre>
+      <p style="color:var(--grey);font-size:11px;margin-top:8px;">
+        signature: ${p.signature?.slice(0, 64)}…
+      </p>
+    `;
+  }
+
+  function renderStubPackage(o) {
+    return `
+      <h4>Order summary</h4>
+      <p><strong>Buyer:</strong> ${o.buyer}</p>
+      <p><strong>Gig:</strong> GIG-${o.gigId}</p>
+      <p><strong>Tier:</strong> ${o.tier}</p>
+      <p><strong>Verdict:</strong> ${o.verdict}</p>
+      <p><strong>Flags:</strong> ${o.flags}</p>
+      <p><strong>Pipeline time:</strong> ${(o.elapsedMs/1000).toFixed(2)}s</p>
+      <p style="color:var(--grey);margin-top:16px;">⚠ Live agent not connected · full package details unavailable in demo mode. Start the agent: <code>node agent.mjs --server</code></p>
+    `;
+  }
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  function closePanel() {
+    document.getElementById('overlay').classList.remove('open');
+    document.getElementById('panel').classList.remove('open');
+    activeOrder = null;
+  }
+
+  async function approveOrder() {
+    if (!activeOrder || !AGENT_BASE) {
+      alert('Demo mode · approval needs the live agent. Start: node agent.mjs --server');
+      return;
+    }
+    try {
+      const r = await fetch(`${AGENT_BASE}/api/fiverr/approve/${activeOrder.orderId}`, { method: 'POST' });
+      if (r.ok) {
+        closePanel();
+        await refresh();
+      }
+    } catch (e) {
+      alert('approve failed: ' + e.message);
+    }
+  }
+
+  function copyDelivery() {
+    const msg = document.getElementById('deliveryMsg')?.textContent;
+    if (!msg) { alert('delivery message not loaded'); return; }
+    navigator.clipboard.writeText(msg).then(() => {
+      alert('copied to clipboard · paste into Fiverr "Deliver Work" form');
+    });
+  }
+
+  function flagForRework() {
+    alert('Flagged · would call /api/fiverr/rework/{id} in live mode');
+  }
+
+  // ── live signals · BroadcastChannel ────────────────────────────────
+  try {
+    const ch = new BroadcastChannel('fiverr-queue');
+    ch.addEventListener('message', () => refresh());
+  } catch {}
+
+  // ── refresh ────────────────────────────────────────────────────────
+  async function refresh() {
+    [queue, auditStats, shipped] = await Promise.all([fetchQueue(), fetchStats(), fetchShipped()]);
+    renderStats();
+    renderQueue();
+    renderShipped();
+    document.getElementById('liveStatus').textContent = AGENT_BASE ? 'live · port 1618' : 'demo mode';
+    if (!AGENT_BASE) document.getElementById('liveStatus').classList.remove('pulse');
+  }
+  refresh();
+  setInterval(refresh, 5000);
+
+  window.closePanel = closePanel;
+  window.approveOrder = approveOrder;
+  window.copyDelivery = copyDelivery;
+  window.flagForRework = flagForRework;
+</script>
+
+</body>
+</html>

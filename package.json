@@ -10,10 +10,15 @@
   "scripts": {
     "start": "node agent.mjs",
     "upwork": "node agent.mjs ./examples/UPWORK-BRIEF.txt",
-    "github-audit": "node agent.mjs ./examples/GITHUB-AUDIT-BRIEF.txt"
+    "github-audit": "node agent.mjs ./examples/GITHUB-AUDIT-BRIEF.txt",
+    "fv:serve": "node scripts/fv-serve.mjs",
+    "fv:test": "node scripts/synthetic-order.mjs",
+    "fv:dashboard": "node scripts/fv-serve.mjs"
   },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.3.159",
+    "pdfkit": "^0.18.0",
+    "sharp": "^0.34.5",
     "zod": "^3.23.0"
   },
   "optionalDependencies": {
