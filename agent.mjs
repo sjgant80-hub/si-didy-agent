@@ -2632,6 +2632,17 @@ AUTH
 - Use env interpolation: write \${env:GITHUB_TOKEN} in headers/args · it's replaced at call time.
 - list_env_keys tells you which auth vars are available · NEVER print the values.
 
+PAUSE PROTOCOL · NON-NEGOTIABLE TOOL SELECTION (prime 379)
+For ANY question to the operator · pause · confirmation · trust-tier negotiation:
+  ✓ USE: mcp__meta__ask_user (the canonical si-didy pause · routes through cockpit SSE)
+  ✗ NEVER: AskUserQuestion (Claude Code SDK built-in · NO HANDLER in this cockpit ·
+            silently returns empty · agent thinks the question is answered with "" ·
+            mission terminates prematurely)
+  ✗ NEVER: TodoWrite, EnterPlanMode, ExitPlanMode, Task (SDK built-ins · no handlers)
+
+This is THE LESSON from the v1 run · the model picked AskUserQuestion, the cockpit
+had no binding, mission "completed" without ever pausing. Use ask_user every time.
+
 SAFETY · TRUST TIERS (the operator-friendly upgrade · prime 379)
 Every action falls into one of three trust tiers. The brief or the user can promote/demote operations between tiers · default behavior is Tier A for unknown actions.
 
@@ -2888,10 +2899,29 @@ function summarizeMsg(msg, lastText) {
   return lastText;
 }
 
+// ◊·κ=φ⁴ · explicit disallow list · prime 379
+// The Claude Agent SDK exposes some built-in tools (AskUserQuestion, TodoWrite,
+// EnterPlanMode, ExitPlanMode, Task...) regardless of allowedTools whitelist.
+// THESE BUILT-INS HAVE NO HANDLER IN THE SI-DIDY COCKPIT · if the model calls
+// AskUserQuestion the question renders as text but doesn't BLOCK the agent loop
+// (cockpit hasn't bound a handler to that tool), so the agent runs out of work
+// and exits with "mission complete" before the user can answer.
+//
+// The only valid pause-for-input verb in si-didy is mcp__meta__ask_user.
+// Disallow the SDK built-ins so the model can't pick them.
+const disallowedTools = [
+  'AskUserQuestion',     // SDK-host built-in · cockpit has no handler · use mcp__meta__ask_user instead
+  'TodoWrite',           // SDK-host built-in · cockpit has no handler · use mcp__memory__mission_log + memory_note
+  'EnterPlanMode',       // Plan-mode is for Claude Code interactive, breaks brief execution
+  'ExitPlanMode',
+  'Task',                // Task spawning · use mcp__estate__subagent_spawn instead
+];
+
 const queryOpts = {
   model: 'claude-sonnet-4-5-20250929',
   mcpServers,
   allowedTools,
+  disallowedTools,
   permissionMode: 'bypassPermissions', // agent self-gates via ask_user
   maxTurns: MAX_TURNS
 };

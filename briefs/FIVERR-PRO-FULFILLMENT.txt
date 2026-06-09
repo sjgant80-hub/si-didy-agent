@@ -50,19 +50,30 @@ steps including images), 2 experience entries, 5 certifications.
   STEP 0 · TRUST-TIER NEGOTIATION (one ask · sets the tone)
 ═══════════════════════════════════════════════════════════════════════
 
-ask_user("◊ Fiverr Pro fulfillment ready · 6 portfolio + 2 experience + 5 cert.
+  CRITICAL · TOOL TO USE: mcp__meta__ask_user
+  DO NOT USE: AskUserQuestion (the v1 run died here · the SDK built-in has
+              no handler in this cockpit · question rendered but didn't
+              block · mission terminated at "complete" before any pause).
 
-This mission has 13 Save operations · all are Tier B (your Fiverr account,
-fully reversible, easily edited later).
+Call mcp__meta__ask_user with this prompt verbatim:
 
-How do you want them handled?
-  [all]  · auto-approve all 13 · I just report progress · fastest
-  [first] · pause once after the FIRST item lands so you can verify the
-            pattern · then auto-approve the remaining 12
-  [each] · pause before every single Save · slowest but most controlled
-  [stop] · cancel mission")
+  "◊ Fiverr Pro fulfillment ready · 6 portfolio + 2 experience + 5 cert.
 
-Cache the answer in mission state. Honor it for the rest of the run.
+  This mission has 13 Save operations · all are Tier B (your Fiverr account,
+  fully reversible, easily edited later).
+
+  How do you want them handled?
+    [all]   · auto-approve all 13 · I just report progress · fastest
+    [first] · pause once after the FIRST item lands so you can verify the
+              pattern · then auto-approve the remaining 12
+    [each]  · pause before every single Save · slowest but most controlled
+    [stop]  · cancel mission
+
+  Reply with: all, first, each, or stop"
+
+WAIT FOR THE REPLY. Cache the answer in mission state. Honor it for the rest
+of the run. If the reply is "stop" · mission_finish immediately with outcome
+"halted_by_user_at_step_0".
 
 ═══════════════════════════════════════════════════════════════════════
   STEP 1 · LOGIN HANDOFF (skip if CDP attach is on · you're already in)
