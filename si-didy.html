@@ -184,6 +184,17 @@ main{background:var(--void);display:flex;flex-direction:column;min-width:0;min-h
 
   <aside class="right">
     <div class="panel">
+      <h2>◊·κ=φ⁴ · Fiverr autopilot</h2>
+      <div id="fv-stats" class="muted" style="margin-bottom:6px;font-size:11px">
+        listening for orders · prime 379
+      </div>
+      <div class="qlist" id="fv-queue"><div class="empty">queue empty</div></div>
+      <div style="margin-top:6px;display:flex;gap:6px">
+        <a href="/dashboard" target="_blank" class="primary" style="flex:1;text-align:center;text-decoration:none;padding:6px 10px;font-size:11px;border-radius:3px;background:var(--brass);color:var(--void)">open dashboard ↗</a>
+        <button class="dim" id="fv-refresh" style="font-size:11px">refresh</button>
+      </div>
+    </div>
+    <div class="panel">
       <h2>Queues · drafts</h2>
       <div class="qlist" id="qlist"><div class="empty">no drafts yet</div></div>
       <div style="margin-top:6px"><button class="dim" id="qrefresh" style="width:100%">refresh queues</button></div>
@@ -403,6 +414,42 @@ async function refreshQueues(){
 $('#qrefresh').onclick = refreshQueues;
 setInterval(refreshQueues, 20000);
 refreshQueues();
+
+// ─── ◊·κ=φ⁴ · Fiverr autopilot live panel ─────────────────────────────
+async function refreshFiverr() {
+  try {
+    const [qRes, sRes] = await Promise.all([
+      fetch('/api/fiverr/queue'),
+      fetch('/api/fiverr/stats'),
+    ]);
+    const queue = await qRes.json();
+    const stats = await sRes.json();
+    const qEl = document.getElementById('fv-queue');
+    const sEl = document.getElementById('fv-stats');
+    sEl.innerHTML = `<span style="color:var(--brass)">${queue.length}</span> queued · <span style="color:var(--mem)">${stats.byType?.shipped || 0}</span> shipped · ${stats.last24h || 0} events 24h`;
+    if (!queue.length) {
+      qEl.innerHTML = '<div class="empty">queue empty · listening</div>';
+      return;
+    }
+    qEl.innerHTML = queue.slice(0, 8).map(o => {
+      const tierColor = ({high:'#8b1a1a',limited:'#b8974a',minimal:'#5fb3a8',prohibited:'#8b1a1a'})[o.tier] || '#888';
+      const verdictColor = o.verdict === 'auto-ship' ? '#4ea96a' : '#8b1a1a';
+      return `<div class="q" style="padding:6px 8px;margin-bottom:4px">
+        <div class="qtitle" style="font-size:11px"><b>${o.orderId}</b> · GIG-${o.gigId}</div>
+        <div class="qmeta" style="font-size:10px">
+          <span style="color:${tierColor}">${o.tier || 'unknown'}</span> ·
+          <span style="color:${verdictColor}">${o.verdict || 'unknown'}</span> ·
+          ${o.buyer || 'buyer'} ·
+          ${o.flags > 0 ? `⚠ ${o.flags} flags` : '✓'}
+        </div>
+      </div>`;
+    }).join('');
+  } catch (e) { /* offline · ignore */ }
+}
+document.getElementById('fv-refresh')?.addEventListener('click', refreshFiverr);
+setInterval(refreshFiverr, 5000);
+refreshFiverr();
+
 </script>
 </body>
 </html>

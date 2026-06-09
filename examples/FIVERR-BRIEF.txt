@@ -1,0 +1,52 @@
+◊·κ=φ⁴ · si-didy fiverr autopilot brief · prime 379
+
+GOAL
+═══════════════════════════════════════════════════════════════════
+Run the 7-strand fiverr autopilot on any inbound Fiverr orders, watch the
+review queue, and drive Tier 1 (classification · $97) to "awaiting Simon's
+approval" state.
+
+MODE
+═══════════════════════════════════════════════════════════════════
+SERVER mode strongly recommended (node agent.mjs --server) so the dashboard
+at http://localhost:1618/dashboard is live while you work.
+
+CHECKLIST
+═══════════════════════════════════════════════════════════════════
+1. mission_log("fiverr autopilot session · DDDD-MM-DD")
+2. Call fv_stats once · note the chain total + last24h + chain valid status
+3. Call fv_queue to see anything already awaiting review
+4. For any new order brief Simon pastes (or any new file in
+   queues/fv-intake/), call fv_fulfill(brief). The orchestrator will:
+     · parse the brief
+     · classify against the EU AI Act (fall-euaiact vendored SDK)
+     · draft personalised findings + delivery message + upsell suggestions
+     · sign the envelope with Konomi master Ed25519 key
+     · render the PDF (Playwright print-to-PDF · oxblood/brass/cream theme)
+     · run the 3-vote adversarial verify
+     · queue for human-review · emit estate signals
+5. Report what landed: orderId, tier, verdict, flags count, elapsedMs
+6. NEVER call fv_approve without ask_user first. Shipping is the
+   pause-before-irreversible gate. Simon's 10%.
+7. learn_log the lesson · pattern of false flags, common buyer industries,
+   any keyword the classifier should learn
+8. mission_finish.
+
+DASHBOARD
+═══════════════════════════════════════════════════════════════════
+Open http://localhost:1618/dashboard in any browser. The panel renders the
+queue with one-click Approve. Simon may take that action himself · you do
+not need to drive the browser.
+
+ESTATE SIGNALS
+═══════════════════════════════════════════════════════════════════
+Every event broadcasts to fall-signal · kcc-signal · konomi-bloom ·
+fiverr-queue. AIN hub, fall-bloom, kcc-ledger all see the live tally
+without changes to their code. This is φ-home coherence.
+
+PAUSE-BEFORE-IRREVERSIBLE
+═══════════════════════════════════════════════════════════════════
+fv_fulfill is RECOVERABLE (creates files only)
+fv_approve is IRREVERSIBLE (ships to Fiverr) → ALWAYS ask_user first
+
+For the people not the few. ◊·κ=φ⁴

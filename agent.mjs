@@ -2586,6 +2586,56 @@ ${BRIEF}
 Begin. State your plan first (tiers per step), then execute.`;
 
 // ═══════════════════════════════════════════════════════════════════
+//  ◊·κ=φ⁴ · FIVERR AUTOPILOT MCP · 7 strands + estate signals · prime 379
+// ═══════════════════════════════════════════════════════════════════
+const fiverrMcp = createSdkMcpServer({
+  name: 'fiverr',
+  version: '1.0.0',
+  tools: [
+    tool(
+      'fv_fulfill',
+      '◊·κ=φ⁴ · FIVERR · Run the 7-strand fulfillment pipeline on a raw Fiverr order brief. Parses → classifies (fall-euaiact) → drafts findings → signs (Ed25519) → renders PDF → 3-vote verifies → queues for Simon\'s approval. Auto-fulfills GIG-1 only · other gigs land in manual queue. Emits estate-wide BroadcastChannel signals (fall-signal/kcc-signal/konomi-bloom/fiverr-queue) at every stage. NEVER ships without Simon clicking Approve in the dashboard.',
+      { brief: z.string().describe('the raw email body or pasted intake brief from Fiverr') },
+      async ({ brief }) => {
+        const { fulfill } = await import('./tools/fiverr/index.js');
+        const r = await fulfill(brief);
+        return { content: [{ type: 'text', text: JSON.stringify(r, null, 2) }] };
+      }
+    ),
+    tool(
+      'fv_queue',
+      '◊ FIVERR · List packages currently in the awaiting-review queue. Returns orderId, gigId, tier, verdict (auto-ship/needs-review), flag count, buyer, pipeline time per package. Use before approve.',
+      {},
+      async () => {
+        const { listQueue } = await import('./tools/fiverr/index.js');
+        return { content: [{ type: 'text', text: JSON.stringify(listQueue(), null, 2) }] };
+      }
+    ),
+    tool(
+      'fv_approve',
+      '◊ FIVERR · Approve and ship a queued package. Moves artifacts from queues/fv-awaiting-review to queues/fv-shipped, emits fv:shipped to estate, marks the chain. ALWAYS pause for ask_user before calling this · shipping triggers a real Fiverr delivery in the dashboard.',
+      { orderId: z.string().describe('the Fiverr order ID (e.g. FO9SYNTH001)') },
+      async ({ orderId }) => {
+        const { approveAndShip } = await import('./tools/fiverr/index.js');
+        const r = await approveAndShip(orderId);
+        return { content: [{ type: 'text', text: JSON.stringify(r, null, 2) }] };
+      }
+    ),
+    tool(
+      'fv_stats',
+      '◊ FIVERR · Get audit chain stats. Returns total events, last-24h volume, counts by event type (order_received / classified / signed / shipped / etc). Use to verify the chain is healthy and the pipeline ran the expected steps.',
+      {},
+      async () => {
+        const { auditStats, verifyChain } = await import('./tools/fiverr/index.js');
+        const stats = auditStats();
+        const chain = await verifyChain();
+        return { content: [{ type: 'text', text: JSON.stringify({ ...stats, chainValid: chain.valid, chainTotal: chain.total }, null, 2) }] };
+      }
+    ),
+  ],
+});
+
+// ═══════════════════════════════════════════════════════════════════
 //  RUN
 // ═══════════════════════════════════════════════════════════════════
 const mcpServers = {
@@ -2595,6 +2645,7 @@ const mcpServers = {
   meta: metaMcp,
   memory: memoryMcp,
   estate: estateMcp,
+  fiverr: fiverrMcp,
   ...configuredMcps,
 };
 
@@ -2633,6 +2684,9 @@ const allowedTools = [
   'mcp__estate__upwork_autopilot',
   // ◊ Upwork PROFILE-FILL · v2.2 · LinkedIn-flow rail · pack-driven paste + pause-before-Save
   'mcp__estate__upwork_assisted_paste',
+  // ◊·κ=φ⁴ · FIVERR autopilot · 7 strands · prime 379
+  'mcp__fiverr__fv_fulfill', 'mcp__fiverr__fv_queue',
+  'mcp__fiverr__fv_approve', 'mcp__fiverr__fv_stats',
 ];
 
 console.log('\n◊ tiers loaded:');
@@ -2883,6 +2937,79 @@ if (SERVER_MODE) {
       return res.end(JSON.stringify(list));
     }
 
+    // ◊·κ=φ⁴ · FIVERR AUTOPILOT routes · 7-strand pipeline · prime 379
+    // GET  /api/fiverr/queue     → list awaiting-review
+    // GET  /api/fiverr/stats     → audit chain stats
+    // GET  /api/fiverr/shipped   → list shipped orders
+    // GET  /api/fiverr/order/:id → full review package
+    // POST /api/fiverr/approve/:id → move to shipped + emit signals
+    // POST /api/fiverr/fulfill   → run orchestrator on a raw brief
+    // GET  /dashboard             → serve dashboards/fiverr-review.html
+    if (url.pathname.startsWith('/api/fiverr/') || url.pathname === '/dashboard') {
+      try {
+        const fv = await import('./tools/fiverr/index.js');
+        if (url.pathname === '/api/fiverr/queue' && req.method === 'GET') {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          return res.end(JSON.stringify(fv.listQueue()));
+        }
+        if (url.pathname === '/api/fiverr/stats' && req.method === 'GET') {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          return res.end(JSON.stringify(fv.auditStats()));
+        }
+        if (url.pathname === '/api/fiverr/shipped' && req.method === 'GET') {
+          const SHIP_DIR = path.resolve('queues/fv-shipped');
+          const items = !fs.existsSync(SHIP_DIR) ? [] : fs.readdirSync(SHIP_DIR)
+            .filter(f => f.endsWith('.json') && !f.includes('-envelope'))
+            .map(f => { try { const p = JSON.parse(fs.readFileSync(path.join(SHIP_DIR, f), 'utf8')); return { orderId: p.orderId, gigId: p.order?.gigId, tier: p.classification?.tier, shippedAt: p.shippedAt || fs.statSync(path.join(SHIP_DIR, f)).mtime.toISOString() }; } catch { return null; } })
+            .filter(Boolean).sort((a, b) => (b.shippedAt || '').localeCompare(a.shippedAt || ''));
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          return res.end(JSON.stringify(items));
+        }
+        if (url.pathname.startsWith('/api/fiverr/order/') && req.method === 'GET') {
+          const id = url.pathname.split('/').pop();
+          const fp = path.resolve('queues/fv-awaiting-review', `${id}.json`);
+          if (!fs.existsSync(fp)) { res.writeHead(404); return res.end(JSON.stringify({ error: 'not_found' })); }
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          return res.end(fs.readFileSync(fp));
+        }
+        if (url.pathname.startsWith('/api/fiverr/approve/') && req.method === 'POST') {
+          const id = url.pathname.split('/').pop();
+          const r = await fv.approveAndShip(id);
+          // broadcast to cockpit SSE so the whole estate sees the ship event
+          broadcast({ type: 'fall_signal', source: 'fiverr-autopilot', kind: 'fv:shipped', payload: { orderId: id }, ts: new Date().toISOString() });
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          return res.end(JSON.stringify(r));
+        }
+        if (url.pathname === '/api/fiverr/fulfill' && req.method === 'POST') {
+          let body = '';
+          req.on('data', c => body += c);
+          req.on('end', async () => {
+            try {
+              const { brief } = JSON.parse(body || '{}');
+              if (!brief) { res.writeHead(400); return res.end(JSON.stringify({ ok: false, error: 'brief required' })); }
+              const r = await fv.fulfill(brief);
+              broadcast({ type: 'fall_signal', source: 'fiverr-autopilot', kind: 'fv:awaiting_review', payload: r, ts: new Date().toISOString() });
+              res.writeHead(200, { 'Content-Type': 'application/json' });
+              res.end(JSON.stringify(r));
+            } catch (e) {
+              res.writeHead(500, { 'Content-Type': 'application/json' });
+              res.end(JSON.stringify({ ok: false, error: e.message }));
+            }
+          });
+          return;
+        }
+        if (url.pathname === '/dashboard' && req.method === 'GET') {
+          const dashPath = path.resolve('dashboards/fiverr-review.html');
+          if (!fs.existsSync(dashPath)) { res.writeHead(404); return res.end('dashboard not found'); }
+          res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+          return res.end(fs.readFileSync(dashPath));
+        }
+      } catch (e) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ ok: false, error: 'fiverr autopilot: ' + e.message }));
+      }
+    }
+
     res.writeHead(404); res.end('not found');
   });
 
@@ -3057,6 +3184,14 @@ Execute the n=4-7 doctrine. Estate-first. Log mission. Stream tier calls. Pause 
     console.log(`◊ SSE events at /events · POST directives at /directive`);
     console.log(`◊ substrate verbs at POST /substrate · {verb:"research"|"verify"|"substrate_build", args:{...}}`);
     console.log(`◊ fall-signal mesh bridge at POST /signal · GET /signal?n=50 to replay`);
+    console.log(`◊ ──────────────────────────────────────────────────────────────────`);
+    console.log(`◊ fiverr autopilot · 7 strands · prime 379`);
+    console.log(`◊   dashboard:   http://localhost:${SERVER_PORT}/dashboard`);
+    console.log(`◊   queue:       http://localhost:${SERVER_PORT}/api/fiverr/queue`);
+    console.log(`◊   stats:       http://localhost:${SERVER_PORT}/api/fiverr/stats`);
+    console.log(`◊   fulfill:     POST /api/fiverr/fulfill {brief:"..."}`);
+    console.log(`◊   approve:     POST /api/fiverr/approve/:orderId`);
+    console.log(`◊ ──────────────────────────────────────────────────────────────────`);
     if (AUTOPILOT_ON) {
       console.log(`◊ autopilot ARMED · every ${AUTOPILOT_INTERVAL_MIN}min · 07-21h · drafts only · NEVER auto-sends`);
     } else {
