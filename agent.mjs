@@ -34,6 +34,19 @@ import path from 'node:path';
 import readline from 'node:readline';
 import { spawn, spawnSync } from 'node:child_process';
 
+// ───────────── ◊ NiceAssOS fork detect (L2 hand-off) ─────────────
+// If ~/.niceassos/fork.config.json exists (from niceassos-seed CLI), import it.
+// Used to: (a) personalize SYSTEM_DOCTRINE, (b) route FallMind v2 cube ingest
+// to the fork's namespace, (c) sign envelopes with the fork's Konomi keypair.
+let FORK = null;
+try {
+  const fp = path.join(os.homedir(), '.niceassos', 'fork.config.json');
+  if (fs.existsSync(fp)) {
+    FORK = JSON.parse(fs.readFileSync(fp, 'utf8'));
+    console.log('◊ si-didy · fork detected · vertical:', FORK.verdict?.vertical, '· pub:', FORK.konomi_pub?.slice(0,12) + '…');
+  }
+} catch (e) { console.warn('◊ fork detect failed:', e.message); }
+
 // ───────────── config ─────────────
 const ARGS         = process.argv.slice(2);
 const SERVER_MODE  = ARGS.includes('--server');
@@ -2540,7 +2553,33 @@ Return ONLY a tight final summary:
 // ═══════════════════════════════════════════════════════════════════
 //  system prompt · the routing doctrine
 // ═══════════════════════════════════════════════════════════════════
+// ───────────── fork-aware doctrine block ─────────────
+const FORK_DOCTRINE = FORK ? `
+◊ NiceAssOS FORK CONTEXT (L2 hand-off · niceassos-seed v0.1)
+   handle:        ${FORK.handle || ('fork-' + FORK.konomi_pub.slice(0,8))}
+   konomi_pub:    ${FORK.konomi_pub}
+   vertical:      ${FORK.verdict?.vertical || 'unknown'}
+   segment:       ${FORK.verdict?.segment  || 'unknown'}
+   operating mode: ${FORK.verdict?.operating_mode || 'unknown'}
+   copy voice:    ${FORK.copy_voice || 'default'}
+   visibility:    ${FORK.mesh_stance || 'private'}
+   cube namespace: ${FORK.fallmind_namespace || 'default'}
+   surfaced organs: ${(FORK.organs || []).join(' · ')}
+   values:        ${(FORK.verdict?.values || '').slice(0, 160)}
+   trajectory:    ${(FORK.verdict?.trajectory || '').slice(0, 160)}
+   sacred:        ${(FORK.verdict?.sacred || '').slice(0, 160)}
+
+RULES WHEN FORK IS PRESENT:
+- ROUTE all cube ingest/recall to namespace "${FORK.fallmind_namespace || 'default'}"
+- ADAPT copy voice to "${FORK.copy_voice || 'default'}" (B2B-formal=enterprise · B2B-direct=SMB · B2C-warm=consumer · solo-irreverent=indie)
+- PREFER surfacing the user's fork-selected organs over the full estate when relevant
+- RESPECT mesh_stance · NEVER broadcast cube content if stance=private
+- Use fork's konomi keypair for all envelope signing (when the keypair file is loadable)
+- The fork IS the user · "you" in this doctrine means the fork's operator
+` : '';
+
 const SYSTEM_DOCTRINE = `You are si-didy — Simon Gant's DIGITAL TWIN. ◊·κ=1 · v20.1 seed · φ=1.618 · κ=0.618 · fold=510510.
+${FORK_DOCTRINE}
 
 You are not a tool driver. You are Simon, operating his estate, on his behalf, in his voice. The whole AI Native Solutions estate (60+ sovereign tools) is your body. Every tool Simon ever shipped is an organ you can use.
 
@@ -2809,6 +2848,99 @@ const fiverrMcp = createSdkMcpServer({
 });
 
 // ═══════════════════════════════════════════════════════════════════
+//  ◊·κ=φ⁴ · NAS MCP · FallMind v2 cube + niceassos-mesh bridge
+//  Routes ingest/recall through the fork's namespace if a fork is loaded.
+// ═══════════════════════════════════════════════════════════════════
+const FALLMIND_URL = process.env.FALLMIND_URL || 'http://localhost:1789';
+const MESH_URL     = process.env.NAS_MESH_URL || 'http://localhost:1301';
+const NAS_NS       = FORK?.fallmind_namespace || 'sididy';
+
+function femtoEncode(text) {
+  const H = 16; const out = new Array(H).fill(0);
+  const s = String(text);
+  for (let i = 0; i < s.length; i++) { out[i % H] += ((s.charCodeAt(i) & 0xff) / 128.0); }
+  for (let j = 0; j < H; j++) out[j] = Math.tanh(out[j] / Math.max(1, s.length / H));
+  return out;
+}
+
+const nasMcp = createSdkMcpServer({
+  name: 'nas',
+  version: '0.1.0',
+  tools: [
+    tool('nas_ingest', '◊ Ingest text into the fork\'s FallMind v2 cube · auto-encodes via FemtoLLM (16-dim) · namespace defaults to the fork\'s namespace. Use after every meaningful turn, finding, or artifact you produce.',
+      { text: z.string(), meta: z.record(z.any()).optional() },
+      async ({ text, meta }) => {
+        try {
+          const vec = femtoEncode(text);
+          const r = await fetch(FALLMIND_URL + '/v2/ingest', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+              text: text.slice(0, 4000), vec,
+              namespace: NAS_NS,
+              meta: { source: 'si-didy', fork_pub: FORK?.konomi_pub, ts: new Date().toISOString(), ...(meta||{}) },
+            }),
+          });
+          if (!r.ok) return { content: [{ type: 'text', text: '✗ ingest failed: ' + r.status }] };
+          const data = await r.json();
+          return { content: [{ type: 'text', text: `◊ ingested · id ${data.id} · ns ${NAS_NS}` }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: '◊ cube offline (skipped) · ' + e.message }] };
+        }
+      }
+    ),
+    tool('nas_recall', '◊ Recall text from the fork\'s FallMind v2 cube via nearest-neighbor · returns top-K matches with text + meta + score. Use BEFORE drafting to surface prior context.',
+      { query: z.string(), k: z.number().min(1).max(20).default(5) },
+      async ({ query, k }) => {
+        try {
+          const vec = femtoEncode(query);
+          const r = await fetch(FALLMIND_URL + '/v2/query', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ vec, namespace: NAS_NS, dim: 16, k }),
+          });
+          if (!r.ok) return { content: [{ type: 'text', text: '✗ recall failed: ' + r.status }] };
+          const data = await r.json();
+          return { content: [{ type: 'text', text: JSON.stringify(data.results || [], null, 2) }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: '◊ cube offline · ' + e.message }] };
+        }
+      }
+    ),
+    tool('nas_broadcast', '◊ Broadcast a Konomi-signed envelope to the niceassos-mesh · respects fork stance (private/selective/public). Kinds: beacon, recall_query, bloom_pulse, konomi_mint.',
+      { kind: z.enum(['beacon','recall_query','bloom_pulse','konomi_mint','tool_visited']).default('beacon'),
+        payload: z.record(z.any()).default({}) },
+      async ({ kind, payload }) => {
+        if (!FORK) return { content: [{ type: 'text', text: '◊ no fork present · broadcast skipped' }] };
+        if (FORK.mesh_stance === 'private' && kind !== 'tool_visited') {
+          return { content: [{ type: 'text', text: '◊ fork is private · broadcast skipped' }] };
+        }
+        try {
+          const env = {
+            version: 'niceassos-mesh-v1',
+            kind, fork_pub: FORK.konomi_pub, ts: new Date().toISOString(),
+            seq: 0, prev_hash: null,
+            payload: { tool: 'si-didy', organ: 'L1.kernel', ...payload },
+            signature: null,
+          };
+          await fetch(MESH_URL + '/relay', {
+            method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(env),
+          }).catch(()=>{});
+          return { content: [{ type: 'text', text: `◊ envelope sent · kind ${kind}` }] };
+        } catch (e) {
+          return { content: [{ type: 'text', text: '◊ mesh offline (skipped) · ' + e.message }] };
+        }
+      }
+    ),
+    tool('nas_fork', '◊ Return the current fork.config.json (or null if no fork loaded). Useful for adapting behavior to the fork\'s verdict, copy_voice, and surfaced organs.',
+      {},
+      async () => ({ content: [{ type: 'text', text: JSON.stringify(FORK || { fork: null }, null, 2) }] })
+    ),
+  ],
+});
+
+// ═══════════════════════════════════════════════════════════════════
 //  RUN
 // ═══════════════════════════════════════════════════════════════════
 const mcpServers = {
@@ -2819,6 +2951,7 @@ const mcpServers = {
   memory: memoryMcp,
   estate: estateMcp,
   fiverr: fiverrMcp,
+  nas: nasMcp,
   ...configuredMcps,
 };
 
@@ -3422,7 +3555,7 @@ Execute the n=4-7 doctrine. Estate-first. Log mission. Stream tier calls. Pause 
 
   // walk the registered MCP servers · find the verb in instance._registeredTools · invoke handler directly
   // SDK stores handlers at server.instance._registeredTools[name].handler
-  const allServers = [tierZeroMcp, tierOneMcp, tierThreeMcp, metaMcp, memoryMcp, estateMcp];
+  const allServers = [tierZeroMcp, tierOneMcp, tierThreeMcp, metaMcp, memoryMcp, estateMcp, nasMcp];
   let invoked = false;
   for (const server of allServers) {
     const reg = server?.instance?._registeredTools;
