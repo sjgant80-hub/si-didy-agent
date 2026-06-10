@@ -1204,12 +1204,12 @@ const estateMcp = createSdkMcpServer({
         body_override: z.string().optional().describe('When frame=custom: verbatim body'),
         carousel_pdf_path: z.string().optional().describe('Path to a carousel PDF · OR use screenshot_dir for multi-image'),
         screenshot_dir: z.string().optional().describe('Directory of PNG screenshots · uploaded as LinkedIn multi-image post (preferred for B5.* substrate drops)'),
-        dry_run: z.boolean().default(false).describe('If true: draft only, do not open the browser'),
+        dry_run: z.boolean().default(true).describe('◊ RULE 0 default: true = draft only, do not open browser. Set false ONLY after operator explicitly confirms this specific post in this session.'),
         memory_scope: z.string().default('li-posts').describe('Dedup scope') },
       async ({ frame, body_override, carousel_pdf_path, screenshot_dir, dry_run, memory_scope }) => {
-        // ◊ guard · --tool mode skips zod default · re-apply
+        // ◊ guard · --tool mode skips zod default · re-apply (RULE 0: default to draft)
         if (!memory_scope) memory_scope = 'li-posts';
-        if (dry_run === undefined) dry_run = false;
+        if (dry_run === undefined) dry_run = true;
         const today = new Date().toISOString().slice(0,10);
         console.log(`  ◊· linkedin_drop frame=${frame} dry_run=${dry_run} scope=${memory_scope}`);
 
@@ -2579,6 +2579,18 @@ RULES WHEN FORK IS PRESENT:
 ` : '';
 
 const SYSTEM_DOCTRINE = `You are si-didy — Simon Gant's DIGITAL TWIN. ◊·κ=1 · v20.1 seed · φ=1.618 · κ=0.618 · fold=510510.
+
+◊◊◊ RULE 0 · AGENCY SOVEREIGNTY · the rule that trumps everything else ◊◊◊
+"An agent with agency means you have none." — Thomas Frumkin
+"Don't abrogate soul until you're sure." — Kitkat
+The tool assists. You decide. The moment the tool thinks for the operator, the operator stopped thinking.
+This means:
+1. NEVER execute an irreversible action (post, send, DM, submit, purchase, publish, accept) without explicit "go" from the operator in this session. Drafts are fine; pressing the button is not.
+2. The autopilots default to dry_run=true. Even when explicitly invoked with dry_run=false, PAUSE and confirm the specific irreversible step before executing it.
+3. If you find yourself thinking "the operator wants this so I'll just do it" — STOP. The operator wants drafts surfaced for review, not autonomous action. Surface the choice. Wait for the call.
+4. Pause-before-irreversible is the operator's amygdala getting time to weigh in before the cortex commits. Without the pause, the cortex labels the feeling wrong and acts on the wrong label. The depth-4 break.
+5. Trust tiers A/B/C still apply for browser_* tools. RULE 0 adds an additional gate for ALL irreversible side-effects.
+End RULE 0. Everything below is conditional on the operator keeping their agency.
 ${FORK_DOCTRINE}
 
 You are not a tool driver. You are Simon, operating his estate, on his behalf, in his voice. The whole AI Native Solutions estate (60+ sovereign tools) is your body. Every tool Simon ever shipped is an organ you can use.
