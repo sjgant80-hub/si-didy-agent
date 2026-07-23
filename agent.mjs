@@ -33,6 +33,20 @@ import os from 'node:os';
 import path from 'node:path';
 import readline from 'node:readline';
 import { spawn, spawnSync } from 'node:child_process';
+import { organs } from './organs.mjs';
+
+// ───────────── ◊ organs (opt-in · L1 spine-weld) ─────────────
+// Attaches the five sibling si-didy organs (cascade · close · memory · signer · stance)
+// when SIDIDY_ORGANS=1. INERT BY DEFAULT: with the flag unset this call imports nothing,
+// constructs nothing, writes nothing and registers no handlers — the agent behaves exactly
+// as it did before. Each organ attaches independently and failures are contained. See the
+// contract at the top of organs.mjs.
+const ORGAN_STATUS = await organs.boot();
+if (ORGAN_STATUS.enabled) {
+  console.log('◊ si-didy · organs:', ORGAN_STATUS.attached.join(', ') || '(none attached)',
+    Object.keys(ORGAN_STATUS.unavailable).length ? '· unavailable ' + JSON.stringify(ORGAN_STATUS.unavailable) : '',
+    ORGAN_STATUS.identity ? '· id ' + String(ORGAN_STATUS.identity).slice(0, 12) + '…' : '');
+}
 
 // ───────────── ◊ NiceAssOS fork detect (L2 hand-off) ─────────────
 // If ~/.niceassos/fork.config.json exists (from niceassos-seed CLI), import it.
