@@ -1,0 +1,17 @@
+linkedin_autopilot · mode:"scan" · cap:5 · queue all drafts · NEVER send
+
+Execute ONE cycle:
+- Scan LinkedIn home feed
+- Scan Simon's recent posts for new comments
+- Draft helpful comments/replies/connection requests
+- Queue EVERYTHING to ./queues/li-* for human approval
+- NEVER auto-send anything
+- Rate-limit aware (max 5 drafts this cycle)
+
+SAFETY RULES (non-negotiable):
+- NEVER click Submit/Send/Connect/Post buttons
+- NEVER auto-accept InMails
+- ALL actions queue for human approval
+- If account restriction notice appears → STOP immediately
+
+Return summary: N drafts queued · paths · top engagement scores · next-cycle suggestion

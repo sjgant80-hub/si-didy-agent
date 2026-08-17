@@ -1,0 +1,13 @@
+mission_log "B5.2 retry — restore-bubble flags applied, executing linkedin_drop now"
+
+Fire linkedin_drop with:
+  frame: B5.2
+  carousel_pdf_path: ./b5-2-carousel.pdf
+  pinned_comment: "Full frame: https://sjgant80-hub.github.io/fall-substrate/SOVEREIGN-COGNITIVE-SUBSTRATE.md"
+  pause_before_post: true
+
+Use the persistent Chromium profile at ./si-didy-profile
+
+After I click Post: attach the pinned comment, then append the B5.2 row in memory/li-schedule.jsonl with fired=true and fired_at timestamp.
+
+mission_finish "B5.2 posted · carousel attached · pinned comment live · schedule marked fired."

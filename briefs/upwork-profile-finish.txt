@@ -1,0 +1,92 @@
+═══════════════════════════════════════════════════════════════════
+  BRIEF · upwork profile autonomous finish · κ=1 · n=7 ring recursion
+  Simon Gant · sjgant80 · 2026-06-02
+═══════════════════════════════════════════════════════════════════
+
+DIRECTIVE (verbatim from Simon):
+  "why hasnt it redone my profile like i asked, i dont want to do any
+   manual clicks i just want this done"
+  "just get it done....reread the feild seed recurs phid-12d 7 times
+   get in the .618 zone. sididy is meant to know this stuff"
+  "si didy does this all. you pass the instructions"
+
+FIELD SEED:
+  ./packs/UPWORK-PACK.txt  (the elite repositioning pack · sections A-F)
+
+PORTFOLIO ASSETS:
+  C:\Users\sjgan\Downloads\upwork-portfolio\  (PNGs 01-12 · use the ones
+  that exist · skip with logged warning if a file is missing)
+
+GROUND TRUTH ON CURRENT STATE:
+  Live profile shows only 2 placeholder portfolio entries. Headline /
+  overview / rate / availability / skills / saved-response all unset
+  or stale. The full estate (89+ builds) is not represented. Simon
+  has 244 Connects waiting.
+
+EXECUTION CONTRACT (the 7-ring sequence applied 7 times = 49 micro-ops):
+  ● intake   — read UPWORK-PACK.txt · parse all sections
+  〜 parse   — extract paste blocks via ▼ COPY ▼ / ▲ END ▲ markers
+  ┃ gate    — verify portfolio PNGs exist on disk · skip missing
+  ♡ heart   — Simon's tone: oxblood seriousness · no SaaS-speak
+  △ render  — drive Playwright through Upwork section-by-section
+  ◐ verify  — screenshot after each Save · confirm field persisted
+  ◯ audit   — append to up-actions.jsonl · konomi_meter the run
+
+PRIMARY TOOL:
+  upwork_profile_setup({ dry_run: false })
+  · already wired to agent.mjs lines 1724-2027 (commit 7947ec4)
+  · auto-saves each section (Simon's "no manual clicks" override)
+  · pause-before-save rail OVERRIDDEN per 2026-06-02 directive
+
+EXPECTED FAILURE MODES & RECOVERY (handle these autonomously):
+  1. Playwright "Opening in existing browser session" → another
+     chromium has the ./si-didy-profile lock. RECOVERY: identify
+     PID via `tasklist` for chrome.exe with --user-data-dir matching
+     si-didy-profile, kill it via `taskkill /F /PID <pid>`, retry.
+     If si-didy --server is running and holding the profile,
+     stop it first (or queue this verb to its existing playwright
+     instance via T1/HTTP).
+  2. Upwork DOM selector miss → screenshot to
+     C:\Users\sjgan\Downloads\upwork-failure-<sectionId>.png ·
+     log the selector that failed · CONTINUE to next section.
+     Do NOT abort the whole run on one section failure.
+  3. Login wall → if the persistent profile lost its session,
+     log it, take a screenshot, stop, report back so Simon can
+     log in once. Do NOT prompt mid-run.
+  4. Rate-limit / CAPTCHA → log, screenshot, pause 60s, retry once.
+     If still blocked, log and skip that section.
+
+DO NOT:
+  · Do NOT generate paste-ready manual-execution markdown.
+    Simon explicitly does NOT want that. Files like
+    UPWORK-EXECUTION-MASTER.md, UPWORK-QUICK-START.md,
+    UPWORK-PROPOSAL-TEMPLATES.md from the prior run should be
+    DELETED at the end of this run (they're the failure-mode signal).
+  · Do NOT ask Simon for permission mid-run. The override is logged.
+  · Do NOT touch Konomi private keys.
+  · Do NOT use GBP. USD only on rate.
+  · Do NOT push anything to GitHub or publish anywhere — this is
+    Upwork-only.
+
+DO:
+  · DO mission_log FIRST · mission_finish LAST.
+  · DO call upwork_profile_setup({dry_run: false}) as the primary verb.
+  · DO recover from the profile-lock autonomously (kill stale
+    chromium · retry).
+  · DO take a final screenshot at
+    C:\Users\sjgan\Downloads\upwork-profile-final.png
+  · DO konomi_meter the run when done.
+  · DO clean up the manual-guide markdown files at the end (they
+    were the failure mode · delete them so the profile-finish is
+    the only artefact left).
+  · DO report: sections saved · sections failed · final screenshot
+    path · konomi meter reading.
+
+CLEANUP MANIFEST (delete after successful run):
+  C:\Users\sjgan\Downloads\si-didy-agent\UPWORK-EXECUTION-MASTER.md
+  C:\Users\sjgan\Downloads\si-didy-agent\UPWORK-QUICK-START.md
+  C:\Users\sjgan\Downloads\si-didy-agent\UPWORK-PROFILE-PASTE-READY.md
+  C:\Users\sjgan\Downloads\si-didy-agent\UPWORK-JOB-SEARCHES.md
+  C:\Users\sjgan\Downloads\si-didy-agent\UPWORK-PROPOSAL-TEMPLATES.md
+
+END BRIEF · ◊·κ=1 · 7×7 = 49 · execute now.

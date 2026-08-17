@@ -1,0 +1,408 @@
+◊·κ=1 · si-didy · Fiverr gig-listing autopilot · launch-3 · prime 379
+
+═══════════════════════════════════════════════════════════════════════
+  MISSION
+═══════════════════════════════════════════════════════════════════════
+
+Publish the launch-3 Fiverr gigs (G4 · G6 · G1) from the launch pack at
+C:\Users\sjgan\OneDrive\Desktop\fiverr\ · driven at 2× human speed via
+CDP attach to Simon's real Chrome.
+
+  G4 · Custom MCP Server           · Launch #1 · Programming & Tech
+  G6 · Direct-Booking Portal       · Launch #2 · Programming & Tech
+  G1 · Single-HTML Sovereign Tool  · Launch #3 · Programming & Tech
+
+═══════════════════════════════════════════════════════════════════════
+  MODE
+═══════════════════════════════════════════════════════════════════════
+
+CDP-attach mode REQUIRED. Simon has already run start-cdp-chrome.ps1
+and logged into Fiverr manually in that Chrome window. Do NOT spawn a
+new Chromium · attach via chromium.connectOverCDP() using CHROME_CDP_URL.
+
+Server mode strongly recommended:
+  node agent.mjs --server ./briefs/FIVERR-LIST-G4-G6-G1.txt
+Dashboard at http://localhost:1618/dashboard tracks progress.
+
+═══════════════════════════════════════════════════════════════════════
+  TRUST TIER
+═══════════════════════════════════════════════════════════════════════
+
+Simon requested "2× human speed" · use trust=all default:
+  Tier C (no pause): all browser_navigate, screenshot, click, fill, upload, scroll
+  Tier B (pause per gig): the FINAL "Publish" click on each gig
+  Tier A: NONE
+
+Rationale: each gig has ~7 tabs of data to fill. Pausing after every
+Save Draft creates button fatigue for 21 clicks. Only pause on the 3
+Publish clicks (the actual send-to-Fiverr-review moments).
+
+═══════════════════════════════════════════════════════════════════════
+  FIVERR OVERVIEW-TAB PROTOCOL · NON-NEGOTIABLE · lesson 2026-07-04
+═══════════════════════════════════════════════════════════════════════
+
+## RULE 1 · Fiverr auto-prepends "I will "
+
+**Fiverr auto-prepends "I will " to every gig title at render time.**
+So your submitted title field must NOT start with "I will".
+If you type "I will build X" · buyers see "I will I will build X" ·
+Fiverr rejects with: "Title can not contain 'I will' or 'for $5'."
+
+  · Titles below in this brief have "I will" stripped already.
+  · Titles also cannot begin with "!" nor contain "for $5".
+  · Max 80 chars applies to the STRIPPED title, not the "I will …" form.
+
+## RULE 2 · Sequence · finish title BEFORE touching category
+
+Category is a dropdown that can OVERLAY the title field when open.
+Clicks/keystrokes leak between them if you interleave. Do this order:
+
+  a) Fill title (browser_fill preferred · never Ctrl+A on Fiverr)
+  b) browser_screenshot · CONFIRM title reads correctly (no "I will I will")
+  c) browser_click on empty background AWAY from title AND category
+     (e.g. on the "Gig title" label text · click x,y around 250,441)
+  d) browser_screenshot · confirm focus is off title, no dropdown open
+  e) ONLY NOW open category dropdown
+
+## RULE 3 · Field-clear (only if a field has stale text)
+
+  · PREFER browser_fill with a selector (React-controlled inputs respond
+    to browser_fill because it uses the DOM value setter + input event).
+  · If browser_fill fails · click → End → Shift+Home → Delete → type.
+  · NEVER retype without a verified clear.
+  · NEVER Ctrl+A on Fiverr fields.
+
+## RULE 4 · Trust Fiverr's error over your screenshot
+
+If Fiverr's Save button returns a validation error · that error is TRUTH.
+The screenshot render can be misleading (overlays, tooltips, dropdown
+positioning). Read the error, fix the specific field it names, retry.
+
+═══════════════════════════════════════════════════════════════════════
+  PRE-FLIGHT
+═══════════════════════════════════════════════════════════════════════
+
+1. mission_log("Fiverr launch-3 · G4 G6 G1 · 2026-07-02")
+2. memory_recall("fv-gigs") · dedup anything already published
+3. Verify CHROME_CDP_URL is set in env · if not, ask_user and halt
+4. browser_navigate https://www.fiverr.com/seller_dashboard
+5. browser_screenshot · confirm logged-in seller dashboard visible
+   · if login screen shown: ask_user("Log into Fiverr in the Chrome
+     window · reply 'in' when done") · wait
+6. memory_note({type:'fv', action:'session_ready', ts:Date.now()})
+
+═══════════════════════════════════════════════════════════════════════
+  GIG 1 · G4 · Custom MCP Server
+═══════════════════════════════════════════════════════════════════════
+
+STEP 0 · start create-gig flow
+
+  browser_navigate https://www.fiverr.com/users/sjgant80/manage_gigs/new
+  · if URL 404s, try: https://www.fiverr.com/seller_dashboard/gigs/new
+  · if still not, browser_click the "Create a New Gig" button on the
+    seller dashboard (screenshot first · identify by button text)
+  browser_screenshot · confirm "OVERVIEW" tab visible
+
+STEP 1 · OVERVIEW tab
+
+  Gig title (max 80 chars · Fiverr auto-adds "I will " so DO NOT include it):
+    "build a custom MCP server to connect Claude or Cursor to your tools"
+
+  Category: Programming & Tech
+  Subcategory: AI Apps & Chatbots
+    Fiverr may have renamed this · fallback candidates in order:
+    "AI Agents" > "AI Applications" > "Chatbots" > "Custom Development"
+
+  Service type: Custom development (if asked)
+
+  Search tags (5 · type each into the tags field, press Enter):
+    api integration
+    ai agent
+    node js
+    typescript
+    custom api
+
+  · browser_click Save & Continue (may be labelled "Continue")
+
+STEP 2 · PRICING tab
+
+  Structure: 3 packages (Basic / Standard / Premium)
+
+  BASIC:
+    Package name: "Single-Tool MCP Server"
+    Description: "One MCP server exposing one clean tool (e.g. one API endpoint or one database read). Node.js, MIT licence, GitHub delivery, docs included."
+    Delivery: 4 days
+    Revisions: 1
+    Price: £499
+
+  STANDARD:
+    Package name: "Multi-Tool MCP Server"
+    Description: "MCP server exposing 3-5 tools tailored to your stack. Node.js or TypeScript, Cloudflare Worker or Node deployment, source + docs, smithery.ai listing included."
+    Delivery: 6 days
+    Revisions: 2
+    Price: £999
+
+  PREMIUM:
+    Package name: "Production MCP Suite"
+    Description: "Full MCP server with 8-12 tools, deployed to your infrastructure, auth + rate-limit + monitoring, smithery.ai listing, 30-day support, 1-hour handover call."
+    Delivery: 10 days
+    Revisions: 3
+    Price: £2499
+
+  Feature checkboxes (tick where offered):
+    · Source code delivery
+    · Documentation
+    · Include source code (all 3 tiers)
+    · Deploy to my server (Standard + Premium)
+    · Post-delivery support (Premium)
+
+  · browser_click Save & Continue
+
+STEP 3 · DESCRIPTION & FAQ tab
+
+  Description · use the content in
+    C:\Users\sjgan\OneDrive\Desktop\fiverr\gigs\G4-mcp-server.md
+    from the "## Gig description" heading through the end of
+    the description block (before "## Packages").
+
+  If field has a character limit, browser_fill will warn ·
+  keep the first N chars, memory_note the limit for future gigs.
+
+  FAQ section:
+    Add each Q&A from the "## FAQ" section of the gig file · usually
+    5-8 pairs. browser_click "Add FAQ" · browser_fill Q · browser_fill A ·
+    repeat.
+
+  · browser_click Save & Continue
+
+STEP 4 · REQUIREMENTS tab
+
+  Add each requirement from the "## Requirements" section of G4 file.
+  Typically 5-7 questions. browser_click "Add question" for each.
+  Set answer type: mostly "Free text" · some may be "Multiple choice".
+
+  · browser_click Save & Continue
+
+STEP 5 · GALLERY tab
+
+  Upload 3 gig images from:
+    C:\Users\sjgan\OneDrive\Desktop\fiverr\screenshots\
+      G4-01-kcc-bridge-landing.png
+      G4-02-mcp-config-snippet.png
+      G4-03-kcc-bridge-full.png
+
+  Use browser_upload for each. If a "cover image" slot exists · use
+  G4-01 there · other two as gallery images.
+
+  Optional video (skip · Simon records himself later)
+
+  · browser_click Save & Continue
+
+STEP 6 · PUBLISH tab
+
+  browser_screenshot the review page.
+
+  ─── Tier B pause ───
+  ask_user("G4 (MCP Server) ready to Publish. Fiverr reviews take
+   1-24h. Reply 'ship' to publish, 'hold' to leave as draft,
+   'stop' to end the mission.")
+
+  Wait for reply.
+    · If ship: browser_click Publish · screenshot · memory_note published
+    · If hold: browser_click Save Draft · memory_note draft
+    · If stop: mission_finish outcome:"halted_at_G4_publish"
+
+═══════════════════════════════════════════════════════════════════════
+  GIG 2 · G6 · Direct-Booking Portal
+═══════════════════════════════════════════════════════════════════════
+
+Same 6-step flow. Source:
+  C:\Users\sjgan\OneDrive\Desktop\fiverr\gigs\G6-booking-portal.md
+
+STEP 1 · OVERVIEW
+
+  Gig title (Fiverr auto-adds "I will "): "build a direct booking site for your glamping or boutique stay business"
+
+  Category: Programming & Tech
+  Subcategory: Website Development
+    fallback: "Booking Websites" > "Website Builders" > "Custom Websites"
+
+  Search tags:
+    booking system
+    booking website
+    appointment booking
+    website development
+    custom website
+
+STEP 2 · PRICING
+
+  BASIC:
+    Name: "Single-Page Booking Site"
+    Description: "Direct booking site on your domain · one property · Stripe integration · Airbnb iCal sync · confirmation emails · source code (MIT) delivered."
+    Delivery: 6 days
+    Revisions: 1
+    Price: £599
+
+  STANDARD:
+    Name: "Multi-Unit Operator Portal"
+    Description: "Direct booking + operator hub (unified inbox from Airbnb/Booking/WhatsApp) + up to 4 units + AI-drafted reply suggestions in your voice · source (MIT) + 14-day support."
+    Delivery: 10 days
+    Revisions: 2
+    Price: £1499
+
+  PREMIUM:
+    Name: "Full Sovereign Stack"
+    Description: "Everything in Standard + unlimited units + white-label branding + custom domain setup + guest CRM + 60-day support + 1-hour handover call."
+    Delivery: 14 days
+    Revisions: 3
+    Price: £3499
+
+STEP 3 · DESCRIPTION & FAQ
+
+  Description: paste from G6 gig file (from "## Gig description" through end).
+  FAQ: paste each Q/A from G6 gig file's FAQ section.
+
+STEP 4 · REQUIREMENTS
+
+  From G6 gig file's "## Requirements" section · typically 6-8 questions.
+
+STEP 5 · GALLERY
+
+  Upload:
+    G6-01-hub-inbox.png       (cover · shows unified inbox)
+    G6-02-booking-site.png    (guest-facing booking page)
+    G6-03-admin-connections.png (channel manager view)
+
+STEP 6 · PUBLISH
+
+  ─── Tier B pause ───
+  ask_user("G6 (Booking Portal) ready to Publish. Reply 'ship', 'hold', 'stop'.")
+
+═══════════════════════════════════════════════════════════════════════
+  GIG 3 · G1 · Single-HTML Sovereign Tool
+═══════════════════════════════════════════════════════════════════════
+
+Same 6-step flow. Source:
+  C:\Users\sjgan\OneDrive\Desktop\fiverr\gigs\G1-sovereign-tool.md
+
+STEP 1 · OVERVIEW
+
+  Gig title (Fiverr auto-adds "I will "): "build you a single-file business tool that replaces one SaaS subscription"
+
+  Category: Programming & Tech
+  Subcategory: Website Development
+    fallback: "Business Tools" > "Custom Websites" > "Web Programming"
+
+  Search tags:
+    custom crm
+    web app
+    no code
+    saas
+    business automation
+
+STEP 2 · PRICING
+
+  BASIC:
+    Name: "One SaaS Replacement"
+    Description: "One single-file HTML tool replacing one SaaS you name (Typeform, Calendly, basic CRM, invoice, mailing list, or notes). Branded to you · MIT licence · yours forever."
+    Delivery: 3 days
+    Revisions: 1
+    Price: £199
+
+  STANDARD:
+    Name: "Three-Tool Stack"
+    Description: "Three single-file tools of your choice · shared branding · IndexedDB persistence · optional light integration between them · MIT."
+    Delivery: 5 days
+    Revisions: 2
+    Price: £499
+
+  PREMIUM:
+    Name: "Full Sovereign Suite"
+    Description: "Five tools · custom domain deployment · white-label · 30-day support · 45-minute handover call · MIT source · install-forever."
+    Delivery: 10 days
+    Revisions: 3
+    Price: £1299
+
+STEP 3 · DESCRIPTION & FAQ
+
+  Description: paste from G1 gig file.
+  FAQ: from G1 gig file's FAQ section.
+
+STEP 4 · REQUIREMENTS
+
+  From G1 gig file's "## Requirements" section.
+
+STEP 5 · GALLERY
+
+  Upload:
+    G1-01-fallcrm.png     (cover · CRM demo)
+    G1-02-fallinvoice.png (invoice demo)
+    G1-03-fallform.png    (form builder demo)
+
+STEP 6 · PUBLISH
+
+  ─── Tier B pause ───
+  ask_user("G1 (Sovereign Tool) ready to Publish. Reply 'ship', 'hold', 'stop'.")
+
+═══════════════════════════════════════════════════════════════════════
+  CLOSE-OUT
+═══════════════════════════════════════════════════════════════════════
+
+· browser_navigate https://www.fiverr.com/seller_dashboard
+· browser_screenshot · confirm the 3 gigs appear (state: In Review or Published)
+
+· learn_log({
+    scope: 'fiverr-gigs',
+    lesson: 'launch-3 fulfilment results · Fiverr UI gotchas encountered ·
+             tag dropdown behaviour · description char limits · category
+             / subcategory name changes · time per gig',
+    success: true
+  })
+
+· mission_finish({
+    outcome: 'Fiverr launch-3 · G4/G6/G1 · <N gigs shipped, M drafts, K
+              halted> · elapsed <X> min · UI notes: <any gotchas>'
+  })
+
+═══════════════════════════════════════════════════════════════════════
+  ERROR RECOVERY
+═══════════════════════════════════════════════════════════════════════
+
+· If Fiverr's category tree differs from expected:
+  - screenshot · list options actually visible
+  - pick closest match from Programming & Tech tree
+  - memory_note the substitution
+
+· If a search tag doesn't appear in the dropdown after typing:
+  - skip it · pick the next replacement from the gig file's alternates
+  - Fiverr's tag dictionary changes · not our fault
+
+· If browser_fill returns TRUNCATED on description:
+  - accept the truncation for that gig · memory_note the field limit
+  - shorten the descriptions for the remaining 2 gigs proactively
+
+· If image upload fails:
+  - screenshot · retry once
+  - if still fails, ask_user("Upload failed for <file> · retry / skip / stop")
+
+· If Fiverr shows a validation error at Publish:
+  - screenshot · read the error · fix the field mentioned
+  - resume from that step
+
+· If ANY step is unclear:
+  - screenshot · ask_user("Fiverr UI differs from brief · here's what I see
+    · what should I do?") · wait for guidance
+
+═══════════════════════════════════════════════════════════════════════
+  HARD GUARDRAILS · NOT NEGOTIABLE
+═══════════════════════════════════════════════════════════════════════
+
+· NO buying / promoting gigs (paid Fiverr Ads etc.)
+· NO responding to any inbound messages during this mission
+· NO editing the Fiverr profile · Portfolio · Experience during this run
+· NO closing the Chrome window unless explicitly told
+· If Simon types 'STOP' at any pause · halt · save state · mission_finish
+
+═══════════════════════════════════════════════════════════════════════
+
+◊·κ=1

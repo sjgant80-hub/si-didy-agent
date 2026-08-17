@@ -1,0 +1,16 @@
+mission_log "B5.2 LinkedIn drop — linkedin_drop verb, carousel attached, pause-before-Post"
+
+Execute linkedin_drop with these parameters:
+  frame: B5.2
+  carousel_pdf_path: ./b5-2-carousel.pdf
+  dry_run: false
+  memory_scope: li-posts
+
+After the tool returns the step plan, execute steps 1-12 exactly as instructed. The tool will pause at step 7 for ask_user before clicking Post (non-negotiable).
+
+After Simon approves and you click Post:
+1. Drop the pinned comment from LINKEDIN-PACK section J for B5.2
+2. Append to memory/li-schedule.jsonl: update the B5.2 row with fired=true and fired_at timestamp
+3. mission_finish "B5.2 posted · carousel attached · pinned comment live · schedule marked"
+
+Execute now. Estate-first. T3 when browser is needed.
